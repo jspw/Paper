@@ -1,0 +1,41 @@
+{
+  "name": "online-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jspw/WillChange.git"
+  },
+  "author": "jspw,sania51",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jspw/WillChange/issues"
+  },
+  "homepage": "https://github.com/jspw/WillChange#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.13",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.4.0",
+    "validator": "^13.5.2",
+    "xss-clean": "^0.1.1"
+  }
+}
