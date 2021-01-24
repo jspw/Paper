@@ -1,348 +1,455 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-require('dotenv').config();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
 
-const StudentModel = require('../models/student');
-const TeacherModel = require('../models/teacher');
-const UniversityModel = require('../models/university');
-
+const UniversityModel = require("../models/university");
+const StudentModel = require("../models/student");
+const TeacherModel = require("../models/teacher");
 
 exports.postCreateUniversity = (req, res, next) => {
-    console.log(req.body);
+  console.log(req.body);
 
-    const universityModel = new UniversityModel(
-
-        req.body
-
-    );
-    universityModel.save()
-        .then(result => {
-            res.status(202).json({
-                "status": "OK",
-                comment: "University created successfully."
-            })
-        }
-        )
-        .catch(error => console.log(error));
-}
+  const universityModel = new UniversityModel(req.body);
+  universityModel
+    .save()
+    .then((result) => {
+      res.status(202).json({
+        status: "OK",
+        result: "University created successfully.",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(400).json({
+        status: "FAILED",
+        result: "Something went wrong in server.",
+      });
+    });
+};
 
 exports.postCreateTeacher = (req, res, next) => {
+  const {
+    role,
+    username,
+    email,
+    password,
+    repassword,
+    firstName,
+    lastName,
+    department,
+    varsity,
+    designation,
+  } = req.body;
 
-    const { role, username, email, password, repassword, firstName, lastName, department, varsity, designation } = req.body;
+  // console.log(role, username, email, password, repassword, firstName, lastName, department, varsity, designation);
 
-    // console.log(role, username, email, password, repassword, firstName, lastName, department, varsity, designation);
+  if (password !== repassword) {
+    res.status(400).json({
+      status: "FAILED",
+      result: "Password have to be matched!",
+    });
+  } else {
+    bcrypt
+      .hash(password, 10)
+      .then((hash) => {
+        UniversityModel.findOne({
+          "emails.email": email,
+        })
+          .then((result) => {
+            console.log(result);
 
-    if (password !== repassword) {
-        res.status(400)
-            .json(
-                {
-                    status: "FAILED",
-                    comment: "Password have to be matched!"
-                }
-            );
-    }
+            if (result && result._id == varsity) {
+              const teacherModel = new TeacherModel({
+                role: role,
+                email: email,
+                username: username,
+                password: hash,
+                firstName: firstName,
+                lastName: lastName,
+                department: department,
+                varsity: varsity,
+                designation: designation,
+              });
 
-    else {
-        bcrypt.hash(password, 10)
-            .then(hash => {
+              return teacherModel
+                .save()
+                .then((teacher) => {
+                  console.log("New teacher Account Created!");
 
-                const teacherModel = new TeacherModel({
-                    role: role,
-                    email: email,
-                    username: username,
-                    password: hash,
-                    firstName: firstName,
-                    lastName: lastName,
-                    department: department,
-                    varsity: varsity,
-                    designation: designation
-                });
+                  return res.status(201).json({
+                    status: "OK",
+                    result: {
+                      jwt: {
+                        token: jwt.sign(
+                          {
+                            _id: teacher._id,
+                          },
 
-                return teacherModel.save()
-                    .then(
-                        teacher => {
+                          process.env.JWT_SECRET_TOKEN,
 
-                            console.log("New teacher Account Created!");
-
-                            teacher.password = undefined;
-
-                            res.status(201).json({
-                                status: "OK",
-                                result: {
-                                    token: jwt.sign(
-                                        {
-                                            _id: teacher._id
-                                        },
-
-                                        process.env.JWT_SECRET_TOKEN,
-
-                                        {
-                                            expiresIn: process.env.JWT_EXPIRES_IN
-                                        }
-                                    ),
-                                    data: {
-                                        teacher
-                                    }
-                                }
-                            });
-                        }
-                    );
-
-            })
-            .catch(error => {
-                console.log("New teacher Account Creation Failed!");
-
-
-                let errorMessage;
-
-                if (error.code == 11000) {
+                          {
+                            expiresIn: process.env.JWT_EXPIRES_IN,
+                          }
+                        ),
+                        expiresIn: process.env.JWT_EXPIRES_IN,
+                      },
+                      data: {
+                        user: teacher.role,
+                        id: teacher._id,
+                      },
+                    },
+                  });
+                })
+                .catch((error) => {
+                  console.log("New teacher Account Creation Failed!");
+                  let errorMessage;
+                  if (error.code == 11000) {
                     if (error.keyPattern.username)
-                        errorMessage = "Username already exits";
+                      errorMessage = "Username already exits";
                     else if (error.keyPattern.email)
-                        errorMessage = "Email address already exits";
-                    // } else if (error.errors.role.message) {
-                    //     errorMessage = error.errors.role.message;
-                } else errorMessage = error;
+                      errorMessage = "Email address already exits";
+                  } else errorMessage = error;
 
-
-                res.status(401).json({
+                  return res.status(401).json({
                     status: "FAILED",
-                    result: errorMessage
+                    result: errorMessage,
+                  });
                 });
+            } else {
+              return res.status(402).json({
+                status: "FAILED",
+                result: "Unauthorized email address",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            return res.status(400).json({
+              status: "FAILED",
+              result: "Something went wrong in server.",
             });
-    }
-
-
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({
+          status: "FAILED",
+          result: "Something went wrong in server.",
+        });
+      });
+  }
 };
 
 exports.postCreateStudent = (req, res, next) => {
+  const {
+    role,
+    username,
+    email,
+    password,
+    repassword,
+    firstName,
+    lastName,
+    department,
+    varsity,
+    registrationNo,
+    session,
+  } = req.body;
 
-    const { role, username, email, password, repassword, firstName, lastName, department, varsity, registrationNo, session } = req.body;
+  // console.log(role, username, email, password, repassword, firstName, lastName, department, registrationNo, session);
 
-    // console.log(role, username, email, password, repassword, firstName, lastName, department, registrationNo, session);
+  if (password !== repassword) {
+    return res.status(400).json({
+      status: "FAILED",
+      result: "Password have to be matched!",
+    });
+  } else {
+    bcrypt
+      .hash(password, 10)
+      .then((hash) => {
+        UniversityModel.findOne({
+          "emails.email": email,
+        })
+          .then((result) => {
+            console.log(result);
 
-    if (password !== repassword) {
-        res.status(400)
-            .json(
-                {
-                    status: "FAILED",
-                    comment: "Password have to be matched!"
-                }
-            );
-    }
+            if (result && result._id == varsity) {
+              const studentModel = new StudentModel({
+                role: role,
+                email: email,
+                username: username,
+                password: hash,
+                firstName: firstName,
+                lastName: lastName,
+                department: department,
+                registrationNo: registrationNo,
+                varsity: varsity,
+                session: session,
+              });
 
-    else {
-        bcrypt.hash(password, 10)
-            .then(hash => {
+              return studentModel
+                .save()
+                .then((student) => {
+                  console.log("New Student Account Created!");
 
-                const studentModel = new StudentModel({
-                    role: role,
-                    email: email,
-                    username: username,
-                    password: hash,
-                    firstName: firstName,
-                    lastName: lastName,
-                    department: department,
-                    registrationNo: registrationNo,
-                    varsity: varsity,
-                    session: session
-                });
+                  student.password = undefined;
 
-                return studentModel.save()
-                    .then(
-                        student => {
-                            console.log("New Student Account Created!");
+                  return res.status(201).json({
+                    status: "OK",
+                    result: {
+                      jwt: {
+                        token: jwt.sign(
+                          {
+                            _id: student._id,
+                          },
 
-                            student.password = undefined;
+                          process.env.JWT_SECRET_TOKEN,
 
-                            res.status(201).json(
-                                {
-                                    status: "OK",
-                                    result: {
-                                        token: jwt.sign(
-                                            {
-                                                _id: student._id
-                                            },
+                          {
+                            expiresIn: process.env.JWT_EXPIRES_IN,
+                          }
+                        ),
+                        expiresIn: process.env.JWT_EXPIRES_IN,
+                      },
+                      data: {
+                        user: student.role,
+                        id: student._id,
+                      },
+                    },
+                  });
+                })
+                .catch((error) => {
+                  console.log("New Student Account Creation Failed!");
 
-                                            process.env.JWT_SECRET_TOKEN,
+                  console.log(error);
 
-                                            {
-                                                expiresIn: process.env.JWT_EXPIRES_IN
-                                            }
-                                        ),
-                                        data: {
+                  let errorMessage;
 
-                                            student
-                                        }
-                                    }
-                                }
-                            );
-                        }
-                    );
-
-            })
-            .catch(error => {
-                console.log("New Student Account Creation Failed!");
-
-                // console.log(error)
-
-                let errorMessage;
-
-                if (error.code == 11000) {
+                  if (error.code == 11000) {
                     if (error.keyPattern.username)
-                        errorMessage = "Username already exits";
+                      errorMessage = "Username already exits";
                     else if (error.keyPattern.email)
-                        errorMessage = "Email address already exits";
-                    // } else if (error.errors.role.message) {
-                    //     errorMessage = error.errors.role.message;
-                } else errorMessage = error;
+                      errorMessage = "Email address already exits";
+                  } else errorMessage = error;
 
-
-                res.status(401).json({
+                  res.status(401).json({
                     status: "FAILED",
-                    result: errorMessage
+                    result: errorMessage,
+                  });
                 });
+            } else {
+              return res.status(402).json({
+                status: "FAILED",
+                result: "Unauthorized email address",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            return res.status(400).json({
+              status: "FAILED",
+              result: "Something went wrong in server.",
             });
-    }
-
-    // }
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({
+          status: "FAILED",
+          result: "Something went wrong in server.",
+        });
+      });
+  }
 };
 
-
-
 exports.getLogin = (req, res, next) => {
+  const { email, password } = req.body;
 
-    const { email, password } = req.body;
+  console.log(email, password);
 
-    console.log(email, password);
+  if (!email || !password) {
+    return res.status(400).json({
+      status: "FAILED",
+      result: "Invalid body structure",
+    });
+  } else {
+    StudentModel.findOne({
+      email: email,
+    })
+      .populate("varsity")
+      .exec()
+      .then((student) => {
+        if (student) {
+          let {
+            role,
+            email,
+            username,
+            firstName,
+            lastName,
+            registrationNo,
+            varsity,
+            session,
+            registered_at,
+          } = student;
 
-    if (!email || !password) {
-        return res.status(400)
-            .json(
-                {
-                    status: "FAILED",
-                    message: "Invalid body structure"
-                }
-            );
-    } else {
+          let department;
 
+          student.varsity.departments.forEach((dept) => {
+            if (dept.id == student.department) {
+              department = dept.shortform;
+            }
+          });
 
-        StudentModel.findOne({
-            email: email
-        }).then(student => {
+          console.log("Student User Found");
 
-            if (student) {
+          bcrypt
+            .compare(password, student.password)
+            .then((matchResult) => {
+              console.log("Student User Password Match");
 
-                console.log("Student User Found");
+              if (matchResult) {
+                return res.status(200).json({
+                  status: "OK",
+                  result: {
+                    jwt: {
+                      token: jwt.sign(
+                        {
+                          _id: student._id,
+                        },
 
-                bcrypt.compare(password, student.password).then(matchResult => {
+                        process.env.JWT_SECRET_TOKEN,
 
-                    console.log("Student User Password Match");
+                        {
+                          expiresIn: process.env.JWT_EXPIRES_IN,
+                        }
+                      ),
+                      expiresIn: process.env.JWT_EXPIRES_IN,
+                    },
+                    data: {
+                      id: student._id,
+                      role: role,
+                      email: email,
+                      username: username,
+                      firstName: firstName,
+                      lastName: lastName,
+                      department: department,
+                      registrationNo: registrationNo,
+                      session: session,
+                      registered_at: registered_at,
+                      varsity: student.varsity.shortform,
+                    },
+                  },
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              return res.status(400).json({
+                status: "FAILED",
+                result: "Something went wrong in server.",
+              });
+            });
+        } else {
+          TeacherModel.findOne({
+            email: email,
+          })
+            .populate("varsity")
+            .exec()
+            .then((teacher) => {
+              if (teacher) {
+                let {
+                  role,
+                  email,
+                  username,
+                  firstName,
+                  lastName,
+                  registrationNo,
+                  varsity,
+                  designation,
+                  registered_at,
+                } = teacher;
 
-                    student.password = undefined;
+                let department;
+
+                teacher.varsity.departments.forEach((dept) => {
+                  if (dept.id == teacher.department) {
+                    department = dept.shortform;
+                  }
+                });
+
+                console.log("teacher User Found");
+
+                bcrypt
+                  .compare(password, teacher.password)
+                  .then((matchResult) => {
+                    console.log("teacher User Password Match");
 
                     if (matchResult) {
-                        return res.status(200).json(
-                            {
-                                status: "OK",
-                                result: {
-                                    token: jwt.sign(
-                                        {
-                                            _id: student._id
-                                        },
+                      return res.status(200).json({
+                        status: "OK",
+                        result: {
+                          jwt: {
+                            token: jwt.sign(
+                              {
+                                _id: teacher._id,
+                              },
 
-                                        process.env.JWT_SECRET_TOKEN,
+                              process.env.JWT_SECRET_TOKEN,
 
-                                        {
-                                            expiresIn: process.env.JWT_EXPIRES_IN
-                                        }
-                                    ),
-                                    data: {
-
-                                        student
-                                    }
-                                }
-
-
-                            }
-                        );
+                              {
+                                expiresIn: process.env.JWT_EXPIRES_IN,
+                              }
+                            ),
+                            expiresIn: process.env.JWT_EXPIRES_IN,
+                          },
+                          data: {
+                            id: teacher._id,
+                            role: role,
+                            email: email,
+                            username: username,
+                            firstName: firstName,
+                            lastName: lastName,
+                            department: department,
+                            registrationNo: registrationNo,
+                            designation: designation,
+                            registered_at: registered_at,
+                            varsity: teacher.varsity.shortform,
+                          },
+                        },
+                      });
                     }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    return res.status(400).json({
+                      status: "FAILED",
+                      result: "Something went wrong in server.",
+                    });
+                  });
+              }
 
-                }).catch(error => console.log(error));
-            }
-            else {
-
-                TeacherModel.findOne({
-                    email: email
-                })
-                    .then(teacher => {
-
-                        if (teacher) {
-
-                            console.log("Teacher User Found");
-
-                            bcrypt.compare(password, teacher.password).then(matchResult => {
-
-                                if (matchResult) {
-
-                                    console.log("Teacher User Password Matched");
-
-                                    teacher.password = undefined;
-
-                                    return res.status(200).json(
-                                        {
-                                            status: "OK",
-                                            result: {
-                                                token: jwt.sign(
-                                                    {
-                                                        _id: teacher._id
-                                                    },
-
-                                                    process.env.JWT_SECRET_TOKEN,
-
-                                                    {
-                                                        expiresIn: process.env.JWT_EXPIRES_IN
-                                                    }
-                                                ),
-                                                data: {
-                                                    teacher
-                                                }
-                                            }
-
-                                        }
-                                    );
-                                } else {
-
-                                    return res.status(401)
-                                        .json(
-                                            {
-                                                status: "FAILED",
-                                                message: "Invalid Email or Password"
-                                            }
-                                        );
-
-
-                                }
-
-                            }).catch(error => console.log(error));
-
-                        } else {
-                            return res.status(401)
-                                .json(
-                                    {
-                                        status: "FAILED",
-                                        message: "No User Found"
-                                    }
-                                );
-
-                        }
-
-                    }
-                    ).catch(error => console.log(error));
-
-            }
-
+              //hgh///
+              else {
+                return res.status(401).json({
+                  status: "FAILED",
+                  result: "No User Found",
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              return res.status(400).json({
+                status: "FAILED",
+                result: "Something went wrong in server.",
+              });
+            });
         }
-        ).catch(error => console.log(error));
-    }
-}
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({
+          status: "FAILED",
+          result: "Something went wrong in server.",
+        });
+      });
+  }
+};

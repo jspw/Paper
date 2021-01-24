@@ -1,31 +1,57 @@
-const StudentModel = require('../models/student');
-
+const StudentModel = require("../models/student");
 
 exports.getStudent = (req, res, next) => {
+  StudentModel.findById(req.params.id)
+    .populate("varsity")
+    .exec()
+    .then((student) => {
+      let {
+        role,
+        email,
+        username,
+        firstName,
+        lastName,
+        registrationNo,
+        varsity,
+        session,
+        registered_at,
+      } = student;
 
-    StudentModel.findById(req.params.id)
-        .then(student => {
+      let department;
 
-            student.password = undefined;
+      student.varsity.departments.forEach((dept) => {
+        if (dept.id == student.department) {
+          department = dept.shortform;
+        }
+      });
 
-            return res.status(201).json(
-                {
-                    status: "OK",
-                    result: {
-                        data: {
-                            student
-                        }
-                    }
-                }
-            );
-        })
-        .catch(error => {
-            console.log(error);
+      console.log("Student User Found");
 
-            return res.status(400).json({
-                status: "FAILED",
-                comment: "Student not found."
-            });
-        });
+      return res.status(200).json({
+        status: "OK",
+        result: {
+          data: {
+            id: student._id,
+            role: role,
+            email: email,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            department: department,
+            registrationNo: registrationNo,
+            session: session,
+            registered_at: registered_at,
+            varsity: student.varsity.shortform,
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.log(error);
 
-}
+      return res.status(400).json({
+        status: "FAILED",
+        result: "Student not found.",
+      });
+    });
+};

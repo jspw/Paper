@@ -8,16 +8,16 @@
 
     - [Registration](#registration)
 
-      - [Create Student](#create-user)
-      - [Create Teacher](#create-user)
+      - [Create Student](#create-student)
+      - [Create Teacher](#create-teacher)
 
     - [Login](#login)
 
     - [Access A Protected or Restricted Route](#access-a-protected-or-restricted-route)
 
   - [Users](#users)
-    - [Student Info](#student-info)
-    - [Teacher Info](#teacher-info)
+    - [Get Single Student Info](#get-a-single-student-info)
+    - [Get Single Teacher Info](#get-a-single-teacher-info)
 
 ## Contents :
 
@@ -38,34 +38,26 @@ Body :
   "repassword": "Text*",
   "firstName": "Text",
   "lastName": "Text",
-  "department": "Text*",
+  "department": "ID OBJECT",
+  "varsity": "ID OBJECT",
   "registrationNo": "Number*",
   "session": "Text*" //[2015-2016,2016-2017,2017-2018,2019-2019]
 }
 ```
 
-Response : 
+Response :
 
 ```json
 {
   "status": "OK",
   "result": {
-    "token": "JWT_TOKEN",
+    "jwt": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBkOTQ0YjUxMDVjMDcyZTE5NGVjYWYiLCJpYXQiOjE2MTE1MDI2NjcsImV4cCI6MTYxMTU4OTA2N30.tEk6td7RvzmBh_9zJE4Gy888LSMjWAlrTies1sA0P9M",
+      "expiresIn": "24h"
+    },
     "data": {
-      "student": {
-        "_id": "600c58df30da3d2fe7789afb",
-        "role": "student",
-        "email": "rahoim",
-        "username": "rahimo",
-        "firstName": "Sania",
-        "lastName": "Rahman",
-        "department": "swe",
-        "registrationNo": 2017831051,
-        "varsity": "SUST",
-        "session": "2017-2018",
-        "registered_at": "2021-01-23T17:11:59.634Z",
-        "__v": 0
-      }
+      "user": "student",
+      "id": "600d944b5105c072e194ecaf"
     }
   }
 }
@@ -86,7 +78,8 @@ Body :
   "email": "Email*", //must be unique
   "firstName": "Text",
   "lastName": "Text",
-  "department": "Text*",
+  "department": "ID OBJECT",
+  "varsity": "ID OBJECT",
   "designation": "Text*"
 }
 ```
@@ -97,21 +90,13 @@ Response :
 {
   "status": "OK",
   "result": {
-    "token": "JWT_TOKEN",
+    "jwt": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBkOTI4NjQzYjQ2MDcwZmRlYzdlYzMiLCJpYXQiOjE2MTE1MDIyMTQsImV4cCI6MTYxMTU4ODYxNH0.z0dxESRK9ux-dOzhPl6t_Qv057rjJ74M-WSTUd9Yfvk",
+      "expiresIn": "24h"
+    },
     "data": {
-      "teacher": {
-        "_id": "600c591030da3d2fe7789afc",
-        "role": "teacher",
-        "email": "wolav2",
-        "username": "Xdaa",
-        "firstName": "Asif",
-        "lastName": "Samir",
-        "department": "swe",
-        "varsity": "SUST",
-        "designation": "Professor",
-        "registered_at": "2021-01-23T17:12:48.876Z",
-        "__v": 0
-      }
+      "user": "teacher",
+      "id": "600d928643b46070fdec7ec3"
     }
   }
 }
@@ -130,27 +115,54 @@ Body:
 }
 ```
 
-Response:
+Response: (Teacher)
 
 ```json
 {
   "status": "OK",
   "result": {
-    "token": "JWT_TOKEN",
+    "jwt": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBkYjc1NmY4NWU2N2MxYzg1ZGNiNmMiLCJpYXQiOjE2MTE1MTE2NTcsImV4cCI6MTYxMTU5ODA1N30.AyeGvocVfynHUgx_MNPsStWSIXuu-3t_fnaj8_ErpQ8",
+      "expiresIn": "24h"
+    },
     "data": {
-      "teacher": {
-        "_id": "600c591030da3d2fe7789afc",
-        "role": "teacher",
-        "email": "wolav2",
-        "username": "Xdaa",
-        "firstName": "Asif",
-        "lastName": "Samir",
-        "department": "swe",
-        "varsity": "SUST",
-        "designation": "Professor",
-        "registered_at": "2021-01-23T17:12:48.876Z",
-        "__v": 0
-      }
+      "id": "600db756f85e67c1c85dcb6c",
+      "role": "teacher",
+      "email": "kafi@@sust.edu",
+      "username": "Kofi",
+      "firstName": "Mazah",
+      "lastName": "Kafi",
+      "department": "SWE",
+      "designation": "Professor",
+      "registered_at": "2021-01-24T18:07:18.998Z",
+      "varsity": "SUST"
+    }
+  }
+}
+```
+
+Response : (Student)
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "jwt": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBkOTU0YmI5MzFkZDc2NmIxNjE1MGQiLCJpYXQiOjE2MTE1MTE3MTAsImV4cCI6MTYxMTU5ODExMH0.fOJJ7_PrSGMZJdWxGptouksSABAw-kwWhxhlEZKv5xQ",
+      "expiresIn": "24h"
+    },
+    "data": {
+      "id": "600d954bb931dd766b16150d",
+      "role": "student",
+      "email": "mehedi17@sust.edu",
+      "username": "mhs",
+      "firstName": "Shifat",
+      "lastName": "Rahman",
+      "department": "SWE",
+      "registrationNo": 2017831051,
+      "session": "2017-2018",
+      "registered_at": "2021-01-24T15:42:03.248Z",
+      "varsity": "SUST"
     }
   }
 }
@@ -181,20 +193,17 @@ Response:
   "status": "OK",
   "result": {
     "data": {
-      "student": {
-        "_id": "600c58df30da3d2fe7789afb",
-        "role": "student",
-        "email": "rahoim",
-        "username": "rahimo",
-        "firstName": "Sania",
-        "lastName": "Rahman",
-        "department": "swe",
-        "registrationNo": 2017831051,
-        "varsity": "SUST",
-        "session": "2017-2018",
-        "registered_at": "2021-01-23T17:11:59.634Z",
-        "__v": 0
-      }
+      "id": "600d954bb931dd766b16150d",
+      "role": "student",
+      "email": "mehedi17@sust.edu",
+      "username": "mhs",
+      "firstName": "Shifat",
+      "lastName": "Rahman",
+      "department": "SWE",
+      "registrationNo": 2017831051,
+      "session": "2017-2018",
+      "registered_at": "2021-01-24T15:42:03.248Z",
+      "varsity": "SUST"
     }
   }
 }
@@ -211,19 +220,16 @@ Response:
   "status": "OK",
   "result": {
     "data": {
-      "teacher": {
-        "_id": "600c1dbaaafea2a9b4a4fc7e",
-        "role": "teacher",
-        "email": "wolv2",
-        "username": "Xdd",
-        "firstName": "Asif",
-        "lastName": "Samir",
-        "department": "swe",
-        "varsity": "SUST",
-        "designation": "Professor",
-        "registered_at": "2021-01-23T12:59:38.171Z",
-        "__v": 0
-      }
+      "id": "600db756f85e67c1c85dcb6c",
+      "role": "teacher",
+      "email": "kafi@@sust.edu",
+      "username": "Kofi",
+      "firstName": "Mazah",
+      "lastName": "Kafi",
+      "department": "SWE",
+      "designation": "Professor",
+      "registered_at": "2021-01-24T18:07:18.998Z",
+      "varsity": "SUST"
     }
   }
 }

@@ -1,20 +1,18 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-const app = require('./app');
+const app = require("./app");
 
 const mongodbUrl = process.env.MONGO_URL;
 
 const PORT = process.env.SERVER_PORT;
 
-mongoose.connect(
-  mongodbUrl
-  , {
+mongoose
+  .connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-  }
-)
+  })
   .then(() => {
     console.log("Mongodb Connected!");
 
@@ -24,15 +22,13 @@ mongoose.connect(
 
     // Handle Unhandled Rejections
 
-    process.on('unhandledRejection', err => {
-      console.log('Unhandled Rejection! Shutting down the server...');
+    process.on("unhandledRejection", (err) => {
+      console.log("Unhandled Rejection! Shutting down the server...");
       console.error(err);
 
       server.close(() => {
         process.exit(1);
       });
     });
-
   })
-  .catch(error => console.log(error));
-
+  .catch((error) => console.log(error));
