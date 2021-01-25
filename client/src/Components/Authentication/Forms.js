@@ -11,7 +11,55 @@ import Select from "@material-ui/core/Select";
 import axios from "axios";
 import "./SignIn.css";
 
-const apiDomain = "http://localhost:8080/";
+const apiDomain = "http://95572ad1dd4e.ngrok.io/";
+
+const TextForm = (props) => (
+  <FormControl className={props.classes.textField} variant="outlined" fullWidth>
+    <InputLabel>{props.label}</InputLabel>
+    <OutlinedInput
+      id={props.id}
+      onChange={props.handleChange(props.id)}
+      value={props.values}
+      labelWidth={props.labelWidth}
+    />
+  </FormControl>
+);
+
+const PasswordForm = (props) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  return (
+    <FormControl className={props.classes.textField} variant="outlined" fullWidth>
+      <InputLabel>{props.label}</InputLabel>
+      <OutlinedInput
+        id={props.id}
+        type={showPassword ? "text" : "password"}
+        value={props.values}
+        onChange={props.handleChange(props.id)}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              aria-label={"password"}
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge="end"
+            >
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        }
+        labelWidth={props.labelWidth}
+      />
+    </FormControl>
+  );
+};
 
 const Forms = (props) => {
 
@@ -20,7 +68,7 @@ const Forms = (props) => {
   const [universities, setUniversities] = useState(null);
   const [isApiLoaded, setIsApiLoaded] = useState(true);
 
-  console.log(props);
+  // console.log(props);
 
   useEffect(() => {
     axios({
@@ -44,61 +92,13 @@ const Forms = (props) => {
       });
   }, []);
 
-  const TextForm = (props) => (
-    <FormControl className={props.classes.margin} variant="outlined">
-      <InputLabel>{props.label}</InputLabel>
-      <OutlinedInput
-        id={props.id}
-        onChange={props.handleChange(props.id)}
-        value={props.values}
-        labelWidth={props.labelWidth}
-      />
-    </FormControl>
-  );
-
-  const PasswordForm = (props) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleClickShowPassword = () => {
-      setShowPassword(!showPassword);
-    };
-
-    const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-    };
-    return (
-      <FormControl className={props.classes.margin} variant="outlined">
-        <InputLabel>{props.label}</InputLabel>
-        <OutlinedInput
-          id={props.id}
-          type={showPassword ? "text" : "password"}
-          value={props.values}
-          onChange={props.handleChange(props.id)}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label={"password"}
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          }
-          labelWidth={props.labelWidth}
-        />
-      </FormControl>
-    );
-  };
-
   const SelectForm = (props) => {
-    console.log("COMPONENT : select form");
+    // console.log("COMPONENT : select form");
     let items = [];
     const id = props.id;
 
     if (universities) {
-      console.log("Univbersity", universities);
+      // console.log("Univbersity", universities);
 
       // for (let i = 0; i < universities.length; i++) {
       //   console.log("Loop");
@@ -115,11 +115,11 @@ const Forms = (props) => {
         items = [];
 
         if (props.selectedUniversity) {
-          console.log("Selected University ", props.selectedUniversity);
+          // console.log("Selected University ", props.selectedUniversity);
           universities.forEach((element) => {
-            if (element.shortform == props.selectedUniversity) {
+            if (element.shortform === props.selectedUniversity) {
               element.departments.forEach((dept) => {
-                console.log(dept);
+                // console.log(dept);
                 items.push(dept.shortform);
               });
             }
@@ -146,7 +146,7 @@ const Forms = (props) => {
     });
 
     return (
-      <FormControl variant="outlined" className={props.classes.textField}>
+      <FormControl variant="outlined" className={props.classes.textField} fullWidth>
         <InputLabel>{props.label}</InputLabel>
         <Select
           id={id}

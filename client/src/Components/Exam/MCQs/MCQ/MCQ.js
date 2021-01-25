@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-const MCQ = (props) => {
+const MCQ = () => {
 
     return (
         <h1>Hello</h1>
