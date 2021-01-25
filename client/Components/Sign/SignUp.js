@@ -1,42 +1,68 @@
-import React, { useState } from "react";
-import { Container, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Forms from './Forms';
+import React, { useState, useEffect } from "react";
+import { Container, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Forms from "./Forms";
 import "./SignIn.css";
+import axios from "axios";
+
+const apiDomain = "https://21efb3977bdd.ngrok.io/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap",
   },
   margin: {
     margin: theme.spacing(1),
   },
   textField: {
-    width: '15vw',
+    width: "15vw",
     margin: theme.spacing(1),
   },
 }));
 
 export default function SignUp() {
+  const [universities, setUniversities] = useState(null);
 
   const classes = useStyles();
+
   const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    designation: '',
-    university: '',
-    department: '',
-    session: '',
-    regNo: '',
-    result: '',
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    role: "",
+    designation: "",
+    university: "",
+    department: "",
+    session: "",
+    regNo: "",
+    result: "",
   });
-  console.log(values.email);
+
+  // useEffect(() => {
+  //   axios({
+  //     method: "get",
+  //     url: apiDomain + "university/all",
+  //   })
+  //     .then((response) => {
+  //       // console.log("All Universites..");
+
+  //       // console.log(response.data);
+
+  //       const data = response.data;
+
+  //       if (data.status === "OK") {
+  //         setUniversities(data.result.data);
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
+
+  // console.log("API CALL DATA", universities);
+
   const obj = {
     role: values.role,
     username: values.username,
@@ -50,29 +76,31 @@ export default function SignUp() {
     session: values.session,
     varsity: values.university,
   };
+
   const body = JSON.stringify(obj);
+
   const handleSignUp = (e) => {
-      temp();
-      e.preventDefault();
-  }
+    temp();
+    e.preventDefault();
+  };
   const temp = async () => {
-    const domain = 'http://19bd18c73cba.ngrok.io/';
     let endpoint;
-    if(values.role === "teacher") endpoint = 'auth/create-teacher';
-    else endpoint = 'auth/create-student';
+    if (values.role === "teacher") endpoint = "auth/create-teacher";
+    else endpoint = "auth/create-student";
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: body
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
     };
-    const response = await fetch(`${domain}${endpoint}`, requestOptions);
+    const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
     console.log(data);
-  }
+  };
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
+  // if (universities)
   return (
     <Container>
       <form onSubmit={handleSignUp}>
@@ -96,6 +124,7 @@ export default function SignUp() {
           handleChange={handleChange}
         />
         <Forms
+          selectedUniversity={values.university}
           id="department"
           type="select"
           label="Department"
@@ -202,5 +231,5 @@ export default function SignUp() {
       </form>
     </Container>
   );
+  // else return <h1>Loading</h1>;
 }
-    
