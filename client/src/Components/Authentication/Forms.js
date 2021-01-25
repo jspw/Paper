@@ -14,7 +14,7 @@ import "./SignIn.css";
 const apiDomain = "http://95572ad1dd4e.ngrok.io/";
 
 const TextForm = (props) => (
-  <FormControl className={props.classes.textField} variant="outlined" fullWidth>
+  <FormControl className={props.classes.textField} variant="outlined" fullWidth /* error={props.error} */ required={props.required}>
     <InputLabel>{props.label}</InputLabel>
     <OutlinedInput
       id={props.id}
@@ -36,7 +36,7 @@ const PasswordForm = (props) => {
     event.preventDefault();
   };
   return (
-    <FormControl className={props.classes.textField} variant="outlined" fullWidth>
+    <FormControl className={props.classes.textField} variant="outlined" fullWidth required>
       <InputLabel>{props.label}</InputLabel>
       <OutlinedInput
         id={props.id}
@@ -146,7 +146,7 @@ const Forms = (props) => {
     });
 
     return (
-      <FormControl variant="outlined" className={props.classes.textField} fullWidth>
+      <FormControl variant="outlined" className={props.classes.textField} fullWidth required>
         <InputLabel>{props.label}</InputLabel>
         <Select
           id={id}

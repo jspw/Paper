@@ -3,6 +3,7 @@ import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
 import Grid from '@material-ui/core/Grid';
+import MuiAlert from '@material-ui/lab/Alert';
 import "./SignIn.css";
 
 const apiDomain = "http://95572ad1dd4e.ngrok.io/";
@@ -19,9 +20,20 @@ const useStyles = makeStyles((theme) => ({
     // width: "15vw",
     // margin: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
   },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+  shadows: ["none"],
 }));
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function SignUp() {
   const classes = useStyles();
@@ -40,6 +52,7 @@ export default function SignUp() {
     session: "",
     regNo: "",
     result: "",
+    error: 'error',
   });
 
   // useEffect(() => {
@@ -80,10 +93,10 @@ export default function SignUp() {
   const body = JSON.stringify(obj);
 
   const handleSignUp = (e) => {
-    temp();
+    fetchData();
     e.preventDefault();
   };
-  const temp = async () => {
+  const fetchData = async () => {
     let endpoint;
     if (values.role === "teacher") endpoint = "auth/create-teacher";
     else endpoint = "auth/create-student";
@@ -94,6 +107,7 @@ export default function SignUp() {
     };
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
+    // if(data.message === "failed") setValues.error = (errorMessage);
     console.log(data);
   };
 
@@ -103,18 +117,24 @@ export default function SignUp() {
   // if (universities)
   return (
     <Container>
-      {/*         <Grid item alignItems="flex-start" justify="flex-start">
-          <h2>Hello There!!</h2>
-          <p>Lets Sign Up to continue</p>
-        </Grid> */}
       <Grid container justify="center" alignItems="center">
+        <Grid container justify="center" alignItems="center">
+          <Grid item className={classes.textField}>
+            <h2>Hello There!!</h2>
+            <p>Lets Sign Up to continue</p>
+          </Grid>
+        </Grid>
+        {values.error !== "" ? (
+          <Grid container justify="center" alignItems="center" className={classes.root}>
+            <Alert elevation={0} severity="error">This is an error message!</Alert>
+          </Grid>
+        ) : null}
         <form onSubmit={handleSignUp}>
           <Grid item xs={12}>
             <Forms
               id="role"
               type="select"
               label="Role"
-              labelWidth={112}
               classes={classes}
               values={values.role}
               handleChange={handleChange}
@@ -126,7 +146,7 @@ export default function SignUp() {
                 id="university"
                 type="select"
                 label="University"
-                labelWidth={112}
+                labelWidth={117}
                 classes={classes}
                 values={values.university}
                 handleChange={handleChange}
@@ -138,7 +158,7 @@ export default function SignUp() {
                 id="department"
                 type="select"
                 label="Department"
-                labelWidth={112}
+                labelWidth={117}
                 classes={classes}
                 values={values.department}
                 handleChange={handleChange}
@@ -152,7 +172,7 @@ export default function SignUp() {
                   id="session"
                   type="select"
                   label="Session"
-                  labelWidth={112}
+                  labelWidth={117}
                   classes={classes}
                   values={values.session}
                   handleChange={handleChange}
@@ -163,10 +183,11 @@ export default function SignUp() {
                   id="regNo"
                   type="text"
                   label="Registration No"
-                  labelWidth={112}
+                  labelWidth={120}
                   classes={classes}
                   values={values.regNo}
                   handleChange={handleChange}
+                  required={true}
                 />
               </Grid>
             </Grid>
@@ -176,7 +197,7 @@ export default function SignUp() {
                 id="designation"
                 type="select"
                 label="Designation"
-                labelWidth={112}
+                labelWidth={117}
                 classes={classes}
                 values={values.designation}
                 handleChange={handleChange}
@@ -193,6 +214,7 @@ export default function SignUp() {
                 classes={classes}
                 values={values.firstName}
                 handleChange={handleChange}
+                required={false}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -204,6 +226,7 @@ export default function SignUp() {
                 classes={classes}
                 values={values.lastName}
                 handleChange={handleChange}
+                required={false}
               />
             </Grid>
           </Grid>
@@ -213,10 +236,11 @@ export default function SignUp() {
                 id="username"
                 type="text"
                 label="Username"
-                labelWidth={73}
+                labelWidth={84}
                 classes={classes}
                 values={values.username}
                 handleChange={handleChange}
+                required={true}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -224,10 +248,11 @@ export default function SignUp() {
                 id="email"
                 type="text"
                 label="Email Address"
-                labelWidth={102}
+                labelWidth={110}
                 classes={classes}
                 values={values.email}
                 handleChange={handleChange}
+                required={true}
               />
             </Grid>
           </Grid>
@@ -237,7 +262,7 @@ export default function SignUp() {
                 id="password"
                 label="Password"
                 type="password"
-                labelWidth={70}
+                labelWidth={80}
                 classes={classes}
                 values={values.password}
                 handleChange={handleChange}
@@ -248,7 +273,7 @@ export default function SignUp() {
                 id="confirmPassword"
                 label="Confirm Password"
                 type="password"
-                labelWidth={135}
+                labelWidth={140}
                 classes={classes}
                 values={values.confirmPassword}
                 handleChange={handleChange}
