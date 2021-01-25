@@ -1,119 +1,123 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Container, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Forms from "./Forms";
 import Grid from '@material-ui/core/Grid';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Container, Button } from '@material-ui/core';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import MuiAlert from '@material-ui/lab/Alert';
+import Link from '@material-ui/core/Link';
 import "./SignIn.css";
 
+const apiDomain = "";
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
   textField: {
-    width: '25vw',
+    marginTop: theme.spacing(2),
+  },
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
   },
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
-export default function SignIn() {
-
+export default function SignUp() {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    email: '',
-    password: '',
-    showPassword: false,
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    error: "error",
   });
+
+  const obj = {
+    email: values.email,
+    password: values.password,
+  };
+
+  const body = JSON.stringify(obj);
+
+  const handleSignIn = (e) => {
+    fetchData();
+    e.preventDefault();
+  };
+  const fetchData = async () => {
+    const endpoint = "";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+    };
+    const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
+    const data = await response.json();
+    console.log(data);
+  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <Container>
-      <form>
-        <Grid
-          container
-          spacing={1}
-          justify="center"
-          alignItems="center"
-          direction="row"
-        >
-          <Grid item>
-            <EmailOutlinedIcon />
-          </Grid>
-          <Grid item>
-            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-              <InputLabel>Email Address</InputLabel>
-              <OutlinedInput
-                id="email"
-                onChange={handleChange("email")}
-                labelWidth={102}
-              />
-            </FormControl>
-          </Grid>
+      <Grid container justify="center" alignItems="center">
+        <Grid item className={classes.textField}>
+          <h2>Welcome Back!!</h2>
+          <p>Please sign into your account to countinue</p>
         </Grid>
-        <Grid
-          container
-          spacing={1}
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <LockOutlinedIcon />
+        {values.error !== "" ? (
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.root}
+          >
+            <Alert elevation={0} severity="error">
+              This is an error message!
+            </Alert>
           </Grid>
-          <Grid item>
-            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-              <InputLabel>Password</InputLabel>
-              <OutlinedInput
-                id="password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="password"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                labelWidth={70}
-              />
-            </FormControl>
+        ) : null}
+        <form onSubmit={handleSignIn}>
+          <Grid item xs={12}>
+            <Forms
+              id="email"
+              type="text"
+              label="Email Address"
+              labelWidth={110}
+              classes={classes}
+              values={values.email}
+              handleChange={handleChange}
+              required={true}
+            />
           </Grid>
-        </Grid>
-        <Grid container justify="center" alignItems="center">
-          <Button variant="contained" color="default" type="submit" >
-            Sign In
-          </Button>
-        </Grid>
-      </form>
+          <Grid item xs={12}>
+            <Forms
+              id="password"
+              label="Password"
+              type="password"
+              labelWidth={80}
+              classes={classes}
+              values={values.password}
+              handleChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <p><Link href="#"><b>Forgot Password?</b></Link></p>
+            </Grid>
+          <Grid item xs={12} className={classes.textField}>
+            <Button variant="contained" value="Sign In" type="submit" fullWidth>
+              Sign In
+            </Button>
+            <Grid item xs={12} className={classes.textField}>
+            <p>Don't have an account? <Link href="#"><b>Sign Up</b></Link> instead</p>
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
     </Container>
   );
 }
-    
