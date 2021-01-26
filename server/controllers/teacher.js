@@ -1,4 +1,8 @@
 const TeacherModel = require("../models/teacher");
+const CourseModel = require("../models/course");
+const McqQuestionModel = require("../models/mcqQuestion");
+const errorHandler = require("../middleware/errorHandler");
+const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 exports.getTeacher = (req, res, next) => {
   TeacherModel.findById(req.params.id)
@@ -47,9 +51,42 @@ exports.getTeacher = (req, res, next) => {
     .catch((error) => {
       console.log(error);
 
-      return res.status(400).json({
-        status: "FAILED",
-        result: "Teacher not found.",
-      });
+      errorHandler.validationError(res, 400, "Student not found.");
     });
+};
+
+exports.postCreateCourse = (req, res, next) => {
+  if (req.user.role == "Teacher") {
+    const courseModel = new CourseModel(req.body);
+    courseModel
+      .save()
+      .then((course) => {
+        console.log(course);
+
+        apiResponseInJson(res, 201, course);
+      })
+      .catch((error) => {
+        errorHandler.validationError(res, 401, error);
+      });
+  } else {
+    errorHandler.unauthorizedAccess(res);
+  }
+};
+
+exports.postCreateMcqQuestion = (req, res, next) => {
+  if (req.user.role == "Teacher") {
+    const mcqQuestionModel = new McqQuestionModel(req.body);
+    mcqQuestionModel
+      .save()
+      .then((mcqQuestion) => {
+        console.log(mcqQuestion);
+
+        apiResponseInJson(res, 201, mcqQuestion);
+      })
+      .catch((error) => {
+        errorHandler.validationError(res, 401, error);
+      });
+  } else {
+    errorHandler.unauthorizedAccess(res);
+  }
 };

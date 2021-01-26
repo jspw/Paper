@@ -1,3 +1,4 @@
+const errorHandler = require("../middleware/errorHandler");
 const StudentModel = require("../models/student");
 
 exports.getStudent = (req, res, next) => {
@@ -49,9 +50,6 @@ exports.getStudent = (req, res, next) => {
     .catch((error) => {
       console.log(error);
 
-      return res.status(400).json({
-        status: "FAILED",
-        result: "Student not found.",
-      });
+      errorHandler.validationError(res, 400, "Student not found.");
     });
 };

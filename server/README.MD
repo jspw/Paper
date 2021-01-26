@@ -16,14 +16,18 @@
     - [Access A Protected or Restricted Route](#access-a-protected-or-restricted-route)
 
   - [Users](#users)
-    - [Get Single Student Info](#get-a-single-student-info)
-    - [Get Single Teacher Info](#get-a-single-teacher-info)
+    - [Get A Single Student Info](#get-a-single-student-info)
+    - [Get A Single Teacher Info](#get-a-single-teacher-info)
 
 ## Contents :
 
-### Registration
+### API Documentation
 
-#### Create Student
+#### Authorization
+
+##### Registration
+
+###### Create Student
 
 Request : `POST` `/auth/create-student`
 
@@ -45,6 +49,24 @@ Body :
 }
 ```
 
+Example :
+
+```json
+{
+  "role": "Student",
+  "username": "mhs",
+  "password": "123456",
+  "email": "mehedi17@sust.edu",
+  "firstName": "Shifat",
+  "lastName": "Rahman",
+  "repassword": "123456",
+  "department": "600c75f1059f3d6697f4e93a",
+  "varsity": "600c75f1059f3d6697f4e931",
+  "registrationNo": "2017831051",
+  "session": "2017-2018"
+}
+```
+
 Response :
 
 ```json
@@ -63,7 +85,7 @@ Response :
 }
 ```
 
-#### Create Teacher
+###### Create Teacher
 
 Request : `POST` `/auth/create-teacher`
 
@@ -81,6 +103,24 @@ Body :
   "department": "ID OBJECT",
   "varsity": "ID OBJECT",
   "designation": "Text*"
+}
+```
+
+Example :
+
+```json
+{
+  "role": "Teacher",
+  "username": "shifat",
+  "password": "123456",
+  "email": "sania@sust.edu",
+  "firstName": "Mazah",
+  "lastName": "Kafi",
+  "repassword": "123456",
+  "department": "600c75f1059f3d6697f4e93a",
+  "varsity": "600c75f1059f3d6697f4e931",
+  "designation": "Professor",
+  "session": "2017-2018"
 }
 ```
 
@@ -102,7 +142,7 @@ Response :
 }
 ```
 
-#### Login
+###### Login
 
 Request: `POST` `/auth/login`
 
@@ -168,7 +208,7 @@ Response : (Student)
 }
 ```
 
-#### Access A Protected or Restricted Route
+###### Access A Protected or Restricted Route
 
 Add the JSON Web Token, you get by logging in or during registration, on the header like this.
 
@@ -182,7 +222,9 @@ Header:
 
 When the endpoint is restricted, it'd return a success response, only if the request comes from any allowed user.
 
-#### Get Single Student Info
+#### Users
+
+##### Get Single Student Info
 
 Request: `RESTRICTED (student/teacher)` `GET` `/student/:id`
 
@@ -209,7 +251,7 @@ Response:
 }
 ```
 
-#### Get Single Teacher Info
+##### Get Single Teacher Info
 
 Request: `RESTRICTED (student/teacher)` `GET` `/teacher/:id`
 
@@ -230,6 +272,56 @@ Response:
       "designation": "Professor",
       "registered_at": "2021-01-24T18:07:18.998Z",
       "varsity": "SUST"
+    }
+  }
+}
+```
+
+#### Create Course
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/create-course`
+
+Body :
+
+Example :
+
+```json
+{
+  "name": "Algebra",
+  "code": "MAT101",
+  "department": {
+    "name": "CSE",
+    "id": "600c75f1059f3d6697f4e93b"
+  },
+  "varsity": {
+    "name": "SUST",
+    "id": "600c75f1059f3d6697f4e931"
+  }
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "creationDate": "2021-01-26T13:15:47.213Z",
+      "_id": "60101629eab66d4434084582",
+      "name": "Algebra",
+      "code": "MAT101",
+      "department": {
+        "name": "CSE",
+        "id": "600c75f1059f3d6697f4e93b"
+      },
+      "varsity": {
+        "name": "SUST",
+        "id": "600c75f1059f3d6697f4e931"
+      },
+      "mcqExams": [],
+      "cqExams": [],
+      "__v": 0
     }
   }
 }

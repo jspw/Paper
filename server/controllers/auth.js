@@ -5,6 +5,7 @@ require("dotenv").config();
 const UniversityModel = require("../models/university");
 const StudentModel = require("../models/student");
 const TeacherModel = require("../models/teacher");
+const errorHandler = require("../middleware/errorHandler");
 
 exports.postCreateUniversity = (req, res, next) => {
   console.log(req.body);
@@ -20,10 +21,7 @@ exports.postCreateUniversity = (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
-      return res.status(400).json({
-        status: "FAILED",
-        result: "Something went wrong in server.",
-      });
+      errorHandler.serverError(res);
     });
 };
 
@@ -44,10 +42,7 @@ exports.postCreateTeacher = (req, res, next) => {
   // console.log(role, username, email, password, repassword, firstName, lastName, department, varsity, designation);
 
   if (password !== repassword) {
-    res.status(400).json({
-      status: "FAILED",
-      result: "Password have to be matched!",
-    });
+    errorHandler.validationError(res, 400, "Password have to be matched!");
   } else {
     bcrypt
       .hash(password, 10)
@@ -110,32 +105,20 @@ exports.postCreateTeacher = (req, res, next) => {
                       errorMessage = "Email address already exits";
                   } else errorMessage = error;
 
-                  return res.status(401).json({
-                    status: "FAILED",
-                    result: errorMessage,
-                  });
+                  errorHandler.validationError(res, 401, errorMessage);
                 });
             } else {
-              return res.status(402).json({
-                status: "FAILED",
-                result: "Unauthorized email address",
-              });
+              errorHandler.unauthorizedEmail(res);
             }
           })
           .catch((error) => {
             console.log(error);
-            return res.status(400).json({
-              status: "FAILED",
-              result: "Something went wrong in server.",
-            });
+            errorHandler.serverError(res);
           });
       })
       .catch((error) => {
         console.log(error);
-        return res.status(400).json({
-          status: "FAILED",
-          result: "Something went wrong in server.",
-        });
+        errorHandler.serverError(res);
       });
   }
 };
@@ -158,10 +141,7 @@ exports.postCreateStudent = (req, res, next) => {
   // console.log(role, username, email, password, repassword, firstName, lastName, department, registrationNo, session);
 
   if (password !== repassword) {
-    return res.status(400).json({
-      status: "FAILED",
-      result: "Password have to be matched!",
-    });
+    errorHandler.validationError(res, 400, "Password have to be matched!");
   } else {
     bcrypt
       .hash(password, 10)
@@ -231,32 +211,20 @@ exports.postCreateStudent = (req, res, next) => {
                       errorMessage = "Email address already exits";
                   } else errorMessage = error;
 
-                  res.status(401).json({
-                    status: "FAILED",
-                    result: errorMessage,
-                  });
+                  errorHandler.validationError(res, 401, errorMessage);
                 });
             } else {
-              return res.status(402).json({
-                status: "FAILED",
-                result: "Unauthorized email address",
-              });
+              errorHandler.unauthorizedEmail(res);
             }
           })
           .catch((error) => {
             console.log(error);
-            return res.status(400).json({
-              status: "FAILED",
-              result: "Something went wrong in server.",
-            });
+            errorHandler.serverError(res);
           });
       })
       .catch((error) => {
         console.log(error);
-        return res.status(400).json({
-          status: "FAILED",
-          result: "Something went wrong in server.",
-        });
+        errorHandler.serverError(res);
       });
   }
 };
@@ -343,10 +311,7 @@ exports.getLogin = (req, res, next) => {
             })
             .catch((error) => {
               console.log(error);
-              return res.status(400).json({
-                status: "FAILED",
-                result: "Something went wrong in server.",
-              });
+              errorHandler.serverError(res);
             });
         } else {
           TeacherModel.findOne({
@@ -420,36 +385,24 @@ exports.getLogin = (req, res, next) => {
                   })
                   .catch((error) => {
                     console.log(error);
-                    return res.status(400).json({
-                      status: "FAILED",
-                      result: "Something went wrong in server.",
-                    });
+                    errorHandler.serverError(res);
                   });
               }
 
               //hgh///
               else {
-                return res.status(401).json({
-                  status: "FAILED",
-                  result: "No User Found",
-                });
+                errorHandler.validationError(res, 401, "No User Found");
               }
             })
             .catch((error) => {
               console.log(error);
-              return res.status(400).json({
-                status: "FAILED",
-                result: "Something went wrong in server.",
-              });
+              errorHandler.serverError(res);
             });
         }
       })
       .catch((error) => {
         console.log(error);
-        return res.status(400).json({
-          status: "FAILED",
-          result: "Something went wrong in server.",
-        });
+        errorHandler.serverError(res);
       });
   }
 };

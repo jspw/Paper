@@ -14,6 +14,11 @@ app.use(helmet());
 app.use(compression());
 app.use(xssClean());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.set("view engine", "ejs");
 
 app.set("view", "view");

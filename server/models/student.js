@@ -7,7 +7,7 @@ const studentSchema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ["student", "teacher"],
+    enum: ["Student", "Teacher"],
   },
   username: {
     type: String,
