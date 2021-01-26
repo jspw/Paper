@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import MuiAlert from '@material-ui/lab/Alert';
 import "./SignIn.css";
 
-const apiDomain = "http://95572ad1dd4e.ngrok.io/";
+const apiDomain = "http://1337a8374cf4.ngrok.io/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +52,7 @@ export default function SignUp() {
     session: "",
     regNo: "",
     result: "",
-    error: 'error',
+    error: "",
   });
 
   // useEffect(() => {
@@ -93,12 +93,13 @@ export default function SignUp() {
   const body = JSON.stringify(obj);
 
   const handleSignUp = (e) => {
+    // console.log('hello')
     fetchData();
     e.preventDefault();
   };
   const fetchData = async () => {
     let endpoint;
-    if (values.role === "teacher") endpoint = "auth/create-teacher";
+    if (values.role === "Teacher") endpoint = "auth/create-teacher";
     else endpoint = "auth/create-student";
     const requestOptions = {
       method: "POST",
@@ -107,7 +108,8 @@ export default function SignUp() {
     };
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
-    // if(data.message === "failed") setValues.error = (errorMessage);
+    if(data.status === "FAILED") setValues({...values, ["error"]: data.result});
+    else setValues({...values, ["error"]: ''});
     console.log(data);
   };
 
@@ -126,7 +128,7 @@ export default function SignUp() {
         </Grid>
         {values.error !== "" ? (
           <Grid container justify="center" alignItems="center" className={classes.root}>
-            <Alert elevation={0} severity="error">This is an error message!</Alert>
+            <Alert elevation={0} severity="error">{values.error}</Alert>
           </Grid>
         ) : null}
         <form onSubmit={handleSignUp}>

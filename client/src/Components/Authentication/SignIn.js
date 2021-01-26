@@ -5,6 +5,7 @@ import Forms from "./Forms";
 import Grid from '@material-ui/core/Grid';
 import MuiAlert from '@material-ui/lab/Alert';
 import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 import "./SignIn.css";
 
 const apiDomain = "";
@@ -64,21 +65,25 @@ export default function SignUp() {
   };
   return (
     <Container>
-      <Grid container justify="center" alignItems="center">
-        <Grid item className={classes.textField}>
-          <h2>Welcome Back!!</h2>
-          <p>Please sign into your account to countinue</p>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        style={{ marginTop: "4%" }}
+      >
+        <Grid container justify="center" alignItems="center">
+          <Grid item className={classes.textField}>
+            <h3>Welcome Back!!</h3>
+            <p>Please sign into your account</p>
+          </Grid>
         </Grid>
         {values.error !== "" ? (
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            className={classes.root}
-          >
-            <Alert elevation={0} severity="error">
-              This is an error message!
-            </Alert>
+          <Grid container justify="center" alignItems="center">
+            <Grid item>
+              <Alert elevation={0} severity="error" fullWidth>
+                This is an error message!
+              </Alert>
+            </Grid>
           </Grid>
         ) : null}
         <form onSubmit={handleSignIn}>
@@ -106,14 +111,24 @@ export default function SignUp() {
             />
           </Grid>
           <Grid item xs={12}>
-            <p><Link href="#"><b>Forgot Password?</b></Link></p>
-            </Grid>
+            <Typography>
+              <Link href="#">
+                <b>Forgot Password?</b>
+              </Link>
+            </Typography>
+          </Grid>
           <Grid item xs={12} className={classes.textField}>
             <Button variant="contained" value="Sign In" type="submit" fullWidth>
               Sign In
             </Button>
             <Grid item xs={12} className={classes.textField}>
-            <p>Don't have an account? <Link href="#"><b>Sign Up</b></Link> instead</p>
+              <Typography>
+                Don't have an account?{" "}
+                <Link href="#">
+                  <b>Sign Up</b>
+                </Link>{" "}
+                instead
+              </Typography>
             </Grid>
           </Grid>
         </form>
