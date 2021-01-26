@@ -1,0 +1,79 @@
+[{
+  "_id": {
+    "$oid": "6010311c79e31e763e1fe5a8"
+  },
+  "course": {
+    "$oid": "6010146ccf36944122caf45b"
+  },
+  "mcqQuestions": [
+    {
+      "_id": {
+        "$oid": "6010311c79e31e763e1fe5a9"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101c05152a71544b170e8b"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6010311c79e31e763e1fe5aa"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101d7f0224a2573546d357"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6010311c79e31e763e1fe5ab"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101dd40224a2573546d35e"
+      }
+    }
+  ],
+  "totalTime": 30,
+  "totalMarks": 100,
+  "date": {
+    "$date": "2016-11-12T07:00:00Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60103361af01a57afe320961"
+  },
+  "course": {
+    "$oid": "6010146ccf36944122caf45b"
+  },
+  "mcqQuestions": [
+    {
+      "_id": {
+        "$oid": "60103361af01a57afe320962"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101c05152a71544b170e8b"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60103361af01a57afe320963"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101d7f0224a2573546d357"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60103361af01a57afe320964"
+      },
+      "mcqQuestionId": {
+        "$oid": "60101dd40224a2573546d35e"
+      }
+    }
+  ],
+  "totalTime": 30,
+  "totalMarks": 100,
+  "date": {
+    "$date": "2016-11-12T07:00:00Z"
+  },
+  "__v": 0
+}]

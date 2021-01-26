@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "600db756f85e67c1c85dcb6c"
+  },
+  "role": "Teacher",
+  "email": "kafi@@sust.edu",
+  "username": "Kofi",
+  "password": "$2a$10$k2AawmlHqclmzacnZ8CK2OSsjL7kjY2oVxtacrBpbx0Oqxo.fWnSa",
+  "firstName": "Mazah",
+  "lastName": "Kafi",
+  "department": {
+    "$oid": "600c75f1059f3d6697f4e93a"
+  },
+  "varsity": {
+    "$oid": "600c75f1059f3d6697f4e931"
+  },
+  "designation": "Professor",
+  "registered_at": {
+    "$date": "2021-01-24T18:07:18.998Z"
+  },
+  "__v": 0
+}]

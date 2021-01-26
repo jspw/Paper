@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "600d954bb931dd766b16150d"
+  },
+  "role": "Student",
+  "email": "mehedi17@sust.edu",
+  "username": "mhs",
+  "password": "$2a$10$080dRdpKdD9LbM4I53t6YuZPgCL/PrSzwlr.aJnYn9JU0.H63kSDq",
+  "firstName": "Shifat",
+  "lastName": "Rahman",
+  "department": {
+    "$oid": "600c75f1059f3d6697f4e93a"
+  },
+  "registrationNo": 2017831051,
+  "varsity": {
+    "$oid": "600c75f1059f3d6697f4e931"
+  },
+  "session": "2017-2018",
+  "registered_at": {
+    "$date": "2021-01-24T15:42:03.248Z"
+  },
+  "__v": 0
+}]

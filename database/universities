@@ -1,0 +1,549 @@
+[{
+  "_id": {
+    "$oid": "600c75f1059f3d6697f4e931"
+  },
+  "name": "Shahjalal University Of Science And Technology",
+  "shortform": "SUST",
+  "emails": [
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e932"
+      },
+      "email": "mehedi17@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e933"
+      },
+      "email": "sania@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e934"
+      },
+      "email": "autul@gmail.com"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e935"
+      },
+      "email": "naim@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e936"
+      },
+      "email": "kafi@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e937"
+      },
+      "email": "foga@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e938"
+      },
+      "email": "joga@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e939"
+      },
+      "email": "sadlyf@@sust.edu"
+    }
+  ],
+  "departments": [
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e93a"
+      },
+      "name": "SOFTWARE ENGINEERING",
+      "shortform": "SWE"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e93b"
+      },
+      "name": "Computer Science and ENGINEERING",
+      "shortform": "CSE"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e93c"
+      },
+      "name": "Physics",
+      "shortform": "PHY"
+    },
+    {
+      "_id": {
+        "$oid": "600c75f1059f3d6697f4e93d"
+      },
+      "name": "Chemestry",
+      "shortform": "CHE"
+    }
+  ],
+  "password": "1213",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "600c798810a8176de50b9522"
+  },
+  "name": "Hajidanesh University Of Science And Technology",
+  "shortform": "HSTU",
+  "emails": [
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9523"
+      },
+      "email": "shifat@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9524"
+      },
+      "email": "sam@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9525"
+      },
+      "email": "tanvir@gmail.com"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9526"
+      },
+      "email": "mobin@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9527"
+      },
+      "email": "rashid@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9528"
+      },
+      "email": "forhad@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b9529"
+      },
+      "email": "rakib@@sust.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b952a"
+      },
+      "email": "emon@@sust.edu"
+    }
+  ],
+  "departments": [
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b952b"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b952c"
+      },
+      "name": "Computer Science and ENGINEERING",
+      "shortform": "CSE"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b952d"
+      },
+      "name": "Physics",
+      "shortform": "PHY"
+    },
+    {
+      "_id": {
+        "$oid": "600c798810a8176de50b952e"
+      },
+      "name": "Chemestry",
+      "shortform": "CHE"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "600eea29fdfe5956a3986457"
+  },
+  "name": "Patuakhali University Of Science And Technology",
+  "shortform": "PSTU",
+  "emails": [
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986458"
+      },
+      "email": "shifat@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986459"
+      },
+      "email": "sam@@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645a"
+      },
+      "email": "tanvir@pstu.com"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645b"
+      },
+      "email": "mobin@@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645c"
+      },
+      "email": "rashid@@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645d"
+      },
+      "email": "forhad@@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645e"
+      },
+      "email": "rakib@@pstu.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a398645f"
+      },
+      "email": "emon@@pstu.edu"
+    }
+  ],
+  "departments": [
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986460"
+      },
+      "name": "Biology",
+      "shortform": "BIO"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986461"
+      },
+      "name": "Electrics and Electronics Engineering",
+      "shortform": "EEE"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986462"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986463"
+      },
+      "name": "Petrolium and Mining Engineering",
+      "shortform": "PME"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986464"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986465"
+      },
+      "name": "Computer Science and ENGINEERING",
+      "shortform": "CSE"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986466"
+      },
+      "name": "Physics",
+      "shortform": "PHY"
+    },
+    {
+      "_id": {
+        "$oid": "600eea29fdfe5956a3986467"
+      },
+      "name": "Chemestry",
+      "shortform": "CHE"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "600eea80227b1658be186e28"
+  },
+  "name": "Dhaka University",
+  "shortform": "DU",
+  "emails": [
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e29"
+      },
+      "email": "shifat@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2a"
+      },
+      "email": "sam@@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2b"
+      },
+      "email": "tanvir@du.com"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2c"
+      },
+      "email": "mobin@@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2d"
+      },
+      "email": "rashid@@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2e"
+      },
+      "email": "forhad@@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e2f"
+      },
+      "email": "rakib@@du.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e30"
+      },
+      "email": "emon@@du.edu"
+    }
+  ],
+  "departments": [
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e31"
+      },
+      "name": "GEB",
+      "shortform": "GEB"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e32"
+      },
+      "name": "SWE",
+      "shortform": "SWE"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e33"
+      },
+      "name": "IUB",
+      "shortform": "IUB"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e34"
+      },
+      "name": "Biology",
+      "shortform": "BIO"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e35"
+      },
+      "name": "Electrics and Electronics Engineering",
+      "shortform": "EEE"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e36"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e37"
+      },
+      "name": "Petrolium and Mining Engineering",
+      "shortform": "PME"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e38"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e39"
+      },
+      "name": "Computer Science and ENGINEERING",
+      "shortform": "CSE"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e3a"
+      },
+      "name": "Physics",
+      "shortform": "PHY"
+    },
+    {
+      "_id": {
+        "$oid": "600eea80227b1658be186e3b"
+      },
+      "name": "Chemestry",
+      "shortform": "CHE"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "600eeb069c34055b3963adee"
+  },
+  "name": "Bangladesh University Of Engineering And Technology",
+  "shortform": "BUET",
+  "emails": [
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adef"
+      },
+      "email": "shifat@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf0"
+      },
+      "email": "sam@@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf1"
+      },
+      "email": "tanvir@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf2"
+      },
+      "email": "mobin@@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf3"
+      },
+      "email": "rashid@@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf4"
+      },
+      "email": "forhad@@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf5"
+      },
+      "email": "rakib@@buet.edu"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf6"
+      },
+      "email": "emon@@buet.edu"
+    }
+  ],
+  "departments": [
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf7"
+      },
+      "name": "URP",
+      "shortform": "URP"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf8"
+      },
+      "name": "Mechanical Engineering",
+      "shortform": "MEE"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adf9"
+      },
+      "name": "GEB",
+      "shortform": "GEB"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adfa"
+      },
+      "name": "SWE",
+      "shortform": "SWE"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adfb"
+      },
+      "name": "Electrics and Electronics Engineering",
+      "shortform": "EEE"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adfc"
+      },
+      "name": "Petrolium and Mining Engineering",
+      "shortform": "PME"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adfd"
+      },
+      "name": "Mathamatics",
+      "shortform": "MAT"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adfe"
+      },
+      "name": "Computer Science and ENGINEERING",
+      "shortform": "CSE"
+    },
+    {
+      "_id": {
+        "$oid": "600eeb069c34055b3963adff"
+      },
+      "name": "Physics",
+      "shortform": "PHY"
+    }
+  ],
+  "__v": 0
+}]

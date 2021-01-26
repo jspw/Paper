@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "6010146ccf36944122caf45b"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:09:00.285Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101499d9582841efe50144"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:09:37.847Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601014b539650242439115e3"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:10:10.930Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101511032bbb43117d969e"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:11:41.183Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101629eab66d4434084582"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:15:47.213Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "department": {
+    "name": "CSE",
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e93b"
+    }
+  },
+  "varsity": {
+    "name": "SUST",
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e931"
+    }
+  },
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+}]
