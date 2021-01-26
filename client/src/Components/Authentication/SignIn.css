@@ -1,0 +1,14 @@
+.sign {
+    /* width: 50%;
+    margin: 0 auto; */
+    display: flex;
+  justify-content: center;
+}
+.errorMsg {
+  background-color: rgb(250, 214, 214);
+  margin: 20px;
+  padding: 7px 10px;
+  border: 2px solid rgb(255, 197, 197);
+  border-radius: 5px;
+  color: rgb(211, 12, 12);
+}
