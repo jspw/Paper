@@ -11,10 +11,15 @@ import Select from "@material-ui/core/Select";
 import axios from "axios";
 import "./SignIn.css";
 
-const apiDomain = "http://1337a8374cf4.ngrok.io/";
+const apiDomain = "http://localhost:8080/";
 
 const TextForm = (props) => (
-  <FormControl className={props.classes.textField} variant="outlined" fullWidth /* error={props.error} */ required={props.required}>
+  <FormControl
+    className={props.classes.textField}
+    variant="outlined"
+    fullWidth
+    /* error={props.error} */ required={props.required}
+  >
     <InputLabel>{props.label}</InputLabel>
     <OutlinedInput
       id={props.id}
@@ -36,7 +41,12 @@ const PasswordForm = (props) => {
     event.preventDefault();
   };
   return (
-    <FormControl className={props.classes.textField} variant="outlined" fullWidth required>
+    <FormControl
+      className={props.classes.textField}
+      variant="outlined"
+      fullWidth
+      required
+    >
       <InputLabel>{props.label}</InputLabel>
       <OutlinedInput
         id={props.id}
@@ -62,7 +72,6 @@ const PasswordForm = (props) => {
 };
 
 const Forms = (props) => {
-
   const type = props.type;
 
   const [universities, setUniversities] = useState(null);
@@ -105,11 +114,24 @@ const Forms = (props) => {
       //   console.log(universities[i]);
       // }
 
-      if (id === "role") items = ["Teacher", "Student"];
+      if (id === "role")
+        items = [
+          {
+            id: "Teacher",
+            value: "Teacher",
+          },
+          {
+            id: "Student",
+            value: "Student",
+          },
+        ];
       else if (id === "university") {
         items = [];
         universities.forEach((element) => {
-          items.push(element.shortform);
+          items.push({
+            id: element._id,
+            value: element.shortform,
+          });
         });
       } else if (id === "department") {
         items = [];
@@ -117,36 +139,76 @@ const Forms = (props) => {
         if (props.selectedUniversity) {
           // console.log("Selected University ", props.selectedUniversity);
           universities.forEach((element) => {
-            if (element.shortform === props.selectedUniversity) {
+            if (element._id === props.selectedUniversity) {
               element.departments.forEach((dept) => {
-                // console.log(dept);
-                items.push(dept.shortform);
+                console.log(dept);
+                items.push({
+                  id: dept._id,
+                  value: dept.shortform,
+                });
               });
             }
           });
         }
       } else if (id === "session") {
-        items = ["2016-2017", "2017-2018", "2018-2019", "2020-2021"];
-      } else if (id === "designation") {
+        items = [];
         items = [
-          "Department Head",
-          "Professor",
-          "Assistant Professor",
-          "Lecturer",
+          {
+            id: "2016-2017",
+            value: "2016-2017",
+          },
+          {
+            id: "2017-2018",
+            value: "2017-2018",
+          },
+          {
+            id: "2018-2019",
+            value: "2018-2019",
+          },
+          {
+            id: "2020-2021",
+            value: "2020-2021",
+          },
+        ];
+      } else if (id === "designation") {
+        items = [];
+        items = [
+          {
+            id: "Department Head",
+            value: "Department Head",
+          },
+          {
+            id: "Professor",
+            value: "Professor",
+          },
+          {
+            id: "Assistant Professor",
+            value: "Assistant Professor",
+          },
+          {
+            id: "Lecturer",
+            value: "Lecturer",
+          },
         ];
       }
     }
 
     const menuItems = items.map((item, i) => {
+      // console.log(items);
       return (
-        <MenuItem key={i} value={item}>
-          {item}
+        <MenuItem key={i} value={item.id}>
+          {item.value}
         </MenuItem>
       );
     });
 
     return (
-      <FormControl variant="outlined" className={props.classes.textField} fullWidth required>
+      <FormControl
+        variant="outlined"
+        className={props.classes.textField}
+        fullWidth
+        required
+      >
         <InputLabel>{props.label}</InputLabel>
         <Select
           id={id}

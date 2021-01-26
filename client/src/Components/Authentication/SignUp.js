@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
-import Grid from '@material-ui/core/Grid';
-import MuiAlert from '@material-ui/lab/Alert';
+import Grid from "@material-ui/core/Grid";
+import MuiAlert from "@material-ui/lab/Alert";
 import "./SignIn.css";
 
-const apiDomain = "http://1337a8374cf4.ngrok.io/";
+const apiDomain = "http://localhost:8080/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -106,10 +106,14 @@ export default function SignUp() {
       headers: { "Content-Type": "application/json" },
       body: body,
     };
+
+    console.log(body);
+
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
-    if(data.status === "FAILED") setValues({...values, ["error"]: data.result});
-    else setValues({...values, ["error"]: ''});
+    if (data.status === "FAILED")
+      setValues({ ...values, ["error"]: data.result });
+    else setValues({ ...values, ["error"]: "" });
     console.log(data);
   };
 
@@ -127,8 +131,15 @@ export default function SignUp() {
           </Grid>
         </Grid>
         {values.error !== "" ? (
-          <Grid container justify="center" alignItems="center" className={classes.root}>
-            <Alert elevation={0} severity="error">{values.error}</Alert>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.root}
+          >
+            <Alert elevation={0} severity="error">
+              {values.error}
+            </Alert>
           </Grid>
         ) : null}
         <form onSubmit={handleSignUp}>

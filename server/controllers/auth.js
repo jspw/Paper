@@ -39,6 +39,7 @@ exports.postCreateTeacher = (req, res, next) => {
     designation,
   } = req.body;
 
+  // console.log(req.body);
   // console.log(role, username, email, password, repassword, firstName, lastName, department, varsity, designation);
 
   if (password !== repassword) {
@@ -51,7 +52,7 @@ exports.postCreateTeacher = (req, res, next) => {
           "emails.email": email,
         })
           .then((result) => {
-            console.log(result);
+            // console.log(result);
 
             if (result && result._id == varsity) {
               const teacherModel = new TeacherModel({
@@ -138,7 +139,18 @@ exports.postCreateStudent = (req, res, next) => {
     session,
   } = req.body;
 
-  // console.log(role, username, email, password, repassword, firstName, lastName, department, registrationNo, session);
+  console.log(
+    role,
+    username,
+    email,
+    password,
+    repassword,
+    firstName,
+    lastName,
+    department,
+    registrationNo,
+    session
+  );
 
   if (password !== repassword) {
     errorHandler.validationError(res, 400, "Passwords Have To Match!");
@@ -150,8 +162,8 @@ exports.postCreateStudent = (req, res, next) => {
           "emails.email": email,
         })
           .then((result) => {
-            
-            console.log("Check Email ", result);
+
+            // console.log(result);
 
             if (result && result._id == varsity) {
               const studentModel = new StudentModel({
@@ -212,9 +224,12 @@ exports.postCreateStudent = (req, res, next) => {
                       errorMessage = "Email Address Already Exists";
                   } else errorMessage = error;
 
+                  console.log(errorMessage);
+
                   errorHandler.validationError(res, 401, errorMessage);
                 });
             } else {
+              console.log("WTF?");
               errorHandler.unauthorizedEmail(res);
             }
           })
