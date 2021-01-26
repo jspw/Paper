@@ -7,14 +7,14 @@ exports.serverError = (res) => {
   //   };
 };
 
-exports.unauthorizedEmail = (res) => {
+exports.unauthorizedAccess = (res) => {
   return res.status(402).json({
     status: "FAILED",
     result: "Unauthorized access",
   });
 };
 
-exports.unauthorizedAccess = (res) => {
+exports.unauthorizedEmail = (res) => {
   return res.status(402).json({
     status: "FAILED",
     result: "Unauthorized email address",

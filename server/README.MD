@@ -327,6 +327,259 @@ Response :
 }
 ```
 
+### Create Question
+
+#### Create Mcq Question
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/create-mcq-question`
+
+Body :
+
+Example :
+
+```json
+{
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+  "mainQuestion": "What is this?",
+  "options": [
+    {
+      "option": "ASASA"
+    },
+    {
+      "option": "TTTT"
+    },
+    {
+      "option": "UUUdsa"
+    },
+    {
+      "option": "UUUU"
+    }
+  ],
+  "correctAnswers": [
+    {
+      "answer": "AAAAA"
+    },
+    {
+      "answer": "YYYYY"
+    }
+  ],
+  "time": 60,
+  "marks": 1
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "_id": "60101dd40224a2573546d35e",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+      "mainQuestion": "What is this?",
+      "options": [
+        {
+          "_id": "60101dd40224a2573546d35f",
+          "option": "ASASA"
+        },
+        {
+          "_id": "60101dd40224a2573546d360",
+          "option": "TTTT"
+        },
+        {
+          "_id": "60101dd40224a2573546d361",
+          "option": "UUUdsa"
+        },
+        {
+          "_id": "60101dd40224a2573546d362",
+          "option": "UUUU"
+        }
+      ],
+      "correctAnswers": [
+        {
+          "_id": "60101dd40224a2573546d363",
+          "answer": "AAAAA"
+        },
+        {
+          "_id": "60101dd40224a2573546d364",
+          "answer": "YYYYY"
+        }
+      ],
+      "time": 60,
+      "marks": 1,
+      "__v": 0
+    }
+  }
+}
+```
+
+#### Create CQ Question
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/create-cq-question`
+
+Body :
+
+Example :
+
+```json
+{
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+  "mainQuestion": "sdasa sf asfas fsafasfasf ?",
+  "time": 120,
+  "marks": 10
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "creationTime": "2021-01-26T15:22:53.207Z",
+      "_id": "6010356b75bad87bb49e330d",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+      "mainQuestion": "sdasa sf asfas fsafasfasf ?",
+      "time": 120,
+      "marks": 10,
+      "__v": 0
+    }
+  }
+}
+```
+
+### Create Exam
+
+#### Create MCQ Exam
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/create-mcq-exam`
+
+Body :
+
+```json
+
+```
+
+Example :
+
+```json
+{
+  "course": "6010146ccf36944122caf45b",
+  "mcqQuestions": [
+    {
+      "mcqQuestionId": "60101c05152a71544b170e8b"
+    },
+    {
+      "mcqQuestionId": "60101d7f0224a2573546d357"
+    },
+    {
+      "mcqQuestionId": "60101dd40224a2573546d35e"
+    }
+  ],
+  "totalTime": "30",
+  "totalMarks": 100,
+  "date": "11/12/2016,13:00"
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "_id": "6010311c79e31e763e1fe5a8",
+      "course": "6010146ccf36944122caf45b",
+      "mcqQuestions": [
+        {
+          "_id": "6010311c79e31e763e1fe5a9",
+          "mcqQuestionId": "60101c05152a71544b170e8b"
+        },
+        {
+          "_id": "6010311c79e31e763e1fe5aa",
+          "mcqQuestionId": "60101d7f0224a2573546d357"
+        },
+        {
+          "_id": "6010311c79e31e763e1fe5ab",
+          "mcqQuestionId": "60101dd40224a2573546d35e"
+        }
+      ],
+      "totalTime": 30,
+      "totalMarks": 100,
+      "date": "2016-11-12T07:00:00.000Z",
+      "__v": 0
+    }
+  }
+}
+```
+
+#### Create CQ Exam
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/create-cq-exam`
+
+Body :
+
+```json
+
+```
+
+Example :
+
+```json
+{
+  "course": "6010146ccf36944122caf45b",
+  "cqQuestions": [
+    {
+      "cqQuestionId": "6010343c75bad87bb49e3309"
+    },
+    {
+      "cqQuestionId": "6010345675bad87bb49e330a"
+    },
+    {
+      "cqQuestionId": "6010346975bad87bb49e330b"
+    }
+  ],
+  "totalTime": "60",
+  "totalMarks": 100,
+  "date": "11/12/2016,15:00"
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "_id": "6010364ee995357d92168583",
+      "course": "6010146ccf36944122caf45b",
+      "cqQuestions": [
+        {
+          "_id": "6010364ee995357d92168584",
+          "cqQuestionId": "6010343c75bad87bb49e3309"
+        },
+        {
+          "_id": "6010364ee995357d92168585",
+          "cqQuestionId": "6010345675bad87bb49e330a"
+        },
+        {
+          "_id": "6010364ee995357d92168586",
+          "cqQuestionId": "6010346975bad87bb49e330b"
+        }
+      ],
+      "totalTime": 60,
+      "totalMarks": 100,
+      "date": "2016-11-12T09:00:00.000Z",
+      "__v": 0
+    }
+  }
+}
+```
+
 ### How to contribute :
 
 - Clone the project :

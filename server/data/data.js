@@ -1,33 +1,20 @@
+
 {
-    "description": "How are doy ? ds soow ad . sda sdsda",
-  "mainQuestion":  "What is your name ?"
-  "options": [i
+
+  "course": "6010146ccf36944122caf45b"
+  "mcqQuestions": [
     {
-      "option": "Abul",
+      "mcqQuestionId":"60101c05152a71544b170e8b",
     },
     {
-        "option": "ASas",
-      },
-      {
-        "option": "sadsa",
-      },
-      {
-        "option": "dsads",
-      },
-
-  ],
-  "correctAnswers": [
-    {
-      "answer": "Shifat",
-      
-
+      "mcqQuestionId":"60101d7f0224a2573546d357",
     },
     {
-        "answer": "Sania",
-        
+      "mcqQuestionId":"60101dd40224a2573546d35e",
+    },
   
-      },
   ],
-  "time": 120
-  "marks" : 2
+  "totalTime": "1h",
+  "totalMarks":100,
+  "date":"11/12/2016,13:00"
 }

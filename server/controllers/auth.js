@@ -42,7 +42,7 @@ exports.postCreateTeacher = (req, res, next) => {
   // console.log(role, username, email, password, repassword, firstName, lastName, department, varsity, designation);
 
   if (password !== repassword) {
-    errorHandler.validationError(res, 400, "Password have to be matched!");
+    errorHandler.validationError(res, 400, "Passwords Have to Match!");
   } else {
     bcrypt
       .hash(password, 10)
@@ -100,9 +100,9 @@ exports.postCreateTeacher = (req, res, next) => {
                   let errorMessage;
                   if (error.code == 11000) {
                     if (error.keyPattern.username)
-                      errorMessage = "Username already exits";
+                      errorMessage = "Username Already Exists";
                     else if (error.keyPattern.email)
-                      errorMessage = "Email address already exits";
+                      errorMessage = "Email Address Already Exists";
                   } else errorMessage = error;
 
                   errorHandler.validationError(res, 401, errorMessage);
@@ -141,7 +141,7 @@ exports.postCreateStudent = (req, res, next) => {
   // console.log(role, username, email, password, repassword, firstName, lastName, department, registrationNo, session);
 
   if (password !== repassword) {
-    errorHandler.validationError(res, 400, "Password have to be matched!");
+    errorHandler.validationError(res, 400, "Passwords Have To Match!");
   } else {
     bcrypt
       .hash(password, 10)
@@ -150,7 +150,8 @@ exports.postCreateStudent = (req, res, next) => {
           "emails.email": email,
         })
           .then((result) => {
-            console.log(result);
+            
+            console.log("Check Email ", result);
 
             if (result && result._id == varsity) {
               const studentModel = new StudentModel({
@@ -206,9 +207,9 @@ exports.postCreateStudent = (req, res, next) => {
 
                   if (error.code == 11000) {
                     if (error.keyPattern.username)
-                      errorMessage = "Username already exits";
+                      errorMessage = "Username Already Exists";
                     else if (error.keyPattern.email)
-                      errorMessage = "Email address already exits";
+                      errorMessage = "Email Address Already Exists";
                   } else errorMessage = error;
 
                   errorHandler.validationError(res, 401, errorMessage);

@@ -8,11 +8,11 @@ const cqExamSchema = new Schema({
     ref: "Course",
     required:true
   },
-  mcqQuestions: [
+  cqQuestions: [
     {
-      mcqQuestionId: {
+      cqQuestionId: {
         type: Schema.Types.ObjectId,
-        ref: "McqQuestion",
+        ref: "CqQuestion",
         required: true,
       },
     },
