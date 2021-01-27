@@ -16,8 +16,27 @@
     - [Access A Protected or Restricted Route](#access-a-protected-or-restricted-route)
 
   - [Users](#users)
+
     - [Get A Single Student Info](#get-a-single-student-info)
     - [Get A Single Teacher Info](#get-a-single-teacher-info)
+    - [Edit Teacher Info](#edit-teacher-info)
+    - [Edit Student Info](#edit-student-info)
+
+  - [Course](#course)
+
+    - [Create Course](#create-course)
+
+    - [Create Exam](#create-exam)
+
+      - [Create MCQ Exam](#create-mcq-exam)
+      - [Create CQ Exam](#create-cq-exam)
+
+    - [Create Question](#create-question)
+
+      - [Create Mcq Question](#create-mcq-question)
+      - [Create Cq Question](#create-cq-question)
+
+- [How To Contribute](#how-to-contribute)
 
 ## Contents :
 
@@ -253,7 +272,7 @@ Response:
 
 ##### Get Single Teacher Info
 
-Request: `RESTRICTED (student/teacher)` `GET` `/teacher/:id`
+Request: `RESTRICTED (student/teacher)` `GET` `/teacher/user/:id`
 
 Response:
 
@@ -276,6 +295,152 @@ Response:
   }
 }
 ```
+
+### Edit Teacher Info
+
+Request: `RESTRICTED (teacher)` `GET` `/teacher/user/edit/:id`
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "id": "601190c8d8174b3e23a5460b",
+      "role": "Teacher",
+      "email": "sania@@sust.edu",
+      "username": "shifat",
+      "firstName": "Mazah",
+      "lastName": "Kafi",
+      "department": "SWE",
+      "designation": "Professor",
+      "registered_at": "2021-01-27T16:11:52.895Z",
+      "varsity": "SUST"
+    }
+  }
+}
+```
+
+Request: `RESTRICTED (teacher)` `POST` `/teacher/user/edit/:id`
+
+Body :
+
+```json
+
+```
+
+Example :
+
+```json
+{
+  "password": "123456",
+  "repassword": "123456",
+  "username": "kofi",
+  "firstName": "Mazah",
+  "lastName": "Kafi",
+  "department": "600c75f1059f3d6697f4e93a",
+  "designation": "Professor"
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "id": "601190c8d8174b3e23a5460b",
+      "role": "Teacher",
+      "email": "mehedi17@sust.edu",
+      "username": "kofi",
+      "firstName": "Mazah",
+      "lastName": "Kafi",
+      "department": "SWE",
+      "designation": "Professor",
+      "varsity": "SUST",
+      "registered_at": "2021-01-27T16:11:52.895Z"
+    }
+  }
+}
+```
+
+### Edit Student Info
+
+Request: `RESTRICTED (student)` `GET` `/student/user/edit/:id`
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "id": "60119244d8174b3e23a5460c",
+      "role": "Student",
+      "email": "shifat@sust.edu",
+      "username": "mahs",
+      "firstName": "Shifat",
+      "lastName": "Rahman",
+      "registrationNo": 2017831051,
+      "department": "CSE",
+      "session": "2017-2018",
+      "registered_at": "2021-01-27T16:18:12.244Z",
+      "varsity": "HSTU"
+    }
+  }
+}
+```
+
+Request: `RESTRICTED (student)` `POST` `/student/user/edit/:id`
+
+Body :
+
+```json
+
+```
+
+Example :
+
+```json
+{
+  "password": "123456",
+  "repassword": "123456",
+  "email": "shifat@buet.edu",
+  "username": "shifat",
+  "firstName": "Shifat",
+  "lastName": "Rahman",
+  "department": "600eeb069c34055b3963adff",
+  "registrationNo": "2017831051",
+  "session": "2017-2018"
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "id": "6011ac5d686fe0754e88d3ca",
+      "role": "Student",
+      "email": "shifat@buet.edu",
+      "username": "shifat",
+      "firstName": "Shifat",
+      "lastName": "Rahman",
+      "department": "URP",
+      "registrationNo": 2017831051,
+      "session": "2017-2018",
+      "varsity": "BUET",
+      "registered_at": "2021-01-27T18:09:33.744Z"
+    }
+  }
+}
+```
+
+### Course
 
 #### Create Course
 
@@ -580,7 +745,7 @@ Response :
 }
 ```
 
-### How to contribute :
+### How to contribute
 
 - Clone the project :
 
@@ -590,6 +755,12 @@ Response :
 
   >       cd WillChnage
 
+- Replace `MONGODB_URL` in [`.env`](.env) file
+
 - Install packages :
 
   >       npm install
+
+- Run server :
+
+  >     npm start

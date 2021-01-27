@@ -14,7 +14,7 @@ exports.postCreateUniversity = (req, res, next) => {
   universityModel
     .save()
     .then((result) => {
-      res.status(202).json({
+      res.status(201).json({
         status: "OK",
         result: "University created successfully.",
       });
@@ -106,7 +106,7 @@ exports.postCreateTeacher = (req, res, next) => {
                       errorMessage = "Email Address Already Exists";
                   } else errorMessage = error;
 
-                  errorHandler.validationError(res, 401, errorMessage);
+                  errorHandler.validationError(res, 400, errorMessage);
                 });
             } else {
               errorHandler.unauthorizedEmail(res);
@@ -162,7 +162,6 @@ exports.postCreateStudent = (req, res, next) => {
           "emails.email": email,
         })
           .then((result) => {
-
             // console.log(result);
 
             if (result && result._id == varsity) {
@@ -226,7 +225,7 @@ exports.postCreateStudent = (req, res, next) => {
 
                   console.log(errorMessage);
 
-                  errorHandler.validationError(res, 401, errorMessage);
+                  errorHandler.validationError(res, 400, errorMessage);
                 });
             } else {
               console.log("WTF?");
@@ -277,8 +276,11 @@ exports.getLogin = (req, res, next) => {
 
           let department;
 
+          console.log(student);
+
           student.varsity.departments.forEach((dept) => {
-            if (dept.id == student.department) {
+            console.log(dept._id, student.department);
+            if (dept._id.toString() == student.department.toString()) {
               department = dept.shortform;
             }
           });
@@ -318,11 +320,13 @@ exports.getLogin = (req, res, next) => {
                       department: department,
                       registrationNo: registrationNo,
                       session: session,
-                      registered_at: registered_at,
                       varsity: student.varsity.shortform,
+                      registered_at: registered_at,
                     },
                   },
                 });
+              } else {
+                errorHandler.validationError(res, 401, "Invalid Password!");
               }
             })
             .catch((error) => {
@@ -397,6 +401,12 @@ exports.getLogin = (req, res, next) => {
                           },
                         },
                       });
+                    } else {
+                      errorHandler.validationError(
+                        res,
+                        401,
+                        "Invalid Password!"
+                      );
                     }
                   })
                   .catch((error) => {
@@ -407,7 +417,7 @@ exports.getLogin = (req, res, next) => {
 
               //hgh///
               else {
-                errorHandler.validationError(res, 401, "No User Found");
+                errorHandler.validationError(res, 403, "No User Found");
               }
             })
             .catch((error) => {

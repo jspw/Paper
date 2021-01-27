@@ -5,7 +5,12 @@ const authenticateJWT = require('../middleware/authenticateJWS')
 const router = express.Router();
 
 router
-    .route('/:id')
+    .route('/user/:id')
     .get(authenticateJWT, studentController.getStudent);
+
+    router
+    .route("/user/edit/:id")
+    .get(authenticateJWT, studentController.getEditStudent)
+    .post(authenticateJWT, studentController.postEditStudent);
 
 module.exports = router;

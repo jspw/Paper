@@ -1,6 +1,6 @@
 exports.serverError = (res) => {
   //   function serverError() {
-  return res.status(400).json({
+  return res.status(500).json({
     status: "FAILED",
     result: "Something went wrong in server.",
   });
@@ -8,14 +8,14 @@ exports.serverError = (res) => {
 };
 
 exports.unauthorizedAccess = (res) => {
-  return res.status(402).json({
+  return res.status(401).json({
     status: "FAILED",
     result: "Unauthorized access",
   });
 };
 
 exports.unauthorizedEmail = (res) => {
-  return res.status(402).json({
+  return res.status(401).json({
     status: "FAILED",
     result: "Unauthorized email address",
   });

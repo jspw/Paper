@@ -4,26 +4,32 @@ const authenticateJWT = require("../middleware/authenticateJWS");
 
 const router = express.Router();
 
-router.route("/:id").get(authenticateJWT, teacherController.getTeacher);
+router.route("/user/:id").get(authenticateJWT, teacherController.getTeacher);
 
 router
-  .route("/create-course")
+  .route("/user/edit/:id")
+  .get(authenticateJWT, teacherController.getEditTeacher)
+  .post(authenticateJWT, teacherController.postEditTeacher);
+
+
+router
+  .route("/course/create")
   .post(authenticateJWT, teacherController.postCreateCourse);
 
 router
-  .route("/create-mcq-question")
+  .route("/question/mcq/create")
   .post(authenticateJWT, teacherController.postCreateMcqQuestion);
 
 router
-  .route("/create-mcq-exam")
+  .route("/exam/mcq/create")
   .post(authenticateJWT, teacherController.postCreateMcqExam);
 
 router
-  .route("/create-cq-question")
+  .route("/question/cq/create")
   .post(authenticateJWT, teacherController.postCreateCqQuestion);
 
 router
-  .route("/create-cq-exam")
+  .route("/exam/cq/create")
   .post(authenticateJWT, teacherController.postCreateCqExam);
 
 module.exports = router;
