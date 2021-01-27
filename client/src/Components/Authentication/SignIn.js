@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import "./SignIn.css";
 
-const apiDomain = "";
+const apiDomain = "http://localhost:8080/";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -34,7 +34,7 @@ export default function SignUp() {
   const [values, setValues] = useState({
     email: "",
     password: "",
-    error: "error",
+    error: "",
   });
 
   const obj = {
@@ -49,7 +49,7 @@ export default function SignUp() {
     e.preventDefault();
   };
   const fetchData = async () => {
-    const endpoint = "";
+    const endpoint = "auth/login";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -57,6 +57,13 @@ export default function SignUp() {
     };
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
+
+    if (data.status == "OK") {
+      console.log("Logged In Successfully!");
+    } else {
+      setValues({ ...values, error: data.result });
+    }
+
     console.log(data);
   };
 
@@ -81,7 +88,7 @@ export default function SignUp() {
           <Grid container justify="center" alignItems="center">
             <Grid item>
               <Alert elevation={0} severity="error" fullWidth>
-                This is an error message!
+                {values.error}
               </Alert>
             </Grid>
           </Grid>
