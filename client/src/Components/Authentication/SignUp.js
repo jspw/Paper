@@ -88,6 +88,7 @@ export default function SignUp() {
     registrationNo: parseInt(values.regNo, 10),
     session: values.session,
     varsity: values.university,
+    designation: values.designation,
   };
 
   const body = JSON.stringify(obj);

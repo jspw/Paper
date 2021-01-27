@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import IconButton from "@material-ui/core/IconButton";
@@ -109,18 +110,18 @@ const Navigation = () => {
   } else
     navElements = (
       <>
-        <Nav.Link href="" onClick={navChange}>
+        <Link to="signUp" onClick={navChange}>
           Sign Up
-        </Nav.Link>
-        <Nav.Link href="" onClick={navChange}>
+        </Link>
+        <Link to="signIn" onClick={navChange}>
           Sign In
-        </Nav.Link>
+        </Link>
       </>
     );
 
   return (
     <Navbar bg="light">
-      <Navbar.Brand href="#home" className={showSign ? null : "m-auto"}>
+      <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
         Name
       </Navbar.Brand>
       {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
