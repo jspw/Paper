@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
-import Grid from "@material-ui/core/Grid";
-import MuiAlert from "@material-ui/lab/Alert";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+import MuiAlert from '@material-ui/lab/Alert';
+import { Link } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
 import "./SignIn.css";
 
 const apiDomain = "http://localhost:8080/";
@@ -119,7 +119,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Link href="#">
+              <Link to="#">
                 <b>Forgot Password?</b>
               </Link>
             </Typography>
@@ -131,7 +131,7 @@ export default function SignUp() {
             <Grid item xs={12} className={classes.textField}>
               <Typography>
                 Don't have an account?{" "}
-                <Link href="#">
+                <Link to="/signUp">
                   <b>Sign Up</b>
                 </Link>{" "}
                 instead
