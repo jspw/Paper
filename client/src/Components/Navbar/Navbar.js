@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,7 +12,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 let isSignedIn = false;
 let navElements;
 
-const Navigation = () => {
+const Navigation = (props) => {
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
 
@@ -33,6 +33,11 @@ const Navigation = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setAnchor(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    props.login.isLogin = "Failed";
   };
 
   const renderProfileMenu = (
@@ -81,7 +86,7 @@ const Navigation = () => {
     </Menu>
   );
 
-  if (isSignedIn) {
+  if (props.login.isLogin == "OK") {
     navElements = (
       <>
         <IconButton
@@ -103,6 +108,7 @@ const Navigation = () => {
         >
           <AccountCircle />
         </IconButton>
+        <IconButton onClick={handleLogout}>Signout</IconButton>
         {renderNotificationMenu}
         {renderProfileMenu}
       </>

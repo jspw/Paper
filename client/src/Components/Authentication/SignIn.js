@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
-import Grid from '@material-ui/core/Grid';
-import MuiAlert from '@material-ui/lab/Alert';
+import Grid from "@material-ui/core/Grid";
+import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 import "./SignIn.css";
 
 const apiDomain = "http://localhost:8080/";
@@ -60,6 +60,16 @@ export default function SignUp() {
 
     if (data.status == "OK") {
       console.log("Logged In Successfully!");
+
+      const userdata = {
+        token: data.result.jwt.token,
+        role: data.result.data.role.toLowerCase(),
+        id: data.result.data.id,
+      };
+
+      console.log(userdata);
+
+      localStorage.setItem("data", JSON.stringify(userdata));
     } else {
       setValues({ ...values, error: data.result });
     }
