@@ -7,6 +7,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import "./SignIn.css";
+import { useHistory } from "react-router-dom";
 
 const apiDomain = "http://localhost:8080/";
 
@@ -30,6 +31,8 @@ function Alert(props) {
 
 export default function SignUp() {
   const classes = useStyles();
+
+  let history = useHistory();
 
   const [values, setValues] = useState({
     email: "",
@@ -70,6 +73,9 @@ export default function SignUp() {
       console.log(userdata);
 
       localStorage.setItem("data", JSON.stringify(userdata));
+      history.push("/");
+      window.location.reload();
+      
     } else {
       setValues({ ...values, error: data.result });
     }

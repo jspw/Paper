@@ -7,7 +7,6 @@ import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
 // import  MCQ  from "../Components/Exam/MCQs/MCQ/MCQ";
 import axios from "axios";
-import Home from "../Components/Home/Home";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -29,18 +28,19 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-
-        <Navigation login = {{isLogin}}  />
+        <Route
+          path="/"
+          exact
+          render={(props) => <Navigation login={{ isLogin }} />}
+        />
         <Switch>
           {/* <Route exact path="/" component={Home} /> */}
-          <Route path="/signUp" component={SignUp} />
-          <Route path="/signIn" component={SignIn} />
+          <Route path="/signUp" exact component={SignUp} />
+          <Route path="/signIn" exact component={SignIn} />
         </Switch>
         {/* <SignIn /> */}
         {/* <SignUp /> */}
         {/* <MCQ /> */}
-
-        <Home login = {{isLogin}} />
       </div>
     </BrowserRouter>
   );

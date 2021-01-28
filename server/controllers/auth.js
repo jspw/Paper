@@ -90,7 +90,7 @@ exports.postCreateTeacher = (req, res, next) => {
                         expiresIn: process.env.JWT_EXPIRES_IN,
                       },
                       data: {
-                        user: teacher.role,
+                        role: teacher.role,
                         id: teacher._id,
                       },
                     },
@@ -203,7 +203,7 @@ exports.postCreateStudent = (req, res, next) => {
                         expiresIn: process.env.JWT_EXPIRES_IN,
                       },
                       data: {
-                        user: student.role,
+                        role: student.role,
                         id: student._id,
                       },
                     },
@@ -279,7 +279,7 @@ exports.getLogin = (req, res, next) => {
           console.log(student);
 
           student.varsity.departments.forEach((dept) => {
-            console.log(dept._id, student.department);
+            // console.log(dept);
             if (dept._id.toString() == student.department.toString()) {
               department = dept.shortform;
             }
