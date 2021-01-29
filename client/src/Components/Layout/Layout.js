@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Button,
@@ -18,18 +18,29 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import socketIOClient from "socket.io-client";
+
+const ENDPOINT = "http://10.42.0.1:8080/";
+
 const Layout = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  //   console.log(props.userInfo.userInfo.varsity);
+  const [response, setResponse] = useState("");
+
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("mcqTimeLimit", (data) => {
+      setResponse(data);
+      console.log("Socket", data);
+    });
+    return socket.disconnect();
+  }, []);
 
   const SelectForm = () => {
-    // console.log("COMPONENT : select form");
     let items = [];
-    console.log(props.universityInfo);
 
     if (props.universityInfo) {
       props.universityInfo.forEach((element) => {
@@ -121,6 +132,22 @@ const Layout = (props) => {
             <Button className="pull-right light" onClick={handleShowModal}>
               Create Course
             </Button>
+            <div>Socket</div>
+            <div
+              className={
+                response < 10
+                  ? "alert alert-info"
+                  : response < 20
+                  ? "alert alert-success"
+                  : response < 30
+                  ? "alert alert-primary"
+                  : response < 40
+                  ? "alert alert-secondary"
+                  : "alert alert-danger"
+              }
+            >
+              Time countdown : <strong>{response}</strong>
+            </div>
           </Col>
         </Row>
       </Container>

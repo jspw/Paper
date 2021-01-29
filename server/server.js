@@ -3,9 +3,21 @@ require("dotenv").config();
 
 const app = require("./app");
 
+const socketIo = require("socket.io");
+
+const http = require("http");
+
+let interval;
+
 const mongodbUrl = process.env.MONGO_URL;
 
 const PORT = process.env.SERVER_PORT;
+
+const getApiAndEmit = (socket) => {
+  const response = new Date();
+  // if (response.getSeconds() > 30)
+  socket.emit("mcqTimeLimit", response.getSeconds());
+};
 
 mongoose
   .connect(mongodbUrl, {
@@ -16,7 +28,30 @@ mongoose
   .then(() => {
     console.log("Mongodb Connected!");
 
-    const server = app.listen(PORT, () => {
+    const server = http.createServer(app);
+
+    const io = socketIo(server, {
+      cors: true,
+      origin: ["*"],
+    });
+
+    io.on("connection", (socket) => {
+      console.log("New client Connected!");
+      const ip = socket.handshake.headers || socket.conn.remoteAddress;
+      console.log(ip);
+      console.log("Socket ID : ", socket.id);
+      if (interval) clearInterval(interval);
+
+      interval = setInterval(() => getApiAndEmit(socket), 1000);
+
+      socket.on("disconnect", (reason) => {
+        console.log("Client Disconnected!");
+        console.log("Reason",reason);
+        clearInterval(interval);
+      });
+    });
+
+    server.listen(PORT, () => {
       console.log(`Server is listening at localhost:${PORT}`);
     });
 

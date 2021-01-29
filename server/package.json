@@ -35,6 +35,7 @@
     "mongoose": "^5.11.13",
     "mysql": "^2.18.1",
     "sequelize": "^6.4.0",
+    "socket.io": "^3.1.0",
     "validator": "^13.5.2",
     "xss-clean": "^0.1.1"
   }
