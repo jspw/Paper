@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 
 let navElements;
 
-const Navigation = (props) => {
+export default function Navigation(props) {
   let history = useHistory();
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
@@ -137,5 +137,3 @@ const Navigation = (props) => {
     </Navbar>
   );
 };
-
-export default Navigation;
