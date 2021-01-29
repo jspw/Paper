@@ -49,15 +49,16 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-{/*         <Route
+        <Route
           path="/"
           exact
           render={(props) => (
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
-        /> */}
+        />
         <Switch>
           <Route exact path="/" component={Home} />
+
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
         </Switch>{" "}

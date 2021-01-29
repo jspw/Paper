@@ -28,7 +28,7 @@ const Layout = (props) => {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(1);
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
@@ -36,8 +36,10 @@ const Layout = (props) => {
       setResponse(data);
       console.log("Socket", data);
     });
-    return socket.disconnect();
+    // return socket.disconnect();
   }, []);
+
+  console.log("OO",response);
 
   const SelectForm = () => {
     let items = [];
@@ -124,15 +126,14 @@ const Layout = (props) => {
   if (props.userInfo)
     return (
       <Container bg="light" fluid>
-        {createCourseModal}
-        <Row>
-          <Col md={3}>Courses</Col>
-          <Col md={6} backgroundColor="success">
-            All Events
-            <Button className="pull-right light" onClick={handleShowModal}>
-              Create Course
-            </Button>
-            <div>Socket</div>
+      {/* //   {createCourseModal}
+      //   <Row>
+      //     <Col md={3}>Courses</Col>
+      //     <Col md={6} backgroundColor="success">
+      //       All Events
+      //       <Button className="pull-right light" onClick={handleShowModal}>
+      //         Create Course
+      //       </Button> */}
             <div
               className={
                 response < 10
@@ -148,9 +149,9 @@ const Layout = (props) => {
             >
               Time countdown : <strong>{response}</strong>
             </div>
-          </Col>
-        </Row>
-      </Container>
+      {/* //     </Col>
+      //   </Row> */}
+       </Container>
     );
   else {
     return (
