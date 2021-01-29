@@ -5,7 +5,7 @@ import Navigation from "../Components/Navbar/Navbar";
 // import  MCQ  from "../Components/Exam/MCQs/MCQ/MCQ";
 import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
-// import  MCQ  from "../Components/Exam/MCQs/MCQ/MCQ";
+import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 
@@ -13,11 +13,11 @@ let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
 
 function App() {
-  const [isLogin, setIsLogin] = useState(null);
+  const [loginStatus, setloginStatus] = useState(null);
 
   const [universityInfo, setUniversityInfo] = useState(null);
 
-  const [userInfo,setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     axios
@@ -37,36 +37,34 @@ function App() {
       axios
         .get(`${userdata.role}/user/${userdata.id}`)
         .then((result) => {
-          setIsLogin(result.data.status);
+          setloginStatus(result.data.status);
           setUserInfo(result.data.result.data);
           console.log(result);
         })
         .catch((error) => console.log(error));
-    } else setIsLogin("Failed");
+    } else setloginStatus("Failed");
   }, []);
-
+  // console.log(isLogin)
   return (
     <BrowserRouter>
       <div className="App">
         <Route
           path="/"
-          render={(props) => <Navigation login={{ isLogin }} />}
+          render={(props) => <Navigation loginStatus={loginStatus} />}
         />
-
         <Route
           path="/"
           exact
-          render={(props) => <Layout universityInfo={{ universityInfo }} userInfo={{ userInfo }}/>}
+          render={(props) => (
+            <Layout universityInfo={universityInfo} userInfo={userInfo} />
+          )}
         />
-
         <Switch>
           {/* <Route exact path="/" component={Home} /> */}
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
-        </Switch>
-        {/* <SignIn /> */}
-        {/* <SignUp /> */}
-        {/* <MCQ /> */}
+        </Switch>{" "}
+        {/* <Home loginStatus={loginStatus} /> */}
       </div>
     </BrowserRouter>
   );

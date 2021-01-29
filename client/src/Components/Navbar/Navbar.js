@@ -11,10 +11,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-let isSignedIn = false;
 let navElements;
 
-const Navigation = (props) => {
+export default function Navigation(props) {
   let history = useHistory();
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
@@ -38,9 +37,9 @@ const Navigation = (props) => {
     setAnchor(null);
   };
 
-  const handleLogout = () => {
+  const handleSignout = () => {
     localStorage.clear();
-    props.login.isLogin = "Failed";
+    // props.login.isLogin = "Failed";
     window.location.reload();
     history.push("/");
   };
@@ -67,7 +66,9 @@ const Navigation = (props) => {
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My Schedule</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      <MenuItem onClick={handleMenuClose} onClick={handleSignout}>
+        Sign Out
+      </MenuItem>
     </Menu>
   );
 
@@ -91,11 +92,15 @@ const Navigation = (props) => {
     </Menu>
   );
 
-  if (props.login.isLogin == null) {
-    navElements = <Spinner animation="grow" />;
-  }
+  console.log("Login status", props.loginStatus);
 
-  else if (props.login.isLogin == "OK") {
+  if (props.loginStatus == null) {
+    navElements = (
+      <>
+        <Spinner animation="grow" />
+      </>
+    );
+  } else if (props.loginStatus == "OK") {
     navElements = (
       <>
         <IconButton
@@ -117,12 +122,12 @@ const Navigation = (props) => {
         >
           <AccountCircle />
         </IconButton>
-        <MenuItem onClick={handleLogout}>Signout</MenuItem>
+        {/* <MenuItem onClick={handleSignout}>Signout</MenuItem> */}
         {renderNotificationMenu}
         {renderProfileMenu}
       </>
     );
-  } else
+  } else {
     navElements = (
       <>
         <Link to="signUp" onClick={navChange}>
@@ -133,6 +138,7 @@ const Navigation = (props) => {
         </Link>
       </>
     );
+  }
 
   return (
     <Navbar bg="light">
@@ -142,6 +148,4 @@ const Navigation = (props) => {
       {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
     </Navbar>
   );
-};
-
-export default Navigation;
+}

@@ -61,17 +61,12 @@ export default function SignUp() {
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
 
-    if (data.status == "OK") {
-      console.log("Logged In Successfully!");
-
+    if (data.status === "OK") {
       const userdata = {
         token: data.result.jwt.token,
         role: data.result.data.role.toLowerCase(),
         id: data.result.data.id,
       };
-
-      console.log(userdata);
-
       localStorage.setItem("data", JSON.stringify(userdata));
       history.push("/");
       window.location.reload();
@@ -79,8 +74,6 @@ export default function SignUp() {
     } else {
       setValues({ ...values, error: data.result });
     }
-
-    console.log(data);
   };
 
   const handleChange = (prop) => (event) => {

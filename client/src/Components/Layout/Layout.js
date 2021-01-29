@@ -10,10 +10,13 @@ import {
   Spinner,
 } from "react-bootstrap";
 
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Layout = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,9 +31,9 @@ const Layout = (props) => {
     let items = [];
     console.log(props.universityInfo);
 
-    if (props.universityInfo.universityInfo) {
-      props.universityInfo.universityInfo.forEach((element) => {
-        if (element.shortform === props.userInfo.userInfo.varsity) {
+    if (props.universityInfo) {
+      props.universityInfo.forEach((element) => {
+        if (element.shortform === props.userInfo.varsity) {
           element.departments.forEach((dept) => {
             // console.log(dept);
             items.push({
@@ -89,9 +92,7 @@ const Layout = (props) => {
               <Form.Control
                 readOnly
                 defaultValue={
-                  props.userInfo.userInfo
-                    ? props.userInfo.userInfo.varsity
-                    : "Loading"
+                  props.userInfo ? props.userInfo.varsity : "Loading"
                 }
               />
             </Col>
@@ -117,7 +118,7 @@ const Layout = (props) => {
           <Col md={3}>Courses</Col>
           <Col md={6} backgroundColor="success">
             All Events
-            <Button variant="secondary" onClick={handleShowModal}>
+            <Button className="pull-right light" onClick={handleShowModal}>
               Create Course
             </Button>
           </Col>
@@ -125,7 +126,11 @@ const Layout = (props) => {
       </Container>
     );
   else {
-    return <Spinner animation="border" />;
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <h1>Please Login First</h1>
+      </div>
+    );
   }
 };
 
