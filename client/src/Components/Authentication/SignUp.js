@@ -114,7 +114,15 @@ export default function SignUp() {
     const data = await response.json();
     if (data.status === "FAILED")
       setValues({ ...values, ["error"]: data.result });
-    else setValues({ ...values, ["error"]: "" });
+    else {
+      setValues({ ...values, ["error"]: "" });
+      const userdata = {
+        token: data.result.jwt.token,
+        role: data.result.data.role.toLowerCase(),
+        id: data.result.data.id,
+      };
+      localStorage.setItem("data", JSON.stringify(userdata));
+    }
     console.log(data);
   };
 

@@ -9,7 +9,6 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-let isSignedIn = false;
 let navElements;
 
 const Navigation = (props) => {
@@ -35,9 +34,9 @@ const Navigation = (props) => {
     setAnchor(null);
   };
 
-  const handleLogout = () => {
+  const handleSignout = () => {
     localStorage.clear();
-    props.login.isLogin = "Failed";
+    // props.isLogin = false;
   };
 
   const renderProfileMenu = (
@@ -62,7 +61,7 @@ const Navigation = (props) => {
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My Schedule</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      <MenuItem onClick={handleMenuClose} onClick={handleSignout}>Sign Out</MenuItem>
     </Menu>
   );
 
@@ -86,7 +85,7 @@ const Navigation = (props) => {
     </Menu>
   );
 
-  if (props.login.isLogin == "OK") {
+  if (props.isLogin) {
     navElements = (
       <>
         <IconButton
@@ -108,7 +107,7 @@ const Navigation = (props) => {
         >
           <AccountCircle />
         </IconButton>
-        <IconButton onClick={handleLogout}>Signout</IconButton>
+        {/* <IconButton onClick={handleSignout}>Signout</IconButton> */}
         {renderNotificationMenu}
         {renderProfileMenu}
       </>

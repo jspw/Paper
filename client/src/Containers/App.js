@@ -13,34 +13,29 @@ let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
 
 function App() {
-  const [isLogin, setIsLogin] = useState(null);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     if (userdata) {
       axios
         .get(`${userdata.role}/user/${userdata.id}`)
         .then((result) => {
-          setIsLogin(result.data.status);
+          if(result.data.status === "OK") setIsLogin(true) ;
         })
         .catch((error) => console.log(error));
     }
   }, []);
-
+// console.log(isLogin)
   return (
     <BrowserRouter>
       <div className="App">
-
-        <Navigation login = {{isLogin}}  />
+        <Navigation isLogin={isLogin} />
         <Switch>
           {/* <Route exact path="/" component={Home} /> */}
           <Route path="/signUp" component={SignUp} />
           <Route path="/signIn" component={SignIn} />
         </Switch>
-        {/* <SignIn /> */}
-        {/* <SignUp /> */}
-        {/* <MCQ /> */}
-
-        <Home login = {{isLogin}} />
+        <Home isLogin={isLogin} />
       </div>
     </BrowserRouter>
   );
