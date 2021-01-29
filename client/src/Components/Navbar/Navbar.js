@@ -8,10 +8,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import { useHistory } from "react-router-dom";
 
 let navElements;
 
 const Navigation = (props) => {
+  let history = useHistory();
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
 
@@ -36,7 +38,9 @@ const Navigation = (props) => {
 
   const handleSignout = () => {
     localStorage.clear();
-    // props.isLogin = false;
+    // props.login.isLogin = "Failed";
+    window.location.reload();
+    history.push('/');
   };
 
   const renderProfileMenu = (
@@ -116,10 +120,10 @@ const Navigation = (props) => {
     navElements = (
       <>
         <Link to="signUp" onClick={navChange}>
-          Sign Up
+          <MenuItem> Sign Up</MenuItem>
         </Link>
         <Link to="signIn" onClick={navChange}>
-          Sign In
+          <MenuItem>Sign In</MenuItem>
         </Link>
       </>
     );

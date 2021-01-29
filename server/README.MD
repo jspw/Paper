@@ -444,7 +444,7 @@ Response :
 
 #### Create Course
 
-Request: `RESTRICTED (teacher)` `POST` `/teacher/create-course`
+Request: `RESTRICTED (teacher)` `POST` `/teacher/course/create`
 
 Body :
 
@@ -496,7 +496,7 @@ Response :
 
 #### Create Mcq Question
 
-Request: `RESTRICTED (teacher)` `POST` `/teacher/create-mcq-question`
+Request: `RESTRICTED (teacher)` `POST` `/teacher/question/mcq/create`
 
 Body :
 
@@ -581,7 +581,7 @@ Response :
 
 #### Create CQ Question
 
-Request: `RESTRICTED (teacher)` `POST` `/teacher/create-cq-question`
+Request: `RESTRICTED (teacher)` `POST` `/teacher/question/cq/create`
 
 Body :
 
@@ -619,7 +619,7 @@ Response :
 
 #### Create MCQ Exam
 
-Request: `RESTRICTED (teacher)` `POST` `/teacher/create-mcq-exam`
+Request: `RESTRICTED (teacher)` `POST` `/teacher/exam/mcq/create`
 
 Body :
 
@@ -683,7 +683,7 @@ Response :
 
 #### Create CQ Exam
 
-Request: `RESTRICTED (teacher)` `POST` `/teacher/create-cq-exam`
+Request: `RESTRICTED (teacher)` `POST` `/teacher/exam/cq/create`
 
 Body :
 

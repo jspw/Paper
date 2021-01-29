@@ -141,7 +141,7 @@ const Forms = (props) => {
           universities.forEach((element) => {
             if (element._id === props.selectedUniversity) {
               element.departments.forEach((dept) => {
-                console.log(dept);
+                // console.log(dept);
                 items.push({
                   id: dept._id,
                   value: dept.shortform,

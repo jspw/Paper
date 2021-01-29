@@ -5,6 +5,7 @@ import Forms from "./Forms";
 import Grid from "@material-ui/core/Grid";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./SignIn.css";
+import { useHistory } from "react-router-dom";
 
 const apiDomain = "http://localhost:8080/";
 
@@ -75,6 +76,7 @@ export default function SignUp() {
   // }, []);
 
   // console.log("API CALL DATA", universities);
+  let history = useHistory();
 
   const obj = {
     role: values.role,
@@ -108,10 +110,12 @@ export default function SignUp() {
       body: body,
     };
 
-    console.log(body);
-
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
+
     const data = await response.json();
+
+    console.log("API data",data);
+
     if (data.status === "FAILED")
       setValues({ ...values, ["error"]: data.result });
     else {
@@ -121,9 +125,14 @@ export default function SignUp() {
         role: data.result.data.role.toLowerCase(),
         id: data.result.data.id,
       };
+
+      console.log(userdata);
+
       localStorage.setItem("data", JSON.stringify(userdata));
+      history.push("/");
+      window.location.reload();
     }
-    console.log(data);
+    
   };
 
   const handleChange = (prop) => (event) => {
