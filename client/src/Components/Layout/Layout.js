@@ -20,7 +20,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import socketIOClient from "socket.io-client";
 
-const ENDPOINT = "http://10.42.0.1:8080/";
+const ENDPOINT = "http://localhost:8080/";
 
 const Layout = (props) => {
   const [showModal, setShowModal] = useState(false);

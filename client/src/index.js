@@ -10,7 +10,7 @@ let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
 console.log(userdata);
 
-axios.defaults.baseURL = "http://10.42.0.1:8080/";
+axios.defaults.baseURL = "http://localhost:8080/";
 
 if (userdata) {
   axios.defaults.headers.common["Authorization"] = "Token " + userdata.token;

@@ -48,23 +48,19 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Route
-          path="/"
-          render={(props) => <Navigation loginStatus={loginStatus} />}
-        />
-        <Route
+        <Navigation loginStatus={loginStatus} />
+{/*         <Route
           path="/"
           exact
           render={(props) => (
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
-        />
+        /> */}
         <Switch>
-          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/" component={Home} />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
         </Switch>{" "}
-        {/* <Home loginStatus={loginStatus} /> */}
       </div>
     </BrowserRouter>
   );

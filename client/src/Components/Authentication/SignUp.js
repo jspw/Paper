@@ -7,7 +7,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import "./SignIn.css";
 import { useHistory } from "react-router-dom";
 
-const apiDomain = "http://10.42.0.1:8080/";
+const apiDomain = "http://localhost:8080/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
