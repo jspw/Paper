@@ -9,6 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 let isSignedIn = false;
 let navElements;
@@ -41,7 +42,7 @@ const Navigation = (props) => {
     localStorage.clear();
     props.login.isLogin = "Failed";
     window.location.reload();
-    history.push('/');
+    history.push("/");
   };
 
   const renderProfileMenu = (
@@ -90,7 +91,11 @@ const Navigation = (props) => {
     </Menu>
   );
 
-  if (props.login.isLogin == "OK") {
+  if (props.login.isLogin == null) {
+    navElements = <Spinner animation="grow" />;
+  }
+
+  else if (props.login.isLogin == "OK") {
     navElements = (
       <>
         <IconButton
