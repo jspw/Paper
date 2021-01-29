@@ -9,6 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 let navElements;
 
@@ -40,7 +41,7 @@ export default function Navigation(props) {
     localStorage.clear();
     // props.login.isLogin = "Failed";
     window.location.reload();
-    history.push('/');
+    history.push("/");
   };
 
   const renderProfileMenu = (
@@ -65,7 +66,9 @@ export default function Navigation(props) {
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My Schedule</MenuItem>
-      <MenuItem onClick={handleMenuClose} onClick={handleSignout}>Sign Out</MenuItem>
+      <MenuItem onClick={handleMenuClose} onClick={handleSignout}>
+        Sign Out
+      </MenuItem>
     </Menu>
   );
 
@@ -89,7 +92,15 @@ export default function Navigation(props) {
     </Menu>
   );
 
-  if (props.isLogin) {
+  console.log("Login status", props.loginStatus);
+
+  if (props.loginStatus == null) {
+    navElements = (
+      <>
+        <Spinner animation="grow" />
+      </>
+    );
+  } else if (props.loginStatus == "OK") {
     navElements = (
       <>
         <IconButton
@@ -111,12 +122,12 @@ export default function Navigation(props) {
         >
           <AccountCircle />
         </IconButton>
-        {/* <IconButton onClick={handleSignout}>Signout</IconButton> */}
+        {/* <MenuItem onClick={handleSignout}>Signout</MenuItem> */}
         {renderNotificationMenu}
         {renderProfileMenu}
       </>
     );
-  } else
+  } else {
     navElements = (
       <>
         <Link to="signUp" onClick={navChange}>
@@ -127,6 +138,7 @@ export default function Navigation(props) {
         </Link>
       </>
     );
+  }
 
   return (
     <Navbar bg="light">
@@ -136,4 +148,4 @@ export default function Navigation(props) {
       {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
     </Navbar>
   );
-};
+}
