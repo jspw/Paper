@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import SubjectIcon from '@material-ui/icons/Subject';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import './Home.css';
-export default function Home() {
+import React, { useRef, useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import SubjectIcon from "@material-ui/icons/Subject";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import "./Home.css";
+export default function Home(props) {
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
@@ -38,22 +38,51 @@ export default function Home() {
     };
   });
   // console.log(values.hoursLeft)
+
+  // let coursesUI = [];
+
+  // const courseUI = (courseName) => {
+  //   <Grid container alignItems="flex-start">
+  //     <Grid item>
+  //       <SubjectIcon />
+  //     </Grid>
+  //     <Grid item>
+  //       <p>{courseName}</p>
+  //     </Grid>
+  //   </Grid>;
+  // };
+
+  // if (props.userInfo) {
+  //   props.userInfo.courses.forEach(function (course) {
+  //     // console.log("Course", course);
+  //     coursesUI.push(courseUI(course.name));
+  //   });
+  // }
+
+  let courseUI;
+
+  if (props.userInfo)
+    courseUI = props.userInfo.courses.map((course, i) => {
+      // console.log(items);
+      return (
+        <Grid container alignItems="flex-start">
+          <Grid item>
+            <SubjectIcon />
+          </Grid>
+          <Grid item>
+            <p>{course.course.name}</p>
+          </Grid>
+        </Grid>
+      );
+    });
+
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} sm>
           <h5>My Courses</h5>
           <hr />
-          <div>
-              <Grid container alignItems='flex-start'>
-                  <Grid item><SubjectIcon /></Grid>
-                  <Grid item><p>Course Name</p></Grid>
-              </Grid>
-              <Grid container alignItems='flex-start'>
-                  <Grid item><SubjectIcon /></Grid>
-                  <Grid item><p>Course Name</p></Grid>
-              </Grid>
-          </div>
+          <div>{courseUI}</div>
         </Grid>
         <Grid item xs={12} sm={5}>
           <h5>Upcoming Exams</h5>
@@ -80,14 +109,22 @@ export default function Home() {
           <h5>Previous Exams</h5>
           <hr />
           <div>
-              <Grid container alignItems='flex-start'>
-                  <Grid item><AssignmentIcon /></Grid>
-                  <Grid item><p>Exam Name</p></Grid>
+            <Grid container alignItems="flex-start">
+              <Grid item>
+                <AssignmentIcon />
               </Grid>
-              <Grid container alignItems='flex-start'>
-                  <Grid item><AssignmentIcon /></Grid>
-                  <Grid item><p>Exam Name</p></Grid>
+              <Grid item>
+                <p>Exam Name</p>
               </Grid>
+            </Grid>
+            <Grid container alignItems="flex-start">
+              <Grid item>
+                <AssignmentIcon />
+              </Grid>
+              <Grid item>
+                <p>Exam Name</p>
+              </Grid>
+            </Grid>
           </div>
         </Grid>
       </Grid>

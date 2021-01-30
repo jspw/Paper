@@ -36,6 +36,8 @@
       - [Create Mcq Question](#create-mcq-question)
       - [Create Cq Question](#create-cq-question)
 
+    - [Student Course Add](#student-course-add)
+
 - [How To Contribute](#how-to-contribute)
 
 ## Contents :
@@ -741,6 +743,48 @@ Response :
       "date": "2016-11-12T09:00:00.000Z",
       "__v": 0
     }
+  }
+}
+```
+
+#### Student Course Add
+
+Body :
+
+```json
+
+```
+
+Example :
+
+```
+{
+    "course": "6010146ccf36944122caf45b"
+}
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": [
+      {
+        "_id": "601588d62b5c967ed130e8f4",
+        "course": {
+          "department": "600c75f1059f3d6697f4e93a",
+          "varsity": "600c75f1059f3d6697f4e931",
+          "creationDate": "2021-01-26T13:09:00.285Z",
+          "_id": "6010146ccf36944122caf45b",
+          "name": "Algebra",
+          "code": "MAT101",
+          "mcqExams": [],
+          "cqExams": [],
+          "__v": 0
+        }
+      }
+    ]
   }
 }
 ```

@@ -39,23 +39,34 @@ exports.getTeacher = (req, res, next) => {
 
       console.log("Teacher User Found");
 
-      return res.status(200).json({
-        status: "OK",
-        result: {
-          data: {
-            id: teacher._id,
-            role: role,
-            email: email,
-            username: username,
-            firstName: firstName,
-            lastName: lastName,
-            department: department,
-            designation: designation,
-            registered_at: registered_at,
-            varsity: teacher.varsity.shortform,
-          },
-        },
-      });
+      CourseModel.find({
+        createdBy: teacher._id,
+      })
+        .then((result) => {
+          console.log(result);
+
+          return res.status(200).json({
+            status: "OK",
+            result: {
+              data: {
+                id: teacher._id,
+                role: role,
+                email: email,
+                username: username,
+                firstName: firstName,
+                lastName: lastName,
+                department: department,
+                designation: designation,
+                varsity: teacher.varsity.shortform,
+                courses: result,
+                registered_at: registered_at,
+              },
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     })
     .catch((error) => {
       console.log(error);
@@ -446,8 +457,18 @@ exports.postEditTeacher = (req, res, next) => {
 };
 
 exports.postCreateCourse = (req, res, next) => {
+  const { name, code, department, varsity } = req.body;
+
+  const teacher = req.user._id;
+
   if (req.user.role == "Teacher") {
-    const courseModel = new CourseModel(req.body);
+    const courseModel = new CourseModel({
+      name: name,
+      code: code,
+      department: department,
+      varsity: varsity,
+      createdBy: teacher,
+    });
     courseModel
       .save()
       .then((course) => {

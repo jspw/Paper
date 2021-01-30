@@ -58,6 +58,20 @@ const courseSchema = new Schema({
     },
   ],
 
+  students: [
+    {
+      student: {
+        type: Schema.Types.ObjectId,
+        ref: "Student",
+      },
+    },
+  ],
+
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: "Teacher",
+  },
+
   creationDate: {
     type: Date,
     default: Date.now(),

@@ -54,10 +54,27 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+  courses: [
+    {
+      course: {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+        unique: true,
+      },
+    },
+  ],
   registered_at: {
     type: Date,
     default: Date.now,
   },
 });
+
+studentSchema.methods.addCourse = function (course) {
+  // const updatedCourses = [...this.courses];
+  // updatedCourses.push(course);
+  // this.courses = updatedCourses;
+  // return this.courses.save();
+  return this.courses.push(course);
+};
 
 module.exports = mongoose.model("Student", studentSchema);

@@ -2,10 +2,14 @@ const errorHandler = require("../middleware/errorHandler");
 const StudentModel = require("../models/student");
 const UniversityModel = require("../models/university");
 const bcrypt = require("bcryptjs");
+const student = require("../models/student");
+const apiResponseInJson = require("../middleware/apiResponseInJson");
+const CourseModel = require("../models/course");
 
 exports.getStudent = (req, res, next) => {
   StudentModel.findById(req.params.id)
     .populate("varsity")
+    .populate("courses.course")
     .exec()
     .then((student) => {
       let {
@@ -30,6 +34,8 @@ exports.getStudent = (req, res, next) => {
 
       console.log("Student User Found");
 
+      // console.log(student);
+
       return res.status(200).json({
         status: "OK",
         result: {
@@ -43,8 +49,9 @@ exports.getStudent = (req, res, next) => {
             department: department,
             registrationNo: registrationNo,
             session: session,
-            registered_at: registered_at,
             varsity: student.varsity.shortform,
+            courses: student.courses,
+            registered_at: registered_at,
           },
         },
       });
@@ -454,4 +461,45 @@ exports.postEditStudent = (req, res, next) => {
   } else {
     errorHandler.unauthorizedAccess(res);
   }
+};
+
+exports.postCourseAdd = (req, res, next) => {
+  let student = req.user;
+
+  if (student.role === "Student") {
+    StudentModel.findOne({
+      "courses.course": req.body.course,
+    })
+      .then((result) => {
+        console.log(result);
+        if (result) {
+          errorHandler.validationError(res, 200, "Course Already Added");
+        } else {
+          student.courses.push(req.body);
+          student
+            .save()
+            .then((data) => {
+              // console.log("save course", data);
+              data
+                .populate("courses.course")
+                .execPopulate()
+                .then((result) => {
+                  // console.log("populate course", result);
+                  apiResponseInJson(res, 400, result.courses);
+                })
+                .catch((error) => {
+                  console.log(error);
+                  errorHandler.serverError(res);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+              errorHandler.serverError(res);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else errorHandler.validationError(res, 201, "Invalid Request");
 };

@@ -25,6 +25,8 @@ function App() {
       .then((response) => {
         const data = response.data;
 
+        console.log(data);
+
         if (data.status === "OK") {
           setUniversityInfo(data.result.data.universities);
         }
@@ -49,16 +51,22 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-        <Route
+        {/* <Route
           path="/"
           exact
           render={(props) => (
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
-        />
+        /> */}
         <Switch>
-          <Route exact path="/" component={Home} />
-
+          {/* <Route exact path="/" component={Home} /> */}
+          <Route
+          path="/"
+          exact
+          render={(props) => (
+            <Home universityInfo={universityInfo} userInfo={userInfo} />
+          )}
+        />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
         </Switch>{" "}
