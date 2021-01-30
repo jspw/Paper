@@ -26,5 +26,5 @@ const cqQuestionSchema = new Schema({
     default: Date.now(),
   },
 });
-
+cqQuestionSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("CqQuestion", cqQuestionSchema);

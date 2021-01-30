@@ -37,5 +37,5 @@ const universitySchema = new Schema({
     },
   ],
 });
-
+universitySchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("University", universitySchema);

@@ -50,11 +50,22 @@ const teacherSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "University",
     required: true,
+    autopopulate: true
   },
+  courses: [
+    {
+      course: {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+        unique: true,
+        autopopulate: true
+      },
+    },
+  ],
   registered_at: {
     type: Date,
     default: Date.now,
   },
 });
-
+teacherSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("Teacher", teacherSchema);

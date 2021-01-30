@@ -7,11 +7,13 @@ const onCqExamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CqExam",
     required: true,
+    autopopulate: true
   },
   stduent: {
     type: Schema.Types.ObjectId,
     ref: "Student",
     required: true,
+    autopopulate: true
   },
   studentAnswers: [
     {
@@ -19,6 +21,7 @@ const onCqExamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqQuestion",
         required: true,
+        autopopulate: true
       },
       studentAnswer: {
         type: String,
@@ -40,5 +43,5 @@ const onCqExamSchema = new Schema({
     type: Date.now(),
   },
 });
-
+onCqExamSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("OnCqExam", onCqExamSchema);

@@ -474,6 +474,8 @@ exports.postCreateCourse = (req, res, next) => {
       .then((course) => {
         console.log(course);
 
+        
+
         apiResponseInJson(res, 201, course);
       })
       .catch((error) => {
@@ -493,24 +495,6 @@ exports.postCreateMcqQuestion = (req, res, next) => {
         console.log("MCQ Question Created!");
 
         apiResponseInJson(res, 201, mcqQuestion);
-      })
-      .catch((error) => {
-        errorHandler.validationError(res, 401, error);
-      });
-  } else {
-    errorHandler.unauthorizedAccess(res);
-  }
-};
-
-exports.postCreateMcqExam = (req, res, next) => {
-  if (req.user.role == "Teacher") {
-    const mcqExamModel = new McqExamModel(req.body);
-    mcqExamModel
-      .save()
-      .then((mcqExam) => {
-        console.log("MCQ Exam Created!");
-
-        apiResponseInJson(res, 201, mcqExam);
       })
       .catch((error) => {
         errorHandler.validationError(res, 401, error);
@@ -546,7 +530,65 @@ exports.postCreateCqExam = (req, res, next) => {
       .then((cqExam) => {
         console.log("CQ Exam Created!");
 
-        apiResponseInJson(res, 201, cqExam);
+        CourseModel.findById(req.body.course)
+          .then((course) => {
+            console.log(course);
+            course.cqExams.push({
+              examId: cqExam.id,
+            });
+            course
+              .save()
+              .then((result) => {
+                console.log(result);
+                apiResponseInJson(res, 201, cqExam);
+              })
+              .catch((error) => {
+                console.log("Course save", error);
+                errorHandler.serverError(res);
+              });
+          })
+          .catch((error) => {
+            console.log("Course find", error);
+            errorHandler.serverError(res);
+          });
+      })
+      .catch((error) => {
+        errorHandler.validationError(res, 401, error);
+      });
+  } else {
+    errorHandler.unauthorizedAccess(res);
+  }
+};
+
+exports.postCreateMcqExam = (req, res, next) => {
+  if (req.user.role == "Teacher") {
+    const mcqExamModel = new McqExamModel(req.body);
+    mcqExamModel
+      .save()
+      .then((mcqExam) => {
+        console.log("MCQ Exam Created!");
+
+        CourseModel.findById(req.body.course)
+          .then((course) => {
+            console.log(course);
+            course.mcqExams.push({
+              examId: mcqExam.id,
+            });
+            course
+              .save()
+              .then((result) => {
+                console.log(result);
+                apiResponseInJson(res, 201, mcqExam);
+              })
+              .catch((error) => {
+                console.log("Course save", error);
+                errorHandler.serverError(res);
+              });
+          })
+          .catch((error) => {
+            console.log("Course find", error);
+            errorHandler.serverError(res);
+          });
       })
       .catch((error) => {
         errorHandler.validationError(res, 401, error);

@@ -8,6 +8,7 @@ import SignUp from "../Components/Authentication/SignUp";
 import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
+import Course from '../Components/Course/Course';
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -69,6 +70,7 @@ function App() {
         />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
+          <Route path="/course/:id"  component={Course} />
         </Switch>{" "}
       </div>
     </BrowserRouter>

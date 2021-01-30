@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const autopopulate = require("mongoose-autopopulate");
 
 const Schema = mongoose.Schema;
 
@@ -43,6 +44,8 @@ const courseSchema = new Schema({
       examId: {
         type: Schema.Types.ObjectId,
         ref: "McqExam",
+
+        autopopulate: true,
         // required: true,
       },
     },
@@ -54,6 +57,7 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqExam",
         // required: true,
+        autopopulate: true,
       },
     },
   ],
@@ -77,5 +81,5 @@ const courseSchema = new Schema({
     default: Date.now(),
   },
 });
-
+courseSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("Course", courseSchema);

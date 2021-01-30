@@ -8,9 +8,6 @@ const CourseModel = require("../models/course");
 
 exports.getStudent = (req, res, next) => {
   StudentModel.findById(req.params.id)
-    .populate("varsity")
-    .populate("courses.course")
-    .exec()
     .then((student) => {
       let {
         role,
@@ -34,7 +31,18 @@ exports.getStudent = (req, res, next) => {
 
       console.log("Student User Found");
 
-      // console.log(student);
+      console.log(student);
+
+      student.courses.forEach(function (course) {
+        course.course.cqExams.forEach(function (exam) {
+          console.log("CQ", exam);
+          if (exam.examId.cqQuestions) exam.examId.cqQuestions = undefined;
+        });
+
+        course.course.mcqExams.forEach(function (exam) {
+          if (exam.examId.mcqQuestions) exam.examId.mcqQuestions = undefined;
+        });
+      });
 
       return res.status(200).json({
         status: "OK",
@@ -480,12 +488,32 @@ exports.postCourseAdd = (req, res, next) => {
             .save()
             .then((data) => {
               // console.log("save course", data);
-              data
-                .populate("courses.course")
-                .execPopulate()
-                .then((result) => {
-                  // console.log("populate course", result);
-                  apiResponseInJson(res, 400, result.courses);
+
+              console.log("Student course added");
+
+              CourseModel.findById(req.body.course)
+                .then((course) => {
+                  course.students.push(student._id);
+                  course
+                    .save()
+                    .then((result) => {
+                      console.log(result);
+
+                      data
+                        .populate("courses.course")
+                        .execPopulate()
+                        .then((result) => {
+                          // console.log("populate course", result);
+                          apiResponseInJson(res, 400, result.courses);
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                          errorHandler.serverError(res);
+                        });
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
                 })
                 .catch((error) => {
                   console.log(error);

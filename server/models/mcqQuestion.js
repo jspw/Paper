@@ -33,5 +33,5 @@ const mcqQuestionSchema = new Schema({
     required: true,
   },
 });
-
+mcqQuestionSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("McqQuestion", mcqQuestionSchema);

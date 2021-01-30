@@ -8,12 +8,17 @@ const mcqExamSchema = new Schema({
     ref: "Course",
     required:true
   },
+  name: {
+    type: String,
+    required: true,
+  },
   mcqQuestions: [
     {
       mcqQuestionId: {
         type: Schema.Types.ObjectId,
         ref: "McqQuestion",
         required: true,
+        autopopulate: true
       },
     },
   ],
@@ -30,5 +35,5 @@ const mcqExamSchema = new Schema({
     required:true
   },
 });
-
+mcqExamSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("McqExam", mcqExamSchema);

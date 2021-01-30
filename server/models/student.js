@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+// const autopopulate = require('mongoose-autopopulate')
 
 const Schema = mongoose.Schema;
 
@@ -45,6 +46,7 @@ const studentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "University",
     required: true,
+    autopopulate: true
   },
   registrationNo: {
     type: Number,
@@ -60,6 +62,7 @@ const studentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Course",
         unique: true,
+        autopopulate: true
       },
     },
   ],
@@ -76,5 +79,8 @@ studentSchema.methods.addCourse = function (course) {
   // return this.courses.save();
   return this.courses.push(course);
 };
+
+// studentSchema.plugin(autopopulate);
+studentSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model("Student", studentSchema);
