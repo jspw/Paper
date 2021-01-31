@@ -6,10 +6,9 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import Link from "@material-ui/core/Link";
 import "./Home.css";
 export default function Home(props) {
-
   const courseHandler = (event) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
@@ -57,7 +56,7 @@ export default function Home(props) {
             <SubjectIcon />
           </Grid>
           <Grid item>
-            <Link href={`/course/${course.course._id}`} >
+            <Link href={`/course/${course.course._id}`}>
               <p>{course.course.name}</p>
             </Link>
           </Grid>
@@ -69,12 +68,14 @@ export default function Home(props) {
       return course.course.cqExams.map((exam, j) => {
         console.log("EXAM", exam);
         return (
-          <Grid key={i+j} container alignItems="flex-start">
+          <Grid key={i + j} container alignItems="flex-start">
             <Grid item>
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <p>{exam.examId.name}</p>
+              <Link href={`/exam/${exam.examId._id}`}>
+                <p>{exam.examId.name}</p>
+              </Link>
             </Grid>
           </Grid>
         );
@@ -85,12 +86,14 @@ export default function Home(props) {
       return course.course.mcqExams.map((exam, j) => {
         console.log("EXAM", exam);
         return (
-          <Grid key={i+j} container alignItems="flex-start">
+          <Grid key={i + j} container alignItems="flex-start">
             <Grid item>
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <p>{exam.examId.name}</p>
+              <Link href={`/exam/${exam.examId._id}`}>
+                <p>{exam.examId.name}</p>
+              </Link>
             </Grid>
           </Grid>
         );

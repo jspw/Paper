@@ -11,7 +11,6 @@ const errorHandler = require("../middleware/errorHandler");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 const bcrypt = require("bcryptjs");
-const university = require("../models/university");
 
 exports.getTeacher = (req, res, next) => {
   TeacherModel.findById(req.params.id)
