@@ -47,22 +47,25 @@ export default function Home(props) {
   let cqExamUI;
   let mcqExamUI;
 
+  // console.log("Userinfo", userInfo);
+
   if (props.userInfo) {
-    courseUI = props.userInfo.courses.map((course, k) => {
-      // console.log(items);
-      return (
-        <Grid key={k} container alignItems="flex-start">
-          <Grid item>
-            <SubjectIcon />
+    if (props.userInfo.courses)
+      courseUI = props.userInfo.courses.map((course, k) => {
+        // console.log(items);
+        return (
+          <Grid key={k} container alignItems="flex-start">
+            <Grid item>
+              <SubjectIcon />
+            </Grid>
+            <Grid item>
+              <Link href={`/course/${course.course._id}`}>
+                <p>{course.course.name}</p>
+              </Link>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Link href={`/course/${course.course._id}`}>
-              <p>{course.course.name}</p>
-            </Link>
-          </Grid>
-        </Grid>
-      );
-    });
+        );
+      });
 
     cqExamUI = props.userInfo.courses.map((course, i) => {
       return course.course.cqExams.map((exam, j) => {
