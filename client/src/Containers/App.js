@@ -59,19 +59,19 @@ function App() {
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
         /> */}
-        <Switch>
-          {/* <Route exact path="/" component={Home} /> */}
+{/*         <Switch>
           <Route
-          path="/"
-          exact
-          render={(props) => (
-            <Home universityInfo={universityInfo} userInfo={userInfo} />
-          )}
-        />
+            path="/"
+            exact
+            render={(props) => (
+              <Home universityInfo={universityInfo} userInfo={userInfo} />
+            )}
+          />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
-          <Route path="/course/:id"  component={Course} />
-        </Switch>{" "}
+          <Route path="/course/:id" component={Course} />
+        </Switch> */}
+        <Course/>
       </div>
     </BrowserRouter>
   );
