@@ -76,7 +76,7 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/course/:id" component={Course} />
           <Route path="/exam/:id" component={Exam} />
-        </Switch>{" "}
+        </Switch>
       </div>
     </BrowserRouter>
   );
