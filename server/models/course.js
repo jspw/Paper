@@ -67,6 +67,8 @@ const courseSchema = new Schema({
       student: {
         type: Schema.Types.ObjectId,
         ref: "Student",
+        autopopulate: true,
+        required: true,
       },
     },
   ],
@@ -74,6 +76,8 @@ const courseSchema = new Schema({
   createdBy: {
     type: Schema.Types.ObjectId,
     ref: "Teacher",
+    autopopulate: true,
+    required: true,
   },
 
   creationDate: {
@@ -81,5 +85,5 @@ const courseSchema = new Schema({
     default: Date.now(),
   },
 });
-courseSchema.plugin(require('mongoose-autopopulate'));
+courseSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("Course", courseSchema);

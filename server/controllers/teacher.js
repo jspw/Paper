@@ -597,3 +597,29 @@ exports.postCreateMcqExam = (req, res, next) => {
     errorHandler.unauthorizedAccess(res);
   }
 };
+
+
+exports.getExam = (req, res, next) => {
+  McqExamModel.findById(req.params.id)
+    .then((exam) => {
+      console.log("EH?", exam);
+      if (exam) apiResponseInJson(res, 200, exam);
+      else {
+        CqExamModel.findById(req.params.id)
+          .then((result) => {
+            console.log("CQExam", result);
+            apiResponseInJson(res, 200, result);
+          })
+          .catch((error) => {
+            console.log(error);
+            console.log("CQ EXAM Not Found");
+            errorHandler.validationError(res, 400, "Exam Not Found");
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+
+      errorHandler.serverError(res);
+    });
+};

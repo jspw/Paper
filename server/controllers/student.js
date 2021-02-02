@@ -494,7 +494,9 @@ exports.postCourseAdd = (req, res, next) => {
 
               CourseModel.findById(req.body.course)
                 .then((course) => {
-                  course.students.push(student._id);
+                  course.students.push({
+                    course: student._id,
+                  });
                   course
                     .save()
                     .then((result) => {
@@ -554,6 +556,36 @@ exports.getExam = (req, res, next) => {
     .catch((error) => {
       console.log(error);
 
+      errorHandler.serverError(res);
+    });
+};
+
+exports.getCourse = (req, res, next) => {
+  CourseModel.findById(req.params.id)
+    // .populate("students.student.course").exec()
+    .then((course) => {
+      console.log(course);
+      if (course) {
+        course.mcqExams.forEach((exam) => {
+          exam.examId.mcqQuestions = undefined;
+        });
+
+        course.cqExams.forEach((exam) => {
+          exam.examId.cqQuestions = undefined;
+        });
+
+        course.createdBy.courses = undefined;
+
+        course.students.forEach((student) => {
+          student.student.varsity = undefined;
+          student.student.courses = undefined;
+        });
+
+        apiResponseInJson(res, 200, course);
+      } else errorHandler.validationError(res, 400, "No Course Found");
+    })
+    .catch((error) => {
+      console.log(error);
       errorHandler.serverError(res);
     });
 };

@@ -11,7 +11,6 @@ router
   .get(authenticateJWT, teacherController.getEditTeacher)
   .post(authenticateJWT, teacherController.postEditTeacher);
 
-
 router
   .route("/course/create")
   .post(authenticateJWT, teacherController.postCreateCourse);
@@ -31,5 +30,8 @@ router
 router
   .route("/exam/cq/create")
   .post(authenticateJWT, teacherController.postCreateCqExam);
+
+router.route("/exam/:id").get(authenticateJWT, teacherController.getExam);
+
 
 module.exports = router;

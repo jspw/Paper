@@ -9,7 +9,7 @@ import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
-import Exam from '../Components/Exam/Exam';
+import Exam from "../Components/Exam/Exam";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -27,7 +27,7 @@ function App() {
       .then((response) => {
         const data = response.data;
 
-        console.log(data);
+        // console.log(data);
 
         if (data.status === "OK") {
           setUniversityInfo(data.result.data.universities);
@@ -43,9 +43,12 @@ function App() {
         .then((result) => {
           setloginStatus(result.data.status);
           setUserInfo(result.data.result.data);
-          console.log(result);
+          console.log("UserInfo api call", result);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setloginStatus("Failed");
+          console.log("Error api call", error);
+        });
     } else setloginStatus("Failed");
   }, []);
   // console.log(isLogin)
