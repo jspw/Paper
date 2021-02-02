@@ -1,10 +1,11 @@
 const errorHandler = require("../middleware/errorHandler");
 const StudentModel = require("../models/student");
 const UniversityModel = require("../models/university");
-const bcrypt = require("bcryptjs");
-const student = require("../models/student");
-const apiResponseInJson = require("../middleware/apiResponseInJson");
 const CourseModel = require("../models/course");
+const McqExamModel = require("../models/mcqExam");
+const CqExamModel = require("../models/cqExam");
+const bcrypt = require("bcryptjs");
+const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 exports.getStudent = (req, res, next) => {
   StudentModel.findById(req.params.id)
@@ -530,4 +531,29 @@ exports.postCourseAdd = (req, res, next) => {
         console.log(error);
       });
   } else errorHandler.validationError(res, 201, "Invalid Request");
+};
+
+exports.getExam = (req, res, next) => {
+  McqExamModel.findById(req.params.id)
+    .then((exam) => {
+      console.log("EH?", exam);
+      if (exam) apiResponseInJson(res, 200, exam);
+      else {
+        CqExamModel.findById(req.params.id)
+          .then((result) => {
+            console.log("CQExam", result);
+            apiResponseInJson(res, 200, result);
+          })
+          .catch((error) => {
+            console.log(error);
+            console.log("CQ EXAM Not Found");
+            errorHandler.validationError(res, 400, "Exam Not Found");
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+
+      errorHandler.serverError(res);
+    });
 };

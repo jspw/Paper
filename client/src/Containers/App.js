@@ -8,7 +8,8 @@ import SignUp from "../Components/Authentication/SignUp";
 import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
-import Course from '../Components/Course/Course';
+import Course from "../Components/Course/Course";
+import Exam from '../Components/Exam/Exam';
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -52,14 +53,15 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-        {/* <Route
-          path="/"
+        <Route
+          path="/test"
           exact
           render={(props) => (
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
-        /> */}
-{/*         <Switch>
+        />
+        <Switch>
+          {/* <Route exact path="/" component={Home} /> */}
           <Route
             path="/"
             exact
@@ -70,8 +72,8 @@ function App() {
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/course/:id" component={Course} />
-        </Switch> */}
-        <Course/>
+          <Route path="/exam/:id" component={Exam} />
+        </Switch>
       </div>
     </BrowserRouter>
   );

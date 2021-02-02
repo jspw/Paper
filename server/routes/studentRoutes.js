@@ -15,4 +15,6 @@ router
   .route("/course/add")
   .post(authenticateJWT, studentController.postCourseAdd);
 
+router.route("/exam/:id").get(authenticateJWT, studentController.getExam);
+
 module.exports = router;

@@ -30,16 +30,22 @@ const Layout = (props) => {
 
   const [response, setResponse] = useState(1);
 
+  const [examInfo, setExamInfo] = useState(null);
+
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
-    socket.on("mcqTimeLimit", (data) => {
+    socket.on("test", (data) => {
       setResponse(data);
-      console.log("Socket", data);
+      // console.log("Socket", data);
+    });
+
+    socket.on("exam", (data) => {
+      setExamInfo(data);
     });
     // return socket.disconnect();
   }, []);
 
-  console.log("OO",response);
+  console.log("exam", examInfo);
 
   const SelectForm = () => {
     let items = [];
@@ -126,7 +132,7 @@ const Layout = (props) => {
   if (props.userInfo)
     return (
       <Container bg="light" fluid>
-      {/* //   {createCourseModal}
+        {/* //   {createCourseModal}
       //   <Row>
       //     <Col md={3}>Courses</Col>
       //     <Col md={6} backgroundColor="success">
@@ -134,24 +140,24 @@ const Layout = (props) => {
       //       <Button className="pull-right light" onClick={handleShowModal}>
       //         Create Course
       //       </Button> */}
-            <div
-              className={
-                response < 10
-                  ? "alert alert-info"
-                  : response < 20
-                  ? "alert alert-success"
-                  : response < 30
-                  ? "alert alert-primary"
-                  : response < 40
-                  ? "alert alert-secondary"
-                  : "alert alert-danger"
-              }
-            >
-              Time countdown : <strong>{response}</strong>
-            </div>
-      {/* //     </Col>
+        <div
+          className={
+            response < 10
+              ? "alert alert-info"
+              : response < 20
+              ? "alert alert-success"
+              : response < 30
+              ? "alert alert-primary"
+              : response < 40
+              ? "alert alert-secondary"
+              : "alert alert-danger"
+          }
+        >
+          Time countdown : <strong>{response}</strong>
+        </div>
+        {/* //     </Col>
       //   </Row> */}
-       </Container>
+      </Container>
     );
   else {
     return (

@@ -11,7 +11,6 @@ const errorHandler = require("../middleware/errorHandler");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 const bcrypt = require("bcryptjs");
-const university = require("../models/university");
 
 exports.getTeacher = (req, res, next) => {
   TeacherModel.findById(req.params.id)
@@ -39,34 +38,24 @@ exports.getTeacher = (req, res, next) => {
 
       console.log("Teacher User Found");
 
-      CourseModel.find({
-        createdBy: teacher._id,
-      })
-        .then((result) => {
-          console.log(result);
-
-          return res.status(200).json({
-            status: "OK",
-            result: {
-              data: {
-                id: teacher._id,
-                role: role,
-                email: email,
-                username: username,
-                firstName: firstName,
-                lastName: lastName,
-                department: department,
-                designation: designation,
-                varsity: teacher.varsity.shortform,
-                courses: result,
-                registered_at: registered_at,
-              },
-            },
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      return res.status(200).json({
+        status: "OK",
+        result: {
+          data: {
+            id: teacher._id,
+            role: role,
+            email: email,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            department: department,
+            designation: designation,
+            varsity: teacher.varsity.shortform,
+            courses: teacher.courses,
+            registered_at: registered_at,
+          },
+        },
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -474,9 +463,20 @@ exports.postCreateCourse = (req, res, next) => {
       .then((course) => {
         console.log(course);
 
-        
+        req.user.courses.push({
+          course: course._id,
+        });
 
-        apiResponseInJson(res, 201, course);
+        req.user
+          .save()
+          .then((result) => {
+            console.log(result);
+            apiResponseInJson(res, 201, course);
+          })
+          .catch((error) => {
+            console.log(error);
+            errorHandler.validationError(res, 401, error);
+          });
       })
       .catch((error) => {
         errorHandler.validationError(res, 401, error);
