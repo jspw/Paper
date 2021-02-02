@@ -18,6 +18,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,10 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Exam(props) {
-  const { match } = props;
+  // const { match } = props;
 
-  let { id } = match.params;
-  // console.log("ID", id);
+  // console.log("Exam id",match);
+  console.log("props... ", props);
+
+  let { id } = useParams();
+  console.log("ID", id);
 
   const [examData, setExamData] = useState(null);
 
@@ -41,10 +45,11 @@ export default function Exam(props) {
   const classes = useStyles();
 
   useEffect(() => {
-    axios.get(`student/exam/${id}`).then((response) => {
-      const data = response.data;
-      setExamData(data.result.data);
-    });
+    if (props.userInfo)
+      axios.get(`${props.userInfo.role}/exam/${id}`).then((response) => {
+        const data = response.data;
+        setExamData(data.result.data);
+      });
   }, []);
 
   console.log("Exam Data", examData);
@@ -58,11 +63,7 @@ export default function Exam(props) {
           <CardContent>
             <Typography>{question.mcqQuestionId.description}</Typography>
 
-            {/* <Divider /> */}
-
             <Typography>{question.mcqQuestionId.mainQuestion}</Typography>
-
-            {/* <Divider /> */}
 
             <List>
               {question.mcqQuestionId.options.map((options) => {
@@ -85,12 +86,7 @@ export default function Exam(props) {
           <CardContent>
             <Typography>{question.cqQuestionId.description}</Typography>
 
-            {/* <Divider /> */}
-
             <Typography>{question.cqQuestionId.mainQuestion}</Typography>
-
-            {/* <Divider /> */}
-
             <TextField
               id="outlined-textarea"
               label="Ans"
@@ -107,10 +103,11 @@ export default function Exam(props) {
 
   let x = 0;
 
-  setInterval(() => {
-    const date = new Date();
-    setTimer(date.getSeconds());
-  }, 1000);
+  if (examData)
+    setInterval(() => {
+      const date = new Date();
+      setTimer(date.getSeconds());
+    }, 1000);
 
   if (examData)
     return (

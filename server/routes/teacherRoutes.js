@@ -33,5 +33,6 @@ router
 
 router.route("/exam/:id").get(authenticateJWT, teacherController.getExam);
 
+router.route("/course/:id").get(authenticateJWT, teacherController.getCourse);
 
 module.exports = router;

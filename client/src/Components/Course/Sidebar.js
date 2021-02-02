@@ -5,9 +5,11 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import "./Course.scss";
 
 export default function Sidebar(props) {
+    console.log(props.courseData)
+
     return (
         <aside className="sidebar">
-            <header className="sidebar__header">Course Name</header>
+            <header className="sidebar__header">{props.courseData.name}</header>
             <ul>
                 <li><Link className="sidebar__link">Create Exam</Link></li>
                 <li><Link className="sidebar__link">Exams</Link></li>

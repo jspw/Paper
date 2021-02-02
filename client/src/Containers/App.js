@@ -22,21 +22,6 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("university/all")
-      .then((response) => {
-        const data = response.data;
-
-        // console.log(data);
-
-        if (data.status === "OK") {
-          setUniversityInfo(data.result.data.universities);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     if (userdata) {
       axios
         .get(`${userdata.role}/user/${userdata.id}`)
@@ -50,6 +35,18 @@ function App() {
           console.log("Error api call", error);
         });
     } else setloginStatus("Failed");
+    axios
+      .get("university/all")
+      .then((response) => {
+        const data = response.data;
+
+        if (data.status === "OK") {
+          setUniversityInfo(data.result.data.universities);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
   // console.log(isLogin)
   return (
@@ -74,8 +71,17 @@ function App() {
           />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
-          <Route path="/course/:id" component={Course} />
-          <Route path="/exam/:id" component={Exam} />
+          <Route
+            path="/course/:id"
+            render={(props) => (
+              <Course universityInfo={universityInfo} userInfo={userInfo} />
+            )}
+          />
+          <Route
+            path="/exam/:id"
+            exact
+            render={(props) => <Exam userInfo={userInfo}/>}
+          />
         </Switch>
       </div>
     </BrowserRouter>
