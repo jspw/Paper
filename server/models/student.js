@@ -46,7 +46,7 @@ const studentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "University",
     required: true,
-    autopopulate: true
+    autopopulate: { maxDepth: 2 },
   },
   registrationNo: {
     type: Number,
@@ -62,7 +62,7 @@ const studentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Course",
         unique: true,
-        autopopulate: true
+        autopopulate: { maxDepth: 2 },
       },
     },
   ],

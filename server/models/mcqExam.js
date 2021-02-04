@@ -18,7 +18,7 @@ const mcqExamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "McqQuestion",
         required: true,
-        autopopulate: true
+        autopopulate: { maxDepth: 2 },
       },
     },
   ],
