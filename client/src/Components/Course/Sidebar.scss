@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+:root {
+  font-size: 16px;
+  font-family: "Open Sans";
+  --transition-speed: 600ms;
+}
+.sidebar {
+  width: 4.5rem;
+  height: 100vh;
+  position: fixed;
+  background-color: #2c2c2c;
+  color: white;
+  transition: width 400ms ease;
+  &__logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: blanchedalmond;
+    background-color: #3F7CAC;
+    letter-spacing: 0.15ch;
+    width: 100%;
+    font-size: 1.45rem;
+    .sidebar__item__icon {
+      transform: rotate(0deg);
+      transition: transform var(--transition-speed);
+      &:hover, &:active {
+          color: #f5faff;
+      }
+    }
+    .sidebar__item__link {
+      filter: grayscale(0%) opacity(1);
+      &:hover {
+        filter: grayscale(0%) opacity(1);
+        color: #f5faff;
+      }
+    }
+  }
+  &__nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  &__item {
+    width: 100%;
+    &__link {
+      display: flex;
+      align-items: center;
+      height: 5rem;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition-speed);
+      filter: grayscale(100%) opacity(0.7);
+      transition: var(--transition-speed);
+      &:hover, &:active {
+        text-decoration: none;
+        filter: grayscale(0%) opacity(1);
+        color: #FFCE47;
+        background-color: rgba(238, 232, 232, 0.2);
+      }
+    }
+    &__icon {
+      font-size: 2rem;
+      min-width: 2rem;
+      margin: 0 1.1rem;
+    }
+    &__text {
+      display: none;
+      margin-left: 0.5rem;
+      font-size: 1.15em;
+      transition: var(--transition-speed);
+    }
+    &:last-child {
+      margin-top: auto;
+      margin-bottom: 52px;
+      // background-color: yellow;
+    }
+  }
+}
+.sidebar.active {
+  width: 14rem;
+  .sidebar__logo {
+    .sidebar__item__link {
+      padding-left: 0.55em;
+    }
+    .sidebar__item__icon {
+      // margin-left: 30px;
+      transform: rotate(-180deg);
+    }
+  }
+  .sidebar__item__text {
+    display: inline;
+    color: white;
+  }
+}
+.content__large {
+  display: inline-block;
+  float: right;
+  width: 91.5rem;
+  transition: width var(--transition-speed);
+}
+.content__small {
+  display: inline-block;
+  float: right;
+  transition: width var(--transition-speed);
+  width: 82rem;
+}
