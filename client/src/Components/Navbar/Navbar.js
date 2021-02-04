@@ -6,8 +6,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import { FaUserAlt } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
@@ -109,7 +109,7 @@ export default function Navigation(props) {
           onClick={handleNotificationMenuOpen}
         >
           <Badge badgeContent={17} color="secondary">
-            <NotificationsIcon />
+            <FaBell style={{color: "white"}}/>
           </Badge>
         </IconButton>
         <IconButton
@@ -120,7 +120,7 @@ export default function Navigation(props) {
           onClick={handleProfileMenuOpen}
           color="inherit"
         >
-          <AccountCircle />
+          <FaUserAlt style={{color: "white"}}/>
         </IconButton>
         {/* <MenuItem onClick={handleSignout}>Signout</MenuItem> */}
         {renderNotificationMenu}
@@ -141,7 +141,7 @@ export default function Navigation(props) {
   }
 
   return (
-    <Navbar bg="light">
+    <Navbar bg="" style={{backgroundColor: "#010302"}} variant="dark">
       <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
         Name
       </Navbar.Brand>
