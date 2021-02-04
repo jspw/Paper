@@ -7,13 +7,13 @@ const onCqExamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CqExam",
     required: true,
-    autopopulate: true
+    autopopulate: { maxDepth: 2 },
   },
   stduent: {
     type: Schema.Types.ObjectId,
     ref: "Student",
     required: true,
-    autopopulate: true
+    autopopulate: { maxDepth: 2 },
   },
   studentAnswers: [
     {
@@ -21,7 +21,7 @@ const onCqExamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqQuestion",
         required: true,
-        autopopulate: true
+        autopopulate: { maxDepth: 2 },
       },
       studentAnswer: {
         type: String,
