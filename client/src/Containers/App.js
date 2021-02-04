@@ -48,12 +48,12 @@ function App() {
         console.log(error);
       });
   }, []);
-  // console.log(isLogin)
+  console.log(userInfo);
   return (
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-                <Route
+        <Route
           path="/test"
           exact
           render={(props) => (
@@ -61,7 +61,7 @@ function App() {
           )}
         />
         <Switch>
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Home} /> */}
           <Route
             path="/"
             exact
@@ -69,9 +69,9 @@ function App() {
               <Home universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
+
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
-          <Route path="/exam/:id" component={Exam} />
           <Route
             path="/course/:id"
             render={(props) => (
@@ -81,10 +81,9 @@ function App() {
           <Route
             path="/exam/:id"
             exact
-            render={(props) => <Exam userInfo={userInfo}/>}
+            render={(props) => <Exam userInfo={userInfo} />}
           />
         </Switch>
-        {/* <Course /> */}
       </div>
     </BrowserRouter>
   );

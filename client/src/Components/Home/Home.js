@@ -48,7 +48,7 @@ export default function Home(props) {
   let cqExamUI;
   let mcqExamUI;
 
-  // console.log("Userinfo", userInfo);
+  console.log("UserInfo", props.userInfo );
 
   if (props.userInfo) {
     if (props.userInfo.courses)
