@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 import { IoCreate } from "react-icons/io5";
 import { IoClipboard } from "react-icons/io5";
-import { AiOutlineDoubleRight } from "react-icons/ai";
+import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
@@ -15,13 +17,19 @@ export default function Sidebar(props) {
     const showSidebar = () => setSidebar(!sidebar);
 
     return (
-      <aside className={sidebar ? 'sidebar active' : 'sidebar'}>
+      <aside className={sidebar ? "sidebar active" : "sidebar"}>
         <ul className="sidebar__nav">
           <li className="sidebar__logo">
-            <Link className="sidebar__item__link" onClick={showSidebar}>
-              <span className="sidebar__item__text">SWE111</span>
-              <AiOutlineDoubleRight className="sidebar__item__icon" />
-            </Link>
+            <Row>
+              <Link className="sidebar__item__link" onClick={showSidebar}>
+                <Col xs={4} className="sidebar__item__text">
+                  SWE111
+                </Col>
+                <Col xs={sidebar ? {span: 4, offset: 2} : {}}>
+                  <FaAngleDoubleRight className="sidebar__item__icon" />
+                </Col>
+              </Link>
+            </Row>
           </li>
           <li className="sidebar__item">
             <Link className="sidebar__item__link">
@@ -46,7 +54,7 @@ export default function Sidebar(props) {
               <FaChalkboardTeacher className="sidebar__item__icon" />
               <span className="sidebar__item__text">Teacher</span>
             </Link>
-          </li>          
+          </li>
           <li className="sidebar__item">
             <Link className="sidebar__item__link">
               <FaInfoCircle className="sidebar__item__icon" />

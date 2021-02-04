@@ -13,8 +13,8 @@
   width: 4.5rem;
   height: 100vh;
   position: fixed;
-//   background-color: #202020;
-    background-color: #01160F;
+  background-color: #2c2c2c;
+    // background-color: #01160F;
   color: white;
   transition: width 400ms ease;
   &__logo {
@@ -22,7 +22,7 @@
     text-transform: uppercase;
     margin-bottom: 1rem;
     color: blanchedalmond;
-    background-color: #69995D;
+    background-color: #3F7CAC;
     letter-spacing: 0.3ch;
     width: 100%;
     font-size: 1.5rem;
@@ -64,7 +64,7 @@
       &:hover, &:active {
         text-decoration: none;
         filter: grayscale(0%) opacity(1);
-        color: #FFBE0B;
+        color: #FFCE47;
         background-color: rgba(238, 232, 232, 0.2);
       }
     }
@@ -76,7 +76,7 @@
     &__text {
       display: none;
       margin-left: 0.5rem;
-      font-size: 1.18em;
+      font-size: 1.15em;
       transition: var(--transition-speed);
     }
     &:last-child {
