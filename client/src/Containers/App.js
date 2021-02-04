@@ -9,7 +9,7 @@ import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
-import Exam from '../Components/Exam/Exam';
+import Exam from "../Components/Exam/Exam";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -22,12 +22,23 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
+    if (userdata) {
+      axios
+        .get(`${userdata.role}/user/${userdata.id}`)
+        .then((result) => {
+          setloginStatus(result.data.status);
+          setUserInfo(result.data.result.data);
+          console.log("UserInfo api call", result);
+        })
+        .catch((error) => {
+          setloginStatus("Failed");
+          console.log("Error api call", error);
+        });
+    } else setloginStatus("Failed");
     axios
       .get("university/all")
       .then((response) => {
         const data = response.data;
-
-        console.log(data);
 
         if (data.status === "OK") {
           setUniversityInfo(data.result.data.universities);
@@ -36,24 +47,13 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-
-    if (userdata) {
-      axios
-        .get(`${userdata.role}/user/${userdata.id}`)
-        .then((result) => {
-          setloginStatus(result.data.status);
-          setUserInfo(result.data.result.data);
-          console.log(result);
-        })
-        .catch((error) => console.log(error));
-    } else setloginStatus("Failed");
   }, []);
   // console.log(isLogin)
   return (
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-{/*         <Route
+        <Route
           path="/test"
           exact
           render={(props) => (
@@ -71,10 +71,20 @@ function App() {
           />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/signIn" exact component={SignIn} />
-          <Route path="/course/:id" component={Course} />
           <Route path="/exam/:id" component={Exam} />
-        </Switch> */}
-        <Course/>
+          <Route
+            path="/course/:id"
+            render={(props) => (
+              <Course universityInfo={universityInfo} userInfo={userInfo} />
+            )}
+          />
+          <Route
+            path="/exam/:id"
+            exact
+            render={(props) => <Exam userInfo={userInfo} />}
+          />
+        </Switch>
+        <Course />
       </div>
     </BrowserRouter>
   );

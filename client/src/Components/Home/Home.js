@@ -3,10 +3,11 @@ import { Grid } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import SubjectIcon from "@material-ui/icons/Subject";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./Home.css";
 export default function Home(props) {
-  const courseHandler = (event) => {
+  const reloadHandler = (event) => {
     event.preventDefault();
   };
 
@@ -59,9 +60,16 @@ export default function Home(props) {
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link href={`/course/${course.course._id}`}>
+              <Link to={`/course/${course.course._id}`}>
                 <p>{course.course.name}</p>
               </Link>
+
+              {/* <Link
+                onClick={reloadHandler}
+                href={`/course/${course.course._id}`}
+              >
+                <p>{course.course.name}</p>
+              </Link> */}
             </Grid>
           </Grid>
         );
@@ -76,7 +84,7 @@ export default function Home(props) {
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link href={`/exam/${exam.examId._id}`}>
+              <Link to={`/exam/${exam.examId._id}`}>
                 <p>{exam.examId.name}</p>
               </Link>
             </Grid>
@@ -94,7 +102,7 @@ export default function Home(props) {
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link href={`/exam/${exam.examId._id}`}>
+              <Link to={`/exam/${exam.examId._id}`}>
                 <p>{exam.examId.name}</p>
               </Link>
             </Grid>
