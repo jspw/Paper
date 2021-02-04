@@ -14,30 +14,28 @@
   height: 100vh;
   position: fixed;
   background-color: #2c2c2c;
-    // background-color: #01160F;
   color: white;
   transition: width 400ms ease;
   &__logo {
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 1rem;
     color: blanchedalmond;
     background-color: #3F7CAC;
-    letter-spacing: 0.3ch;
+    letter-spacing: 0.15ch;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     .sidebar__item__icon {
       transform: rotate(0deg);
       transition: transform var(--transition-speed);
       &:hover, &:active {
-          color: white;
+          color: #f5faff;
       }
     }
     .sidebar__item__link {
       filter: grayscale(0%) opacity(1);
       &:hover {
         filter: grayscale(0%) opacity(1);
-        color: white;
+        color: #f5faff;
       }
     }
   }
