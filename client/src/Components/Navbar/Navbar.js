@@ -141,7 +141,7 @@ export default function Navigation(props) {
   }
 
   return (
-    <Navbar bg="light">
+    <Navbar bg="" style={{backgroundColor: "#00100B"}} variant="dark">
       <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
         Name
       </Navbar.Brand>

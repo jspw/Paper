@@ -53,7 +53,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
-        <Route
+{/*         <Route
           path="/test"
           exact
           render={(props) => (
@@ -61,7 +61,7 @@ function App() {
           )}
         />
         <Switch>
-          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/" component={Home} />
           <Route
             path="/"
             exact
@@ -73,7 +73,8 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/course/:id" component={Course} />
           <Route path="/exam/:id" component={Exam} />
-        </Switch>
+        </Switch> */}
+        <Course/>
       </div>
     </BrowserRouter>
   );
