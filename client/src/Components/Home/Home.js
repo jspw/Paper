@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import SubjectIcon from "@material-ui/icons/Subject";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 // import Link from "@material-ui/core/Link";
+import Timer from "../Timer/Timer";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./Home.css";
 export default function Home(props) {
@@ -11,44 +12,11 @@ export default function Home(props) {
     event.preventDefault();
   };
 
-  const [timerDays, setTimerDays] = useState("00");
-  const [timerHours, setTimerHours] = useState("00");
-  const [timerMinutes, setTimerMinutes] = useState("00");
-  const [timerSeconds, setTimerSeconds] = useState("00");
-  let interval = useRef();
-
-  const timer = () => {
-    const seconds = 1000;
-    const minutes = seconds * 60;
-    const hours = minutes * 60;
-    const days = hours * 24;
-    const deadline = new Date("January 31, 2021 00:00:00").getTime();
-
-    interval = setInterval(() => {
-      const now = new Date().getTime();
-      const timeLeft = deadline - now;
-      if (timeLeft < 0) {
-        clearInterval(interval.current);
-      } else {
-        setTimerDays(Math.floor(timeLeft / days));
-        setTimerHours(Math.floor((timeLeft % days) / hours));
-        setTimerMinutes(Math.floor((timeLeft % hours) / minutes));
-        setTimerSeconds(Math.floor((timeLeft % minutes) / seconds));
-      }
-    }, 1000);
-  };
-  useEffect(() => {
-    timer();
-    return () => {
-      clearInterval(interval.current);
-    };
-  });
-
   let courseUI;
   let cqExamUI;
   let mcqExamUI;
 
-  console.log("UserInfo", props.userInfo );
+  console.log("UserInfo", props.userInfo);
 
   if (props.userInfo) {
     if (props.userInfo.courses)
@@ -84,7 +52,7 @@ export default function Home(props) {
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link to={`/exam/${exam.examId._id}`}>
+              <Link to={`/upcoming-exam/${exam.examId._id}`}>
                 <p>{exam.examId.name}</p>
               </Link>
             </Grid>
@@ -102,7 +70,7 @@ export default function Home(props) {
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link to={`/exam/${exam.examId._id}`}>
+              <Link to={`/previous-exam/${exam.examId._id}`}>
                 <p>{exam.examId.name}</p>
               </Link>
             </Grid>
@@ -123,28 +91,15 @@ export default function Home(props) {
         <Grid item xs={12} sm={5}>
           <h5>Upcoming Exams</h5>
           <hr />
-          <div>{mcqExamUI}</div>
-          <div className="timer-container">
-            <ul>
-              <li>
-                <span id="days">{timerDays}</span> Days
-              </li>
-              <li>
-                <span id="hours">{timerHours}</span> Hours
-              </li>
-              <li>
-                <span id="minutes">{timerMinutes}</span> Minutes
-              </li>
-              <li>
-                <span id="seconds">{timerSeconds}</span> Seconds
-              </li>
-            </ul>
-          </div>
+          {/* <div>{mcqExamUI}</div> */}
+          <div>{cqExamUI}</div>
+          <Timer deadline={new Date("Sun Feb 28 2021 00:00:00")} />
         </Grid>
         <Grid item xs={12} sm>
           <h5>Previous Exams</h5>
           <hr />
-          <div>{cqExamUI}</div>
+          {/* <div>{cqExamUI}</div> */}
+          <div>{mcqExamUI}</div>
         </Grid>
       </Grid>
     </Container>
