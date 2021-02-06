@@ -56,6 +56,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navigation loginStatus={loginStatus} />
+        <Route
+          path="/test"
+          exact
+          render={(props) => (
+            <Layout universityInfo={universityInfo} userInfo={userInfo} />
+          )}
+        />
         <Switch>
           <Route
             path="/"

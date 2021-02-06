@@ -14,31 +14,28 @@
   height: 100vh;
   position: fixed;
   background-color: #2c2c2c;
-  // background-color: #01160F;
   color: white;
   transition: width 400ms ease;
   &__logo {
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 1rem;
     color: blanchedalmond;
-    background-color: #3f7cac;
-    letter-spacing: 0.3ch;
+    background-color: #3F7CAC;
+    letter-spacing: 0.15ch;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     .sidebar__item__icon {
       transform: rotate(0deg);
       transition: transform var(--transition-speed);
-      &:hover,
-      &:active {
-        color: white;
+      &:hover, &:active {
+          color: #f5faff;
       }
     }
     .sidebar__item__link {
       filter: grayscale(0%) opacity(1);
       &:hover {
         filter: grayscale(0%) opacity(1);
-        color: white;
+        color: #f5faff;
       }
     }
   }
@@ -62,11 +59,10 @@
       transition: var(--transition-speed);
       filter: grayscale(100%) opacity(0.7);
       transition: var(--transition-speed);
-      &:hover,
-      &:active {
+      &:hover, &:active {
         text-decoration: none;
         filter: grayscale(0%) opacity(1);
-        color: #ffce47;
+        color: #FFCE47;
         background-color: rgba(238, 232, 232, 0.2);
       }
     }
@@ -102,6 +98,17 @@
   .sidebar__item__text {
     display: inline;
     color: white;
-    // font-size: medium;
   }
+}
+.content__large {
+  display: inline-block;
+  float: right;
+  width: 91.5rem;
+  transition: width var(--transition-speed);
+}
+.content__small {
+  display: inline-block;
+  float: right;
+  transition: width var(--transition-speed);
+  width: 82rem;
 }
