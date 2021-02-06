@@ -7,6 +7,9 @@ const UniversityModel = require("../models/university");
 const CqQuestionModel = require("../models/cqQuestion");
 const CqExamModel = require("../models/cqExam");
 
+const OnMcqExamModel = require("../models/onMcqExam");
+const OnCqExamModel = require("../models/onCqExam");
+
 const errorHandler = require("../middleware/errorHandler");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
@@ -598,7 +601,6 @@ exports.postCreateMcqExam = (req, res, next) => {
   }
 };
 
-
 exports.getExam = (req, res, next) => {
   McqExamModel.findById(req.params.id)
     .then((exam) => {
@@ -652,4 +654,34 @@ exports.getCourse = (req, res, next) => {
       console.log(error);
       errorHandler.serverError(res);
     });
+};
+
+exports.getMcqSubmits = (req, res, next) => {
+  console.log(req.user.role);
+  if ((req.user.role === "Teacher")) {
+    OnMcqExamModel.find()
+      .then((result) => {
+        console.log(result);
+        apiResponseInJson(res, 200, result);
+      })
+      .catch((error) => {
+        console.log(error);
+        errorHandler.validationError(res, 400, error);
+      });
+  } else errorHandler.unauthorizedAccess(res);
+};
+
+exports.getCqSubmits = (req, res, next) => {
+  console.log(req.user.role);
+  if (req.user.role === "Teacher") {
+    OnCqExamModel.find()
+      .then((result) => {
+        console.log(result);
+        apiResponseInJson(res, 200, result);
+      })
+      .catch((error) => {
+        console.log(error);
+        errorHandler.validationError(res, 400, error);
+      });
+  } else errorHandler.unauthorizedAccess(res);
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css"
+import "./App.css";
 import Navigation from "../Components/Navbar/Navbar";
 // import  MCQ  from "../Components/Exam/MCQs/MCQ/MCQ";
 import SignIn from "../Components/Authentication/SignIn";
@@ -11,6 +11,8 @@ import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
 import Exam from "../Components/Exam/Exam";
+import PreviousExam from "../Components/PreviousExam/PreviousExam";
+import UpcomingExam from "../Components/UpcomingExam/UpcomingExam";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -65,7 +67,7 @@ function App() {
           <Route
             path="/"
             exact
-            render={(props) => (
+            render={() => (
               <Home universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
@@ -74,17 +76,32 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route
             path="/course/:id"
-            render={(props) => (
+            render={() => (
               <Course universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
           <Route
             path="/exam/:id"
             exact
-            render={(props) => <Exam userInfo={userInfo} />}
+            render={() => <Exam userInfo={userInfo} />}
+          />
+          <Route
+            path="/previous-exam/:id"
+            exact
+            render={() => (
+              // <Layout universityInfo={universityInfo} userInfo={userInfo} />
+              <PreviousExam />
+            )}
+          />
+          <Route
+            path="/upcoming-exam/:id"
+            exact
+            render={() => (
+              // <Layout universityInfo={universityInfo} userInfo={userInfo} />
+              <UpcomingExam userInfo={userInfo} />
+            )}
           />
         </Switch>
-        {/* <Course/> */}
       </div>
     </BrowserRouter>
   );
