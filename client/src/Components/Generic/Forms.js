@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -13,12 +14,28 @@ import "./Forms.scss";
 
 const apiDomain = "http://localhost:8080/";
 
+const TextFieldForm = (props) => (
+  <TextField
+  id={props.id}
+  label={props.label}
+  multiline
+  rows={props.rows}
+  variant="outlined"
+  onChange={props.handleChange(props.id)}
+  labelWidth={props.labelWidth}
+  value={props.values}
+  fullWidth
+  className={props.classes.textField}
+  required={props.required}
+/>
+)
+
 const TextForm = (props) => (
   <FormControl
     className={props.classes.textField}
     variant="outlined"
     fullWidth
-    /* error={props.error} */ required={props.required}
+    required={props.required}
   >
     <InputLabel>{props.label}</InputLabel>
     <OutlinedInput
@@ -190,6 +207,26 @@ const Forms = (props) => {
             value: "Lecturer",
           },
         ];
+      } else if(id === "options") {
+        items = [];
+        items = [
+          {
+            id: "optA",
+            value: "A",
+          },
+          {
+            id: "optB",
+            value: "B",
+          },
+          {
+            id: "optC",
+            value: "C",
+          },
+          {
+            id: "optD",
+            value: "D",
+          },
+        ];
       }
     }
 
@@ -229,8 +266,10 @@ const Forms = (props) => {
     return <TextForm {...props} />;
   } else if (type === "password") {
     return <PasswordForm {...props} />;
-  } else {
+  } else if (type === "select") {
     return <SelectForm {...props} />;
+  } else {
+    return <TextFieldForm {...props}/>
   }
 };
 

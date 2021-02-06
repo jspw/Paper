@@ -27,7 +27,7 @@ export default class CreateCourse extends React.Component {
 
   add = () => {
     const { panes } = this.state;
-    const activeKey = `newTab${this.newTabIndex++}`;
+    const activeKey = `question${this.newTabIndex++}`;
     const newPanes = [...panes];
     newPanes.push({ title: `Question ${this.quesNo++}`, content: <Question/>, key: activeKey });
     this.setState({
