@@ -1,11 +1,12 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
+import Question from './Question';
 
 const { TabPane } = Tabs;
 
 const initialPanes = [
-  { title: "Question 1", content: "Content of Tab 1", key: "1", closable: false },
+  { title: "Question 1", content: <Question/>, key: "1", closable: false },
 ];
 
 export default class CreateCourse extends React.Component {
@@ -28,7 +29,7 @@ export default class CreateCourse extends React.Component {
     const { panes } = this.state;
     const activeKey = `newTab${this.newTabIndex++}`;
     const newPanes = [...panes];
-    newPanes.push({ title: `Question ${this.quesNo++}`, content: 'Content of new Tab', key: activeKey });
+    newPanes.push({ title: `Question ${this.quesNo++}`, content: <Question/>, key: activeKey });
     this.setState({
       panes: newPanes,
       activeKey,

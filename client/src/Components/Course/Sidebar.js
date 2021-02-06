@@ -71,7 +71,7 @@ export default function Sidebar(props) {
               <Row>
                 <Link className="sidebar__item__link" onClick={showSidebar}>
                   <Col xs={4} className="sidebar__item__text">
-                    {props.courseData.name}
+                    {props.courseData.code}
                   </Col>
                   <Col xs={sidebar ? { span: 4, offset: 2 } : {}}>
                     <FaAngleDoubleRight className="sidebar__item__icon" />

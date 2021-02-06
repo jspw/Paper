@@ -9,7 +9,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import axios from "axios";
-import "./SignIn.css";
+import "./Forms.scss";
 
 const apiDomain = "http://localhost:8080/";
 
