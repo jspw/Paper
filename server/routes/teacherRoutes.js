@@ -1,4 +1,5 @@
 const express = require("express");
+const { getMcqSubmit } = require("../controllers/student");
 const teacherController = require("../controllers/teacher");
 const authenticateJWT = require("../middleware/authenticateJWS");
 
@@ -34,5 +35,13 @@ router
 router.route("/exam/:id").get(authenticateJWT, teacherController.getExam);
 
 router.route("/course/:id").get(authenticateJWT, teacherController.getCourse);
+
+router
+  .route("/exam/mcq/submits")
+  .get(authenticateJWT, teacherController.getMcqSubmits);
+
+router
+  .route("/exam/cq/submits")
+  .get(authenticateJWT, teacherController.getCqSubmits);
 
 module.exports = router;

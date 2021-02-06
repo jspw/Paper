@@ -4,6 +4,8 @@ const UniversityModel = require("../models/university");
 const CourseModel = require("../models/course");
 const McqExamModel = require("../models/mcqExam");
 const CqExamModel = require("../models/cqExam");
+const OnMcqExamModel = require("../models/onMcqExam");
+const OnCqExamModel = require("../models/onCqExam");
 const bcrypt = require("bcryptjs");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
@@ -589,3 +591,108 @@ exports.getCourse = (req, res, next) => {
       errorHandler.serverError(res);
     });
 };
+
+exports.postMcqSubmit = (req, res, next) => {
+  const examId = req.params.id;
+  const { studentAnswers } = req.body;
+
+  let solved = 0;
+  let wrong = 0;
+  let marks = 0;
+
+  McqExamModel.findById(examId)
+    .then((exam) => {
+      for (let i = 0; i < studentAnswers.length; i++) {
+        if (
+          studentAnswers[i].mcqQuestion ==
+          exam.mcqQuestions[i].mcqQuestionId._id
+        ) {
+          if (
+            studentAnswers[i].studentAnswer ==
+            exam.mcqQuestions[i].mcqQuestionId.correctAnswers[0].answer
+          ) {
+            solved++;
+            marks += exam.mcqQuestions[i].mcqQuestionId.marks;
+          }
+        }
+      }
+
+      wrong = studentAnswers.length - solved;
+
+      console.log(solved, wrong, marks);
+
+      const onMcqExam = new OnMcqExamModel({
+        mcqExam: examId,
+        student: req.user._id,
+        studentAnswers: studentAnswers,
+        solved: solved,
+        wrong: wrong,
+        mark: marks,
+      });
+      onMcqExam
+        .save()
+        .then((result) => {
+          console.log(result);
+          apiResponseInJson(res, 200, result);
+        })
+        .catch((error) => {
+          console.log(error);
+          errorHandler.validationError(res, 400, error);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      errorHandler.validationError(res, 400, error);
+    });
+};
+
+exports.postCqSubmit = (req, res, next) => {
+  const examId = req.params.id;
+  const { studentAnswers } = req.body;
+  const onCqExamModel = new OnCqExamModel({
+    cqExam: examId,
+    student: req.user._id,
+    studentAnswers: studentAnswers,
+  });
+  onCqExamModel
+    .save()
+    .then((result) => {
+      apiResponseInJson(res, 200, result);
+    })
+    .catch((error) => {
+      console.log(error);
+      errorHandler.validationError(res, 400, error);
+    });
+};
+
+exports.getMcqSubmit = (req, res, next) => {
+  OnMcqExamModel.find({
+    mcqExam: req.params.id,
+    student: req.user._id,
+  })
+    .then((result) => {
+      console.log(result);
+      apiResponseInJson(res, 200, result);
+    })
+    .catch((error) => {
+      console.log(error);
+      errorHandler.validationError(res, 400, error);
+    });
+};
+
+exports.getCqSubmit = (req, res, next) => {
+  OnCqExamModel.find({
+    cqExam: req.params.id,
+    student: req.user._id,
+  })
+    .then((result) => {
+      console.log(result);
+      apiResponseInJson(res, 200, result);
+    })
+    .catch((error) => {
+      console.log(error);
+      errorHandler.validationError(res, 400, error);
+    });
+};
+
+

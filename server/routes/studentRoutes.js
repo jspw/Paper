@@ -17,6 +17,22 @@ router
 
 router.route("/exam/:id").get(authenticateJWT, studentController.getExam);
 
-router.route('/course/:id').get(authenticateJWT,studentController.getCourse);
+router.route("/course/:id").get(authenticateJWT, studentController.getCourse);
+
+router
+  .route("/exam/mcq/submit/:id")
+  .post(authenticateJWT, studentController.postMcqSubmit);
+
+router
+  .route("/exam/cq/submit/:id")
+  .post(authenticateJWT, studentController.postCqSubmit);
+
+router
+  .route("/exam/mcq/submit/:id")
+  .get(authenticateJWT, studentController.getMcqSubmit);
+
+router
+  .route("/exam/cq/submit/:id")
+  .get(authenticateJWT, studentController.getCqSubmit);
 
 module.exports = router;

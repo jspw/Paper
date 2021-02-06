@@ -45,7 +45,7 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "McqExam",
 
-        autopopulate: { maxDepth: 2 }
+        autopopulate: { maxDepth: 1 }
         // required: true,
       },
     },
@@ -57,17 +57,17 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqExam",
         // required: true,
-        autopopulate: { maxDepth: 2 }
+        autopopulate: { maxDepth: 1 }
       },
     },
   ],
 
   students: [
     {
-      student: {
+      studentDetail: {
         type: Schema.Types.ObjectId,
         ref: "Student",
-        autopopulate: { maxDepth: 2 },
+        autopopulate: { maxDepth: 1 },
         required: true,
       },
     },
@@ -76,7 +76,7 @@ const courseSchema = new Schema({
   createdBy: {
     type: Schema.Types.ObjectId,
     ref: "Teacher",
-    autopopulate: { maxDepth: 2 },
+    autopopulate: { maxDepth: 1 },
     required: true,
   },
 
