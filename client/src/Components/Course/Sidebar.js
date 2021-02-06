@@ -17,6 +17,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import CreateCourse from './CreateCourse/CreateCourse';
 import "./Sidebar.scss";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,55 +111,9 @@ export default function Sidebar(props) {
             </li>
           </ul>
         </aside>
-{/*         <div className={sidebar ? "content__small" : "content__large"}>
-          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-            <Tab eventKey="home" title="Home">adfsdf</Tab>
-            <Tab eventKey="profile" title="Profile">adfdsfdgfdgty</Tab>
-            <Tab eventKey="contact" title="Contact" disabled>tyhtyt</Tab>
-          </Tabs>
-        </div> */}
         <div className={sidebar ? "content__small" : "content__large"}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
-        >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four" {...a11yProps(3)} />
-          <Tab label="Item Five" {...a11yProps(4)} />
-          <Tab label="Item Six" {...a11yProps(5)} />
-          <Tab label="Item Seven" {...a11yProps(6)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
-    </div>
+          <CreateCourse/>
+        </div>
       </>
     );
 }

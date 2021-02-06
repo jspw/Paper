@@ -15,47 +15,9 @@ import Tab from '@material-ui/core/Tab'; */
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import './Course.scss';
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '90%',
-  },
-}));
 
 export default function Course(props) {
-/*   let { id } = useParams();
+  let { id } = useParams();
 
   const [courseData, setCourseData] = useState(null);
 
@@ -73,14 +35,5 @@ export default function Course(props) {
   console.log("Course Data", courseData);
 
   if (courseData) return <Sidebar courseData={courseData} />;
-  else return <CircularProgress></CircularProgress>; */
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  return (
-<Sidebar/>
-  );
+  else return <CircularProgress></CircularProgress>;
 }
