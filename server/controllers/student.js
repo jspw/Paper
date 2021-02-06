@@ -568,20 +568,20 @@ exports.getCourse = (req, res, next) => {
     .then((course) => {
       console.log(course);
       if (course) {
-        course.mcqExams.forEach((exam) => {
-          exam.examId.mcqQuestions = undefined;
-        });
+        // course.mcqExams.forEach((exam) => {
+        //   exam.examId.mcqQuestions = undefined;
+        // });
 
-        course.cqExams.forEach((exam) => {
-          exam.examId.cqQuestions = undefined;
-        });
+        // course.cqExams.forEach((exam) => {
+        //   exam.examId.cqQuestions = undefined;
+        // });
 
-        course.createdBy.courses = undefined;
+        // course.createdBy.courses = undefined;
 
-        course.students.forEach((student) => {
-          student.student.varsity = undefined;
-          student.student.courses = undefined;
-        });
+        // course.students.forEach((student) => {
+        //   student.student.varsity = undefined;
+        //   student.student.courses = undefined;
+        // });
 
         apiResponseInJson(res, 200, course);
       } else errorHandler.validationError(res, 400, "No Course Found");
