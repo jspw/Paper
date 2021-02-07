@@ -90,7 +90,7 @@ function App() {
             exact
             render={() => (
               // <Layout universityInfo={universityInfo} userInfo={userInfo} />
-              <PreviousExam />
+              <PreviousExam userInfo={userInfo} />
             )}
           />
           <Route

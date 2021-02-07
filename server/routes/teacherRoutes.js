@@ -44,4 +44,8 @@ router
   .route("/exam/cq/submits")
   .get(authenticateJWT, teacherController.getCqSubmits);
 
+router
+  .route("/examine/cq/:id")
+  .post(authenticateJWT, teacherController.postCqExamine);
+
 module.exports = router;

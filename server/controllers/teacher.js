@@ -658,7 +658,7 @@ exports.getCourse = (req, res, next) => {
 
 exports.getMcqSubmits = (req, res, next) => {
   console.log(req.user.role);
-  if ((req.user.role === "Teacher")) {
+  if (req.user.role === "Teacher") {
     OnMcqExamModel.find()
       .then((result) => {
         console.log(result);
@@ -684,4 +684,31 @@ exports.getCqSubmits = (req, res, next) => {
         errorHandler.validationError(res, 400, error);
       });
   } else errorHandler.unauthorizedAccess(res);
+};
+
+exports.postCqExamine = (req, res, next) => {
+  if (req.user.role == "Teacher") {
+    console.log(req.body.mark);
+
+    OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
+
+      console.log(onCqExamModel);
+
+      onCqExamModel.mark = req.body.mark;
+      onCqExamModel.examineBy = req.user._id;
+
+      onCqExamModel
+        .save()
+        .then((result) => {
+          console.log(result);
+          apiResponseInJson(res, 200, result);
+        })
+        .catch((error) => {
+          console.log(error);
+          errorHandler.validationError(res, 400, error);
+        });
+    });
+  } else {
+    errorHandler.unauthorizedAccess(res);
+  }
 };
