@@ -1,27 +1,26 @@
-import React, {useState} from 'react';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Forms from '../../Generic/Forms';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Forms from "../../Generic/Forms";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
-    textField: {
-      marginTop: theme.spacing(3),
-    },
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      width: "100%",
-    },
-  }));
-
+  textField: {
+    marginTop: theme.spacing(3),
+  },
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+  },
+}));
 
 export default function Question() {
   const classes = useStyles();
@@ -153,28 +152,43 @@ export default function Question() {
             </FormControl>
           </Row>
           <Row>
-            <h6 className={classes.textField}>Time Limit</h6>
+            <h6 className={classes.textField} >Time Limit</h6>
           </Row>
           <Row>
-            <Col xs='auto'>
-              <label for="quantity">Minutes:</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                max="5"
-              />
+            <Col xs="auto">
+              <div class="input-group">
+                {/* <label class="form-control" for="quantity">Minutes : </label> */}
+                {/* <FormLabel value="min"  /> */}
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Minutes </span>
+                </div>
+                <input
+                  class="form-control"
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  min="0"
+                  max="5"
+                  placeholder="00"
+                />
+              </div>
             </Col>
-            <Col xs='auto'>
-              <label for="quantity">Seconds:</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                max="59"
-              />
+            <Col xs="auto">
+              <div class="input-group">
+                {/* <label class="mr-sm-2" for="quantity">Seconds :</label> */}
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Seconds</span>
+                </div>
+                <input
+                  class="form-control"
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  min="0"
+                  max="59"
+                  placeholder="00"
+                />
+              </div>
             </Col>
           </Row>
         </Col>
