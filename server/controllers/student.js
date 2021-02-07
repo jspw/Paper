@@ -666,7 +666,7 @@ exports.postCqSubmit = (req, res, next) => {
 };
 
 exports.getMcqSubmit = (req, res, next) => {
-  OnMcqExamModel.find({
+  OnMcqExamModel.findOne({
     mcqExam: req.params.id,
     student: req.user._id,
   })
@@ -681,7 +681,7 @@ exports.getMcqSubmit = (req, res, next) => {
 };
 
 exports.getCqSubmit = (req, res, next) => {
-  OnCqExamModel.find({
+  OnCqExamModel.findOne({
     cqExam: req.params.id,
     student: req.user._id,
   })
@@ -694,5 +694,4 @@ exports.getCqSubmit = (req, res, next) => {
       errorHandler.validationError(res, 400, error);
     });
 };
-
 

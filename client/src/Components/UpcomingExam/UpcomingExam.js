@@ -127,25 +127,6 @@ const UpcomingExam = (props) => {
               </Table>
             </Col>
           </Row>
-
-          {/* 
-          <Alert variant="warning">
-            <div className="text-left">
-              Date :{" "}
-              {new Date(examInfo.date).getHours() < 10
-                ? "0" + new Date(examInfo.date).getHours()
-                : new Date(examInfo.date).getHours()}
-              :
-              {new Date(examInfo.date).getMinutes() < 10
-                ? "0" + new Date(examInfo.date).getMinutes()
-                : new Date(examInfo.date).getMinutes()}{" "}
-
-              {new Date(examInfo.date).getDate()}th{" "}
-              {months[new Date(examInfo.date).getMonth()]},
-              {new Date(examInfo.date).getFullYear()} (
-              {days[new Date(examInfo.date).getDay()]})
-            </div>
-          </Alert> */}
         </Col>
 
         <Col>

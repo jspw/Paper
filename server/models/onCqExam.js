@@ -29,6 +29,14 @@ const onCqExamSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  mark: {
+    type: Number,
+  },
+  examineBy: {
+    type: Schema.Types.ObjectId,
+    ref: "Teacher",
+    autopopulate: { maxDepth: 1 },
+  },
 });
 onCqExamSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("OnCqExam", onCqExamSchema);

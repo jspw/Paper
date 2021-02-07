@@ -13,8 +13,12 @@ export default function Home(props) {
   };
 
   let courseUI;
-  let cqExamUI;
-  let mcqExamUI;
+  let previousCqExams;
+  let previousMcqExams;
+  let upcomingMcqExams;
+  let upcomingCqExams;
+
+  
 
   console.log("UserInfo", props.userInfo);
 
@@ -43,9 +47,55 @@ export default function Home(props) {
         );
       });
 
-    cqExamUI = props.userInfo.courses.map((course, i) => {
+    previousCqExams = props.userInfo.courses.map((course, i) => {
       return course.course.cqExams.map((exam, j) => {
         console.log("EXAM", exam);
+        const date = new Date();
+        
+        if(new Date(exam.examId.date).getTime() < date.getTime())
+        return (
+          <Grid key={i + j} container alignItems="flex-start">
+            <Grid item>
+              <SubjectIcon />
+            </Grid>
+            <Grid item>
+              <Link to={`/previous-exam/${exam.examId._id}`}>
+                <p>{exam.examId.name}</p>
+              </Link>
+            </Grid>
+          </Grid>
+        );
+      });
+    });
+
+    previousMcqExams =  props.userInfo.courses.map((course, i) => {
+      return course.course.mcqExams.map((exam, j) => {
+        console.log("EXAM", exam);
+        const date = new Date();
+        
+        if(new Date(exam.examId.date).getTime() < date.getTime())
+        return (
+          <Grid key={i + j} container alignItems="flex-start">
+            <Grid item>
+              <SubjectIcon />
+            </Grid>
+            <Grid item>
+              <Link to={`/previous-exam/${exam.examId._id}`}>
+                <p>{exam.examId.name}</p>
+              </Link>
+            </Grid>
+          </Grid>
+        );
+      });
+    });
+
+
+    upcomingCqExams = props.userInfo.courses.map((course, i) => {
+      return course.course.cqExams.map((exam, j) => {
+        console.log("EXAM", exam);
+        const date = new Date();
+        
+        if(new Date(exam.examId.date).getTime() >  (date.getTime()+exam.examId.totalTime*60) )
         return (
           <Grid key={i + j} container alignItems="flex-start">
             <Grid item>
@@ -61,16 +111,21 @@ export default function Home(props) {
       });
     });
 
-    mcqExamUI = props.userInfo.courses.map((course, i) => {
+    upcomingMcqExams =  props.userInfo.courses.map((course, i) => {
       return course.course.mcqExams.map((exam, j) => {
         console.log("EXAM", exam);
+        const date = new Date();
+
+        // console.log(new Date(exam.examId.date).getTime(),(date.getTime()+(exam.examId.date*60)));
+        
+        if(new Date(exam.examId.date).getTime() >  (date.getTime()+(exam.examId.totalTime*60)))
         return (
           <Grid key={i + j} container alignItems="flex-start">
             <Grid item>
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link to={`/previous-exam/${exam.examId._id}`}>
+              <Link to={`/upcoming-exam/${exam.examId._id}`}>
                 <p>{exam.examId.name}</p>
               </Link>
             </Grid>
@@ -78,10 +133,15 @@ export default function Home(props) {
         );
       });
     });
+
+
+
+    // const sortedActivities = activities.sort((a, b) => b.date - a.date)
+
   }
 
   return (
-    <Container>
+    <Container style={{marginTop:'10px'}} >
       <Grid container spacing={3}>
         <Grid item xs={12} sm>
           <h5>My Courses</h5>
@@ -92,14 +152,15 @@ export default function Home(props) {
           <h5>Upcoming Exams</h5>
           <hr />
           {/* <div>{mcqExamUI}</div> */}
-          <div>{cqExamUI}</div>
+          <div>{upcomingMcqExams}</div>
+          <div>{upcomingCqExams}</div>
           <Timer deadline={new Date("Sun Feb 28 2021 00:00:00")} />
         </Grid>
         <Grid item xs={12} sm>
           <h5>Previous Exams</h5>
           <hr />
-          {/* <div>{cqExamUI}</div> */}
-          <div>{mcqExamUI}</div>
+          <div>{previousCqExams}</div>
+          <div>{previousMcqExams}</div>
         </Grid>
       </Grid>
     </Container>

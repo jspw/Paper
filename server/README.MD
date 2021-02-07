@@ -45,8 +45,7 @@
     - [Exam All Submits](#exam-all-submits)
       - [MCQ Exam Submits](#mcq-exam-submits)
       - [CQ Exam Submits](#cq-exam-submits)
-
-
+    - [CQ Examine](#cq-examine)
 
 - [How To Contribute](#how-to-contribute)
 
@@ -797,7 +796,6 @@ Response :
     ]
   }
 }
-
 ```
 
 ## Exams
@@ -2261,6 +2259,302 @@ Response :
         "__v": 0
       }
     ]
+  }
+}
+```
+
+#### CQ Examine
+
+Request : ``RESTRICTED (teacher)` `POST` `/examine/cq/:onCqExamId``
+
+Body :
+
+```json
+{
+  "marks": 10
+}
+
+```
+
+Response :
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "data": {
+      "_id": "601eb79e4819f46540c3f468",
+      "cqExam": {
+        "_id": "6015bade5fb74ddde0a42ad6",
+        "course": "60158e6e5e798487dd0d985f",
+        "name": "Shit TT1",
+        "cqQuestions": [
+          {
+            "_id": "6015bade5fb74ddde0a42ad7",
+            "cqQuestionId": {
+              "creationTime": "2021-01-26T15:22:53.207Z",
+              "_id": "6010345675bad87bb49e330a",
+              "mainQuestion": "Describe Your Life in words!",
+              "time": 120,
+              "marks": 10,
+              "__v": 0
+            }
+          },
+          {
+            "_id": "6015bade5fb74ddde0a42ad8",
+            "cqQuestionId": {
+              "creationTime": "2021-01-26T15:22:53.207Z",
+              "_id": "6010345675bad87bb49e330a",
+              "mainQuestion": "Describe Your Life in words!",
+              "time": 120,
+              "marks": 10,
+              "__v": 0
+            }
+          },
+          {
+            "_id": "6015bade5fb74ddde0a42ad9",
+            "cqQuestionId": {
+              "creationTime": "2021-01-26T15:22:53.207Z",
+              "_id": "6010345675bad87bb49e330a",
+              "mainQuestion": "Describe Your Life in words!",
+              "time": 120,
+              "marks": 10,
+              "__v": 0
+            }
+          }
+        ],
+        "totalTime": 60,
+        "totalMarks": 100,
+        "date": "2021-02-06T07:06:39.000Z",
+        "__v": 0
+      },
+      "student": {
+        "_id": "6015855a946f0c778c691c60",
+        "role": "Student",
+        "email": "shifat@buet.edu",
+        "username": "shifat",
+        "password": "$2a$10$4bHW6tXtiDPvrxhGVj3CP.Uq4aL7VbhCFy3EyZceW9Ov3ePijQyyK",
+        "firstName": "Shifat",
+        "lastName": "Rahman",
+        "department": "600eeb069c34055b3963adf7",
+        "registrationNo": 2017831051,
+        "varsity": {
+          "_id": "600eeb069c34055b3963adee",
+          "name": "Bangladesh University Of Engineering And Technology",
+          "shortform": "BUET",
+          "emails": [
+            {
+              "_id": "600eeb069c34055b3963adef",
+              "email": "shifat@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf0",
+              "email": "sam@@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf1",
+              "email": "tanvir@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf2",
+              "email": "mobin@@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf3",
+              "email": "rashid@@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf4",
+              "email": "forhad@@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf5",
+              "email": "rakib@@buet.edu"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf6",
+              "email": "emon@@buet.edu"
+            }
+          ],
+          "departments": [
+            {
+              "_id": "600eeb069c34055b3963adf7",
+              "name": "URP",
+              "shortform": "URP"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf8",
+              "name": "Mechanical Engineering",
+              "shortform": "MEE"
+            },
+            {
+              "_id": "600eeb069c34055b3963adf9",
+              "name": "GEB",
+              "shortform": "GEB"
+            },
+            {
+              "_id": "600eeb069c34055b3963adfa",
+              "name": "SWE",
+              "shortform": "SWE"
+            },
+            {
+              "_id": "600eeb069c34055b3963adfb",
+              "name": "Electrics and Electronics Engineering",
+              "shortform": "EEE"
+            },
+            {
+              "_id": "600eeb069c34055b3963adfc",
+              "name": "Petrolium and Mining Engineering",
+              "shortform": "PME"
+            },
+            {
+              "_id": "600eeb069c34055b3963adfd",
+              "name": "Mathamatics",
+              "shortform": "MAT"
+            },
+            {
+              "_id": "600eeb069c34055b3963adfe",
+              "name": "Computer Science and ENGINEERING",
+              "shortform": "CSE"
+            },
+            {
+              "_id": "600eeb069c34055b3963adff",
+              "name": "Physics",
+              "shortform": "PHY"
+            }
+          ],
+          "__v": 0
+        },
+        "session": "2017-2018",
+        "courses": [
+          {
+            "_id": "6015abe55976cdc3c3cf866d",
+            "course": {
+              "department": {
+                "id": "600c75f1059f3d6697f4e93a",
+                "name": "SWE"
+              },
+              "varsity": {
+                "id": "600c75f1059f3d6697f4e931",
+                "name": "SUST"
+              },
+              "creationDate": "2021-01-30T16:43:28.590Z",
+              "_id": "60158e6e5e798487dd0d985f",
+              "name": "C Programming",
+              "code": "SWE123",
+              "createdBy": "6015b154a411b8ce8c103c23",
+              "mcqExams": [
+                {
+                  "_id": "6015ba8d5fb74ddde0a42ad5",
+                  "examId": "6015ba8d5fb74ddde0a42ad1"
+                }
+              ],
+              "cqExams": [
+                {
+                  "_id": "6015a30c98e7b7af0f4d0f47",
+                  "examId": "6015bade5fb74ddde0a42ad6"
+                }
+              ],
+              "students": [
+                {
+                  "_id": "6015855a946f0c778c691c60",
+                  "student": "6015855a946f0c778c691c60"
+                }
+              ],
+              "__v": 4
+            }
+          },
+          {
+            "_id": "6015bec42f28dfe7375e365b",
+            "course": {
+              "department": {
+                "name": "CSE",
+                "id": "600c75f1059f3d6697f4e93b"
+              },
+              "varsity": {
+                "name": "SUST",
+                "id": "600c75f1059f3d6697f4e931"
+              },
+              "creationDate": "2021-01-26T13:15:47.213Z",
+              "_id": "60101629eab66d4434084582",
+              "name": "Algebra",
+              "code": "MAT101",
+              "mcqExams": [],
+              "cqExams": [],
+              "__v": 1,
+              "students": [
+                {
+                  "_id": "6015855a946f0c778c691c60"
+                }
+              ]
+            }
+          }
+        ],
+        "registered_at": "2021-01-30T16:12:10.919Z",
+        "__v": 10
+      },
+      "studentAnswers": [
+        {
+          "_id": "601eb79e4819f46540c3f469",
+          "cqQuestion": {
+            "creationTime": "2021-01-26T15:22:53.207Z",
+            "_id": "6010345675bad87bb49e330a",
+            "mainQuestion": "Describe Your Life in words!",
+            "time": 120,
+            "marks": 10,
+            "__v": 0
+          },
+          "studentAnswer": "Bal er ans dimu."
+        },
+        {
+          "_id": "601eb79e4819f46540c3f46a",
+          "cqQuestion": {
+            "creationTime": "2021-01-26T15:22:53.207Z",
+            "_id": "6010345675bad87bb49e330a",
+            "mainQuestion": "Describe Your Life in words!",
+            "time": 120,
+            "marks": 10,
+            "__v": 0
+          },
+          "studentAnswer": "Hoga mara shara!"
+        },
+        {
+          "_id": "601eb79e4819f46540c3f46b",
+          "cqQuestion": {
+            "creationTime": "2021-01-26T15:22:53.207Z",
+            "_id": "6010345675bad87bb49e330a",
+            "mainQuestion": "Describe Your Life in words!",
+            "time": 120,
+            "marks": 10,
+            "__v": 0
+          },
+          "studentAnswer": "Aaaah"
+        }
+      ],
+      "submitOn": "2021-02-06T15:37:02.475Z",
+      "__v": 0,
+      "mark": "10",
+      "examineBy": {
+        "_id": "6015b154a411b8ce8c103c23",
+        "role": "Teacher",
+        "email": "sania@@sust.edu",
+        "username": "shifat",
+        "password": "$2a$10$yjpavJYS7wl8zFv6GB6Teeh2nVHNnYVrcAh8IWk3JPgrClk1NFl2u",
+        "firstName": "Mazah",
+        "lastName": "Kafi",
+        "department": "600c75f1059f3d6697f4e93a",
+        "varsity": "600c75f1059f3d6697f4e931",
+        "designation": "Professor",
+        "courses": [
+          {
+            "_id": "6017d79c9f341b2d5f2893ae",
+            "course": "60158e6e5e798487dd0d985f"
+          }
+        ],
+        "registered_at": "2021-01-30T19:19:48.333Z",
+        "__v": 1
+      }
+    }
   }
 }
 ```
