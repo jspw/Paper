@@ -10,6 +10,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { Button } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Question() {
+export default function Question(props) {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -39,6 +40,15 @@ export default function Question() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  const handleQuestionAdd = (id) => {
+    props.addQuestion(id);
+  };
+
+  const sendQuestion = () => {
+    handleQuestionAdd(200);
+  };
+
   return (
     <Container fluid className="justify-content-flex-start">
       <Row className="justify-content-center">
@@ -46,9 +56,9 @@ export default function Question() {
           <h3>Create Your Question Here</h3>
         </Col>
       </Row>
-      <Row>
-        <Col xs={6}>
-          <form>
+      <form>
+        <Row>
+          <Col xs={6}>
             <Col lg={12}>
               <Row className="justify-content-flex-start">
                 <Col xs={12} md={6} lg={12}>
@@ -132,67 +142,86 @@ export default function Question() {
                 </Col>
               </Row>
             </Col>
-          </form>
-        </Col>
-        <Col>
-          <Row>
-            <FormControl component="fieldset" className={classes.textField}>
-              <FormLabel component="legend">Select Correct Ans</FormLabel>
-              <RadioGroup
-                aria-label="option"
-                name="opt"
-                value={value}
-                onChange={handleRadioChange}
-              >
-                <FormControlLabel value="optA" control={<Radio />} label="A" />
-                <FormControlLabel value="optB" control={<Radio />} label="B" />
-                <FormControlLabel value="optC" control={<Radio />} label="C" />
-                <FormControlLabel value="optD" control={<Radio />} label="D" />
-              </RadioGroup>
-            </FormControl>
-          </Row>
-          <Row>
-            <h6 className={classes.textField} >Time Limit</h6>
-          </Row>
-          <Row>
-            <Col xs="auto">
-              <div class="input-group">
-                {/* <label class="form-control" for="quantity">Minutes : </label> */}
-                {/* <FormLabel value="min"  /> */}
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Minutes </span>
+          </Col>
+          <Col>
+            <Row>
+              <FormControl component="fieldset" className={classes.textField}>
+                <FormLabel component="legend">Select Correct Ans</FormLabel>
+                <RadioGroup
+                  aria-label="option"
+                  name="opt"
+                  value={value}
+                  onChange={handleRadioChange}
+                >
+                  <FormControlLabel
+                    value="optA"
+                    control={<Radio />}
+                    label="A"
+                  />
+                  <FormControlLabel
+                    value="optB"
+                    control={<Radio />}
+                    label="B"
+                  />
+                  <FormControlLabel
+                    value="optC"
+                    control={<Radio />}
+                    label="C"
+                  />
+                  <FormControlLabel
+                    value="optD"
+                    control={<Radio />}
+                    label="D"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Row>
+            <Row>
+              <h6 className={classes.textField}>Time Limit</h6>
+            </Row>
+            <Row>
+              <Col xs="auto">
+                <div class="input-group">
+                  {/* <label class="form-control" for="quantity">Minutes : </label> */}
+                  {/* <FormLabel value="min"  /> */}
+
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="0"
+                    max="5"
+                    placeholder="00"
+                  />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">min</span>
+                  </div>
                 </div>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  min="0"
-                  max="5"
-                  placeholder="00"
-                />
-              </div>
-            </Col>
-            <Col xs="auto">
-              <div class="input-group">
-                {/* <label class="mr-sm-2" for="quantity">Seconds :</label> */}
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Seconds</span>
+              </Col>
+              <Col xs="auto">
+                <div class="input-group">
+                  {/* <label class="mr-sm-2" for="quantity">Seconds :</label> */}
+
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="0"
+                    max="59"
+                    placeh
+                    older="00"
+                  />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">sec</span>
+                  </div>
                 </div>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  min="0"
-                  max="59"
-                  placeholder="00"
-                />
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </form>
     </Container>
   );
 }
