@@ -10,7 +10,7 @@ import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
-import Exam from "../Components/Exam/Exam";
+// import Exam from "../Components/Exam/Exam";
 import PreviousExam from "../Components/PreviousExam/PreviousExam";
 import UpcomingExam from "../Components/UpcomingExam/UpcomingExam";
 
@@ -80,11 +80,11 @@ function App() {
               <Course universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
-          <Route
+{/*           <Route
             path="/exam/:id"
             exact
             render={() => <Exam userInfo={userInfo} />}
-          />
+          /> */}
           <Route
             path="/previous-exam/:id"
             exact
