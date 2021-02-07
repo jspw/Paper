@@ -16,6 +16,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { getRenderPropValue } from "antd/lib/_util/getRenderPropValue";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,18 +54,40 @@ export default function Question() {
   const classes = useStyles();
   const leftClasses = leftStyles();
 
+  
   const [values, setValues] = useState({
     description: "",
-    question: "",
-    optA: "",
-    optB: "",
-    optC: "",
-    optD: "",
-    ans: "A",
-    marks: "",
+    question: null,
+    optA: null,
+    optB: null,
+    optC: null,
+    optD: null,
+    ans: null,
+    marks: null,
     min: null,
     sec: null,
   });
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    if (
+      values.question &&
+      values.optA &&
+      values.optB &&
+      values.optc &&
+      values.optD &&
+      values.ans &&
+      values.marks &&
+      values.min &&
+      values.sec
+    ) {setOpen(true);}
+    else {setOpen(false); console.log(open)}
+  };
+  console.log(open)
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 /*   const [value, setValue] = React.useState("");
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -275,13 +302,49 @@ export default function Question() {
               color="primary"
               className={classes.button}
               startIcon={<LockIcon />}
-              type="submit"
+          
+              onClick={handleClickOpen}
             >
               Lock Exam
             </Button>
           </ButtonGroup>
         </Row>
       </form>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Lock This Exam</DialogTitle>
+        <DialogContent>
+          <TextField
+            id="datetime-local"
+            label="Exam Schedule"
+            type="datetime-local"
+            defaultValue="2021-05-01T10:30"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <DialogContentText>
+          <br />
+            Total Marks: 50
+            <br />
+            Total Time: 20mins
+            <br />
+            <br />
+            By clicking confirm this exam will be created as schedule.<br/><br/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
