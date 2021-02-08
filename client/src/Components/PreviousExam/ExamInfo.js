@@ -243,7 +243,7 @@ const ExamInfo = (props) => {
           </Row>
         </Col>
       </Row>
-      <Container className ="scroll">{mcq}</Container>
+      <Container className="scroll">{mcq}</Container>
     </Container>
   );
 };

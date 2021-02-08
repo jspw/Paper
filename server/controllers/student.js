@@ -11,6 +11,10 @@ const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 exports.getStudent = (req, res, next) => {
   StudentModel.findById(req.params.id)
+    .sort({
+      "courses.mcqExams.examId.date": 1,
+      "courses.cqExams.examId.date": 1,
+    })
     .then((student) => {
       let {
         role,

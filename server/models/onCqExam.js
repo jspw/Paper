@@ -32,6 +32,9 @@ const onCqExamSchema = new Schema({
   mark: {
     type: Number,
   },
+  feedback:{
+    type : String
+  },
   examineBy: {
     type: Schema.Types.ObjectId,
     ref: "Teacher",

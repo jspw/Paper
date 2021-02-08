@@ -40,6 +40,9 @@ const onMcqExamSchema = new Schema({
     type: Number,
     required: true,
   },
+  feedback:{
+    type : String
+  },
   submitOn: {
     type: Date,
     default: Date.now,
