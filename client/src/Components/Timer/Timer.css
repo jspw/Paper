@@ -1,6 +1,7 @@
 .timer-container {
-  margin-top: 2%;
-  margin-bottom: 4%;
+  /* margin-top: 2%; */
+  padding-top: 5%;
+ 
   display: flex;
   align-items: center;
   justify-content: center;

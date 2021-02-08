@@ -143,7 +143,7 @@ export default function Navigation(props) {
   return (
     <Navbar bg="" style={{ backgroundColor: "#010302" }} variant="dark">
       <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
-        <div>
+        <>
           <img
             src={"/static/paper.png"}
             width={"38"}
@@ -153,7 +153,7 @@ export default function Navigation(props) {
             alt={"logo"}
           />
           <span className="nav__heading" style={{fontSize:"122%"}}>paper</span>
-        </div>
+        </>
       </Navbar.Brand>
       {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
     </Navbar>
