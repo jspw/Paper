@@ -66,7 +66,7 @@ export default function Question(props) {
     marks: null,
     min: null,
     sec: null,
-    date: null,
+    date: Date.now(),
     name: null,
   });
   const [open, setOpen] = React.useState(false);
@@ -103,7 +103,7 @@ export default function Question(props) {
   };
 
   const handleChange = (prop) => (event) => {
-    console.log("Triggered",event.target.value);
+    console.log("Triggered", event.target.value);
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -389,7 +389,7 @@ export default function Question(props) {
             type="text"
             label="Exam Name"
             value={values.name}
-            onChange={handleChange('name')}
+            onChange={handleChange("name")}
             required={true}
             classes={classes.textField}
           />

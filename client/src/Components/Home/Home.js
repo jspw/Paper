@@ -33,18 +33,15 @@ export default function Home(props) {
     "Saturday",
   ];
 
-  const [timerDeadline, setTimerDeadLine] = useState(Date.now());
-
-  const reloadHandler = (event) => {
-    event.preventDefault();
-  };
-
   let courseUI;
   let upcomingExams = [];
   let upcomingExamsUI;
   let mostUpcomingExamUI;
   let previousExams = [];
   let previousExamsUI;
+  let ongoingExams = [];
+
+  const [timerDeadline, setTimerDeadLine] = useState(Date.now());
 
   if (props.userInfo) {
     if (props.userInfo.courses) {
@@ -68,22 +65,52 @@ export default function Home(props) {
     props.userInfo.courses.forEach((course, i) => {
       const date = new Date();
 
-      if (course.course.cqExams)
+      if (course.course.cqExams) {
         course.course.cqExams.forEach((exam, j) => {
           if (
             new Date(exam.examId.date).getTime() >
             date.getTime() + exam.examId.totalTime * 60
-          )
+          ) {
+            ongoingExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              date: new Date(exam.examId.date),
+            });
+          } else if (
+            new Date(exam.examId.date).getTime() >
+            date.getTime() + exam.examId.totalTime * 60
+          ) {
             upcomingExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
               date: new Date(exam.examId.date),
             });
+          } else
+            course.course.cqExams.forEach((exam, j) => {
+              if (new Date(exam.examId.date).getTime() < date.getTime()) {
+                previousExams.push({
+                  _id: exam.examId._id,
+                  name: exam.examId.name,
+                  date: new Date(exam.examId.date),
+                });
+              }
+            });
         });
+      }
 
-      if (course.course.mcqExams)
+      if (course.course.mcqExams) {
         course.course.mcqExams.forEach((exam, j) => {
           if (
+            new Date(exam.examId.date).getTime() > date.getTime() &&
+            new Date(exam.examId.date).getTime() <
+              date.getTime() + exam.examId.totalTime * 60
+          )
+            ongoingExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              date: new Date(exam.examId.date),
+            });
+          else if (
             new Date(exam.examId.date).getTime() >
             date.getTime() + exam.examId.totalTime * 60
           )
@@ -92,12 +119,30 @@ export default function Home(props) {
               name: exam.examId.name,
               date: new Date(exam.examId.date),
             });
+          else if (new Date(exam.examId.date).getTime() < date.getTime())
+            previousExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              date: new Date(exam.examId.date),
+            });
         });
+      }
     });
 
     upcomingExams.sort(function (a, b) {
       return a.date.getTime() - b.date.getTime();
     });
+    previousExams.sort(function (a, b) {
+      return a.date.getTime() - b.date.getTime();
+    });
+
+    ongoingExams.sort(function (a, b) {
+      return a.date.getTime() - b.date.getTime();
+    });
+
+    const reloadHandler = (event) => {
+      event.preventDefault();
+    };
 
     mostUpcomingExamUI = (
       <Grid key={upcomingExams[0]._id} container alignItems="flex-start">
@@ -126,7 +171,7 @@ export default function Home(props) {
         </Grid>
       </Grid>
     );
-    console.log(upcomingExams[0]);
+    // console.log(upcomingExams[0]);
 
     upcomingExamsUI = upcomingExams.map((ex, i) => {
       if (i != 0)
@@ -157,33 +202,29 @@ export default function Home(props) {
         );
     });
 
-    props.userInfo.courses.forEach((course, i) => {
-      const date = new Date();
+    // props.userInfo.courses.forEach((course, i) => {
+    //   const date = new Date();
 
-      if (course.course.cqExams)
-        course.course.cqExams.forEach((exam, j) => {
-          if (new Date(exam.examId.date).getTime() < date.getTime())
-            previousExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-        });
+    //   if (course.course.cqExams)
+    //     course.course.cqExams.forEach((exam, j) => {
+    //       if (new Date(exam.examId.date).getTime() < date.getTime())
+    //         previousExams.push({
+    //           _id: exam.examId._id,
+    //           name: exam.examId.name,
+    //           date: new Date(exam.examId.date),
+    //         });
+    //     });
 
-      if (course.course.mcqExams)
-        course.course.mcqExams.forEach((exam, j) => {
-          if (new Date(exam.examId.date).getTime() < date.getTime())
-            previousExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-        });
-    });
-
-    previousExams.sort(function (a, b) {
-      return a.date.getTime() - b.date.getTime();
-    });
+    //   if (course.course.mcqExams)
+    //     course.course.mcqExams.forEach((exam, j) => {
+    //       if (new Date(exam.examId.date).getTime() < date.getTime())
+    //         previousExams.push({
+    //           _id: exam.examId._id,
+    //           name: exam.examId.name,
+    //           date: new Date(exam.examId.date),
+    //         });
+    //     });
+    // });
 
     previousExamsUI = previousExams.map((ex, i) => {
       return (
