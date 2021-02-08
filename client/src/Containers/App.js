@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Navigation from "../Components/Navbar/Navbar";
-// import  MCQ  from "../Components/Exam/MCQs/MCQ/MCQ";
 import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
 import Home from "../Components/Home/Home";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
-// import Exam from "../Components/Exam/Exam";
+import Exam from "../Components/Exam/Exam";
+import LiveExam from "../Components/LiveExam/LiveExam";
 import PreviousExam from "../Components/PreviousExam/PreviousExam";
 import UpcomingExam from "../Components/UpcomingExam/UpcomingExam";
+import "./App.css";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -80,16 +80,15 @@ function App() {
               <Course universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
-{/*           <Route
+          <Route
             path="/exam/:id"
             exact
             render={() => <Exam userInfo={userInfo} />}
-          /> */}
+          />
           <Route
             path="/previous-exam/:id"
             exact
             render={() => (
-              // <Layout universityInfo={universityInfo} userInfo={userInfo} />
               <PreviousExam userInfo={userInfo} />
             )}
           />
@@ -97,11 +96,11 @@ function App() {
             path="/upcoming-exam/:id"
             exact
             render={() => (
-              // <Layout universityInfo={universityInfo} userInfo={userInfo} />
               <UpcomingExam userInfo={userInfo} />
             )}
           />
         </Switch>
+        {/* <LiveExam/> */}
       </div>
     </BrowserRouter>
   );
