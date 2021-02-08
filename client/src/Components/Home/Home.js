@@ -192,7 +192,7 @@ export default function Home(props) {
             <SubjectIcon />
           </Grid>
           <Grid item>
-            <Link to={`/prvious-exam/${ex._id}`}>
+            <Link to={`/previous-exam/${ex._id}`}>
               <p>
                 {ex.name} [
                 {new Date(ex.date).getHours() < 10
