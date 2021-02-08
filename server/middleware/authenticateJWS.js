@@ -38,6 +38,7 @@ module.exports = function (req, res, next) {
               TeacherModel.findById(user._id).then((teacher) => {
                 if (teacher) {
                   req.user = teacher;
+                  console.log(teacher);
                   next();
                 } else {
                   console.log("User not found! in Teacher DB");

@@ -37,11 +37,11 @@ router.route("/exam/:id").get(authenticateJWT, teacherController.getExam);
 router.route("/course/:id").get(authenticateJWT, teacherController.getCourse);
 
 router
-  .route("/exam/mcq/submits")
+  .route("/exam/mcq/submits/:id")
   .get(authenticateJWT, teacherController.getMcqSubmits);
 
 router
-  .route("/exam/cq/submits")
+  .route("/exam/cq/submits/:id")
   .get(authenticateJWT, teacherController.getCqSubmits);
 
 router

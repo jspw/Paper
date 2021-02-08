@@ -672,7 +672,8 @@ exports.getMcqSubmit = (req, res, next) => {
   })
     .then((result) => {
       console.log(result);
-      apiResponseInJson(res, 200, result);
+      if (result) apiResponseInJson(res, 200, result);
+      else errorHandler.validationError(res, 400, "No Mcq Exam Found");
     })
     .catch((error) => {
       console.log(error);
@@ -686,12 +687,11 @@ exports.getCqSubmit = (req, res, next) => {
     student: req.user._id,
   })
     .then((result) => {
-      console.log(result);
-      apiResponseInJson(res, 200, result);
+      if (result) apiResponseInJson(res, 200, result);
+      else errorHandler.validationError(res, 400, "No Cq Exam Found");
     })
     .catch((error) => {
       console.log(error);
       errorHandler.validationError(res, 400, error);
     });
 };
-

@@ -491,6 +491,7 @@ exports.postCreateCourse = (req, res, next) => {
 
 exports.postCreateMcqQuestion = (req, res, next) => {
   if (req.user.role == "Teacher") {
+    console.log(req.body);
     const mcqQuestionModel = new McqQuestionModel(req.body);
     mcqQuestionModel
       .save()
@@ -500,9 +501,11 @@ exports.postCreateMcqQuestion = (req, res, next) => {
         apiResponseInJson(res, 201, mcqQuestion);
       })
       .catch((error) => {
-        errorHandler.validationError(res, 401, error);
+        console.log(error);
+        errorHandler.validationError(res, 400, error);
       });
   } else {
+    console.log(error);
     errorHandler.unauthorizedAccess(res);
   }
 };
@@ -640,12 +643,12 @@ exports.getCourse = (req, res, next) => {
         //   exam.examId.cqQuestions = undefined;
         // });
 
-        course.createdBy.courses = undefined;
+        // course.createdBy.courses = undefined;
 
-        course.students.forEach((student) => {
-          student.student.varsity = undefined;
-          student.student.courses = undefined;
-        });
+        // course.students.forEach((student) => {
+        //   student.student.varsity = undefined;
+        //   student.student.courses = undefined;
+        // });
 
         apiResponseInJson(res, 200, course);
       } else errorHandler.validationError(res, 400, "No Course Found");
@@ -659,10 +662,13 @@ exports.getCourse = (req, res, next) => {
 exports.getMcqSubmits = (req, res, next) => {
   console.log(req.user.role);
   if (req.user.role === "Teacher") {
-    OnMcqExamModel.find()
+    OnMcqExamModel.find({
+      mcqExam: req.params.id,
+    })
       .then((result) => {
         console.log(result);
-        apiResponseInJson(res, 200, result);
+        if (result.length > 0) apiResponseInJson(res, 200, result);
+        else errorHandler.validationError(res, 400, "No Mcq Exam Found");
       })
       .catch((error) => {
         console.log(error);
@@ -674,10 +680,12 @@ exports.getMcqSubmits = (req, res, next) => {
 exports.getCqSubmits = (req, res, next) => {
   console.log(req.user.role);
   if (req.user.role === "Teacher") {
-    OnCqExamModel.find()
+    OnCqExamModel.find({
+      cqExam: req.params.id,
+    })
       .then((result) => {
-        console.log(result);
-        apiResponseInJson(res, 200, result);
+        if (result.length > 0) apiResponseInJson(res, 200, result);
+        else errorHandler.validationError(res, 400, "No Cq Exam Found");
       })
       .catch((error) => {
         console.log(error);
@@ -691,7 +699,6 @@ exports.postCqExamine = (req, res, next) => {
     console.log(req.body.mark);
 
     OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
-
       console.log(onCqExamModel);
 
       onCqExamModel.mark = req.body.mark;

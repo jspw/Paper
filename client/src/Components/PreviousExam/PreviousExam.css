@@ -1,0 +1,24 @@
+.crown {
+  animation: mymove 2s infinite;
+}
+
+@keyframes mymove {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll-off{
+    /* overflow-y: hidden; */
+}
+
+div.scroll {
+  /* margin:4px, 4px;  */
+  /* padding:4px;  */
+  /* background-color: green;  */
+  /* width: 500px;  */
+  /* height: 110px;  */
+  /* overflow-x: hidden;  */
+  /* overflow: auto; */
+  /* max-height: 100vh; */
+}

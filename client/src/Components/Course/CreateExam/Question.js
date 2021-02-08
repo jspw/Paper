@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import SaveIcon from "@material-ui/icons/Save";
+import EditIcon from "@material-ui/icons/Edit";
 import Grid from "@material-ui/core/Grid";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,7 +13,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { Button } from "react-bootstrap";
+import { getRenderPropValue } from "antd/lib/_util/getRenderPropValue";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -21,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     width: "100%",
   },
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: "#3F7CAC",
+  },
 }));
 
 export default function Question(props) {
@@ -29,25 +37,71 @@ export default function Question(props) {
   const [values, setValues] = useState({
     description: "",
     question: "",
-    error: "",
-    option: "",
+    optA: "",
+    optB: "",
+    optC: "",
+    optD: "",
+    ans: "A",
+    marks: "",
+    min: 1,
+    sec: 0,
   });
-  const [value, setValue] = React.useState("");
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
   const handleQuestionAdd = (id) => {
-    props.addQuestion(id);
+    props.onAdd(id);
   };
 
-  const sendQuestion = () => {
-    handleQuestionAdd(200);
-  };
+  function sendQuestion(e) {
+
+    e.preventDefault();
+
+    console.log("Form Values ", values);
+
+    axios({
+      method: "POST",
+      url: "teacher/question/mcq/create",
+
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify({
+        description: values.description,
+        mainQuestion: values.question,
+        options: [
+          {
+            option: values.optA,
+          },
+          {
+            option: values.optB,
+          },
+          {
+            option: values.optC,
+          },
+          {
+            option: values.optD,
+          },
+        ],
+        correctAnswers: [
+          {
+            answer: values.ans,
+          },
+        ],
+        time: parseInt(values.min, 10) * 60 + parseInt(values.sec, 10),
+        marks: parseInt(values.marks, 10),
+      }),
+    })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "OK") {
+          handleQuestionAdd(response.data.result.data._id);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <Container fluid className="justify-content-flex-start">
@@ -56,7 +110,7 @@ export default function Question(props) {
           <h3>Create Your Question Here</h3>
         </Col>
       </Row>
-      <form>
+      <form onSubmit={sendQuestion}>
         <Row>
           <Col xs={6}>
             <Col lg={12}>
@@ -67,7 +121,7 @@ export default function Question(props) {
                     type="textField"
                     label="Description"
                     labelWidth={80}
-                    values={values.email}
+                    values={values.description}
                     handleChange={handleChange}
                     rows={4}
                     classes={classes}
@@ -81,7 +135,7 @@ export default function Question(props) {
                     type="textField"
                     label="Question"
                     labelWidth={75}
-                    values={values.email}
+                    values={values.question}
                     handleChange={handleChange}
                     required={true}
                     rows={3}
@@ -96,7 +150,7 @@ export default function Question(props) {
                     type="text"
                     label="Option A"
                     labelWidth={75}
-                    values={values.email}
+                    values={values.optA}
                     handleChange={handleChange}
                     required={true}
                     classes={classes}
@@ -108,7 +162,7 @@ export default function Question(props) {
                     type="text"
                     label="Option B"
                     labelWidth={75}
-                    values={values.email}
+                    values={values.optB}
                     handleChange={handleChange}
                     required={true}
                     classes={classes}
@@ -122,7 +176,7 @@ export default function Question(props) {
                     type="text"
                     label="Option C"
                     labelWidth={75}
-                    values={values.email}
+                    values={values.optC}
                     handleChange={handleChange}
                     required={true}
                     classes={classes}
@@ -134,7 +188,7 @@ export default function Question(props) {
                     type="text"
                     label="Option D"
                     labelWidth={75}
-                    values={values.email}
+                    values={values.optD}
                     handleChange={handleChange}
                     required={true}
                     classes={classes}
@@ -144,74 +198,74 @@ export default function Question(props) {
             </Col>
           </Col>
           <Col>
-            <Row>
-              <FormControl component="fieldset" className={classes.textField}>
-                <FormLabel component="legend">Select Correct Ans</FormLabel>
-                <RadioGroup
-                  aria-label="option"
-                  name="opt"
-                  value={value}
-                  onChange={handleRadioChange}
-                >
-                  <FormControlLabel
-                    value="optA"
-                    control={<Radio />}
-                    label="A"
-                  />
-                  <FormControlLabel
-                    value="optB"
-                    control={<Radio />}
-                    label="B"
-                  />
-                  <FormControlLabel
-                    value="optC"
-                    control={<Radio />}
-                    label="C"
-                  />
-                  <FormControlLabel
-                    value="optD"
-                    control={<Radio />}
-                    label="D"
-                  />
-                </RadioGroup>
-              </FormControl>
+            <Row className="justify-content-flex-start">
+              <Col>
+                <FormControl component="fieldset" className={classes.textField}>
+                  <FormLabel component="legend">Select Correct Ans</FormLabel>
+                  <RadioGroup
+                    aria-label="ans"
+                    name="ans"
+                    value={values.ans}
+                    onChange={handleChange("ans")}
+                  >
+                    <FormControlLabel value="A" control={<Radio />} label="A" />
+                    <FormControlLabel value="B" control={<Radio />} label="B" />
+                    <FormControlLabel value="C" control={<Radio />} label="C" />
+                    <FormControlLabel value="D" control={<Radio />} label="D" />
+                  </RadioGroup>
+                </FormControl>
+              </Col>
             </Row>
             <Row>
-              <h6 className={classes.textField}>Time Limit</h6>
+              <Col xs={6}>
+                <Forms
+                  id="marks"
+                  type="number"
+                  label="Marks"
+                  labelWidth={60}
+                  values={values.marks}
+                  handleChange={handleChange}
+                  required={true}
+                  classes={classes}
+                />
+              </Col>
             </Row>
-            <Row>
-              <Col xs="auto">
+            <Row className="justify-content-flex-start">
+              <Col>
+                <FormLabel component="legend">Time Limit</FormLabel>
+              </Col>
+            </Row>
+            <Row className="justify-content-flex-start">
+              <Col xs={4}>
                 <div class="input-group">
-                  {/* <label class="form-control" for="quantity">Minutes : </label> */}
-                  {/* <FormLabel value="min"  /> */}
-
                   <input
                     class="form-control"
                     type="number"
-                    id="quantity"
-                    name="quantity"
+                    id="min"
+                    name="min"
                     min="0"
                     max="5"
                     placeholder="00"
+                    value={values.min}
+                    onChange={handleChange("min")}
                   />
                   <div class="input-group-prepend">
                     <span class="input-group-text">min</span>
                   </div>
                 </div>
               </Col>
-              <Col xs="auto">
+              <Col xs={4}>
                 <div class="input-group">
-                  {/* <label class="mr-sm-2" for="quantity">Seconds :</label> */}
-
                   <input
                     class="form-control"
                     type="number"
-                    id="quantity"
-                    name="quantity"
+                    id="sec"
+                    name="sec"
                     min="0"
                     max="59"
-                    placeh
-                    older="00"
+                    placeholder="00"
+                    value={values.sec}
+                    onChange={handleChange("sec")}
                   />
                   <div class="input-group-prepend">
                     <span class="input-group-text">sec</span>
@@ -219,6 +273,30 @@ export default function Question(props) {
                 </div>
               </Col>
             </Row>
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          <Col xs="auto">
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              startIcon={<EditIcon />}
+            >
+              Edit
+            </Button>
+          </Col>
+          <Col xs="auto">
+            <Button
+              // onClick={sendQuestion}
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              startIcon={<SaveIcon />}
+              type="submit"
+            >
+              Save
+            </Button>
           </Col>
         </Row>
       </form>

@@ -1306,7 +1306,7 @@ Response :
 
 #### MCQ Exam Submits
 
-Request: `RESTRICTED (teacher)` `GET` `/teacher/exam/mcq/submits`
+Request: `RESTRICTED (teacher)` `GET` `/teacher/exam/mcq/submits/examID`
 
 Response :
 
@@ -1745,7 +1745,7 @@ Response :
 
 #### CQ Exam Submits
 
-Request: `RESTRICTED (teacher)` `GET` `/teacher/exam/cq/submits`
+Request: `RESTRICTED (teacher)` `GET` `/teacher/exam/cq/submits/:examID`
 
 Response :
 

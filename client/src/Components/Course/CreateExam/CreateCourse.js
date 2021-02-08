@@ -12,7 +12,7 @@ export default class CreateCourse extends React.Component {
 
   addQuestion = (id) => {
     this.questionIDs.push(id);
-    console.log("bal !", id);
+    console.log("mcq Question Id !",id);
   };
 
   initialPanes = [
@@ -43,7 +43,7 @@ export default class CreateCourse extends React.Component {
     const newPanes = [...panes];
     newPanes.push({
       title: `Question ${this.quesNo++}`,
-      content: <Question onAdd={this.addQuestions} />,
+      content: <Question onAdd={this.addQuestion} />,
       key: activeKey,
     });
     this.setState({
