@@ -597,9 +597,11 @@ exports.postCreateMcqExam = (req, res, next) => {
           });
       })
       .catch((error) => {
+        console.log("Course find", error);
         errorHandler.validationError(res, 401, error);
       });
   } else {
+    console.log("Course find", error);
     errorHandler.unauthorizedAccess(res);
   }
 };
@@ -665,6 +667,7 @@ exports.getMcqSubmits = (req, res, next) => {
     OnMcqExamModel.find({
       mcqExam: req.params.id,
     })
+      .sort("mark")
       .then((result) => {
         console.log(result);
         if (result.length > 0) apiResponseInJson(res, 200, result);
