@@ -143,45 +143,74 @@ export default function Home(props) {
     const reloadHandler = (event) => {
       event.preventDefault();
     };
-
-    mostUpcomingExamUI = (
-      <Grid key={upcomingExams[0]._id} container alignItems="flex-start">
-        <Grid item>
-          <SubjectIcon />
-        </Grid>
-        <Grid item>
-          <Link to={`/upcoming-exam/${upcomingExams[0]._id}`}>
-            <p>
+    if (upcomingExams)
+      mostUpcomingExamUI = (
+        <Grid key={upcomingExams[0]._id} container alignItems="flex-start">
+          <Grid item>
+            <SubjectIcon />
+          </Grid>
+          <Grid item>
+            <Link to={`/upcoming-exam/${upcomingExams[0]._id}`}>
               <p>
-                {upcomingExams[0].name} [
-                {new Date(upcomingExams[0].date).getHours() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getHours()
-                  : new Date(upcomingExams[0].date).getHours()}
-                :
-                {new Date(upcomingExams[0].date).getMinutes() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getMinutes()
-                  : new Date(upcomingExams[0].date).getMinutes()}{" "}
-                {new Date(upcomingExams[0].date).getDate()}
-                th {months[new Date(upcomingExams[0].date).getMonth()]},
-                {new Date(upcomingExams[0].date).getFullYear()} (
-                {days[new Date(upcomingExams[0].date).getDay()]}) ]
+                <p>
+                  {upcomingExams[0].name} [
+                  {new Date(upcomingExams[0].date).getHours() < 10
+                    ? "0" + new Date(upcomingExams[0].date).getHours()
+                    : new Date(upcomingExams[0].date).getHours()}
+                  :
+                  {new Date(upcomingExams[0].date).getMinutes() < 10
+                    ? "0" + new Date(upcomingExams[0].date).getMinutes()
+                    : new Date(upcomingExams[0].date).getMinutes()}{" "}
+                  {new Date(upcomingExams[0].date).getDate()}
+                  th {months[new Date(upcomingExams[0].date).getMonth()]},
+                  {new Date(upcomingExams[0].date).getFullYear()} (
+                  {days[new Date(upcomingExams[0].date).getDay()]}) ]
+                </p>
               </p>
-            </p>
-          </Link>
+            </Link>
+          </Grid>
         </Grid>
-      </Grid>
-    );
+      );
     // console.log(upcomingExams[0]);
+    if (upcomingExams)
+      upcomingExamsUI = upcomingExams.map((ex, i) => {
+        if (i != 0)
+          return (
+            <Grid key={ex._id} container alignItems="flex-start">
+              <Grid item>
+                <SubjectIcon />
+              </Grid>
+              <Grid item>
+                <Link to={`/upcoming-exam/${ex._id}`}>
+                  <p>
+                    {ex.name} [
+                    {new Date(ex.date).getHours() < 10
+                      ? "0" + new Date(ex.date).getHours()
+                      : new Date(ex.date).getHours()}
+                    :
+                    {new Date(ex.date).getMinutes() < 10
+                      ? "0" + new Date(ex.date).getMinutes()
+                      : new Date(ex.date).getMinutes()}{" "}
+                    {new Date(ex.date).getDate()}
+                    th {months[new Date(ex.date).getMonth()]},
+                    {new Date(ex.date).getFullYear()} (
+                    {days[new Date(ex.date).getDay()]}) ]
+                  </p>
+                </Link>
+              </Grid>
+            </Grid>
+          );
+      });
 
-    upcomingExamsUI = upcomingExams.map((ex, i) => {
-      if (i != 0)
+    if (previousExams)
+      previousExamsUI = previousExams.map((ex, i) => {
         return (
           <Grid key={ex._id} container alignItems="flex-start">
             <Grid item>
               <SubjectIcon />
             </Grid>
             <Grid item>
-              <Link to={`/upcoming-exam/${ex._id}`}>
+              <Link to={`/previous-exam/${ex._id}`}>
                 <p>
                   {ex.name} [
                   {new Date(ex.date).getHours() < 10
@@ -200,59 +229,7 @@ export default function Home(props) {
             </Grid>
           </Grid>
         );
-    });
-
-    // props.userInfo.courses.forEach((course, i) => {
-    //   const date = new Date();
-
-    //   if (course.course.cqExams)
-    //     course.course.cqExams.forEach((exam, j) => {
-    //       if (new Date(exam.examId.date).getTime() < date.getTime())
-    //         previousExams.push({
-    //           _id: exam.examId._id,
-    //           name: exam.examId.name,
-    //           date: new Date(exam.examId.date),
-    //         });
-    //     });
-
-    //   if (course.course.mcqExams)
-    //     course.course.mcqExams.forEach((exam, j) => {
-    //       if (new Date(exam.examId.date).getTime() < date.getTime())
-    //         previousExams.push({
-    //           _id: exam.examId._id,
-    //           name: exam.examId.name,
-    //           date: new Date(exam.examId.date),
-    //         });
-    //     });
-    // });
-
-    previousExamsUI = previousExams.map((ex, i) => {
-      return (
-        <Grid key={ex._id} container alignItems="flex-start">
-          <Grid item>
-            <SubjectIcon />
-          </Grid>
-          <Grid item>
-            <Link to={`/previous-exam/${ex._id}`}>
-              <p>
-                {ex.name} [
-                {new Date(ex.date).getHours() < 10
-                  ? "0" + new Date(ex.date).getHours()
-                  : new Date(ex.date).getHours()}
-                :
-                {new Date(ex.date).getMinutes() < 10
-                  ? "0" + new Date(ex.date).getMinutes()
-                  : new Date(ex.date).getMinutes()}{" "}
-                {new Date(ex.date).getDate()}
-                th {months[new Date(ex.date).getMonth()]},
-                {new Date(ex.date).getFullYear()} (
-                {days[new Date(ex.date).getDay()]}) ]
-              </p>
-            </Link>
-          </Grid>
-        </Grid>
-      );
-    });
+      });
   }
   if (props.userInfo)
     return (
