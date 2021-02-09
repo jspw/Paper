@@ -7,13 +7,67 @@ import SubjectIcon from "@material-ui/icons/Subject";
 import { HiClipboard } from "react-icons/hi";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
 import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
 // import Link from "@material-ui/core/Link";
 import Timer from "../Timer/Timer";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import LinearIndeterminate from "../Generic/Loader";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Forms from "../Generic/Forms";
+import { makeStyles } from "@material-ui/core/styles";
 import "./Home.scss";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  margin: {
+    // margin: theme.spacing(1),
+  },
+  textField: {
+    // width: "15vw",
+    // margin: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginTop: theme.spacing(2),
+  },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+  shadows: ["none"],
+}));
+
 export default function Home(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const classes = useStyles();
+
+  const [values, setValues] = useState({
+    courseName: "",
+    courseCode: "",
+    university: "",
+    department: "",
+  });
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
   var months = [
     "January",
     "February",
@@ -57,8 +111,7 @@ export default function Home(props) {
           <Grid
             key={k}
             container
-            alignItems="flex-start"
-            xs
+            alignitems="flex-start"
             className="sideExams"
           >
             <Grid item>
@@ -186,7 +239,7 @@ export default function Home(props) {
       ${new Date(upcomingExams[0].date).getFullYear()}`;
 
       mostUpcomingExamUI = (
-        <Container fluid key={upcomingExams[0]._id} alignItems="flex-start">
+        <Container fluid key={upcomingExams[0]._id} alignitems="flex-start">
           <Row className="examHeading d-flex justify-content-between">
             <Col xs="auto">
               <span className="examName">
@@ -225,7 +278,7 @@ export default function Home(props) {
             <Container
               fluid
               key={ex._id}
-              alignItems="flex-start"
+              alignitems="flex-start"
               className="upcoming__next"
             >
               {/*               <Grid item>
@@ -265,8 +318,7 @@ export default function Home(props) {
           <Grid
             key={ex._id}
             container
-            alignItems="flex-start"
-            xs
+            alignitems="flex-start"
             className="sideExams"
           >
             <Grid item>
@@ -280,7 +332,7 @@ export default function Home(props) {
                 <span>{ex.name}</span>
               </Link>
             </Grid>
-            <Grid item xs={4.5}>
+            <Grid item >
               <p>
                 {new Date(ex.date).getHours() < 10
                   ? "0" + new Date(ex.date).getHours()
@@ -298,23 +350,94 @@ export default function Home(props) {
         );
       });
   }
-  if (props.userInfo)
+  if (props.userInfo){
+    const role = props.userInfo.role;
+    // console.log(role)
     return (
       <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm md  className="side" style={{ float: "left" }}>
-            <Grid container justify="space-between" alignItems="flex-start">
+          <Grid item xs={12} sm md className="side" style={{ float: "left" }}>
+            <Grid container justify="space-between">
               <Grid item>
                 <h5>My Courses</h5>
               </Grid>
+              {role !== "Student" ? (
+                <Grid item>
+                  <Button
+                    color="default"
+                    startIcon={<AddIcon />}
+                    onClick={handleClickOpen}
+                  >
+                    Create Course
+                  </Button>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                  >
+                    <DialogTitle id="form-dialog-title">
+                      Create New Course
+                    </DialogTitle>
+                    <DialogContent>
+                      <Forms
+                        id="university"
+                        type="select"
+                        label="University"
+                        labelWidth={117}
+                        classes={classes}
+                        values={values.university}
+                        handleChange={handleChange}
+                      />
+                      <Forms
+                        selectedUniversity={values.university}
+                        id="department"
+                        type="select"
+                        label="Department"
+                        labelWidth={117}
+                        classes={classes}
+                        values={values.department}
+                        handleChange={handleChange}
+                      />
+                      <Forms
+                        id="courseName"
+                        type="text"
+                        label="Course Name"
+                        labelWidth={78}
+                        classes={classes}
+                        values={values.firstName}
+                        handleChange={handleChange}
+                        required={false}
+                      />
+                      <Forms
+                        id="courseCode"
+                        type="text"
+                        label="Course Code"
+                        labelWidth={78}
+                        classes={classes}
+                        values={values.firstName}
+                        handleChange={handleChange}
+                        required={false}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="default">
+                        Cancel
+                      </Button>
+                      <Button onClick={handleClose} color="primary">
+                        Create
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </Grid>
+              ) : null}
             </Grid>
             <Grid item>
               <hr />
             </Grid>
-            <div>{courseUI}</div>
+            {courseUI}
           </Grid>
           <Grid item xs={12} sm md={5} className="upcoming">
-            <Grid container justify="space-between" alignItems="flex-start">
+            <Grid container justify="space-between" alignitems="flex-start">
               <Grid item>
                 <h5>Upcoming Exams</h5>
               </Grid>
@@ -334,7 +457,7 @@ export default function Home(props) {
             <div>{upcomingExamsUI}</div>
           </Grid>
           <Grid item xs={12} sm md className="side">
-            <Grid container justify="space-between" alignItems="flex-start">
+            <Grid container justify="space-between" alignitems="flex-start">
               <Grid item>
                 <h5>Previous Exams</h5>
               </Grid>
@@ -347,5 +470,6 @@ export default function Home(props) {
         </Grid>
       </Container>
     );
+  }
   else return <LinearIndeterminate />;
 }

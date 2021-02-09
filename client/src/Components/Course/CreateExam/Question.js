@@ -382,7 +382,20 @@ export default function Question(props) {
               classes={classes}
             />
           </Col>
-          <Col xs={4}>
+        </Row>
+        <Row>
+          <Col xs={12} sm={12} md={4}>
+            <TextField
+              type="number"
+              label="Marks"
+              variant="outlined"
+              value={values.marks}
+              onChange={handleChange("marks")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+          <Col xs={12} sm={6} md={4}>
             <TextField
               id="min"
               type="number"
@@ -395,18 +408,7 @@ export default function Question(props) {
               required
             />
           </Col>
-          <Col xs={4}>
-            <TextField
-              type="number"
-              label="Marks"
-              variant="outlined"
-              value={values.marks}
-              onChange={handleChange("marks")}
-              className={classes.textField}
-              required
-            />
-          </Col>
-          <Col xs={4}>
+          <Col xs={12} sm={6} md={4}>
             <TextField
               id="sec"
               min="0"
@@ -447,7 +449,7 @@ export default function Question(props) {
         </Col>
       </Row>
       <form onSubmit={sendQuestion}>
-        {props.examType === "cq" ? cq : mcq}
+        {cq}
         <Row className="justify-content-center">
           <ButtonGroup size="large" color="primary">
             <Button

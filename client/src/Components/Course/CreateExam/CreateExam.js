@@ -86,17 +86,17 @@ export default class CreateCourse extends React.Component {
       title: "Question 1",
       content: (
         <Question
-          onAdd={this.addQuestion}
-          createExam={this.createExam}
-          totalMarks={this.totalMarks}
-          totalTime={this.totalTime}
-          examType={this.state.examType}
+        onAdd={this.addQuestion}
+        createExam={this.createExam}
+        totalMarks={this.totalMarks}
+        totalTime={this.totalTime}
+        // examType={this.state.examType}
         />
-      ),
-      key: "1",
-      closable: false,
-    },
-  ];
+        ),
+        key: "1",
+        closable: false,
+      },
+    ];
 
   state = {
     activeKey: this.initialPanes[0].key,
@@ -179,7 +179,7 @@ export default class CreateCourse extends React.Component {
           <Row>
             <Col>
               <Row>
-                <Col xs={12}>
+                <Col xs={12} md={12}>
                   <h3>Create Exam</h3>
                 </Col>
               </Row>
@@ -207,8 +207,8 @@ export default class CreateCourse extends React.Component {
               </Row>
               <form onSubmit={this.handleSubmit}>
                 <Row>
-                  <Col xs={12}>
-                    <FormControl style={{ minWidth: "13%" }} required>
+                  <Col xs={12} md={12}>
+                    <FormControl style={{ minWidth: "10rem" }} required>
                       <InputLabel id="examType">Exam Type</InputLabel>
                       <Select
                         id="examType"
@@ -223,7 +223,7 @@ export default class CreateCourse extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={{ span: 2, offset: 5 }}>
+                  <Col xs={12} lg={{ span: 2, offset: 5 }} style={{ marginTop: "2rem" }}>
                     <Button variant="outlined" color="primary" type="submit">
                       Create Exam
                     </Button>
