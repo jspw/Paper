@@ -4,6 +4,16 @@ import { Tabs } from "antd";
 import Question from "./Question";
 import axios from "axios";
 import { Toast } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Forms from "../../Generic/Forms";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import './CreateExam.scss';
 
 const { TabPane } = Tabs;
@@ -14,7 +24,11 @@ export default class CreateCourse extends React.Component {
   quesNo = 2;
   totalMarks = 0;
   totalTime = 0;
-
+  handleChange = (event) => {
+    this.setState({
+      examType: event.target.value,
+    })
+  }
   addQuestion = (id, marks, time) => {
     this.setState({
       showToast: true,
@@ -80,6 +94,7 @@ export default class CreateCourse extends React.Component {
           createExam={this.createExam}
           totalMarks={this.totalMarks}
           totalTime={this.totalTime}
+          examType={this.examType}
         />
       ),
       key: "1",
@@ -92,8 +107,13 @@ export default class CreateCourse extends React.Component {
     panes: this.initialPanes,
     showToast: false,
     examCreateMessage: null,
+    create: true,
   };
-
+  handleSubmit = () => {
+    this.setState({
+      create: false,
+    })
+  }
   onChange = (activeKey) => {
     this.setState({ activeKey });
   };
@@ -150,37 +170,102 @@ export default class CreateCourse extends React.Component {
   render() {
     const { panes, activeKey } = this.state;
     return (
-      <>
-        <Toast
-          autohide
-          className="toast-modify"
-          onClose={() => this.setState({ showToast: false })}
-          show={this.state.showToast}
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
-              alt=""
-            />
-            <strong className="mr-auto">Create Message</strong>
-            <small>just now</small>
-          </Toast.Header>
-          <Toast.Body>{this.state.examCreateMessage}</Toast.Body>
-        </Toast>
-        <Tabs
-          type="editable-card"
-          onChange={this.onChange}
-          activeKey={activeKey}
-          onEdit={this.onEdit}
-        >
-          {panes.map((pane) => (
-            <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-              {pane.content}
-            </TabPane>
-          ))}
-        </Tabs>
-      </>
+      <Container fluid className="justify-content-center">
+        {this.state.create ? (
+          <Row>
+            <Col>
+              <Row>
+                <Col xs={12}>
+                  <h3>Create Exam</h3>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h4>Instructions</h4>
+                  <ul>
+                    <li>
+                      Select exam type from below form and then click Create
+                      Exam to proceed.
+                    </li>
+                    <li>You can create as many queston as you like.</li>
+                    <li>
+                      For every queston you have to set a specific time limit
+                      for your student to answer that question.
+                    </li>
+                    <li>Also you have to specify marks for every question.</li>
+                    <li>When your question set is ready click Lock Exam.</li>
+                    <li>
+                      Then you'll need to give your exam a name and a start
+                      schedule.
+                    </li>
+                  </ul>
+                </Col>
+              </Row>
+              <form onSubmit={this.handleSubmit}>
+                <Row>
+                  <Col xs={12}>
+                    <FormControl style={{ minWidth: "13%" }} required>
+                      <InputLabel id="examType">Exam Type</InputLabel>
+                      <Select
+                        id="examType"
+                        value={this.examType}
+                        onChange={this.handleChange}
+                      >
+                        <MenuItem disabled>Exam Type</MenuItem>
+                        <MenuItem value="mcq">MCQ</MenuItem>
+                        <MenuItem value="CQ">CQ</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={{ span: 2, offset: 5 }}>
+                    <Button variant="outlined" color="primary" type="submit">
+                      Create Exam
+                    </Button>
+                  </Col>
+                </Row>
+              </form>
+            </Col>
+          </Row>
+        ) : (
+          <>
+            <Toast
+              autohide
+              className="toast-modify"
+              onClose={() => this.setState({ showToast: false })}
+              show={this.state.showToast}
+            >
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded mr-2"
+                  alt=""
+                />
+                <strong className="mr-auto">Create Message</strong>
+                <small>just now</small>
+              </Toast.Header>
+              <Toast.Body>{this.state.examCreateMessage}</Toast.Body>
+            </Toast>
+            <Tabs
+              type="editable-card"
+              onChange={this.onChange}
+              activeKey={activeKey}
+              onEdit={this.onEdit}
+            >
+              {panes.map((pane) => (
+                <TabPane
+                  tab={pane.title}
+                  key={pane.key}
+                  closable={pane.closable}
+                >
+                  {pane.content}
+                </TabPane>
+              ))}
+            </Tabs>
+          </>
+        )}
+      </Container>
     );
   }
 }

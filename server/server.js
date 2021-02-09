@@ -37,7 +37,25 @@ mongoose
       origin: ["*"],
     });
 
-    examController(io);
+    io.on("connection", (socket) => {
+      console.log("New client Connected!");
+      const ip = socket.handshake.headers || socket.conn.remoteAddress;
+      console.log(ip);
+      console.log("Socket ID : ", socket.id);
+
+      app.use((req, res, next) => {
+        res.socket = socket;
+        next();
+      });
+
+      socket.on("disconnect", (reason) => {
+        console.log("Client Disconnected!");
+        console.log("Reason", reason);
+        clearInterval(interval);
+      });
+    });
+
+    // examController(io);
     // notificationController(io);
 
     server.listen(PORT, () => {

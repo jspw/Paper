@@ -6,7 +6,8 @@ const mcqExamSchema = new Schema({
   course: {
     type: Schema.Types.ObjectId,
     ref: "Course",
-    required:true
+    required:true,
+    autopopulate: { maxDepth: 1 },
   },
   name: {
     type: String,

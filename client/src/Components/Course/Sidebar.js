@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoCreate } from "react-icons/io5";
 import { IoClipboard } from "react-icons/io5";
 import { FaAngleDoubleRight } from "react-icons/fa";
@@ -65,25 +65,25 @@ export default function Sidebar(props) {
 
     return (
       <>
-        <aside className={sidebar ? "sidebar active" : "sidebar"}>
+        <div className={sidebar ? "sidebar active" : "sidebar"}>
           <ul className="sidebar__nav">
             <li className="sidebar__logo">
               <Row>
-                <Link className="sidebar__item__link" onClick={showSidebar}>
+                <span className="sidebar__item__link" onClick={showSidebar}>
                   <Col xs={4} className="sidebar__item__text">
                     {props.courseData.code}
                   </Col>
                   <Col xs={sidebar ? { span: 4, offset: 2 } : {}}>
                     <FaAngleDoubleRight className="sidebar__item__icon" />
                   </Col>
-                </Link>
+                </span>
               </Row>
             </li>
             <li className="sidebar__item">
-              <Link className="sidebar__item__link">
+              <a href="#create-exam" activeclassname="is-active" className="sidebar__item__link">
                 <IoCreate className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Create Exam</span>
-              </Link>
+              </a>
             </li>
             <li className="sidebar__item">
               <Link className="sidebar__item__link">
@@ -110,7 +110,7 @@ export default function Sidebar(props) {
               </Link>
             </li>
           </ul>
-        </aside>
+        </div>
         <div className={sidebar ? "content__small" : "content__large"}>
           <CreateExam  courseData={props.courseData} />
         </div>

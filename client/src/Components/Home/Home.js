@@ -82,34 +82,51 @@ export default function Home(props) {
 
       if (course.course.cqExams) {
         course.course.cqExams.forEach((exam, j) => {
+          // if (
+          //   new Date(exam.examId.date).getTime() >
+          //   date.getTime() + exam.examId.totalTime * 60
+          // ) {
+          //   ongoingExams.push({
+          //     _id: exam.examId._id,
+          //     name: exam.examId.name,
+          //     date: new Date(exam.examId.date),
+          //   });
+          // } else if (
+          //   new Date(exam.examId.date).getTime() >
+          //   date.getTime() + exam.examId.totalTime * 60
+          // ) {
+          //   upcomingExams.push({
+          //     _id: exam.examId._id,
+          //     name: exam.examId.name,
+          //     date: new Date(exam.examId.date),
+          //   });
+          // } else
+          //   course.course.cqExams.forEach((exam, j) => {
+          //     if (new Date(exam.examId.date).getTime() < date.getTime()) {
+          //       previousExams.push({
+          //         _id: exam.examId._id,
+          //         name: exam.examId.name,
+          //         date: new Date(exam.examId.date),
+          //       });
+          //     }
+          //   });
+
           if (
-            new Date(exam.examId.date).getTime() >
-            date.getTime() + exam.examId.totalTime * 60
-          ) {
-            ongoingExams.push({
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
+            date.getTime()
+          )
+            previousExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
               date: new Date(exam.examId.date),
             });
-          } else if (
-            new Date(exam.examId.date).getTime() >
-            date.getTime() + exam.examId.totalTime * 60
-          ) {
+          else {
             upcomingExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
               date: new Date(exam.examId.date),
             });
-          } else
-            course.course.cqExams.forEach((exam, j) => {
-              if (new Date(exam.examId.date).getTime() < date.getTime()) {
-                previousExams.push({
-                  _id: exam.examId._id,
-                  name: exam.examId.name,
-                  date: new Date(exam.examId.date),
-                });
-              }
-            });
+          }
         });
       }
 
