@@ -179,7 +179,253 @@ export default function Question(props) {
         console.log(error);
       });
   }
-
+  const mcq = (
+    <Row>
+      <Col xs={12} lg={6}>
+        <Col lg={12}>
+          <Row className="justify-content-flex-start">
+            <Col xs={12}>
+              <Forms
+                id="description"
+                type="textField"
+                label="Description"
+                labelWidth={80}
+                values={values.description}
+                handleChange={handleChange}
+                rows={4}
+                classes={classes}
+              />
+            </Col>
+          </Row>
+          <Row className="justify-content-flex-start">
+            <Col xs={12}>
+              <Forms
+                id="question"
+                type="textField"
+                label="Question"
+                labelWidth={75}
+                values={values.question}
+                handleChange={handleChange}
+                required={true}
+                rows={3}
+                classes={classes}
+              />
+            </Col>
+          </Row>
+          <Row className="justify-content-flex-start">
+            <Col xs={6}>
+              <Forms
+                id="optA"
+                type="text"
+                label="Option A"
+                labelWidth={75}
+                values={values.optA}
+                handleChange={handleChange}
+                required={true}
+                classes={classes}
+              />
+            </Col>
+            <Col xs={6}>
+              <Forms
+                id="optB"
+                type="text"
+                label="Option B"
+                labelWidth={75}
+                values={values.optB}
+                handleChange={handleChange}
+                required={true}
+                classes={classes}
+              />
+            </Col>
+          </Row>
+          <Row className="justify-content-flex-start">
+            <Col xs={6}>
+              <Forms
+                id="optC"
+                type="text"
+                label="Option C"
+                labelWidth={75}
+                values={values.optC}
+                handleChange={handleChange}
+                required={true}
+                classes={classes}
+              />
+            </Col>
+            <Col xs={6}>
+              <Forms
+                id="optD"
+                type="text"
+                label="Option D"
+                labelWidth={75}
+                values={values.optD}
+                handleChange={handleChange}
+                required={true}
+                classes={classes}
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Col>
+      <Col>
+        <Row className="justify-content-flex-start">
+          <Col>
+            <FormControl
+              component="fieldset"
+              className={classes.textField}
+              required
+            >
+              <FormLabel component="legend">Select Correct Ans</FormLabel>
+              <RadioGroup
+                aria-label="ans"
+                name="ans"
+                value={values.ans}
+                onChange={handleChange("ans")}
+              >
+                <FormControlLabel
+                  value="A"
+                  control={<Radio color="primary" />}
+                  label="A"
+                />
+                <FormControlLabel
+                  value="B"
+                  control={<Radio color="primary" />}
+                  label="B"
+                />
+                <FormControlLabel
+                  value="C"
+                  control={<Radio color="primary" />}
+                  label="C"
+                />
+                <FormControlLabel
+                  value="D"
+                  control={<Radio color="primary" />}
+                  label="D"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={4}>
+            <TextField
+              type="number"
+              label="Marks"
+              variant="outlined"
+              value={values.marks}
+              onChange={handleChange("marks")}
+              className={leftClasses.textField}
+              required
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-flex-start">
+          <Col xs={4}>
+            <TextField
+              id="min"
+              type="number"
+              placeholder="00"
+              label="Minutes"
+              variant="outlined"
+              value={values.min}
+              onChange={handleChange("min")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+          <Col xs={4}>
+            <TextField
+              id="sec"
+              min="0"
+              type="number"
+              max="59"
+              placeholder="00"
+              label="Seconds"
+              variant="outlined"
+              value={values.sec}
+              onChange={handleChange("sec")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
+  const cq = (
+    <Row className="justify-content-center">
+      <Col xs={12} lg={6}>
+        <Row>
+          <Col xs={12}>
+            <Forms
+              id="description"
+              type="textField"
+              label="Description"
+              labelWidth={80}
+              values={values.description}
+              handleChange={handleChange}
+              rows={4}
+              classes={classes}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Forms
+              id="question"
+              type="textField"
+              label="Question"
+              labelWidth={75}
+              values={values.question}
+              handleChange={handleChange}
+              required={true}
+              rows={4}
+              classes={classes}
+            />
+          </Col>
+          <Col xs={4}>
+            <TextField
+              id="min"
+              type="number"
+              placeholder="00"
+              label="Minutes"
+              variant="outlined"
+              value={values.min}
+              onChange={handleChange("min")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+          <Col xs={4}>
+            <TextField
+              type="number"
+              label="Marks"
+              variant="outlined"
+              value={values.marks}
+              onChange={handleChange("marks")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+          <Col xs={4}>
+            <TextField
+              id="sec"
+              min="0"
+              type="number"
+              max="59"
+              placeholder="00"
+              label="Seconds"
+              variant="outlined"
+              value={values.sec}
+              onChange={handleChange("sec")}
+              className={classes.textField}
+              required
+            />
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
+  console.log(props.examType, "exam type");
   return (
     <Container fluid className="justify-content-flex-start">
       <Toast
@@ -193,192 +439,15 @@ export default function Question(props) {
           <strong className="mr-auto">Alert Message</strong>
           <small>just now</small>
         </Toast.Header>
-        <Toast.Body>You Have To Create At Least One Question !</Toast.Body>
+        <Toast.Body>You Have To Create At Least One Question!</Toast.Body>
       </Toast>
-
       <Row className="justify-content-center">
         <Col xs="auto">
           <h3>Create Your Question Here</h3>
         </Col>
       </Row>
       <form onSubmit={sendQuestion}>
-        <Row>
-          <Col xs={6}>
-            <Col lg={12}>
-              <Row className="justify-content-flex-start">
-                <Col xs={12} md={6} lg={12}>
-                  <Forms
-                    id="description"
-                    type="textField"
-                    label="Description"
-                    labelWidth={80}
-                    values={values.description}
-                    handleChange={handleChange}
-                    rows={4}
-                    classes={classes}
-                  />
-                </Col>
-              </Row>
-              <Row className="justify-content-flex-start">
-                <Col xs={12} md={6} lg={12}>
-                  <Forms
-                    id="question"
-                    type="textField"
-                    label="Question"
-                    labelWidth={75}
-                    values={values.question}
-                    handleChange={handleChange}
-                    required={true}
-                    rows={3}
-                    classes={classes}
-                  />
-                </Col>
-              </Row>
-              <Row className="justify-content-flex-start">
-                <Col xs={6}>
-                  <Forms
-                    id="optA"
-                    type="text"
-                    label="Option A"
-                    labelWidth={75}
-                    values={values.optA}
-                    handleChange={handleChange}
-                    required={true}
-                    classes={classes}
-                  />
-                </Col>
-                <Col xs={6}>
-                  <Forms
-                    id="optB"
-                    type="text"
-                    label="Option B"
-                    labelWidth={75}
-                    values={values.optB}
-                    handleChange={handleChange}
-                    required={true}
-                    classes={classes}
-                  />
-                </Col>
-              </Row>
-              <Row className="justify-content-flex-start">
-                <Col xs={6}>
-                  <Forms
-                    id="optC"
-                    type="text"
-                    label="Option C"
-                    labelWidth={75}
-                    values={values.optC}
-                    handleChange={handleChange}
-                    required={true}
-                    classes={classes}
-                  />
-                </Col>
-                <Col xs={6}>
-                  <Forms
-                    id="optD"
-                    type="text"
-                    label="Option D"
-                    labelWidth={75}
-                    values={values.optD}
-                    handleChange={handleChange}
-                    required={true}
-                    classes={classes}
-                  />
-                </Col>
-              </Row>
-            </Col>
-          </Col>
-          <Col>
-            <Row className="justify-content-flex-start">
-              <Col>
-                <FormControl
-                  component="fieldset"
-                  className={classes.textField}
-                  required
-                >
-                  <FormLabel component="legend">Select Correct Ans</FormLabel>
-                  <RadioGroup
-                    aria-label="ans"
-                    name="ans"
-                    value={values.ans}
-                    onChange={handleChange("ans")}
-                  >
-                    <FormControlLabel
-                      value="A"
-                      control={<Radio color="primary" />}
-                      label="A"
-                    />
-                    <FormControlLabel
-                      value="B"
-                      control={<Radio color="primary" />}
-                      label="B"
-                    />
-                    <FormControlLabel
-                      value="C"
-                      control={<Radio color="primary" />}
-                      label="C"
-                    />
-                    <FormControlLabel
-                      value="D"
-                      control={<Radio color="primary" />}
-                      label="D"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={4}>
-                <TextField
-                  type="number"
-                  label="Marks"
-                  variant="outlined"
-                  value={values.marks}
-                  onChange={handleChange("marks")}
-                  className={leftClasses.textField}
-                  required
-                />
-              </Col>
-            </Row>
-            {/*             <Row className="justify-content-flex-start">
-              <Col>
-                <FormLabel component="legend" className={leftClasses.timeField}>
-                  Time Limit
-                </FormLabel>
-              </Col>
-            </Row> */}
-            <Row className="justify-content-flex-start">
-              <Col xs={4}>
-                <TextField
-                  id="min"
-                  type="number"
-                  placeholder="00"
-                  label="Minutes"
-                  variant="outlined"
-                  value={values.min}
-                  onChange={handleChange("min")}
-                  className={classes.textField}
-                  required
-                />
-              </Col>
-              <Col xs={4}>
-                <TextField
-                  id="sec"
-                  min="0"
-                  type="number"
-                  max="59"
-                  placeholder="00"
-                  label="Seconds"
-                  variant="outlined"
-                  value={values.sec}
-                  onChange={handleChange("sec")}
-                  className={classes.textField}
-                  required
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        {props.examType === "CQ" ? cq : mcq}
         <Row className="justify-content-center">
           <ButtonGroup size="large" color="primary">
             <Button
@@ -426,7 +495,8 @@ export default function Question(props) {
             classes={classes.textField}
           />
 
-          <br /><br/>
+          <br />
+          <br />
 
           <TextField
             id="datetime-local"

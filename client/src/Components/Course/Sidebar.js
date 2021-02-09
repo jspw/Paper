@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CreateExam from './CreateExam/CreateExam';
 import "./Sidebar.scss";
+import ExamType from './CreateExam/ExamType';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -75,10 +76,12 @@ export default function Sidebar(props) {
       setContent(prop);
     }
     console.log(content);
-    if(content === "createExam") displayContent = <CreateExam courseData={props.courseData}/>
+    if(content === "createExam") displayContent = <ExamType className="content"  courseData={props.courseData}/>
+    // displayContent = <CreateExam className="content" courseData={props.courseData}/>
+    
     return (
-      <>
-        <div className={sidebar ? "sidebar active" : "sidebar"}>
+      <div className="parent">
+                <div className={sidebar ? "sidebar active" : "sidebar"}>
           <ul className="sidebar__nav">
             <li className="sidebar__logo">
               <Row>
@@ -95,6 +98,7 @@ export default function Sidebar(props) {
             <li className="sidebar__item">
               <a
                 href="#create-exam"
+                id="create-exam"
                 className="sidebar__item__link"
                 onClick={handleClick("createExam")}
               >
@@ -103,13 +107,20 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#exams" className="sidebar__item__link" onClick={handleClick("exams")}>
+              <a
+                href="#exams"
+                id="exams"
+                className="sidebar__item__link"
+                onClick={handleClick("exams")}
+              >
                 <IoClipboard className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Exams</span>
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#students"
+              <a
+                href="#students"
+                id="students"
                 className="sidebar__item__link"
                 onClick={handleClick("students")}
               >
@@ -118,7 +129,9 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#teacher"
+              <a
+                href="#teacher"
+                id="teacher"
                 className="sidebar__item__link"
                 onClick={handleClick("teacher")}
               >
@@ -127,17 +140,20 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#info" className="sidebar__item__link" onClick={handleClick("info")}>
+              <a
+                href="#info"
+                id="info"
+                className="sidebar__item__link"
+                onClick={handleClick("info")}
+              >
                 <FaInfoCircle className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Course Info</span>
               </a>
             </li>
           </ul>
         </div>
-        <div className={sidebar ? "content__small" : "content__large"}>
-          {/* <CreateExam  courseData={props.courseData} /> */}
-          {displayContent}
-        </div>
-      </>
+        <div className={sidebar ? "content__small" : "content__large"}>{displayContent}</div>
+        {/* {displayContent} */}
+      </div>
     );
 }
