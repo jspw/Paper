@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CreateExam from './CreateExam/CreateExam';
 import "./Sidebar.scss";
+import ExamType from './CreateExam/ExamType';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -75,8 +76,9 @@ export default function Sidebar(props) {
       setContent(prop);
     }
     console.log(content);
-    if(content === "createExam") displayContent = <CreateExam className="content" courseData={props.courseData}/>
+    if(content === "createExam") displayContent = <ExamType className="content"  courseData={props.courseData}/>
     // displayContent = <CreateExam className="content" courseData={props.courseData}/>
+    
     return (
       <div className="parent">
                 <div className={sidebar ? "sidebar active" : "sidebar"}>

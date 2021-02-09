@@ -10,7 +10,6 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
-// import Link from "@material-ui/core/Link";
 import Timer from "../Timer/Timer";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import LinearIndeterminate from "../Generic/Loader";
@@ -135,59 +134,7 @@ export default function Home(props) {
 
       if (course.course.cqExams) {
         course.course.cqExams.forEach((exam, j) => {
-          if (
-            new Date(exam.examId.date).getTime() >
-            date.getTime() + exam.examId.totalTime * 60
-          ) {
-            ongoingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-          } else if (
-            new Date(exam.examId.date).getTime() >
-            date.getTime() + exam.examId.totalTime * 60
-          ) {
-            upcomingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-          } else
-            course.course.cqExams.forEach((exam, j) => {
-              if (new Date(exam.examId.date).getTime() < date.getTime()) {
-                previousExams.push({
-                  _id: exam.examId._id,
-                  name: exam.examId.name,
-                  date: new Date(exam.examId.date),
-                });
-              }
-            });
-        });
-      }
-
-      if (course.course.mcqExams) {
-        course.course.mcqExams.forEach((exam, j) => {
-          // if (
-          //   new Date(exam.examId.date).getTime() > date.getTime() &&
-          //   new Date(exam.examId.date).getTime() <
-          //     date.getTime() + exam.examId.totalTime * 60
-          // )
-          //   upcomingExams.push({
-          //     _id: exam.examId._id,
-          //     name: exam.examId.name,
-          //     date: new Date(exam.examId.date),
-          //   });
-          // else if (
-          //   new Date(exam.examId.date).getTime() >
-          //   date.getTime() + exam.examId.totalTime * 60
-          // )
-          //   upcomingExams.push({
-          //     _id: exam.examId._id,
-          //     name: exam.examId.name,
-          //     date: new Date(exam.examId.date),
-          //   });
-          // else
+          console.log(course.course);
           if (
             new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
             date.getTime()
@@ -195,13 +142,68 @@ export default function Home(props) {
             previousExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
+              courseName: course.course.name,
               date: new Date(exam.examId.date),
+              totalMarks: exam.examId.totalMarks,
+              totalTime: exam.examId.totalTime,
+              createdBy:
+                course.course.createdBy.firstName +
+                course.course.createdBy.lastName +
+                course.course.createdBy.username,
             });
           else {
             upcomingExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
+              courseName: course.course.name,
               date: new Date(exam.examId.date),
+              totalMarks: exam.examId.totalMarks,
+              totalTime: exam.examId.totalTime,
+              createdBy:
+                course.course.createdBy.firstName +
+                " " +
+                course.course.createdBy.lastName +
+                " " +
+                course.course.createdBy.username,
+            });
+          }
+        });
+      }
+
+      if (course.course.mcqExams) {
+        course.course.mcqExams.forEach((exam, j) => {
+          if (
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
+            date.getTime()
+          )
+            previousExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              courseName: course.course.name,
+              date: new Date(exam.examId.date),
+              totalMarks: exam.examId.totalMarks,
+              totalTime: exam.examId.totalTime,
+              createdBy:
+                course.course.createdBy.firstName +
+                " " +
+                course.course.createdBy.lastName +
+                " " +
+                course.course.createdBy.username,
+            });
+          else {
+            upcomingExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              courseName: course.course.name,
+              date: new Date(exam.examId.date),
+              totalMarks: exam.examId.totalMarks,
+              totalTime: exam.examId.totalTime,
+              createdBy:
+                course.course.createdBy.firstName +
+                " " +
+                course.course.createdBy.lastName +
+                " " +
+                course.course.createdBy.username,
             });
           }
         });
@@ -252,22 +254,22 @@ export default function Home(props) {
           </Row>
           <Row className="infos">
             <Col>
-              <span>Course: SWE111</span>
+              <span>Course: {upcomingExams[0].courseName}</span>
             </Col>
           </Row>
           <Row className="infos">
             <Col>
-              <p>Host: Teacher Name</p>
+              <p>Host: {upcomingExams[0].createdBy}</p>
             </Col>
           </Row>
           <Row className="infos">
             <Col>
-              <span>Total Marks: 20</span>
+              <span>Total Marks: {upcomingExams[0].totalMarks}</span>
             </Col>
           </Row>
           <Row className="infos">
             <Col>
-              <span>Total Time: 20mins</span>
+              <span>Total Time: {upcomingExams[0].totalTime}</span>
             </Col>
           </Row>
         </Container>
@@ -451,6 +453,7 @@ export default function Home(props) {
             <div className="upcoming__first">
               {mostUpcomingExamUI}
               <Timer
+                examID={upcomingExams[0]._id}
                 deadline={upcomingExams.length > 0 ? upcomingExams[0].date : ""}
               />
             </div>

@@ -26,7 +26,7 @@ import "./PreviousExam.css";
 import MarkSheet from "./MarkSheet";
 
 import MenuItem from "@material-ui/core/MenuItem";
-import LinearIndeterminate from '../Generic/Loader';
+import LinearIndeterminate from "../Generic/Loader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
@@ -398,7 +398,7 @@ const PreviousExam = (props) => {
 
           <Col></Col>
         </Row>
-        {mcq ? mcq : cq}
+        <Container fluid >{mcq ? mcq : cq}</Container>
       </Container>
     );
   else if (onlyExamInfo && role === "Student")

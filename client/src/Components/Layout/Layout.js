@@ -20,32 +20,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import socketIOClient from "socket.io-client";
 
-const ENDPOINT = "http://localhost:8080/";
-
 const Layout = (props) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
-
-  const [response, setResponse] = useState(1);
-
-  const [examInfo, setExamInfo] = useState(null);
-
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.on("test", (data) => {
-      setResponse(data);
-      // console.log("Socket", data);
-    });
-
-    socket.on("exam", (data) => {
-      setExamInfo(data);
-    });
-    // return socket.disconnect();
-  }, []);
-
-  console.log("exam", examInfo);
 
   const SelectForm = () => {
     let items = [];
@@ -129,43 +108,12 @@ const Layout = (props) => {
       </Modal.Footer>
     </Modal>
   );
-  if (props.userInfo)
-    return (
-      <Container bg="light" fluid>
-        {/* //   {createCourseModal}
-      //   <Row>
-      //     <Col md={3}>Courses</Col>
-      //     <Col md={6} backgroundColor="success">
-      //       All Events
-      //       <Button className="pull-right light" onClick={handleShowModal}>
-      //         Create Course
-      //       </Button> */}
-        <div
-          className={
-            response < 10
-              ? "alert alert-info"
-              : response < 20
-              ? "alert alert-success"
-              : response < 30
-              ? "alert alert-primary"
-              : response < 40
-              ? "alert alert-secondary"
-              : "alert alert-danger"
-          }
-        >
-          Time countdown : <strong>{response}</strong>
-        </div>
-        {/* //     </Col>
-      //   </Row> */}
-      </Container>
-    );
-  else {
-    return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>Please Login First</h1>
-      </div>
-    );
-  }
+
+  return (
+    <Container>
+      <Button onClick={handleShowModal}>Create Course </Button>;
+    </Container>
+  );
 };
 
 export default Layout;

@@ -18,6 +18,10 @@ export default function Navigation(props) {
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
 
+  const [notifications, setnotifications] = useState(null);
+
+  if (props.notifications) setnotifications(props.notifications);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -88,7 +92,9 @@ export default function Navigation(props) {
         horizontal: "center",
       }}
     >
-      <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {notifications ? notifications : "No Notifications"}
+      </MenuItem>
     </Menu>
   );
 
@@ -109,7 +115,7 @@ export default function Navigation(props) {
           onClick={handleNotificationMenuOpen}
         >
           <Badge badgeContent={17} color="secondary">
-            <FaBell style={{color: "white"}}/>
+            <FaBell style={{ color: "white" }} />
           </Badge>
         </IconButton>
         <IconButton
@@ -120,7 +126,7 @@ export default function Navigation(props) {
           onClick={handleProfileMenuOpen}
           color="inherit"
         >
-          <FaUserAlt style={{color: "white"}}/>
+          <FaUserAlt style={{ color: "white" }} />
         </IconButton>
         {/* <MenuItem onClick={handleSignout}>Signout</MenuItem> */}
         {renderNotificationMenu}
@@ -152,7 +158,9 @@ export default function Navigation(props) {
             className="nav__logo"
             alt={"logo"}
           />
-          <span className="nav__heading" style={{fontSize:"122%"}}>paper</span>
+          <span className="nav__heading" style={{ fontSize: "122%" }}>
+            paper
+          </span>
         </>
       </Navbar.Brand>
       {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}

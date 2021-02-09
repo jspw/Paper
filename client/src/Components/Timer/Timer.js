@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 
-import './Timer.css';
+import "./Timer.css";
+
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const Timer = (props) => {
   const [timerDays, setTimerDays] = useState("00");
@@ -39,24 +41,36 @@ const Timer = (props) => {
     };
   });
 
-  return (
-    <div className="timer-container">
-      <ul>
-        <li>
-          <span id="days">{timerDays}</span> Days
-        </li>
-        <li>
-          <span id="hours">{timerHours}</span> Hours
-        </li>
-        <li>
-          <span id="minutes">{timerMinutes}</span> Minutes
-        </li>
-        <li>
-          <span id="seconds">{timerSeconds}</span> Seconds
-        </li>
-      </ul>
-    </div>
-  );
+  if (timerDays && timerHours && timerMinutes && timerSeconds)
+    return (
+      <div className="timer-container">
+        <Link
+          to={`/live-exam/${props.examID}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <button className="btn btn-primary">Enter Exam</button>
+        </Link>
+      </div>
+    );
+  else
+    return (
+      <div className="timer-container">
+        <ul>
+          <li>
+            <span id="days">{timerDays}</span> Days
+          </li>
+          <li>
+            <span id="hours">{timerHours}</span> Hours
+          </li>
+          <li>
+            <span id="minutes">{timerMinutes}</span> Minutes
+          </li>
+          <li>
+            <span id="seconds">{timerSeconds}</span> Seconds
+          </li>
+        </ul>
+      </div>
+    );
 };
 
 export default Timer;

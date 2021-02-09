@@ -427,7 +427,7 @@ export default function Question(props) {
       </Col>
     </Row>
   );
-  console.log(props.examType);
+  console.log(props.examType, "exam type");
   return (
     <Container fluid className="justify-content-flex-start">
       <Toast
@@ -449,7 +449,7 @@ export default function Question(props) {
         </Col>
       </Row>
       <form onSubmit={sendQuestion}>
-        {cq}
+        {props.examType === "CQ" ? cq : mcq}
         <Row className="justify-content-center">
           <ButtonGroup size="large" color="primary">
             <Button
@@ -497,7 +497,8 @@ export default function Question(props) {
             classes={classes.textField}
           />
 
-          <br /><br/>
+          <br />
+          <br />
 
           <TextField
             id="datetime-local"

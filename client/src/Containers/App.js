@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import socketIOClient from "socket.io-client";
 import Navigation from "../Components/Navbar/Navbar";
 import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
@@ -23,6 +24,12 @@ function App() {
   const [universityInfo, setUniversityInfo] = useState(null);
 
   const [userInfo, setUserInfo] = useState(null);
+
+  const ENDPOINT = "http://127.0.0.1:8080/";
+
+  const [notifications, setnotifications] = useState(null);
+
+  let socketRef = useRef(null);
 
   useEffect(() => {
     if (userdata) {
@@ -50,19 +57,29 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
+
   }, []);
-  console.log(userInfo);
+
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation loginStatus={loginStatus} />
+        <Navigation loginStatus={loginStatus} notifications={notifications} />
         <Route
           path="/test"
           exact
-          render={(props) => (
+          render={() => (
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
         />
+
+        {/* <Route
+          path="/"
+          exact
+          render={() => (
+            <Layout universityInfo={universityInfo} userInfo={userInfo} />
+          )}
+        /> */}
+
         <Switch>
           <Route
             path="/"

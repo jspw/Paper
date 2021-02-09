@@ -45,7 +45,7 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "McqExam",
 
-        autopopulate: { maxDepth: 2 }
+        autopopulate: { maxDepth: 3 }
         // required: true,
       },
     },
@@ -57,7 +57,7 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqExam",
         // required: true,
-        autopopulate: { maxDepth: 2 }
+        autopopulate: { maxDepth: 3 }
       },
     },
   ],
