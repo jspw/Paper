@@ -53,8 +53,9 @@ function a11yProps(index) {
 }
 export default function Sidebar(props) {
 
-    const [sidebar, setSidebar] = useState(false);
+  let displayContent;
 
+    const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
     const [value, setValue] = React.useState(0);
@@ -62,7 +63,19 @@ export default function Sidebar(props) {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-
+/*     const [content, setContent] = useState({
+      createExam: false,
+      exam: false,
+      students: false,
+      teacher: false,
+      info: false,
+    }); */
+    const [content, setContent] = useState('');
+    const handleClick = (prop) => (event) => {
+      setContent(prop);
+    }
+    console.log(content);
+    if(content === "createExam") displayContent = <CreateExam courseData={props.courseData}/>
     return (
       <>
         <div className={sidebar ? "sidebar active" : "sidebar"}>
@@ -80,39 +93,50 @@ export default function Sidebar(props) {
               </Row>
             </li>
             <li className="sidebar__item">
-              <a href="#create-exam" activeclassname="is-active" className="sidebar__item__link">
+              <a
+                href="#create-exam"
+                className="sidebar__item__link"
+                onClick={handleClick("createExam")}
+              >
                 <IoCreate className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Create Exam</span>
               </a>
             </li>
             <li className="sidebar__item">
-              <Link className="sidebar__item__link">
+              <a href="#exams" className="sidebar__item__link" onClick={handleClick("exams")}>
                 <IoClipboard className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Exams</span>
-              </Link>
+              </a>
             </li>
             <li className="sidebar__item">
-              <Link className="sidebar__item__link">
+              <a href="#students"
+                className="sidebar__item__link"
+                onClick={handleClick("students")}
+              >
                 <FaUsers className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Students</span>
-              </Link>
+              </a>
             </li>
             <li className="sidebar__item">
-              <Link className="sidebar__item__link">
+              <a href="#teacher"
+                className="sidebar__item__link"
+                onClick={handleClick("teacher")}
+              >
                 <FaChalkboardTeacher className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Teacher</span>
-              </Link>
+              </a>
             </li>
             <li className="sidebar__item">
-              <Link className="sidebar__item__link">
+              <a href="#info" className="sidebar__item__link" onClick={handleClick("info")}>
                 <FaInfoCircle className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Course Info</span>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
         <div className={sidebar ? "content__small" : "content__large"}>
-          <CreateExam  courseData={props.courseData} />
+          {/* <CreateExam  courseData={props.courseData} /> */}
+          {displayContent}
         </div>
       </>
     );
