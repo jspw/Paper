@@ -63,6 +63,15 @@ function App() {
             <Layout universityInfo={universityInfo} userInfo={userInfo} />
           )}
         />
+
+        {/* <Route
+          path="/"
+          exact
+          render={() => (
+            <Layout universityInfo={universityInfo} userInfo={userInfo} />
+          )}
+        /> */}
+
         <Switch>
           <Route
             path="/"
