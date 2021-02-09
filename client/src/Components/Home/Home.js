@@ -115,31 +115,42 @@ export default function Home(props) {
 
       if (course.course.mcqExams) {
         course.course.mcqExams.forEach((exam, j) => {
+          // if (
+          //   new Date(exam.examId.date).getTime() > date.getTime() &&
+          //   new Date(exam.examId.date).getTime() <
+          //     date.getTime() + exam.examId.totalTime * 60
+          // )
+          //   upcomingExams.push({
+          //     _id: exam.examId._id,
+          //     name: exam.examId.name,
+          //     date: new Date(exam.examId.date),
+          //   });
+          // else if (
+          //   new Date(exam.examId.date).getTime() >
+          //   date.getTime() + exam.examId.totalTime * 60
+          // )
+          //   upcomingExams.push({
+          //     _id: exam.examId._id,
+          //     name: exam.examId.name,
+          //     date: new Date(exam.examId.date),
+          //   });
+          // else
           if (
-            new Date(exam.examId.date).getTime() > date.getTime() &&
-            new Date(exam.examId.date).getTime() <
-              date.getTime() + exam.examId.totalTime * 60
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
+            date.getTime()
           )
-            ongoingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-          else if (
-            new Date(exam.examId.date).getTime() >
-            date.getTime() + exam.examId.totalTime * 60
-          )
-            upcomingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              date: new Date(exam.examId.date),
-            });
-          else if (new Date(exam.examId.date).getTime() < date.getTime())
             previousExams.push({
               _id: exam.examId._id,
               name: exam.examId.name,
               date: new Date(exam.examId.date),
             });
+          else {
+            upcomingExams.push({
+              _id: exam.examId._id,
+              name: exam.examId.name,
+              date: new Date(exam.examId.date),
+            });
+          }
         });
       }
     });
@@ -158,22 +169,22 @@ export default function Home(props) {
     const reloadHandler = (event) => {
       event.preventDefault();
     };
+    let examSchedule;
+    if (upcomingExams.length > 0) {
+      examSchedule = `${
+        new Date(upcomingExams[0].date).getHours() < 10
+          ? "0" + new Date(upcomingExams[0].date).getHours()
+          : new Date(upcomingExams[0].date).getHours()
+      }:${
+        new Date(upcomingExams[0].date).getMinutes() < 10
+          ? "0" + new Date(upcomingExams[0].date).getMinutes()
+          : new Date(upcomingExams[0].date).getMinutes()
+      }
+      ${new Date(upcomingExams[0].date).getDate()}th ${
+        months[new Date(upcomingExams[0].date).getMonth()]
+      },
+      ${new Date(upcomingExams[0].date).getFullYear()}`;
 
-    let examSchedule = `${
-      new Date(upcomingExams[0].date).getHours() < 10
-        ? "0" + new Date(upcomingExams[0].date).getHours()
-        : new Date(upcomingExams[0].date).getHours()
-    }:${
-      new Date(upcomingExams[0].date).getMinutes() < 10
-        ? "0" + new Date(upcomingExams[0].date).getMinutes()
-        : new Date(upcomingExams[0].date).getMinutes()
-    }
-    ${new Date(upcomingExams[0].date).getDate()}th ${
-      months[new Date(upcomingExams[0].date).getMonth()]
-    },
-    ${new Date(upcomingExams[0].date).getFullYear()}`;
-
-    if (upcomingExams)
       mostUpcomingExamUI = (
         <Container fluid key={upcomingExams[0]._id} alignItems="flex-start">
           <Row className="examHeading d-flex justify-content-between">
@@ -186,23 +197,6 @@ export default function Home(props) {
               <p>{examSchedule}</p>
             </Col>
           </Row>
-
-          {/*           <Row>
-            <Col>
-              <p data-disabled>
-                {new Date(upcomingExams[0].date).getHours() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getHours()
-                  : new Date(upcomingExams[0].date).getHours()}
-                :
-                {new Date(upcomingExams[0].date).getMinutes() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getMinutes()
-                  : new Date(upcomingExams[0].date).getMinutes()}{" "}
-                {new Date(upcomingExams[0].date).getDate()}
-                th {months[new Date(upcomingExams[0].date).getMonth()]},
-                {new Date(upcomingExams[0].date).getFullYear()}
-              </p>
-            </Col>
-          </Row> */}
           <Row className="infos">
             <Col>
               <span>Course: SWE111</span>
@@ -223,30 +217,8 @@ export default function Home(props) {
               <span>Total Time: 20mins</span>
             </Col>
           </Row>
-          {/*           <Grid item>
-            <Link to={`/upcoming-exam/${upcomingExams[0]._id}`}>
-              <p>
-                <p>
-                  {upcomingExams[0].name} [
-                  {new Date(upcomingExams[0].date).getHours() < 10
-                    ? "0" + new Date(upcomingExams[0].date).getHours()
-                    : new Date(upcomingExams[0].date).getHours()}
-                  :
-                  {new Date(upcomingExams[0].date).getMinutes() < 10
-                    ? "0" + new Date(upcomingExams[0].date).getMinutes()
-                    : new Date(upcomingExams[0].date).getMinutes()}{" "}
-                  {new Date(upcomingExams[0].date).getDate()}
-                  th {months[new Date(upcomingExams[0].date).getMonth()]},
-                  {new Date(upcomingExams[0].date).getFullYear()} (
-                  {days[new Date(upcomingExams[0].date).getDay()]}) ]
-                </p>
-              </p>
-            </Link>
-          </Grid> */}
         </Container>
       );
-    // console.log(upcomingExams[0]);
-    if (upcomingExams)
       upcomingExamsUI = upcomingExams.map((ex, i) => {
         if (i != 0)
           return (
@@ -257,8 +229,8 @@ export default function Home(props) {
               className="upcoming__next"
             >
               {/*               <Grid item>
-                <SubjectIcon />
-              </Grid> */}
+                  <SubjectIcon />
+                </Grid> */}
               <Link to={`/upcoming-exam/${ex._id}`}>
                 <Row className="examHeading d-flex justify-content-between">
                   <Col xs="auto">
@@ -285,6 +257,7 @@ export default function Home(props) {
             </Container>
           );
       });
+    }
 
     if (previousExams)
       previousExamsUI = previousExams.map((ex, i) => {
@@ -354,7 +327,9 @@ export default function Home(props) {
             </Grid>
             <div className="upcoming__first">
               {mostUpcomingExamUI}
-              <Timer deadline={upcomingExams[0].date} />
+              <Timer
+                deadline={upcomingExams.length > 0 ? upcomingExams[0].date : ""}
+              />
             </div>
             <div>{upcomingExamsUI}</div>
           </Grid>

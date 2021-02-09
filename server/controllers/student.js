@@ -49,7 +49,8 @@ exports.getStudent = (req, res, next) => {
         });
 
         course.course.mcqExams.forEach(function (exam) {
-          if (exam.examId.mcqQuestions) exam.examId.mcqQuestions = undefined;
+          if (exam.examId)
+            if (exam.examId.mcqQuestions) exam.examId.mcqQuestions = undefined;
         });
       });
 

@@ -56,35 +56,21 @@ const Result = (props) => {
           <Col xs={7} className="exam">
             <Row className="justify-content-center">
               <Col xs="auto">
-                {/* <Jumbotron>
+               <br></br>
+                <Jumbotron>
                   <h1>Exam Finished!</h1>
                   <p>
-                    <Alert
-                      variant={props.result.mark > 0 ? "success" : "danger"}
-                    >
-                      {!props.result.mark
-                        ? ""
-                        : props.result.mark > 0
-                        ? `Congrats You have Scored ${props.result.mark}`
-                        : `Oho! You have Scored ${props.result.mark}`}
-                    </Alert>
+                    <div className="justify-content-center">
+                      <Alert
+                        variant={props.result.mark > 0 ? "success" : "danger"}
+                      >
+                        {props.result.mark > 0
+                          ? `Congrats You have Scored ${props.result.mark}`
+                          : `Oho! You have Scored ${props.result.mark}`}
+                      </Alert>
+                    </div>
                   </p>
-                </Jumbotron> */}
-
-                <Tabs
-                  value={
-                    !props.result.mark
-                      ? ""
-                      : props.result.mark > 0
-                      ? `Congrats! You have Scored ${props.result.mark}`
-                      : `Oho! You have Scored ${props.result.mark}`
-                  }
-                  indicatorColor="primary"
-                  textColor="primary"
-                  centered
-                >
-                  <Tab label="Exam Finished!" />
-                </Tabs>
+                </Jumbotron>
               </Col>
             </Row>
           </Col>

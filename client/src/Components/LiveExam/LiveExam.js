@@ -54,6 +54,7 @@ export default function LiveExam(props) {
   const [result, setResult] = useState(0);
 
   const intervalRef = useRef();
+  const [disableNextButton, setdisableNextButton] = useState(false);
 
   // const [totalExamTime, setTotalExamTime] = useState(0);
 
@@ -99,7 +100,6 @@ export default function LiveExam(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("S ", seconds);
       setSeconds((seconds) => seconds - 1);
     }, 1000);
     intervalRef.current = interval;
@@ -116,19 +116,38 @@ export default function LiveExam(props) {
         let examTimeEndAfter = 0;
 
         examTimeEndAfter =
-          new Date(response.data.result.data.date).getTime() - Date.now();
+          Math.round(
+            new Date(response.data.result.data.date).getTime() / 1000
+          ) +
+          response.data.result.data.totalTime -
+          Math.round(Date.now() / 1000);
 
         console.log(examTimeEndAfter);
 
-        const timer = setTimeout(() => {
-          // setCount("Timeout called!");
+        if (examTimeEndAfter > 0) examTimeEndAfter = examTimeEndAfter * 1000;
+        else examTimeEndAfter = 0;
+
+        console.log(examTimeEndAfter);
+
+        const timeout = setTimeout(() => {
           clearInterval(intervalRef.current);
-          console.log("Timeout worked after ", examTimeEndAfter);
+          setdisableNextButton(true);
           submitAnswers();
-        }, examTimeEndAfter * 1000);
-        return () => {
-          clearTimeout(timer);
-        };
+          // alert("Exam Timeout!");
+        }, examTimeEndAfter);
+
+        // const timer = setTimeout(() => {
+        //   // setCount("Timeout called!");
+        //   // clearInterval(intervalRef.current);
+        //   alert("Hello");
+        //   console.log("Timeout worked after ", examTimeEndAfter);
+        //   // submitAnswers();
+        // }, examTimeEndAfter * 1000);
+        // return () => {
+        //   clearTimeout(timer);
+        // };
+
+        // return () => clearTimeout(timeout);
       })
       .catch((error) => {
         console.log(error);
@@ -300,6 +319,7 @@ export default function LiveExam(props) {
                       color="default"
                       onClick={nextQuestion}
                       disableElevation
+                      disabled={disableNextButton}
                       // disabled={
                       //   index + 1 == examinfo.mcqQuestions.length && true
                       // }
