@@ -16,6 +16,7 @@ const examController = (io) => {
     // const ip = socket.handshake.headers || socket.conn.remoteAddress;
     // console.log(ip);
     // console.log("Socket ID : ", socket.id);
+    // let interval;
 
     // if (interval) clearInterval(interval);
 

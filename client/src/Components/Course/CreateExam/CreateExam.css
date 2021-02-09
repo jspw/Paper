@@ -1,0 +1,6 @@
+.toast-modify{
+    position: fixed;
+    z-index: 1055;
+    top: 100px;
+    right: 50px;
+}

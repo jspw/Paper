@@ -1,16 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import { CircularProgress, Grid } from "@material-ui/core";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import SubjectIcon from "@material-ui/icons/Subject";
 import { HiClipboard } from "react-icons/hi";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
 // import Link from "@material-ui/core/Link";
 import Timer from "../Timer/Timer";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import LinearIndeterminate from "../Generic/Loader";
 import "./Home.scss";
 export default function Home(props) {
   var months = [
@@ -53,12 +54,21 @@ export default function Home(props) {
       courseUI = props.userInfo.courses.map((course, k) => {
         // console.log(items);
         return (
-          <Grid key={k} container alignItems="flex-start" xs className="sideExams">
+          <Grid
+            key={k}
+            container
+            alignItems="flex-start"
+            xs
+            className="sideExams"
+          >
             <Grid item>
-              <SubjectIcon style={{fontSize: "27px"}}/>
+              <SubjectIcon style={{ fontSize: "27px" }} />
             </Grid>
             <Grid item xs className="examName">
-              <Link to={`/course/${course.course._id}`} style={{ textDecoration: 'none', color: "black" }}>
+              <Link
+                to={`/course/${course.course._id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 <span>{course.course.name}</span>
               </Link>
             </Grid>
@@ -138,7 +148,7 @@ export default function Home(props) {
       return a.date.getTime() - b.date.getTime();
     });
     previousExams.sort(function (a, b) {
-      return a.date.getTime() - b.date.getTime();
+      return b.date.getTime() - a.date.getTime();
     });
 
     ongoingExams.sort(function (a, b) {
@@ -158,7 +168,9 @@ export default function Home(props) {
         ? "0" + new Date(upcomingExams[0].date).getMinutes()
         : new Date(upcomingExams[0].date).getMinutes()
     }
-    ${new Date(upcomingExams[0].date).getDate()}th ${months[new Date(upcomingExams[0].date).getMonth()]},
+    ${new Date(upcomingExams[0].date).getDate()}th ${
+      months[new Date(upcomingExams[0].date).getMonth()]
+    },
     ${new Date(upcomingExams[0].date).getFullYear()}`;
 
     if (upcomingExams)
@@ -214,18 +226,20 @@ export default function Home(props) {
           {/*           <Grid item>
             <Link to={`/upcoming-exam/${upcomingExams[0]._id}`}>
               <p>
-                {upcomingExams[0].name} [
-                {new Date(upcomingExams[0].date).getHours() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getHours()
-                  : new Date(upcomingExams[0].date).getHours()}
-                :
-                {new Date(upcomingExams[0].date).getMinutes() < 10
-                  ? "0" + new Date(upcomingExams[0].date).getMinutes()
-                  : new Date(upcomingExams[0].date).getMinutes()}{" "}
-                {new Date(upcomingExams[0].date).getDate()}
-                th {months[new Date(upcomingExams[0].date).getMonth()]},
-                {new Date(upcomingExams[0].date).getFullYear()} (
-                {days[new Date(upcomingExams[0].date).getDay()]}) ]
+                <p>
+                  {upcomingExams[0].name} [
+                  {new Date(upcomingExams[0].date).getHours() < 10
+                    ? "0" + new Date(upcomingExams[0].date).getHours()
+                    : new Date(upcomingExams[0].date).getHours()}
+                  :
+                  {new Date(upcomingExams[0].date).getMinutes() < 10
+                    ? "0" + new Date(upcomingExams[0].date).getMinutes()
+                    : new Date(upcomingExams[0].date).getMinutes()}{" "}
+                  {new Date(upcomingExams[0].date).getDate()}
+                  th {months[new Date(upcomingExams[0].date).getMonth()]},
+                  {new Date(upcomingExams[0].date).getFullYear()} (
+                  {days[new Date(upcomingExams[0].date).getDay()]}) ]
+                </p>
               </p>
             </Link>
           </Grid> */}
@@ -275,12 +289,23 @@ export default function Home(props) {
     if (previousExams)
       previousExamsUI = previousExams.map((ex, i) => {
         return (
-          <Grid key={ex._id} container alignItems="flex-start" xs className="sideExams">
+          <Grid
+            key={ex._id}
+            container
+            alignItems="flex-start"
+            xs
+            className="sideExams"
+          >
             <Grid item>
-              <AssignmentTurnedInOutlinedIcon style={{fontSize: "27px"}} />
+              <AssignmentTurnedInOutlinedIcon style={{ fontSize: "27px" }} />
             </Grid>
             <Grid item xs className="examName">
-              <Link to={`/previous-exam/${ex._id}`} style={{ textDecoration: 'none', color: "black" }}><span>{ex.name}</span></Link>
+              <Link
+                to={`/previous-exam/${ex._id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <span>{ex.name}</span>
+              </Link>
             </Grid>
             <Grid item xs={4.5}>
               <p>
@@ -304,7 +329,7 @@ export default function Home(props) {
     return (
       <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
         <Grid container spacing={3}>
-          <Grid item xs={8} sm className="side" style={{float: "left"}}>
+          <Grid item xs={8} sm className="side" style={{ float: "left" }}>
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid item>
                 <h5>My Courses</h5>
@@ -321,7 +346,7 @@ export default function Home(props) {
                 <h5>Upcoming Exams</h5>
               </Grid>
               <Grid item>
-                <InfoOutlinedIcon style={{fontSize: "35px"}}/>
+                <InfoOutlinedIcon style={{ fontSize: "35px" }} />
               </Grid>
             </Grid>
             <Grid item>
@@ -347,5 +372,5 @@ export default function Home(props) {
         </Grid>
       </Container>
     );
-  else return <CircularProgress />;
+  else return <LinearIndeterminate />;
 }

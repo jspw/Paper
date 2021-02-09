@@ -28,10 +28,11 @@ const mcqQuestionSchema = new Schema({
     type: Number,
     required: true,
   },
+
   marks: {
     type: Number,
     required: true,
   },
 });
-mcqQuestionSchema.plugin(require('mongoose-autopopulate'));
+mcqQuestionSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("McqQuestion", mcqQuestionSchema);

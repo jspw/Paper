@@ -6,6 +6,8 @@ import axios from "axios";
 import { Toast } from "react-bootstrap";
 import './CreateExam.scss';
 
+import "./CreateExam.css";
+
 const { TabPane } = Tabs;
 
 export default class CreateCourse extends React.Component {
@@ -16,6 +18,11 @@ export default class CreateCourse extends React.Component {
   totalTime = 0;
 
   addQuestion = (id, marks, time) => {
+    this.setState({
+      showToast: true,
+      examCreateMessage: "Question Created Successfully",
+    });
+
     this.totalMarks += parseInt(marks, 10);
     this.totalTime += time;
     this.questionIDs.push({
@@ -146,6 +153,23 @@ export default class CreateCourse extends React.Component {
     const { panes, activeKey } = this.state;
     return (
       <>
+        <Toast
+          autohide
+          className="toast-modify"
+          onClose={() => this.setState({ showToast: false })}
+          show={this.state.showToast}
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded mr-2"
+              alt=""
+            />
+            <strong className="mr-auto">Create Message</strong>
+            <small>just now</small>
+          </Toast.Header>
+          <Toast.Body>{this.state.examCreateMessage}</Toast.Body>
+        </Toast>
         <Tabs
           type="editable-card"
           onChange={this.onChange}
@@ -158,21 +182,6 @@ export default class CreateCourse extends React.Component {
             </TabPane>
           ))}
         </Tabs>
-        <Toast
-          onClose={() => this.setState({ showToast: false })}
-          show={this.state.showToast}
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
-              alt=""
-            />
-            <strong className="mr-auto">Exam Create Message</strong>
-            <small>1 sec ago</small>
-          </Toast.Header>
-          <Toast.Body>{this.state.examCreateMessage}</Toast.Body>
-        </Toast>
       </>
     );
   }

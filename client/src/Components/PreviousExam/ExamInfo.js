@@ -75,177 +75,299 @@ const ExamInfo = (props) => {
 
   const mcqExamData = props.mcqExamData;
   const cqExamData = props.cqExamData;
+  const onlyExamInfo = props.onlyExamInfo;
+  let mcq;
 
-  const mcq = mcqExamData.studentAnswers.map((test) => {
+  console.log("mcqExamData", mcqExamData);
+
+  if (mcqExamData)
+    mcq = mcqExamData.studentAnswers.map((test) => {
+      return (
+        <din>
+          <Card>
+            <Box fontWeight="fontWeightBold" m={1}>
+              {" "}
+              Question :{" "}
+            </Box>
+            <div className="card card-body bg-light">
+              <Typography>{test.mcqQuestion.description}</Typography>
+              {/* <Alert variant="primary"> */}
+              <Typography>{test.mcqQuestion.mainQuestion}</Typography>
+              {/* </Alert> */}
+            </div>
+
+            <CardContent>
+              {/* <Box fontWeight="fontWeightBold" m={1}> Options :  </Box> */}
+              <MenuList>
+                {test.mcqQuestion.options.map((op) => {
+                  if (test.mcqQuestion.correctAnswers[0].answer === op.option)
+                    return <Alert variant="success">{op.option}</Alert>;
+
+                  return <MenuItem>{op.option}</MenuItem>;
+                })}
+              </MenuList>
+            </CardContent>
+          </Card>
+          <br></br>
+        </din>
+      );
+    });
+
+  if (onlyExamInfo) {
+    mcq = onlyExamInfo.mcqQuestions.map((questions) => {
+      return (
+        <din>
+          <Card>
+            <Box fontWeight="fontWeightBold" m={1}>
+              {" "}
+              Question :{" "}
+            </Box>
+            <div className="card card-body bg-light">
+              <Typography>{questions.mcqQuestionId.description}</Typography>
+              {/* <Alert variant="primary"> */}
+              <Typography>{questions.mcqQuestionId.mainQuestion}</Typography>
+              {/* </Alert> */}
+            </div>
+
+            <CardContent>
+              {/* <Box fontWeight="fontWeightBold" m={1}> Options :  </Box> */}
+              <MenuList>
+                {questions.mcqQuestionId.options.map((op) => {
+                  if (
+                    questions.mcqQuestionId.correctAnswers[0].answer ===
+                    op.option
+                  )
+                    return <Alert variant="success">{op.option}</Alert>;
+
+                  return <MenuItem>{op.option}</MenuItem>;
+                })}
+              </MenuList>
+            </CardContent>
+          </Card>
+          <br></br>
+        </din>
+      );
+    });
+
     return (
-      <din>
-        <Card>
-          <Box fontWeight="fontWeightBold" m={1}>
-            {" "}
-            Question :{" "}
-          </Box>
-          <div className="card card-body bg-light">
-            <Typography>{test.mcqQuestion.description}</Typography>
-            {/* <Alert variant="primary"> */}
-            <Typography>{test.mcqQuestion.mainQuestion}</Typography>
-            {/* </Alert> */}
-          </div>
+      <Container fluid style={{ marginTop: "5px" }}>
+        <Alert variant="light">
+          <h1 className="text-center">Exam Name : {onlyExamInfo.name}</h1>
+        </Alert>
+        <Row>
+          <Col>
+            <Row>
+              <Col>
+                <Table
+                  // variant="dark"
+                  responsive
+                  hover
+                  bordered
+                  size="sm"
+                  bsPrefix="table"
+                >
+                  <tbody>
+                    <tr>
+                      <td>Date</td>
+                      <td>
+                        {new Date(onlyExamInfo.date).getDate()}
+                        th {months[new Date(onlyExamInfo.date).getMonth()]},
+                        {new Date(onlyExamInfo.date).getFullYear()} (
+                        {days[new Date(onlyExamInfo.date).getDay()]})
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>At</td>
+                      <td>
+                        {new Date(onlyExamInfo.date).getHours() < 10
+                          ? "0" + new Date(onlyExamInfo.date).getHours()
+                          : new Date(onlyExamInfo.date).getHours()}
+                        :
+                        {new Date(onlyExamInfo.date).getMinutes() < 10
+                          ? "0" + new Date(onlyExamInfo.date).getMinutes()
+                          : new Date(onlyExamInfo.date).getMinutes()}{" "}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Col>
 
-          <CardContent>
-            {/* <Box fontWeight="fontWeightBold" m={1}> Options :  </Box> */}
-            <MenuList>
-              {test.mcqQuestion.options.map((op) => {
-                if (test.mcqQuestion.correctAnswers[0].answer === op.option)
-                  return <Alert variant="success">{op.option}</Alert>;
+          <Col>
+            <Row>
+              <Col></Col>
+              <Col>
+                <Table
+                  // variant="dark"
+                  responsive
+                  hover
+                  bordered
+                  size="sm"
+                  bsPrefix="table"
+                >
+                  <tbody>
+                    <tr>
+                      <td>Total Marks</td>
+                      <td>{onlyExamInfo.totalMarks}</td>
+                    </tr>
 
-                return <MenuItem>{op.option}</MenuItem>;
-              })}
-            </MenuList>
-          </CardContent>
-        </Card>
-        <br></br>
-      </din>
+                    <tr>
+                      <td>Total Time</td>
+                      <td>{onlyExamInfo.totalTime} min</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Container className="scroll">{mcq}</Container>
+      </Container>
     );
-  });
+  } else
+    return (
+      <Container fluid style={{ marginTop: "5px" }}>
+        <Alert variant="light">
+          <h1 className="text-center">
+            Exam Name :{" "}
+            {mcqExamData ? mcqExamData.mcqExam.name : cqExamData.cqExam.name}
+          </h1>
+        </Alert>
+        <Row>
+          <Col>
+            <Row>
+              <Col>
+                <Table
+                  // variant="dark"
+                  responsive
+                  hover
+                  bordered
+                  size="sm"
+                  bsPrefix="table"
+                >
+                  <tbody>
+                    <tr>
+                      <td>Date</td>
+                      <td>
+                        {new Date(
+                          mcqExamData
+                            ? mcqExamData.submitOn
+                            : cqExamData.submitOn
+                        ).getDate()}
+                        th{" "}
+                        {
+                          months[
+                            new Date(
+                              mcqExamData
+                                ? mcqExamData.submitOn
+                                : cqExamData.submitOn
+                            ).getMonth()
+                          ]
+                        }
+                        ,
+                        {new Date(
+                          mcqExamData
+                            ? mcqExamData.submitOn
+                            : cqExamData.submitOn
+                        ).getFullYear()}{" "}
+                        (
+                        {
+                          days[
+                            new Date(
+                              mcqExamData
+                                ? mcqExamData.submitOn
+                                : cqExamData.submitOn
+                            ).getDay()
+                          ]
+                        }
+                        )
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>At</td>
+                      <td>
+                        {new Date(
+                          mcqExamData
+                            ? mcqExamData.mcqExam.date
+                            : cqExamData.cqExam.date
+                        ).getHours() < 10
+                          ? "0" +
+                            new Date(
+                              mcqExamData
+                                ? mcqExamData.mcqExam.date
+                                : cqExamData.cqExam.date
+                            ).getHours()
+                          : new Date(
+                              mcqExamData
+                                ? mcqExamData.mcqExam.date
+                                : cqExamData.cqExam.date
+                            ).getHours()}
+                        :
+                        {new Date(
+                          mcqExamData
+                            ? mcqExamData.mcqExam.date
+                            : cqExamData.cqExam.date
+                        ).getMinutes() < 10
+                          ? "0" +
+                            new Date(
+                              mcqExamData
+                                ? mcqExamData.mcqExam.date
+                                : cqExamData.cqExam.date
+                            ).getMinutes()
+                          : new Date(
+                              mcqExamData
+                                ? mcqExamData.mcqExam.date
+                                : cqExamData.cqExam.date
+                            ).getMinutes()}{" "}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Col>
 
-  return (
-    <Container fluid style={{ marginTop: "5px" }}>
-      <Alert variant="light">
-        <h1 className="text-center">
-          Exam Name :{" "}
-          {mcqExamData ? mcqExamData.mcqExam.name : cqExamData.cqExam.name}
-        </h1>
-      </Alert>
-      <Row>
-        <Col>
-          <Row>
-            <Col>
-              <Table
-                // variant="dark"
-                responsive
-                hover
-                bordered
-                size="sm"
-                bsPrefix="table"
-              >
-                <tbody>
-                  <tr>
-                    <td>Date</td>
-                    <td>
-                      {new Date(
-                        mcqExamData ? mcqExamData.submitOn : cqExamData.submitOn
-                      ).getDate()}
-                      th{" "}
-                      {
-                        months[
-                          new Date(
-                            mcqExamData
-                              ? mcqExamData.submitOn
-                              : cqExamData.submitOn
-                          ).getMonth()
-                        ]
-                      }
-                      ,
-                      {new Date(
-                        mcqExamData ? mcqExamData.submitOn : cqExamData.submitOn
-                      ).getFullYear()}{" "}
-                      (
-                      {
-                        days[
-                          new Date(
-                            mcqExamData
-                              ? mcqExamData.submitOn
-                              : cqExamData.submitOn
-                          ).getDay()
-                        ]
-                      }
-                      )
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>At</td>
-                    <td>
-                      {new Date(
-                        mcqExamData
-                          ? mcqExamData.mcqExam.date
-                          : cqExamData.cqExam.date
-                      ).getHours() < 10
-                        ? "0" +
-                          new Date(
-                            mcqExamData
-                              ? mcqExamData.mcqExam.date
-                              : cqExamData.cqExam.date
-                          ).getHours()
-                        : new Date(
-                            mcqExamData
-                              ? mcqExamData.mcqExam.date
-                              : cqExamData.cqExam.date
-                          ).getHours()}
-                      :
-                      {new Date(
-                        mcqExamData
-                          ? mcqExamData.mcqExam.date
-                          : cqExamData.cqExam.date
-                      ).getMinutes() < 10
-                        ? "0" +
-                          new Date(
-                            mcqExamData
-                              ? mcqExamData.mcqExam.date
-                              : cqExamData.cqExam.date
-                          ).getMinutes()
-                        : new Date(
-                            mcqExamData
-                              ? mcqExamData.mcqExam.date
-                              : cqExamData.cqExam.date
-                          ).getMinutes()}{" "}
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Col>
+          <Col>
+            <Row>
+              <Col></Col>
+              <Col>
+                <Table
+                  // variant="dark"
+                  responsive
+                  hover
+                  bordered
+                  size="sm"
+                  bsPrefix="table"
+                >
+                  <tbody>
+                    <tr>
+                      <td>Total Marks</td>
+                      <td>
+                        {mcqExamData
+                          ? mcqExamData.mcqExam.totalMarks
+                          : cqExamData.cqExam.totalMarks}
+                      </td>
+                    </tr>
 
-        <Col>
-          <Row>
-            <Col></Col>
-            <Col>
-              <Table
-                // variant="dark"
-                responsive
-                hover
-                bordered
-                size="sm"
-                bsPrefix="table"
-              >
-                <tbody>
-                  <tr>
-                    <td>Total Marks</td>
-                    <td>
-                      {mcqExamData
-                        ? mcqExamData.mcqExam.totalMarks
-                        : cqExamData.cqExam.totalMarks}
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Total Time</td>
-                    <td>
-                      {mcqExamData
-                        ? mcqExamData.mcqExam.totalTime
-                        : cqExamData.cqExam.totalTime}{" "}
-                      min
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Container className="scroll">{mcq}</Container>
-    </Container>
-  );
+                    <tr>
+                      <td>Total Time</td>
+                      <td>
+                        {mcqExamData
+                          ? mcqExamData.mcqExam.totalTime
+                          : cqExamData.cqExam.totalTime}{" "}
+                        min
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Container className="scroll">{mcq}</Container>
+      </Container>
+    );
 };
 
 export default ExamInfo;
