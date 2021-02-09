@@ -302,7 +302,7 @@ export default function Home(props) {
     return (
       <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
         <Grid container spacing={3}>
-          <Grid item xs={8} sm className="side" style={{ float: "left" }}>
+          <Grid item xs={12} sm md  className="side" style={{ float: "left" }}>
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid item>
                 <h5>My Courses</h5>
@@ -313,7 +313,7 @@ export default function Home(props) {
             </Grid>
             <div>{courseUI}</div>
           </Grid>
-          <Grid item xs={12} sm={5} className="upcoming">
+          <Grid item xs={12} sm md={5} className="upcoming">
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid item>
                 <h5>Upcoming Exams</h5>
@@ -333,7 +333,7 @@ export default function Home(props) {
             </div>
             <div>{upcomingExamsUI}</div>
           </Grid>
-          <Grid item xs={8} sm className="side">
+          <Grid item xs={12} sm md className="side">
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid item>
                 <h5>Previous Exams</h5>

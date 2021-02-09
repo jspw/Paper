@@ -24,8 +24,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { getRenderPropValue } from "antd/lib/_util/getRenderPropValue";
 import axios from "axios";
 import { Toast } from "react-bootstrap";
-
-import "./CreateExam.css";
+import "./CreateExam.scss";
 
 const useStyles = makeStyles((theme) => ({
   textField: {

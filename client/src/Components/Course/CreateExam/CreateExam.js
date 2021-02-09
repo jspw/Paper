@@ -6,8 +6,6 @@ import axios from "axios";
 import { Toast } from "react-bootstrap";
 import './CreateExam.scss';
 
-import "./CreateExam.css";
-
 const { TabPane } = Tabs;
 
 export default class CreateCourse extends React.Component {
