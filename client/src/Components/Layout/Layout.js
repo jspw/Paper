@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   Button,
   Col,
@@ -7,18 +6,11 @@ import {
   Row,
   Modal,
   Form,
-  Spinner,
 } from "react-bootstrap";
-
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-import socketIOClient from "socket.io-client";
 
 const Layout = (props) => {
   const [showModal, setShowModal] = useState(true);

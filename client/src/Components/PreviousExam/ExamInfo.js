@@ -1,51 +1,21 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import {
-  Button,
   Col,
   Container,
   Row,
-  Modal,
-  Form,
-  Spinner,
   Card,
   Alert,
-  Jumbotron,
   Table,
-  Tab,
-  TabContainer,
-  ListGroup,
-  TabContent,
-  TabPane,
 } from "react-bootstrap";
-
-import axios from "axios";
-
-import "./PreviousExam.css";
-
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   Box,
   CardContent,
-  CardHeader,
-  List,
-  ListItem,
-  Menu,
   MenuList,
   Typography,
 } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import "./PreviousExam.css";
 
-import {
-  DataGrid,
-  getNumericColumnOperators,
-  PreferencePanelsValue,
-} from "@material-ui/data-grid";
 
 const ExamInfo = (props) => {
   var months = [

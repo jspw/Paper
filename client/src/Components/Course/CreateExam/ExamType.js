@@ -1,23 +1,13 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
-import { Tabs } from "antd";
-import Question from "./Question";
-import axios from "axios";
-import { Toast } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Forms from "../../Generic/Forms";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import CreateExam from "./CreateExam";
 import "./CreateExam.scss";
-
-const { TabPane } = Tabs;
 
 const ExamType = (props) => {
   const [examType, setexamType] = useState("");

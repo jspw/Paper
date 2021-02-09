@@ -1,57 +1,15 @@
 import React, { useState } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link, NavLink } from "react-router-dom";
 import { IoCreate } from "react-icons/io5";
 import { IoClipboard } from "react-icons/io5";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
-/* import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab'; */
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import CreateExam from './CreateExam/CreateExam';
 import "./Sidebar.scss";
 import ExamType from './CreateExam/ExamType';
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
 export default function Sidebar(props) {
 
   let displayContent;
@@ -64,20 +22,12 @@ export default function Sidebar(props) {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-/*     const [content, setContent] = useState({
-      createExam: false,
-      exam: false,
-      students: false,
-      teacher: false,
-      info: false,
-    }); */
     const [content, setContent] = useState('');
     const handleClick = (prop) => (event) => {
       setContent(prop);
     }
     console.log(content);
     if(content === "createExam") displayContent = <ExamType className="content"  courseData={props.courseData}/>
-    // displayContent = <CreateExam className="content" courseData={props.courseData}/>
     
     return (
       <div className="parent">
@@ -153,7 +103,6 @@ export default function Sidebar(props) {
           </ul>
         </div>
         <div className={sidebar ? "content__small" : "content__large"}>{displayContent}</div>
-        {/* {displayContent} */}
       </div>
     );
 }
