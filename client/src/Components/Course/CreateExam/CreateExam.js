@@ -134,6 +134,7 @@ export default class CreateCourse extends React.Component {
           createExam={this.createExam}
           totalMarks={this.totalMarks}
           totalTime={this.totalTime}
+          examType = {this.examType}
         />
       ),
       key: activeKey,

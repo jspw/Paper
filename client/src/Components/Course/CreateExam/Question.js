@@ -203,7 +203,7 @@ export default function Question(props) {
       </Row>
       <form onSubmit={sendQuestion}>
         <Row>
-          <Col xs={6}>
+          <Col xs={12} lg={6}>
             <Col lg={12}>
               <Row className="justify-content-flex-start">
                 <Col xs={12} md={6} lg={12}>

@@ -94,7 +94,7 @@ export default function Sidebar(props) {
             </li>
             <li className="sidebar__item">
               <a
-                href="#create-exam"
+                href="#create-exam" id="create-exam"
                 className="sidebar__item__link"
                 onClick={handleClick("createExam")}
               >
@@ -103,13 +103,13 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#exams" className="sidebar__item__link" onClick={handleClick("exams")}>
+              <a href="#exams" id="exams" className="sidebar__item__link" onClick={handleClick("exams")}>
                 <IoClipboard className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Exams</span>
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#students"
+              <a href="#students" id="students"
                 className="sidebar__item__link"
                 onClick={handleClick("students")}
               >
@@ -118,7 +118,7 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#teacher"
+              <a href="#teacher" id="teacher"
                 className="sidebar__item__link"
                 onClick={handleClick("teacher")}
               >
@@ -127,7 +127,7 @@ export default function Sidebar(props) {
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#info" className="sidebar__item__link" onClick={handleClick("info")}>
+              <a href="#info" id="info" className="sidebar__item__link" onClick={handleClick("info")}>
                 <FaInfoCircle className="sidebar__item__icon" />
                 <span className="sidebar__item__text">Course Info</span>
               </a>
