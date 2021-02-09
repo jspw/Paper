@@ -24,11 +24,7 @@ export default class CreateCourse extends React.Component {
   quesNo = 2;
   totalMarks = 0;
   totalTime = 0;
-  handleChange = (event) => {
-    this.setState({
-      examType: event.target.value,
-    })
-  }
+
   addQuestion = (id, marks, time) => {
     this.setState({
       showToast: true,
@@ -94,7 +90,7 @@ export default class CreateCourse extends React.Component {
           createExam={this.createExam}
           totalMarks={this.totalMarks}
           totalTime={this.totalTime}
-          examType={this.examType}
+          examType={this.state.examType}
         />
       ),
       key: "1",
@@ -108,7 +104,14 @@ export default class CreateCourse extends React.Component {
     showToast: false,
     examCreateMessage: null,
     create: true,
+    examType: '',
   };
+  handleChange = (event) => {
+    this.setState({
+      examType: event.target.value,
+    })
+    console.log(event.target.value);
+  }
   handleSubmit = () => {
     this.setState({
       create: false,
@@ -134,7 +137,7 @@ export default class CreateCourse extends React.Component {
           createExam={this.createExam}
           totalMarks={this.totalMarks}
           totalTime={this.totalTime}
-          examType = {this.examType}
+          examType = {this.state.examType}
         />
       ),
       key: activeKey,
@@ -209,7 +212,7 @@ export default class CreateCourse extends React.Component {
                       <InputLabel id="examType">Exam Type</InputLabel>
                       <Select
                         id="examType"
-                        value={this.examType}
+                        value={this.state.examType}
                         onChange={this.handleChange}
                       >
                         <MenuItem disabled>Exam Type</MenuItem>
