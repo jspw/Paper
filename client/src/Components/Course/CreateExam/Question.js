@@ -23,6 +23,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { getRenderPropValue } from "antd/lib/_util/getRenderPropValue";
 import axios from "axios";
+import { Toast } from "react-bootstrap";
+
+import "./CreateExam.css";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -55,6 +58,8 @@ export default function Question(props) {
   const classes = useStyles();
   const leftClasses = leftStyles();
 
+  let questionsCreated = 0;
+
   const [values, setValues] = useState({
     description: "",
     question: null,
@@ -71,8 +76,13 @@ export default function Question(props) {
   });
   const [open, setOpen] = React.useState(false);
 
+  const [questionEditDisable, setQuestionEditDisable] = useState(false);
+
+  const [showToast, setShowToast] = useState(false);
+
+  console.log("questionEditDisable", questionEditDisable);
+
   const handleClickOpen = () => {
-    // setOpen(true);
     if (
       values.question &&
       values.optA &&
@@ -86,9 +96,9 @@ export default function Question(props) {
     ) {
       setOpen(true);
     } else {
+      setShowToast(true);
     }
   };
-  console.log(open);
 
   const handleClose = () => {
     setOpen(false);
@@ -144,7 +154,14 @@ export default function Question(props) {
         ],
         correctAnswers: [
           {
-            answer: values.ans,
+            answer:
+              values.ans === "A"
+                ? values.optA
+                : values.ans === "B"
+                ? values.optB
+                : values.ans === "C"
+                ? values.optC
+                : values.optD,
           },
         ],
         time: parseInt(values.min, 10) * 60 + parseInt(values.sec, 10),
@@ -155,6 +172,8 @@ export default function Question(props) {
         console.log(response.data);
         if (response.data.status === "OK") {
           handleQuestionAdd(response.data.result.data._id);
+          setQuestionEditDisable(true);
+          questionsCreated++;
         }
       })
       .catch((error) => {
@@ -164,6 +183,20 @@ export default function Question(props) {
 
   return (
     <Container fluid className="justify-content-flex-start">
+      <Toast
+        className="toast-modify"
+        autohide
+        onClose={() => setShowToast(false)}
+        show={showToast}
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Alert Message</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>You Have To Create At Least One Question !</Toast.Body>
+      </Toast>
+
       <Row className="justify-content-center">
         <Col xs="auto">
           <h3>Create Your Question Here</h3>
@@ -357,7 +390,7 @@ export default function Question(props) {
               Edit
             </Button>
             <Button
-              // onClick={sendQuestion}
+              disabled={questionEditDisable}
               variant="contained"
               color="primary"
               className={classes.button}

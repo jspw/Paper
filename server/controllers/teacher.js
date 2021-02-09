@@ -505,7 +505,7 @@ exports.postCreateMcqQuestion = (req, res, next) => {
         errorHandler.validationError(res, 400, error);
       });
   } else {
-    console.log(error);
+    // console.log(error);
     errorHandler.unauthorizedAccess(res);
   }
 };
@@ -671,7 +671,7 @@ exports.getMcqSubmits = (req, res, next) => {
       .then((result) => {
         console.log(result);
         if (result.length > 0) apiResponseInJson(res, 200, result);
-        else errorHandler.validationError(res, 400, "No Mcq Exam Found");
+        else errorHandler.validationError(res, 404, "No Participate Found");
       })
       .catch((error) => {
         console.log(error);
@@ -688,7 +688,7 @@ exports.getCqSubmits = (req, res, next) => {
     })
       .then((result) => {
         if (result.length > 0) apiResponseInJson(res, 200, result);
-        else errorHandler.validationError(res, 400, "No Cq Exam Found");
+        else errorHandler.validationError(res, 404, "No Participate Found");
       })
       .catch((error) => {
         console.log(error);

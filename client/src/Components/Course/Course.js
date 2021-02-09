@@ -15,6 +15,7 @@ import Tab from '@material-ui/core/Tab'; */
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import "./Course.scss";
+import LinearIndeterminate from '../Generic/Loader';
 
 export default function Course(props) {
   let { id } = useParams();
@@ -38,5 +39,5 @@ export default function Course(props) {
   // console.log("Course Data", courseData);
 
   if (courseData) return <Sidebar courseData={courseData} />;
-  else return <CircularProgress></CircularProgress>;
+  else return <LinearIndeterminate></LinearIndeterminate>;
 }

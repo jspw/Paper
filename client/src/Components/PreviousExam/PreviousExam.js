@@ -26,14 +26,10 @@ import "./PreviousExam.css";
 import MarkSheet from "./MarkSheet";
 
 import MenuItem from "@material-ui/core/MenuItem";
+import LinearIndeterminate from '../Generic/Loader';
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {
-  Box,
-  CardContent,
-  MenuList,
-  Typography,
-} from "@material-ui/core";
+import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 import ExamInfo from "./ExamInfo";
@@ -74,6 +70,11 @@ const PreviousExam = (props) => {
   const [mcqExamsData, setMcqExamsData] = useState(null);
   const [cqExamsData, setCqExamsData] = useState(null);
 
+  const [onlyExamInfo, setOnlyExamInfo] = useState(null);
+
+  let mcq;
+  let cq;
+
   useEffect(() => {
     let examType = "mcq";
 
@@ -92,6 +93,14 @@ const PreviousExam = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        axios
+          .get(`${role}/exam/${id}`)
+          .then((response) => {
+            setOnlyExamInfo(response.data.result.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
 
     examType = "cq";
@@ -109,11 +118,18 @@ const PreviousExam = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        axios
+          .get(`${role}/exam/${id}`)
+          .then((response) => {
+            setOnlyExamInfo(response.data.result.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
   }, []);
 
-  let mcq;
-  let cq;
+  console.log("onlyExamInfo", onlyExamInfo);
 
   if (mcqExamData)
     mcq = mcqExamData.studentAnswers.map((test) => {
@@ -149,8 +165,7 @@ const PreviousExam = (props) => {
         </div>
       );
     });
-
-  if (cqExamData)
+  else if (cqExamData)
     cq = cqExamData.studentAnswers.map((test) => {
       return (
         <din>
@@ -189,36 +204,39 @@ const PreviousExam = (props) => {
       );
     });
 
-  if (mcqExamsData) {
+  if (role === "Teacher" && (mcqExamsData || onlyExamInfo)) {
     return (
       <Tab.Container
         className="scroll-off"
         id="list-group-tabs-example"
-        defaultActiveKey="#link1"
+        defaultActiveKey="#exam-info"
       >
         <Row>
-          <Col sm={2} >
-            <ListGroup variant="flush" className='align-items-center'>
-              <ListGroup.Item action href="#link1">
+          <Col sm={2}>
+            <ListGroup variant="flush" className="align-items-center">
+              <ListGroup.Item action href="#exam-info">
                 Exam Info
               </ListGroup.Item>
-              <ListGroup.Item action href="#link2">
+              <ListGroup.Item action href="#mark-sheet">
                 Mark Sheet
               </ListGroup.Item>
-              <ListGroup.Item action href="#link3">
+              <ListGroup.Item action href="#reviews">
                 Reviews
               </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col sm={10}>
             <Tab.Content>
-              <Tab.Pane eventKey="#link1">
-                <ExamInfo mcqExamData={mcqExamsData[0]} />
+              <Tab.Pane eventKey="#exam-info">
+                <ExamInfo
+                  onlyExamInfo={onlyExamInfo}
+                  mcqExamData={mcqExamsData ? mcqExamsData[0] : null}
+                />
               </Tab.Pane>
-              <Tab.Pane eventKey="#link2">
+              <Tab.Pane eventKey="#mark-sheet">
                 <MarkSheet mcqExamsData={mcqExamsData} />
               </Tab.Pane>
-              <Tab.Pane eventKey="#link3">Reports</Tab.Pane>
+              <Tab.Pane eventKey="#reviews">Reports</Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
@@ -383,7 +401,16 @@ const PreviousExam = (props) => {
         {mcq ? mcq : cq}
       </Container>
     );
-  else return <CircularProgress />;
+  else if (onlyExamInfo && role === "Student")
+    return (
+      <Container>
+        <div className="d-flex justify-content-center">
+          <Alert variant="danger">You Haven't Participated In This Exam</Alert>
+        </div>
+        <ExamInfo onlyExamInfo={onlyExamInfo} />
+      </Container>
+    );
+  else return <LinearIndeterminate />;
 };
 
 export default PreviousExam;

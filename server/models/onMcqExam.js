@@ -43,10 +43,14 @@ const onMcqExamSchema = new Schema({
   feedback:{
     type : String
   },
+  windowChanged: {
+    type: Number,
+  },
   submitOn: {
     type: Date,
     default: Date.now,
   },
 });
 onMcqExamSchema.plugin(require("mongoose-autopopulate"));
+onMcqExamSchema.index({ mcqExam: 1, student: 1 }, { unique: true });
 module.exports = mongoose.model("OnMcqExam", onMcqExamSchema);

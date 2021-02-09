@@ -10,7 +10,9 @@ const bcrypt = require("bcryptjs");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 exports.getStudent = (req, res, next) => {
-  StudentModel.findById(req.params.id)
+  const id = req.params.id ? req.params.id : req.user._id;
+
+  StudentModel.findById(id)
     .sort({
       "courses.mcqExams.examId.date": 1,
       "courses.cqExams.examId.date": 1,
@@ -79,6 +81,8 @@ exports.getStudent = (req, res, next) => {
 };
 
 exports.getEditStudent = (req, res, next) => {
+  // const id = req.params.id ? req.params.id : req.user._id;
+
   if (req.user._id == req.params.id) {
     StudentModel.findById(req.params.id)
       .populate("varsity")
@@ -572,21 +576,6 @@ exports.getCourse = (req, res, next) => {
     .then((course) => {
       console.log(course);
       if (course) {
-        // course.mcqExams.forEach((exam) => {
-        //   exam.examId.mcqQuestions = undefined;
-        // });
-
-        // course.cqExams.forEach((exam) => {
-        //   exam.examId.cqQuestions = undefined;
-        // });
-
-        // course.createdBy.courses = undefined;
-
-        // course.students.forEach((student) => {
-        //   student.student.varsity = undefined;
-        //   student.student.courses = undefined;
-        // });
-
         apiResponseInJson(res, 200, course);
       } else errorHandler.validationError(res, 400, "No Course Found");
     })
@@ -598,74 +587,115 @@ exports.getCourse = (req, res, next) => {
 
 exports.postMcqSubmit = (req, res, next) => {
   const examId = req.params.id;
-  const { studentAnswers } = req.body;
+  const { studentAnswers, windowChanged, feedback } = req.body;
 
   let solved = 0;
   let wrong = 0;
   let marks = 0;
 
-  McqExamModel.findById(examId)
-    .then((exam) => {
-      for (let i = 0; i < studentAnswers.length; i++) {
-        if (
-          studentAnswers[i].mcqQuestion ==
-          exam.mcqQuestions[i].mcqQuestionId._id
-        ) {
-          if (
-            studentAnswers[i].studentAnswer ==
-            exam.mcqQuestions[i].mcqQuestionId.correctAnswers[0].answer
-          ) {
-            solved++;
-            marks += exam.mcqQuestions[i].mcqQuestionId.marks;
-          }
-        }
+  OnMcqExamModel.findOne({
+    mcqExam: examId,
+    student: req.user._id,
+  })
+    .then((result) => {
+      console.log(result);
+      if (result == null) {
+        McqExamModel.findById(examId)
+          .then((exam) => {
+            for (let i = 0; i < studentAnswers.length; i++) {
+              for (let j = 0; j < exam.mcqQuestions.length; j++) {
+                if (
+                  studentAnswers[i].mcqQuestion ==
+                    exam.mcqQuestions[j].mcqQuestionId._id &&
+                  studentAnswers[i].studentAnswer ==
+                    exam.mcqQuestions[j].mcqQuestionId.correctAnswers[0].answer
+                ) {
+                  solved++;
+                  marks += exam.mcqQuestions[j].mcqQuestionId.marks;
+                }
+              }
+            }
+
+            wrong = studentAnswers.length - solved;
+
+            console.log(solved, wrong, marks);
+
+            const onMcqExam = new OnMcqExamModel({
+              mcqExam: examId,
+              student: req.user._id,
+              studentAnswers: studentAnswers,
+              solved: solved,
+              wrong: wrong,
+              mark: marks,
+              windowChanged: windowChanged,
+              feedback: feedback,
+            });
+            onMcqExam
+              .save()
+              .then((result) => {
+                console.log(result);
+                apiResponseInJson(res, 200, result);
+              })
+              .catch((error) => {
+                console.log(error);
+                errorHandler.validationError(res, 400, error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            errorHandler.validationError(res, 400, error);
+          });
+      } else {
+        errorHandler.validationError(
+          res,
+          401,
+          "You Have Already Participated On The Exam"
+        );
       }
-
-      wrong = studentAnswers.length - solved;
-
-      console.log(solved, wrong, marks);
-
-      const onMcqExam = new OnMcqExamModel({
-        mcqExam: examId,
-        student: req.user._id,
-        studentAnswers: studentAnswers,
-        solved: solved,
-        wrong: wrong,
-        mark: marks,
-      });
-      onMcqExam
-        .save()
-        .then((result) => {
-          console.log(result);
-          apiResponseInJson(res, 200, result);
-        })
-        .catch((error) => {
-          console.log(error);
-          errorHandler.validationError(res, 400, error);
-        });
     })
     .catch((error) => {
       console.log(error);
-      errorHandler.validationError(res, 400, error);
     });
 };
 
 exports.postCqSubmit = (req, res, next) => {
   const examId = req.params.id;
-  const { studentAnswers } = req.body;
-  const onCqExamModel = new OnCqExamModel({
-    cqExam: examId,
+  const { studentAnswers, windowChanged, feedback } = req.body;
+
+  OnCqExamModel.findOne({
     student: req.user._id,
-    studentAnswers: studentAnswers,
-  });
-  onCqExamModel
-    .save()
+    cqExam: examId,
+  })
     .then((result) => {
-      apiResponseInJson(res, 200, result);
+      console.log(result);
+      if (result == null) {
+        const onCqExamModel = new OnCqExamModel({
+          cqExam: examId,
+          student: req.user._id,
+          studentAnswers: studentAnswers,
+          windowChanged: windowChanged,
+          feedback: feedback,
+        });
+        onCqExamModel
+          .save()
+          .then((result) => {
+            apiResponseInJson(res, 200, result);
+          })
+          .catch((error) => {
+            console.log(error);
+            errorHandler.validationError(res, 400, error);
+          });
+      } else {
+        errorHandler.validationError(
+          res,
+          401,
+          "You Have Already Participated On The Exam"
+        );
+      }
     })
     .catch((error) => {
       console.log(error);
-      errorHandler.validationError(res, 400, error);
+      errorHandler.serverError(res);
     });
 };
 
