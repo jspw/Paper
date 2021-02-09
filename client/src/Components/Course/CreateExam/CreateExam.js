@@ -4,6 +4,7 @@ import { Tabs } from "antd";
 import Question from "./Question";
 import axios from "axios";
 import { Toast } from "react-bootstrap";
+import './CreateExam.scss';
 
 import "./CreateExam.css";
 

@@ -16,8 +16,8 @@ const LinearIndeterminate = () => {
 
   return (
     <div className={classes.root}>
+      <LinearProgress  />
       <LinearProgress />
-      <LinearProgress color="secondary" />
     </div>
   );
 };
