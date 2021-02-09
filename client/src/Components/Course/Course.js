@@ -38,6 +38,6 @@ export default function Course(props) {
 
   // console.log("Course Data", courseData);
 
-  if (courseData) return <Sidebar courseData={courseData} />;
+  if (courseData) return <div className="course"><Sidebar courseData={courseData} /></div>;
   else return <LinearIndeterminate></LinearIndeterminate>;
 }
