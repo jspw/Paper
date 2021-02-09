@@ -466,6 +466,31 @@ exports.postCreateCourse = (req, res, next) => {
       .then((course) => {
         console.log(course);
 
+        // console.log(req.socke t);
+        // let interval;
+
+        // let socket = req.socket;
+
+        // const getApiAndEmit = (socket) => {
+        //   const response = new Date();
+        // Emitting a new message. Will be consumed by the client
+        //   socket.emit("bal", response);
+        // };
+
+        // if (interval) {
+        //   clearInterval(interval);
+        // }
+        // interval = setInterval(() => getApiAndEmit(socket), 1000);
+        // socket.on("Client", (data) => {
+        //   console.log(data);
+        // });
+        // socket.on("disconnect", () => {
+        //   console.log("Client disconnected");
+        //   clearInterval(interval);
+        // });
+
+        // req.socket.to(course.varsity.id).emit(course.department.id, course);
+
         req.user.courses.push({
           course: course._id,
         });
@@ -482,9 +507,11 @@ exports.postCreateCourse = (req, res, next) => {
           });
       })
       .catch((error) => {
+        console.log(error);
         errorHandler.validationError(res, 401, error);
       });
   } else {
+    console.log(error);
     errorHandler.unauthorizedAccess(res);
   }
 };

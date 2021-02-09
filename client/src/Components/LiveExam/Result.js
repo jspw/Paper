@@ -57,7 +57,7 @@ const Result = (props) => {
             <Row className="justify-content-center">
               <Col xs="auto">
                <br></br>
-                <Jumbotron>
+                {/* <Jumbotron> */}
                   <h1>Exam Finished!</h1>
                   <p>
                     <div className="justify-content-center">
@@ -70,7 +70,7 @@ const Result = (props) => {
                       </Alert>
                     </div>
                   </p>
-                </Jumbotron>
+                {/* </Jumbotron> */}
               </Col>
             </Row>
           </Col>

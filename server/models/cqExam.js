@@ -7,6 +7,7 @@ const cqExamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Course",
     required: true,
+    autopopulate: { maxDepth: 1 },
   },
   name: {
     type: String,
@@ -34,6 +35,12 @@ const cqExamSchema = new Schema({
     type: Date,
     required: true,
   },
+  // createdBy: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Teacher",
+  //   required: true,
+  //   autopopulate: { maxDepth: 1 },
+  // },
 });
-cqExamSchema.plugin(require('mongoose-autopopulate'));
+cqExamSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("CqExam", cqExamSchema);

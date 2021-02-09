@@ -35,6 +35,12 @@ const mcqExamSchema = new Schema({
     type: Date,
     required:true
   },
+  // createdBy : {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Teacher",
+  //   required: true,
+  //   autopopulate: { maxDepth: 1 },
+  // }
 });
 mcqExamSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model("McqExam", mcqExamSchema);

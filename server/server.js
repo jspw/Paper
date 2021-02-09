@@ -14,6 +14,8 @@ const mongodbUrl = process.env.MONGO_URL;
 
 const PORT = process.env.SERVER_PORT;
 
+let interval;
+
 const getApiAndEmit = (socket) => {
   const response = new Date();
   // if (response.getSeconds() > 30)
@@ -37,21 +39,19 @@ mongoose
       origin: ["*"],
     });
 
+    var clients = 0;
+
     io.on("connection", (socket) => {
       console.log("New client Connected!");
-      const ip = socket.handshake.headers || socket.conn.remoteAddress;
-      console.log(ip);
-      console.log("Socket ID : ", socket.id);
+      // const ip = socket.handshake.headers || socket.conn.remoteAddress;
+      // console.log(ip);
 
-      app.use((req, res, next) => {
-        res.socket = socket;
-        next();
-      });
+      // console.log("Socket ID : ", socket.id);
+      // console.log("Clients connected : ", clients);
 
       socket.on("disconnect", (reason) => {
         console.log("Client Disconnected!");
         console.log("Reason", reason);
-        clearInterval(interval);
       });
     });
 
@@ -60,6 +60,10 @@ mongoose
 
     server.listen(PORT, () => {
       console.log(`Server is listening at localhost:${PORT}`);
+      app.use((req, res, next) => {
+        req.socket = socket;
+        next();
+      });
     });
 
     // Handle Unhandled Rejections
