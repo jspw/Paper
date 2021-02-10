@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Noto Serif', serif;
 }
 
 .timer-container ul {
@@ -15,15 +16,21 @@
 }
 
 .timer-container ul li {
-  background: #f5f5f5;
+  background: #f6f8fa;
   border-radius: 2px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   margin: 0 0.5rem;
-  box-shadow: 0px 0px 5px rgba(207, 207, 207, 0.5);
+  box-shadow: 0px 0px 5px rgba(215, 235, 247, 0.5);
 }
 
 .timer-container ul li span {
   font-size: 2rem;
+}
+.enterExam {
+  margin-top: 3.5%;
+}
+.enterHeading {
+  margin-bottom: 1.5%;
 }

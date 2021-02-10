@@ -350,10 +350,7 @@ export default function Home(props) {
                 alignitems="flex-start"
                 className="upcoming__next"
               >
-                {/*               <Grid item>
-                  <SubjectIcon />
-                </Grid> */}
-                <Link to={`/upcoming-exam/${ex._id}`}>
+                <Link to={`/upcoming-exam/${ex._id}`} style={{textDecoration: "none", color: "black"}}>
                   <Row className="examHeading d-flex justify-content-between">
                     <Col xs="auto">
                       <span className="examName">
@@ -374,6 +371,9 @@ export default function Home(props) {
                         {new Date(ex.date).getFullYear()}
                       </p>
                     </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{paddingBottom: "10px"}}>{ex.courseName}</Col>
                   </Row>
                 </Link>
               </Container>
@@ -426,21 +426,20 @@ export default function Home(props) {
     return (
       // <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
       <Grid container justify="space-between" alignItems="flex-start">
-        <Grid item xs={12} md={2} className="leftside" style={{ float: "left" }}>
+        <Grid
+          item
+          xs={12}
+          md={2}
+          className="leftside"
+          style={{ float: "left", paddingTop: "10px", paddingLeft: "10px" }}
+        >
           <Grid container justify="space-between">
             <Grid item>
-              <h5>My Courses</h5>
+              <h4 className="leftHeading">My Courses</h4>
             </Grid>
             {role === "Teacher" ? (
               <Grid item>
-                <Button
-                  // variant = 'outlined'
-                  color="primary"
-                  startIcon={<AddIcon />}
-                  onClick={handleClickOpen}
-                >
-                  Create Course
-                </Button>
+                <AddIcon onClick={handleClickOpen} style={{ fontSize: "35px", color: "#234058", cursor: "pointer" }}/>
                 <Dialog
                   open={open}
                   onClose={handleClose}
@@ -507,13 +506,21 @@ export default function Home(props) {
           </Grid>
           {courseUI}
         </Grid>
-        <Grid item xs={12} md={6} className="upcoming">
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className="upcoming"
+          style={{ padding: "10px" }}
+        >
           <Grid container justify="space-between" alignitems="flex-start">
             <Grid item>
-              <h5>Upcoming Exams</h5>
+              <h4 className="centerHeading">Upcoming Exams</h4>
             </Grid>
             <Grid item>
-              <InfoOutlinedIcon style={{ fontSize: "35px", color: "#234058" }} />
+              <InfoOutlinedIcon
+                style={{ fontSize: "35px", color: "#234058" }}
+              />
             </Grid>
           </Grid>
           <Grid item>
@@ -531,7 +538,9 @@ export default function Home(props) {
               <>
                 <Grid container justify="center">
                   <Grid item xs="auto" style={{ marginTop: "10%" }}>
-                    <FaRegCheckCircle style={{ fontSize: "50px", color: "#234058"}} />
+                    <FaRegCheckCircle
+                      style={{ fontSize: "50px", color: "#234058" }}
+                    />
                   </Grid>
                 </Grid>
                 <Grid container justify="center" style={{ marginTop: "2%" }}>
@@ -549,10 +558,16 @@ export default function Home(props) {
           </div>
           <div>{upcomingExamsUI}</div>
         </Grid>
-        <Grid item xs={12} md={3} className="rightside">
+        <Grid
+          item
+          xs={12}
+          md={3}
+          className="rightside"
+          style={{ padding: "10px" }}
+        >
           <Grid container justify="space-between" alignitems="flex-start">
             <Grid item>
-              <h5>Previous Exams</h5>
+              <h4 className="rightHeading">Previous Exams</h4>
             </Grid>
           </Grid>
           <Grid item>

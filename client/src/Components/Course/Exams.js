@@ -1,20 +1,5 @@
 import React from "react";
-import { Col, Container, Row, Card, Alert, Table } from "react-bootstrap";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
-
-import {
-  Button,
-  Modal,
-  Form,
-  Spinner,
-  Jumbotron,
-  Tab,
-  TabContainer,
-  ListGroup,
-  TabContent,
-  TabPane,
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const Exams = (props) => {
   console.log(props.userInfo.role);
@@ -119,9 +104,6 @@ const Exams = (props) => {
         <tr>
           <td>{x++}</td>
           <td>
-            <span class="crown badge" style={{ fontSize: "20px" }}>
-              {x == 2 ? "👑" : ""}
-            </span>
             {exam.name}
           </td>
           <td>{exam.examType}</td>
@@ -163,7 +145,6 @@ const Exams = (props) => {
           <th>Exam Type</th>
           <th>Total Marks</th>
           <th>Total Time</th>
-
           <th>Condition</th>
           <th>Date</th>
           {props.userInfo.role === "Teacher" ? <th>Check</th> : null}

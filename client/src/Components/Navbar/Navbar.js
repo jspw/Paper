@@ -66,7 +66,7 @@ export default function Navigation(props) {
       }}
       style={{ width: "340px" }}
     >
-      <MenuItem onClick={handleMenuClose} /*style={{width: "340px"}}*/>
+      <MenuItem style={{textDecoration: "none", color: "black"}} component={Link} to="/profile" onClick={handleMenuClose} /*style={{width: "340px"}}*/>
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My Schedule</MenuItem>

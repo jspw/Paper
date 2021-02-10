@@ -6,6 +6,7 @@ import Navigation from "../Components/Navbar/Navbar";
 import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
 import Home from "../Components/Home/Home";
+import Profile from '../Components/Profile/Profile';
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
@@ -78,6 +79,13 @@ function App() {
             exact
             render={() => (
               <Home universityInfo={universityInfo} userInfo={userInfo} />
+            )}
+          />
+          <Route
+            path="/profile"
+            exact
+            render={() => (
+              <Profile userInfo={userInfo} />
             )}
           />
 

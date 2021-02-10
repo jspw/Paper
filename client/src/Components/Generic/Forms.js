@@ -27,6 +27,8 @@ const TextFieldForm = (props) => (
   fullWidth
   className={props.classes.textField}
   required={props.required}
+  defaultValue={props.defaultValue ? props.defaultValue : ''}
+  disabled={props.disabled ? props.disabled : false}
 />
 )
 

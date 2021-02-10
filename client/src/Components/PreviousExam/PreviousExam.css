@@ -1,3 +1,6 @@
+body {
+  background-color: white;
+}
 .crown {
   animation: mymove 2s infinite;
 }

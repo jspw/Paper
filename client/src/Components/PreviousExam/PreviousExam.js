@@ -252,7 +252,7 @@ const PreviousExam = (props) => {
   // else if()
   else if (role === "Student" && (mcqExamData || cqExamData))
     return (
-      <Container style={{ marginTop: "5px" }}>
+      <Container style={{ marginTop: "5px", backgroundColor: "white" }}>
         <Alert variant="light">
           <h1 className="text-center">
             {mcqExamData ? mcqExamData.mcqExam.name : cqExamData.cqExam.name}
