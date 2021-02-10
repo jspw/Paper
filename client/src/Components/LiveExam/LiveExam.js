@@ -3,6 +3,12 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -55,6 +61,27 @@ export default function LiveExam(props) {
   const intervalRef = useRef();
   const [disableNextButton, setdisableNextButton] = useState(false);
 
+  const [openFeedback, setOpenFeedback] = useState(false);
+  const [feedback, setFeedback] = useState("");
+
+  const [answer, setAnswer] = useState('');
+
+  const handleAnswer = (event) => {
+    setAnswer(event.target.value);
+  }
+
+  const handleFeedbackOpen = () => {
+    setOpenFeedback(true);
+  };
+
+  const handleFeedbackClose = () => {
+    setOpenFeedback(false);
+  };
+
+  const handleFeedback = (event) => {
+    setFeedback(event.target.value);
+  };
+  // console.log(feedback);
   // const [totalExamTime, setTotalExamTime] = useState(0);
 
   const handleClick = () => {
@@ -82,7 +109,7 @@ export default function LiveExam(props) {
       headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
         studentAnswers: studentAnswers,
-        feedback: "Sir i think something is wrong in the options",
+        feedback: feedback,
         windowChanged: windowChange,
       }),
     })
@@ -216,23 +243,30 @@ export default function LiveExam(props) {
                     <h4>{examinfo.name}</h4>
                   </Col>
                 </Row>
-                <Row className="exam__question">
-                  <Col>
-                    <h5>
-                      {examinfo.mcqQuestions[index].mcqQuestionId.description}
-                    </h5>
-                  </Col>
-                </Row>
-                <Row className="exam__question">
+                {examinfo.mcqQuestions[index].mcqQuestionId.description ? (
+                  <Row className="exam__description">
+                    <Col>
+                      <h5>
+                        {examinfo.mcqQuestions[index].mcqQuestionId.description}
+                      </h5>
+                    </Col>
+                  </Row>
+                ) : null}
+                <Row className="d-flex justify-content-between exam__question">
                   <Col>
                     <h5>
                       {examinfo.mcqQuestions[index].mcqQuestionId.mainQuestion}
                     </h5>
                   </Col>
+                  <Col xs="auto">
+                    <p style={{ fontSize: "1vw" }}>
+                      Marks: {examinfo.mcqQuestions[index].mcqQuestionId.marks}
+                    </p>
+                  </Col>
                 </Row>
                 <Row className="exam__options">
                   <Col xs={12}>
-                    <FormControl component="fieldset" fullWidth>
+                    {/* <FormControl component="fieldset" fullWidth>
                       <RadioGroup
                         aria-label="ans"
                         name="ans"
@@ -300,7 +334,60 @@ export default function LiveExam(props) {
                           </Col>
                         </Row>
                       </RadioGroup>
-                    </FormControl>
+                    </FormControl> */}
+                    <TextField
+                      id="ans"
+                      label="Answer"
+                      autoFocus
+                      margin="dense"
+                      fullWidth
+                      multiline
+                      rows={5}
+                      variant="standard"
+                      value={answer}
+                      onChange={handleAnswer}
+                    />
+                  </Col>
+                </Row>
+                <Row className="feedback">
+                  <Col>
+                    <p>
+                      Something wrong with this question?
+                      <a onClick={handleFeedbackOpen}>
+                        <b> Give Feedback</b>
+                      </a>
+                    </p>
+                    <Dialog
+                      open={openFeedback}
+                      onClose={handleClose}
+                      aria-labelledby="form-dialog-title"
+                    >
+                      <DialogContent>
+                        <DialogTitle>
+                          Let your teacher know what is wrong
+                        </DialogTitle>
+                        <TextField
+                          autoFocus
+                          margin="dense"
+                          id="feedback"
+                          label="Feedback"
+                          fullWidth
+                          multiline
+                          rows={3}
+                          variant="outlined"
+                          value={feedback}
+                          onChange={handleFeedback}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleFeedbackClose} color="default">
+                          Cancel
+                        </Button>
+                        <Button onClick={handleFeedbackClose} color="primary">
+                          Send
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </Col>
                 </Row>
                 <Row className="exam__buttons d-flex justify-content-between">
@@ -315,10 +402,11 @@ export default function LiveExam(props) {
                   <Col xs="auto">
                     <Button
                       variant="contained"
-                      color="default"
+                      color="primary"
                       onClick={nextQuestion}
                       disableElevation
                       disabled={disableNextButton}
+                      style={{ backgroundColor: "#3F7CAC" }}
                       // disabled={
                       //   index + 1 == examinfo.mcqQuestions.length && true
                       // }
@@ -332,8 +420,5 @@ export default function LiveExam(props) {
           </Container>
         </div>
       );
-  } else
-    return (
-      <LinearIndeterminate/>
-    );
+  } else return <LinearIndeterminate />;
 }
