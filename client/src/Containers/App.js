@@ -64,7 +64,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation loginStatus={loginStatus} notifications={notifications} />
+        <Navigation loginStatus={loginStatus} userInfo={userInfo} />
         <Route
           path="/test"
           exact

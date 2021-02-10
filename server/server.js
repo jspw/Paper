@@ -39,13 +39,11 @@ mongoose
       origin: ["*"],
     });
 
-    var clients = 0;
+    // var clients = 0;
 
     // examController(io);
     // notificationController(io);
 
-    server.listen(PORT, () => {
-      console.log(`Server is listening at localhost:${PORT}`);
 
       io.on("connection", (socket) => {
         console.log("New client Connected!");
@@ -55,16 +53,22 @@ mongoose
         // console.log("Socket ID : ", socket.id);
         // console.log("Clients connected : ", clients);
 
-        app.use((req, res, next) => {
-          req.socket = socket;
-          next();
-        });
+        // app.use((req, res, next) => {
+        //   req.socket = socket;
+        //   next();
+        // });
+
+        app.set("socketIO",io);
 
         socket.on("disconnect", (reason) => {
           console.log("Client Disconnected!");
           console.log("Reason", reason);
         });
       });
+
+    server.listen(PORT, () => {
+      console.log(`Server is listening at localhost:${PORT}`);
+
     });
 
     // Handle Unhandled Rejections

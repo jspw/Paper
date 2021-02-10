@@ -464,7 +464,34 @@ exports.postCreateCourse = (req, res, next) => {
     courseModel
       .save()
       .then((course) => {
-        console.log(course);
+        console.log(course.department.name);
+
+        var io = req.app.get("socketIO");
+
+        
+
+        io.emit(course.department.name, course);
+
+        // io.on("connection", (socket) => {
+        //   console.log("New client Connected!");
+        //   // const ip = socket.handshake.headers || socket.conn.remoteAddress;
+        //   // console.log(ip);
+
+        //   // console.log("Socket ID : ", socket.id);
+        //   // console.log("Clients connected : ", clients);
+
+        //   socket.emit("message", "New Notification");
+
+        //   // app.use((req, res, next) => {
+        //   //   req.socket = socket;
+        //   //   next();
+        //   // });
+
+        //   socket.on("disconnect", (reason) => {
+        //     console.log("Client Disconnected!");
+        //     console.log("Reason", reason);
+        //   });
+        // });
 
         // console.log(req.socke t);
         // let interval;
