@@ -36,10 +36,10 @@ const onCqExamSchema = new Schema({
         ref: "CqQuestion",
         autopopulate: { maxDepth: 1 },
       },
-      mark :{
-        type : Number 
-      }
-    }
+      mark: {
+        type: Number,
+      },
+    },
   ],
   totalMarks: {
     type: Number,
@@ -54,7 +54,7 @@ const onCqExamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Teacher",
     autopopulate: { maxDepth: 1 },
-  }
+  },
 });
 onCqExamSchema.plugin(require("mongoose-autopopulate"));
 onCqExamSchema.index({ cqExam: 1, student: 1 }, { unique: true });

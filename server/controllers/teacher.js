@@ -662,7 +662,7 @@ exports.getCourse = (req, res, next) => {
   CourseModel.findById(req.params.id)
     // .populate("students.student.course").exec()
     .then((course) => {
-      console.log("Course ",course);
+      console.log("Course ", course);
       if (course) {
         // course.mcqExams.forEach((exam) => {
         //   exam.examId.mcqQuestions = undefined;
@@ -731,8 +731,6 @@ exports.postCqExamine = (req, res, next) => {
     OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
       console.log(onCqExamModel);
 
-
-
       onCqExamModel.totalMarks = req.body.totalMarks;
       onCqExamModel.examineBy = req.user._id;
       onCqExamModel.marks.push(req.body.marks);
@@ -751,4 +749,38 @@ exports.postCqExamine = (req, res, next) => {
   } else {
     errorHandler.unauthorizedAccess(res);
   }
+};
+
+exports.getAllExams = (req, res, next) => {
+  McqExamModel.findOne({
+    course: req.params.id,
+  })
+    .then((mcqExams) => {
+      CqExamModel.findOne({
+        course: req.params.id,
+      })
+        .then((cqExams) => {
+          console.log(mcqExams);
+          console.log(cqExams);
+
+          // if(req.user.role === "Student"){
+          //   mcqExams.
+          // }
+
+          const result = {
+            mcqExams: mcqExams,
+            cqExams: cqExams,
+          };
+
+          apiResponseInJson(res, 200, result);
+        })
+        .catch((error) => {
+          console.log(error);
+          errorHandler.serverError(res);
+        });
+    })
+    .cathc((error) => {
+      console.log(error);
+      errorHandler.serverError(res);
+    });
 };

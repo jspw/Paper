@@ -24,6 +24,6 @@ export default function Course(props) {
         });
   }, []);
 
-  if (courseData) return <div className="course"><Sidebar courseData={courseData} /></div>;
+  if (courseData) return <div className="course"><Sidebar courseData={courseData} userInfo = {props.userInfo} /></div>;
   else return <LinearIndeterminate></LinearIndeterminate>;
 }

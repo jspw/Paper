@@ -1,21 +1,22 @@
 import React from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Card,
-  Alert,
-  Table,
-} from "react-bootstrap";
+import { Col, Container, Row, Card, Alert, Table } from "react-bootstrap";
 import MenuItem from "@material-ui/core/MenuItem";
-import {
-  Box,
-  CardContent,
-  MenuList,
-  Typography,
-} from "@material-ui/core";
-import "./PreviousExam.css";
+import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
 
+import {
+  Button,
+  Modal,
+  Form,
+  Spinner,
+  Jumbotron,
+  Tab,
+  TabContainer,
+  ListGroup,
+  TabContent,
+  TabPane,
+} from "react-bootstrap";
+
+import "./PreviousExam.css";
 
 const ExamInfo = (props) => {
   var months = [
@@ -47,46 +48,16 @@ const ExamInfo = (props) => {
   const cqExamData = props.cqExamData;
   const onlyExamInfo = props.onlyExamInfo;
   let mcq;
+  let cq;
 
   console.log("mcqExamData", mcqExamData);
+  console.log("cqExamData", cqExamData);
+  console.log("onlyExamInfo", onlyExamInfo);
 
-  if (mcqExamData)
-    mcq = mcqExamData.studentAnswers.map((test) => {
+  if (mcqExamData) {
+    mcq = mcqExamData.mcqExam.mcqQuestions.map((questions) => {
       return (
-        <din>
-          <Card>
-            <Box fontWeight="fontWeightBold" m={1}>
-              {" "}
-              Question :{" "}
-            </Box>
-            <div className="card card-body bg-light">
-              <Typography>{test.mcqQuestion.description}</Typography>
-              {/* <Alert variant="primary"> */}
-              <Typography>{test.mcqQuestion.mainQuestion}</Typography>
-              {/* </Alert> */}
-            </div>
-
-            <CardContent>
-              {/* <Box fontWeight="fontWeightBold" m={1}> Options :  </Box> */}
-              <MenuList>
-                {test.mcqQuestion.options.map((op) => {
-                  if (test.mcqQuestion.correctAnswers[0].answer === op.option)
-                    return <Alert variant="success">{op.option}</Alert>;
-
-                  return <MenuItem>{op.option}</MenuItem>;
-                })}
-              </MenuList>
-            </CardContent>
-          </Card>
-          <br></br>
-        </din>
-      );
-    });
-
-  if (onlyExamInfo) {
-    mcq = onlyExamInfo.mcqQuestions.map((questions) => {
-      return (
-        <din>
+        <div>
           <Card>
             <Box fontWeight="fontWeightBold" m={1}>
               {" "}
@@ -115,9 +86,127 @@ const ExamInfo = (props) => {
             </CardContent>
           </Card>
           <br></br>
-        </din>
+        </div>
       );
     });
+  } else if (cqExamData) {
+    cq = cqExamData.cqExam.cqQuestions.map((cqx, i) => {
+      console.log(cqExamData);
+      return (
+        <div>
+          <Card>
+            <Box fontWeight="fontWeightBold" m={1}>
+              {" "}
+              Question : [ {`Marks : ${cqx.cqQuestionId.marks} || `}
+              {`Time : ${cqx.cqQuestionId.time / 60}  min  ${
+                cqx.cqQuestionId.time % 60
+              } sec `}
+              ]
+            </Box>
+
+            <div className="card card-body bg-light">
+              <Typography>
+                {" "}
+                {cqx.cqQuestionId.description
+                  ? cqx.cqQuestionId.description
+                  : ""}
+              </Typography>
+
+              <Typography> {cqx.cqQuestionId.mainQuestion} </Typography>
+            </div>
+            <CardContent>
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                <Form.Label>
+                  <Box fontWeight="fontWeightBold" m={1}>
+                    Ans :{" "}
+                  </Box>
+                </Form.Label>
+                <Form.Control
+                  value={cqExamData.studentAnswers[i].studentAnswer}
+                  disabled
+                  as="textarea"
+                  rows={3}
+                />
+              </Form.Group>
+            </CardContent>
+          </Card>
+          <br></br>
+        </div>
+      );
+    });
+  }
+
+  if (onlyExamInfo) {
+    if (onlyExamInfo.mcqQuestions)
+      mcq = onlyExamInfo.mcqQuestions.map((questions) => {
+        return (
+          <div>
+            <Card>
+              <Box fontWeight="fontWeightBold" m={1}>
+                {" "}
+                Question :{" "}
+              </Box>
+              <div className="card card-body bg-light">
+                <Typography>{questions.mcqQuestionId.description}</Typography>
+                {/* <Alert variant="primary"> */}
+                <Typography>{questions.mcqQuestionId.mainQuestion}</Typography>
+                {/* </Alert> */}
+              </div>
+
+              <CardContent>
+                {/* <Box fontWeight="fontWeightBold" m={1}> Options :  </Box> */}
+                <MenuList>
+                  {questions.mcqQuestionId.options.map((op) => {
+                    if (
+                      questions.mcqQuestionId.correctAnswers[0].answer ===
+                      op.option
+                    )
+                      return <Alert variant="success">{op.option}</Alert>;
+
+                    return <MenuItem>{op.option}</MenuItem>;
+                  })}
+                </MenuList>
+              </CardContent>
+            </Card>
+            <br></br>
+          </div>
+        );
+      });
+
+    if (onlyExamInfo.cqQuestions)
+      cq = onlyExamInfo.cqQuestions.map((questions) => {
+        return (
+          <div>
+            <Card>
+              <Box fontWeight="fontWeightBold" m={1}>
+                {" "}
+                Question :{" "}
+              </Box>
+              <div className="card card-body bg-light">
+                <Typography>{questions.cqQuestionId.description}</Typography>
+                {/* <Alert variant="primary"> */}
+                <Typography>{questions.cqQuestionId.mainQuestion}</Typography>
+                {/* </Alert> */}
+              </div>
+
+              {/* <CardContent>
+              <MenuList>
+                {questions.mcqQuestionId.options.map((op) => {
+                  if (
+                    questions.mcqQuestionId.correctAnswers[0].answer ===
+                    op.option
+                  )
+                    return <Alert variant="success">{op.option}</Alert>;
+
+                  return <MenuItem>{op.option}</MenuItem>;
+                })}
+              </MenuList>
+            </CardContent> */}
+            </Card>
+            <br></br>
+          </div>
+        );
+      });
 
     return (
       <Container fluid style={{ marginTop: "5px" }}>
@@ -192,7 +281,7 @@ const ExamInfo = (props) => {
             </Row>
           </Col>
         </Row>
-        <Container className="scroll">{mcq}</Container>
+        <Container>{mcq ? mcq : cq}</Container>
       </Container>
     );
   } else

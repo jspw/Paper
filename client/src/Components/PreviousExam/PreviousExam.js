@@ -161,7 +161,7 @@ const PreviousExam = (props) => {
       );
     });
   else if (cqExamData)
-    cq = cqExamData.cqExam.cqQuestions.map((cqx,i) => {
+    cq = cqExamData.cqExam.cqQuestions.map((cqx, i) => {
       console.log(cqExamData);
       return (
         <div>
@@ -178,7 +178,9 @@ const PreviousExam = (props) => {
             <div className="card card-body bg-light">
               <Typography>
                 {" "}
-                {cqx.cqQuestionId.description ? cqx.cqQuestionId.description : ""}
+                {cqx.cqQuestionId.description
+                  ? cqx.cqQuestionId.description
+                  : ""}
               </Typography>
 
               <Typography> {cqx.cqQuestionId.mainQuestion} </Typography>
@@ -204,7 +206,7 @@ const PreviousExam = (props) => {
       );
     });
 
-  if (role === "Teacher" && (mcqExamsData || onlyExamInfo)) {
+  if (role === "Teacher" && (mcqExamsData || onlyExamInfo || cqExamData)) {
     return (
       <Tab.Container
         className="scroll-off"
@@ -231,10 +233,14 @@ const PreviousExam = (props) => {
                 <ExamInfo
                   onlyExamInfo={onlyExamInfo}
                   mcqExamData={mcqExamsData ? mcqExamsData[0] : null}
+                  cqExamData={cqExamsData ? cqExamsData[0] : null}
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="#mark-sheet">
-                <MarkSheet mcqExamsData={mcqExamsData} />
+                <MarkSheet
+                  mcqExamsData={mcqExamsData}
+                  cqExamsData={cqExamsData}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="#reviews">Reports</Tab.Pane>
             </Tab.Content>
@@ -244,7 +250,7 @@ const PreviousExam = (props) => {
     );
   }
   // else if()
-  else if (mcqExamData || cqExamData)
+  else if (role === "Student" && (mcqExamData || cqExamData))
     return (
       <Container style={{ marginTop: "5px" }}>
         <Alert variant="light">

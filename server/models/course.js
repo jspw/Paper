@@ -67,7 +67,7 @@ const courseSchema = new Schema({
       studentDetail: {
         type: Schema.Types.ObjectId,
         ref: "Student",
-        autopopulate: { maxDepth: 2 },
+        autopopulate: { maxDepth: 3 },
         // required: true,
       },
     },
