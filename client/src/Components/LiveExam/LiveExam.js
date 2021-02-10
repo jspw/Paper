@@ -7,19 +7,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "@material-ui/core/Button";
-import "./LiveExam.scss";
+import LinearIndeterminate from "../Generic/Loader";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {
-  CircularProgress,
   LinearProgress,
   makeStyles,
   Snackbar,
 } from "@material-ui/core";
 // import Alert from "@material-ui/lab/Alert";
 import MuiAlert from "@material-ui/lab/Alert";
-
 import Result from "./Result";
+import "./LiveExam.scss";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -335,9 +334,6 @@ export default function LiveExam(props) {
       );
   } else
     return (
-      <div className={classes.root}>
-        <LinearProgress />
-        <LinearProgress color="secondary" />
-      </div>
+      <LinearIndeterminate/>
     );
 }

@@ -5,6 +5,9 @@ body {
 
 .upcoming {
     height: 100vh;
+    hr {
+        background-color: #E2EBF3;
+    }
     &__first {
         // margin-top: 3%;
         height: 20.1rem;
@@ -43,15 +46,21 @@ body {
 .sideExams {
     padding-bottom: 10px;
 }
-.side {
+.leftside, .rightside {
     height: 100vh;
     background-color: white;
     color: black;
     text-decoration: none;
     overflow:hidden;
+    hr {
+        background-color: #F5F5F5;
+    }
     .examName {
         font-size: 126%;
         color: black;
         text-decoration: none;
     }
+}
+.leftside {
+    border-right: 1px solid #E2EBF3;
 }
