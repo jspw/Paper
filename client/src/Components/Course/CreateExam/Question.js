@@ -81,15 +81,16 @@ export default function Question(props) {
 
   const handleClickOpen = () => {
     if (
-      values.question &&
-      values.optA &&
-      values.optB &&
-      values.optC &&
-      values.optD &&
-      values.ans &&
-      values.marks &&
-      values.min &&
-      values.sec
+      (values.question &&
+        values.optA &&
+        values.optB &&
+        values.optC &&
+        values.optD &&
+        values.ans &&
+        values.marks &&
+        values.min &&
+        values.sec) ||
+      (values.question && values.marks && values.min && values.sec)
     ) {
       setOpen(true);
     } else {
@@ -129,7 +130,7 @@ export default function Question(props) {
 
     axios({
       method: "POST",
-      url: "teacher/question/mcq/create",
+      url: `teacher/question/${props.examType === "CQ" ? "cq" : "mcq"}/create`,
 
       headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
@@ -177,6 +178,7 @@ export default function Question(props) {
         console.log(error);
       });
   }
+
   const mcq = (
     <Row>
       <Col xs={12} lg={6}>

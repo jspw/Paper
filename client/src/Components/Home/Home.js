@@ -1,20 +1,20 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SubjectIcon from "@material-ui/icons/Subject";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
+import AddIcon from "@material-ui/icons/Add";
+import Button from "@material-ui/core/Button";
 import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
 import Timer from "../Timer/Timer";
 import { Link } from "react-router-dom";
 import LinearIndeterminate from "../Generic/Loader";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Forms from "../Generic/Forms";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Home.scss";
@@ -99,22 +99,17 @@ export default function Home(props) {
   const [timerDeadline, setTimerDeadLine] = useState(Date.now());
 
   if (props.userInfo) {
-    if (props.userInfo.courses) {
+    if (props.userInfo.courses.length > 0) {
       courseUI = props.userInfo.courses.map((course, k) => {
         // console.log(items);
         return (
-          <Grid
-            key={k}
-            container
-            alignitems="flex-start"
-            className="sideExams"
-          >
+          <Grid key={k} container alignitems="flex-start" className="sideExams">
             <Grid item>
               <SubjectIcon style={{ fontSize: "27px" }} />
             </Grid>
             <Grid item xs className="examName">
               <Link
-                to={`/course/${course.course._id}`}
+                to={`/course/${course._id}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <span>{course.course.name}</span>
@@ -330,7 +325,7 @@ export default function Home(props) {
                 <span>{ex.name}</span>
               </Link>
             </Grid>
-            <Grid item >
+            <Grid item>
               <p>
                 {new Date(ex.date).getHours() < 10
                   ? "0" + new Date(ex.date).getHours()
@@ -348,7 +343,7 @@ export default function Home(props) {
         );
       });
   }
-  if (props.userInfo){
+  if (props.userInfo) {
     const role = props.userInfo.role;
     // console.log(role)
     return (
@@ -359,10 +354,11 @@ export default function Home(props) {
               <Grid item>
                 <h5>My Courses</h5>
               </Grid>
-              {role !== "Student" ? (
+              {role === "Teacher" ? (
                 <Grid item>
                   <Button
-                    color="default"
+                  // variant = 'outlined'
+                    color="primary"
                     startIcon={<AddIcon />}
                     onClick={handleClickOpen}
                   >
@@ -448,10 +444,15 @@ export default function Home(props) {
             </Grid>
             <div className="upcoming__first">
               {mostUpcomingExamUI}
-              <Timer
-                examID={upcomingExams[0]._id}
-                deadline={upcomingExams.length > 0 ? upcomingExams[0].date : ""}
-              />
+
+              {upcomingExams.length > 0 ? (
+                <Timer
+                  examID={upcomingExams[0]._id}
+                  deadline={upcomingExams[0].date}
+                />
+              ) : (
+                <h2>No Upcoming Exams!</h2>
+              )}
             </div>
             <div>{upcomingExamsUI}</div>
           </Grid>
@@ -469,6 +470,5 @@ export default function Home(props) {
         </Grid>
       </Container>
     );
-  }
-  else return <LinearIndeterminate />;
+  } else return <LinearIndeterminate />;
 }

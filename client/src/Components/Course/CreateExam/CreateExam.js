@@ -28,9 +28,17 @@ export default class CreateCourse extends React.Component {
 
     this.totalMarks += parseInt(marks, 10);
     this.totalTime += time;
-    this.questionIDs.push({
-      mcqQuestionId: id,
-    });
+
+    if (this.props.examType === "CQ")
+      this.questionIDs.push({
+        cqQuestionId: id,
+      });
+    else {
+      this.questionIDs.push({
+        mcqQuestionId: id,
+      });
+    }
+
     console.log("mcq Question Id !", id);
     console.log("Mark !", this.totalMarks);
     console.log("Time!", this.totalTime);
@@ -40,19 +48,34 @@ export default class CreateCourse extends React.Component {
     console.log("Date ", date);
     console.log("Name ", examName);
 
-    axios({
-      method: "POST",
-      url: "teacher/exam/mcq/create",
+    let data;
 
-      headers: { "Content-Type": "application/json" },
-      data: JSON.stringify({
+    if (this.props.examType === "CQ")
+      data = JSON.stringify({
+        course: this.props.courseData._id,
+        cqQuestions: this.questionIDs,
+        totalTime: this.totalTime,
+        totalMarks: this.totalMarks,
+        date: date,
+        name: examName,
+      });
+    else
+      data = JSON.stringify({
         course: this.props.courseData._id,
         mcqQuestions: this.questionIDs,
         totalTime: this.totalTime,
         totalMarks: this.totalMarks,
         date: date,
         name: examName,
-      }),
+      });
+
+    axios({
+      method: "POST",
+      url: `teacher/exam/${this.props.examType === "CQ" ? "cq" : "mcq"}/create`,
+
+      headers: { "Content-Type": "application/json" },
+
+      data: data,
     })
       .then((response) => {
         console.log(response.data);
@@ -87,11 +110,11 @@ export default class CreateCourse extends React.Component {
           totalTime={this.totalTime}
           examType={this.props.examType}
         />
-        ),
-        key: "1",
-        closable: false,
-      },
-    ];
+      ),
+      key: "1",
+      closable: false,
+    },
+  ];
 
   state = {
     activeKey: this.initialPanes[0].key,
