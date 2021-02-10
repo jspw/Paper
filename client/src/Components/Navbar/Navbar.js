@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -10,6 +10,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://localhost:8080";
 
 let navElements;
 
@@ -27,6 +29,22 @@ export default function Navigation(props) {
 
   const [anchor, setAnchor] = React.useState(null);
   const isNotificationOpen = Boolean(anchor);
+
+  const [response, setResponse] = useState("");
+
+  let socketRef = useRef(null);
+
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+
+    if (props.userInfo) {
+      console.log(props.userInfo.department);
+      socket.on(props.userInfo.department, (data) => {
+        // setResponse(data);
+        console.log("data from socket", data);
+      });
+    }
+  }, [ENDPOINT, props.userInfo]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -93,7 +111,7 @@ export default function Navigation(props) {
       }}
     >
       <MenuItem onClick={handleMenuClose}>
-        {notifications ? notifications : "No Notifications"}
+        {response ? response : "No Notifications"}
       </MenuItem>
     </Menu>
   );

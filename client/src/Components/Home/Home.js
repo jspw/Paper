@@ -494,7 +494,7 @@ export default function Home(props) {
                     <Button onClick={handleClose} color="default">
                       Cancel
                     </Button>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={createCourse} color="primary">
                       Create
                     </Button>
                   </DialogActions>
