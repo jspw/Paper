@@ -6,8 +6,6 @@ const MarkSheet = (props) => {
   let tableBody;
   let x = 1;
 
- 
-
   if (mcqExamsData) {
     mcqExamsData.sort(function (a, b) {
       return a.mark - b.mark;
@@ -25,7 +23,9 @@ const MarkSheet = (props) => {
               <span class="crown badge" style={{ fontSize: "20px" }}>
                 {x == 2 ? "👑" : ""}
               </span>
-              {`${data.student.firstName} ${data.student.lastName} ${data.student.username}`}
+              {`${data.student.firstName ? data.student.firstName : ""} ${
+                data.student.lastName ? data.student.lastName : ""
+              } ${data.student.username}`}
             </td>
             <td>{data.student.registrationNo}</td>
 

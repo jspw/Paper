@@ -61,8 +61,6 @@ const PreviousExam = (props) => {
   ];
   const { id } = useParams();
 
-  const userId = props.userInfo._id;
-
   const role = props.userInfo.role;
 
   const [mcqExamData, setMcqExamData] = useState(null);
@@ -77,7 +75,6 @@ const PreviousExam = (props) => {
 
   useEffect(() => {
     let examType = "mcq";
-
     let endpoint;
     if (role === "Teacher") endpoint = `teacher/exam/${examType}/submits/${id}`;
     else endpoint = `${role}/exam/${examType}/submit/${id}`;
@@ -129,8 +126,6 @@ const PreviousExam = (props) => {
       });
   }, []);
 
-  console.log("onlyExamInfo", onlyExamInfo);
-
   if (mcqExamData)
     mcq = mcqExamData.studentAnswers.map((test) => {
       return (
@@ -166,21 +161,28 @@ const PreviousExam = (props) => {
       );
     });
   else if (cqExamData)
-    cq = cqExamData.studentAnswers.map((test) => {
+    cq = cqExamData.cqExam.cqQuestions.map((cqx,i) => {
+      console.log(cqExamData);
       return (
-        <din>
+        <div>
           <Card>
             <Box fontWeight="fontWeightBold" m={1}>
               {" "}
-              Question :{" "}
+              Question : [ {`Marks : ${cqx.cqQuestionId.marks} || `}
+              {`Time : ${cqx.cqQuestionId.time / 60}  min  ${
+                cqx.cqQuestionId.time % 60
+              } sec `}
+              ]
             </Box>
-            <div className="card card-body bg-light">
-              <Typography>{test.cqQuestion.description}</Typography>
-              {/* <Alert variant="primary"> */}
-              <Typography>{test.cqQuestion.mainQuestion}</Typography>
-              {/* </Alert> */}
-            </div>
 
+            <div className="card card-body bg-light">
+              <Typography>
+                {" "}
+                {cqx.cqQuestionId.description ? cqx.cqQuestionId.description : ""}
+              </Typography>
+
+              <Typography> {cqx.cqQuestionId.mainQuestion} </Typography>
+            </div>
             <CardContent>
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>
@@ -189,18 +191,16 @@ const PreviousExam = (props) => {
                   </Box>
                 </Form.Label>
                 <Form.Control
-                  value={test.studentAnswer}
+                  value={cqExamData.studentAnswers[i].studentAnswer}
                   disabled
                   as="textarea"
                   rows={3}
                 />
               </Form.Group>
-
-              {/* <Alert variant="success">{test.studentAnswer}</Alert> */}
             </CardContent>
           </Card>
           <br></br>
-        </din>
+        </div>
       );
     });
 
@@ -242,7 +242,9 @@ const PreviousExam = (props) => {
         </Row>
       </Tab.Container>
     );
-  } else if (mcqExamData || cqExamData)
+  }
+  // else if()
+  else if (mcqExamData || cqExamData)
     return (
       <Container style={{ marginTop: "5px" }}>
         <Alert variant="light">
@@ -398,7 +400,7 @@ const PreviousExam = (props) => {
 
           <Col></Col>
         </Row>
-        <Container fluid >{mcq ? mcq : cq}</Container>
+        <Container fluid>{mcq ? mcq : cq}</Container>
       </Container>
     );
   else if (onlyExamInfo && role === "Student")

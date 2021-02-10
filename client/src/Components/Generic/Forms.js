@@ -241,6 +241,7 @@ const Forms = (props) => {
 
     return (
       <FormControl
+      disabled = {props.disable ?  props.disable : false}
         variant="outlined"
         className={props.classes.textField}
         fullWidth

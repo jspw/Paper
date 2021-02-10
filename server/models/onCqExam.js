@@ -7,15 +7,11 @@ const onCqExamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CqExam",
     autopopulate: { maxDepth: 2 },
-    
-    
   },
   student: {
     type: Schema.Types.ObjectId,
     ref: "Student",
     autopopulate: { maxDepth: 2 },
-    
-    
   },
   studentAnswers: [
     {
@@ -23,37 +19,42 @@ const onCqExamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "CqQuestion",
         autopopulate: { maxDepth: 2 },
-        
       },
       studentAnswer: {
         type: String,
-        
       },
     },
   ],
   submitOn: {
     type: Date,
     default: Date.now,
-    
   },
-  mark: {
+  marks: [
+    {
+      cqQuestion: {
+        type: Schema.Types.ObjectId,
+        ref: "CqQuestion",
+        autopopulate: { maxDepth: 1 },
+      },
+      mark :{
+        type : Number 
+      }
+    }
+  ],
+  totalMarks: {
     type: Number,
-    
   },
   feedback: {
     type: String,
-    
   },
   windowChanged: {
     type: Number,
-    
   },
   examineBy: {
     type: Schema.Types.ObjectId,
     ref: "Teacher",
     autopopulate: { maxDepth: 1 },
-    
-  },
+  }
 });
 onCqExamSchema.plugin(require("mongoose-autopopulate"));
 onCqExamSchema.index({ cqExam: 1, student: 1 }, { unique: true });

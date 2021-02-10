@@ -662,7 +662,7 @@ exports.getCourse = (req, res, next) => {
   CourseModel.findById(req.params.id)
     // .populate("students.student.course").exec()
     .then((course) => {
-      console.log(course);
+      console.log("Course ",course);
       if (course) {
         // course.mcqExams.forEach((exam) => {
         //   exam.examId.mcqQuestions = undefined;
@@ -731,8 +731,11 @@ exports.postCqExamine = (req, res, next) => {
     OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
       console.log(onCqExamModel);
 
-      onCqExamModel.mark = req.body.mark;
+
+
+      onCqExamModel.totalMarks = req.body.totalMarks;
       onCqExamModel.examineBy = req.user._id;
+      onCqExamModel.marks.push(req.body.marks);
 
       onCqExamModel
         .save()
