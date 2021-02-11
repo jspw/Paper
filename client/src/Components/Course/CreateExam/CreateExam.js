@@ -26,7 +26,11 @@ export default class CreateCourse extends React.Component {
       examCreateMessage: "Question Created Successfully",
     });
 
-    this.totalMarks += parseInt(marks, 10);
+    console.log("mcq Question Id !", id);
+    console.log("Mark !", marks);
+    console.log("Time!", time);
+
+    this.totalMarks += marks
     this.totalTime += time;
 
     if (this.props.examType === "CQ")
@@ -39,9 +43,7 @@ export default class CreateCourse extends React.Component {
       });
     }
 
-    console.log("mcq Question Id !", id);
-    console.log("Mark !", this.totalMarks);
-    console.log("Time!", this.totalTime);
+    console.log(this.questionIDs);
   };
 
   createExam = (date, examName) => {

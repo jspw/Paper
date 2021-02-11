@@ -95,7 +95,7 @@ const Examine = (props) => {
       .then((response) => {
         console.log(response.data);
         if (response.data.status == "OK") {
-          console.log("ONCQ?",response.data.result.data)
+          console.log("ONCQ?", response.data.result.data);
           setCqExamsData(response.data.result.data);
         }
       })
@@ -126,7 +126,7 @@ const Examine = (props) => {
   };
 
   const postMarks = () => {
-    const url = `teacher/examine/cq/${id}`;
+    const url = `teacher/examine/cq/${cqExamsData[index]._id}`;
 
     let totalMarks;
 
@@ -280,8 +280,8 @@ const Examine = (props) => {
                 </Form.Label>
                 <Form.Control
                   value={
-                    cqExamsData[0].studentAnswers[i]
-                      ? cqExamsData[0].studentAnswers[i].studentAnswer
+                    cqExamsData[index].studentAnswers[i]
+                      ? cqExamsData[index].studentAnswers[i].studentAnswer
                       : ""
                   }
                   disabled
@@ -293,7 +293,7 @@ const Examine = (props) => {
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <TextField
                   label="Mark"
-                  id={cqExamsData[0].cqExam._id}
+                  id={cqExamsData[index].cqExam._id}
                   //   defaultValue="Small"
                   type="Number"
                   value={mark}

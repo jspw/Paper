@@ -126,7 +126,7 @@ export default function Navigation(props) {
         if (response.data.status === "OK") {
           setTimeout(function () {
             window.location.reload();
-          }, 3000);
+          }, 1000);
         }
       })
       .catch((error) => {

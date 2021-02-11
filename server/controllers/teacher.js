@@ -764,13 +764,13 @@ exports.postCqExamine = (req, res, next) => {
   if (req.user.role == "Teacher") {
     console.log(req.body.mark);
 
-    OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
+    OnCqExamModel.find({
+      cqExam: req.params.id,
+    }).then((onCqExamModel) => {
       console.log(onCqExamModel);
 
       onCqExamModel.totalMarks = req.body.marks;
       onCqExamModel.examineBy = req.user._id;
-
-      
 
       onCqExamModel.marks.push(req.body.marks);
 

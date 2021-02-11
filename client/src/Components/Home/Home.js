@@ -67,7 +67,7 @@ export default function Home(props) {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const courseCreateModalHandleClose = () => {
     setOpen(false);
   };
   const classes = useStyles();
@@ -135,6 +135,7 @@ export default function Home(props) {
       values.courseCode &&
       values.courseName
     ) {
+      courseCreateModalHandleClose();
       axios({
         method: "POST",
         url: `teacher/course/create`,
@@ -157,17 +158,16 @@ export default function Home(props) {
         .then((response) => {
           console.log(response.data);
           if (response.data.status === "OK") {
-            handleClose();
-            setsnackbarMsg("Course Created Successfully");
             setopensnack(true);
+            setsnackbarMsg("Course Created Successfully");
 
             setTimeout(function () {
               history.push("/");
               window.location.reload();
             }, 1000);
           } else {
-            setsnackbarMsg("Course Creation Failed!");
             setopensnack(true);
+            setsnackbarMsg("Course Creation Failed!");
           }
         })
         .catch((error) => {
@@ -182,6 +182,7 @@ export default function Home(props) {
     if (userdata.courses.length > 0) {
       courseUI = userdata.courses.map((course, k) => {
         // console.log(items);
+
         return (
           <Grid key={k} container alignitems="flex-start" className="sideExams">
             <Grid item>
@@ -201,14 +202,21 @@ export default function Home(props) {
     }
 
     userdata.courses.forEach((course, i) => {
-      const date = new Date();
+      
 
       if (course.course.cqExams) {
         course.course.cqExams.forEach((exam, j) => {
-          console.log(course.course);
+          let date = new Date();
+          console.log(exam.examId.name);
+          console.log(
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60
+          );
+          console.log(date.getTime());
+
+          // console.log(course.course);
           if (
-            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
-            date.getTime()
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 <
+            new Date().getTime()
           )
             previousExams.push({
               _id: exam.examId._id,
@@ -217,10 +225,11 @@ export default function Home(props) {
               date: new Date(exam.examId.date),
               totalMarks: exam.examId.totalMarks,
               totalTime: exam.examId.totalTime,
-              createdBy:
-                course.course.createdBy.firstName +
-                course.course.createdBy.lastName +
-                course.course.createdBy.username,
+              createdBy: course.course.createdBy.firstName
+                ? course.course.createdBy.firstName
+                : "" + " " + course.course.createdBy.lastName
+                ? course.course.createdBy.lastName
+                : "" + " " + course.course.createdBy.username,
             });
           else {
             upcomingExams.push({
@@ -230,12 +239,11 @@ export default function Home(props) {
               date: new Date(exam.examId.date),
               totalMarks: exam.examId.totalMarks,
               totalTime: exam.examId.totalTime,
-              createdBy:
-                course.course.createdBy.firstName +
-                " " +
-                course.course.createdBy.lastName +
-                " " +
-                course.course.createdBy.username,
+              createdBy: course.course.createdBy.firstName
+                ? course.course.createdBy.firstName
+                : "" + " " + course.course.createdBy.lastName
+                ? course.course.createdBy.lastName
+                : "" + " " + course.course.createdBy.username,
             });
           }
         });
@@ -243,9 +251,19 @@ export default function Home(props) {
 
       if (course.course.mcqExams) {
         course.course.mcqExams.forEach((exam, j) => {
+          let date = new Date();
+
+          console.log(exam.examId.name);
+
+          console.log(
+            new Date(exam.examId.date).getTime() + (exam.examId.totalTime * 60)
+          );
+          console.log(date.getTime());
+
+          
           if (
-            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
-            date.getTime()
+            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 <
+            new Date().getTime()
           )
             previousExams.push({
               _id: exam.examId._id,
@@ -254,12 +272,11 @@ export default function Home(props) {
               date: new Date(exam.examId.date),
               totalMarks: exam.examId.totalMarks,
               totalTime: exam.examId.totalTime,
-              createdBy:
-                course.course.createdBy.firstName +
-                " " +
-                course.course.createdBy.lastName +
-                " " +
-                course.course.createdBy.username,
+              createdBy: course.course.createdBy.firstName
+                ? course.course.createdBy.firstName
+                : "" + " " + course.course.createdBy.lastName
+                ? course.course.createdBy.lastName
+                : "" + " " + course.course.createdBy.username,
             });
           else {
             upcomingExams.push({
@@ -269,12 +286,11 @@ export default function Home(props) {
               date: new Date(exam.examId.date),
               totalMarks: exam.examId.totalMarks,
               totalTime: exam.examId.totalTime,
-              createdBy:
-                course.course.createdBy.firstName +
-                " " +
-                course.course.createdBy.lastName +
-                " " +
-                course.course.createdBy.username,
+              createdBy: course.course.createdBy.firstName
+                ? course.course.createdBy.firstName
+                : "" + " " + course.course.createdBy.lastName
+                ? course.course.createdBy.lastName
+                : "" + " " + course.course.createdBy.username,
             });
           }
         });
@@ -468,7 +484,7 @@ export default function Home(props) {
                   />
                   <Dialog
                     open={open}
-                    onClose={handleClose}
+                    onClose={courseCreateModalHandleClose}
                     aria-labelledby="form-dialog-title"
                   >
                     <DialogTitle id="form-dialog-title">
@@ -516,7 +532,10 @@ export default function Home(props) {
                       />
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={handleClose} color="default">
+                      <Button
+                        onClick={courseCreateModalHandleClose}
+                        color="default"
+                      >
                         Cancel
                       </Button>
                       <Button onClick={createCourse} color="primary">

@@ -79,7 +79,8 @@ export default function Question(props) {
 
   console.log("questionEditDisable", questionEditDisable);
 
-  const handleClickOpen = () => {
+  const handleLockExamClickOpen = () => {
+    console.log(props.totalMarks,props.totalTime)
     if (
       (values.question &&
         values.optA &&
@@ -98,11 +99,12 @@ export default function Question(props) {
     }
   };
 
-  const handleClose = () => {
+  const handleDialogClose = () => {
     setOpen(false);
   };
 
   const createExam = () => {
+    console.log(props.totalMarks,props.totalTime)
     console.log(values.name);
     if (values.name) {
       props.createExam(values.date, values.name);
@@ -116,9 +118,11 @@ export default function Question(props) {
   };
 
   const handleQuestionAdd = (id) => {
+    console.log(id, values.marks, values.min, values.sec);
     props.onAdd(
       id,
-      values.marks,
+
+      parseInt(values.marks, 10),
       parseInt(values.min, 10) * 60 + parseInt(values.sec, 10)
     );
   };
@@ -473,7 +477,7 @@ export default function Question(props) {
               color="primary"
               className={classes.button}
               startIcon={<LockIcon />}
-              onClick={handleClickOpen}
+              onClick={handleLockExamClickOpen}
             >
               Lock Exam
             </Button>
@@ -482,10 +486,10 @@ export default function Question(props) {
       </form>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleDialogClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Lock This Exam</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create This Exam</DialogTitle>
         <DialogContent>
           <TextField
             id="exam-name"
@@ -524,7 +528,7 @@ export default function Question(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleDialogClose} color="primary">
             Cancel
           </Button>
           <Button onClick={createExam} color="primary">
