@@ -55,7 +55,7 @@ const UpcomingExam = (props) => {
   console.log(examInfo);
 
   return (
-    <Container style={{backgroundColor: "white", paddingBottom: "3%"}}>
+    <Container style={{ backgroundColor: "white", paddingBottom: "3%" }}>
       <Alert variant="primary">
         <p className="text-center">Exam Has Not Started Yet</p>
       </Alert>
@@ -130,7 +130,7 @@ const UpcomingExam = (props) => {
           </Row>
         </Col>
       </Row>
-      <Timer deadline={examInfo.date} />
+      <Timer deadline={examInfo.date} examID={examInfo._id} />
     </Container>
   );
 };

@@ -609,110 +609,120 @@ exports.postMcqSubmit = (req, res, next) => {
   let wrong = 0;
   let marks = 0;
 
-  OnMcqExamModel.findOne({
-    mcqExam: examId,
-    student: req.user._id,
-  })
-    .then((result) => {
-      console.log(result);
-      if (result == null) {
-        McqExamModel.findById(examId)
-          .then((exam) => {
-            for (let i = 0; i < studentAnswers.length; i++) {
-              for (let j = 0; j < exam.mcqQuestions.length; j++) {
-                if (
-                  studentAnswers[i].mcqQuestion ==
-                    exam.mcqQuestions[j].mcqQuestionId._id &&
-                  studentAnswers[i].studentAnswer ==
-                    exam.mcqQuestions[j].mcqQuestionId.correctAnswers[0].answer
-                ) {
-                  solved++;
-                  marks += exam.mcqQuestions[j].mcqQuestionId.marks;
+  if(req.user.role === "Student"){
+
+    OnMcqExamModel.findOne({
+      mcqExam: examId,
+      student: req.user._id,
+    })
+      .then((result) => {
+        console.log(result);
+        if (result == null) {
+          McqExamModel.findById(examId)
+            .then((exam) => {
+              for (let i = 0; i < studentAnswers.length; i++) {
+                for (let j = 0; j < exam.mcqQuestions.length; j++) {
+                  if (
+                    studentAnswers[i].mcqQuestion ==
+                      exam.mcqQuestions[j].mcqQuestionId._id &&
+                    studentAnswers[i].studentAnswer ==
+                      exam.mcqQuestions[j].mcqQuestionId.correctAnswers[0].answer
+                  ) {
+                    solved++;
+                    marks += exam.mcqQuestions[j].mcqQuestionId.marks;
+                  }
                 }
               }
-            }
-
-            wrong = studentAnswers.length - solved;
-
-            console.log(solved, wrong, marks);
-
-            const onMcqExam = new OnMcqExamModel({
-              mcqExam: examId,
-              student: req.user._id,
-              studentAnswers: studentAnswers,
-              solved: solved,
-              wrong: wrong,
-              mark: marks,
-              windowChanged: windowChanged,
-              feedback: feedback,
-            });
-            onMcqExam
-              .save()
-              .then((result) => {
-                console.log(result);
-                apiResponseInJson(res, 200, result);
-              })
-              .catch((error) => {
-                console.log(error);
-                errorHandler.validationError(res, 400, error);
+  
+              wrong = studentAnswers.length - solved;
+  
+              console.log(solved, wrong, marks);
+  
+              const onMcqExam = new OnMcqExamModel({
+                mcqExam: examId,
+                student: req.user._id,
+                studentAnswers: studentAnswers,
+                solved: solved,
+                wrong: wrong,
+                mark: marks,
+                windowChanged: windowChanged,
+                feedback: feedback,
               });
-          })
-          .catch((error) => {
-            console.log(error);
-            errorHandler.validationError(res, 400, error);
-          });
-      } else {
-        errorHandler.validationError(
-          res,
-          401,
-          "You Have Already Participated On The Exam"
-        );
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+              onMcqExam
+                .save()
+                .then((result) => {
+                  console.log(result);
+                  apiResponseInJson(res, 200, result);
+                })
+                .catch((error) => {
+                  console.log(error);
+                  errorHandler.validationError(res, 400, error);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+              errorHandler.validationError(res, 400, error);
+            });
+        } else {
+          errorHandler.validationError(
+            res,
+            401,
+            "You Have Already Participated On The Exam"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }else {
+    errorHandler.unauthorizedAccess(res);
+  }
 };
 
 exports.postCqSubmit = (req, res, next) => {
   const examId = req.params.id;
   const { studentAnswers, windowChanged, feedback } = req.body;
 
-  OnCqExamModel.findOne({
-    student: req.user._id,
-    cqExam: examId,
-  })
-    .then((result) => {
-      console.log(result);
-      if (result == null) {
-        const onCqExamModel = new OnCqExamModel({
-          cqExam: examId,
-          student: req.user._id,
-          studentAnswers: studentAnswers,
-          windowChanged: windowChanged,
-          feedback: feedback,
-        });
-        onCqExamModel
-          .save()
-          .then((result) => {
-            apiResponseInJson(res, 200, result);
-          })
-          .catch((error) => {
-            console.log(error);
-            errorHandler.validationError(res, 400, error);
-          });
-      } else {
-        errorHandler.validationError(
-          res,
-          401,
-          "You Have Already Participated On The Exam"
-        );
-      }
+  if(req.user.role === "Student"){
+    OnCqExamModel.findOne({
+      student: req.user._id,
+      cqExam: examId,
     })
-    .catch((error) => {
-      console.log(error);
-      errorHandler.serverError(res);
-    });
+      .then((result) => {
+        console.log(result);
+        if (result == null) {
+          const onCqExamModel = new OnCqExamModel({
+            cqExam: examId,
+            student: req.user._id,
+            studentAnswers: studentAnswers,
+            windowChanged: windowChanged,
+            feedback: feedback,
+          });
+          onCqExamModel
+            .save()
+            .then((result) => {
+              apiResponseInJson(res, 200, result);
+            })
+            .catch((error) => {
+              console.log(error);
+              errorHandler.validationError(res, 400, error);
+            });
+        } else {
+          errorHandler.validationError(
+            res,
+            401,
+            "You Have Already Participated On The Exam"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        errorHandler.serverError(res);
+      });
+  }else {
+    errorHandler.unauthorizedAccess(res);
+  }
 };
 
 exports.getMcqSubmit = (req, res, next) => {

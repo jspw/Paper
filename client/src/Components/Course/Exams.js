@@ -8,10 +8,9 @@ const Exams = (props) => {
 
   if (props.courseData.cqExams) {
     props.courseData.cqExams.forEach((exam, j) => {
-      const date = new Date();
       if (
-        new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 <
-        date.getTime()
+        new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 <
+        new Date().getTime()
       )
         exams.push({
           _id: exam.examId._id,
@@ -22,10 +21,11 @@ const Exams = (props) => {
           examType: "cq",
           when: "previous",
           totalTime: exam.examId.totalTime,
-          createdBy:
-            props.courseData.createdBy.firstName +
-            props.courseData.createdBy.lastName +
-            props.courseData.createdBy.username,
+          createdBy: props.courseData.createdBy.firstName
+            ? props.courseData.createdBy.firstName
+            : "" + " " + props.courseData.createdBy.lastName
+            ? props.courseData.createdBy.lastName
+            : "" + " " + props.courseData.createdBy.username,
         });
       else {
         exams.push({
@@ -37,23 +37,21 @@ const Exams = (props) => {
           totalTime: exam.examId.totalTime,
           examType: "cq",
           when: "upcoming",
-          createdBy:
-            props.courseData.createdBy.firstName +
-            " " +
-            props.courseData.createdBy.lastName +
-            " " +
-            props.courseData.createdBy.username,
+          createdBy: props.courseData.createdBy.firstName
+            ? props.courseData.createdBy.firstName
+            : "" + " " + props.courseData.createdBy.lastName
+            ? props.courseData.createdBy.lastName
+            : "" + " " + props.courseData.createdBy.username,
         });
       }
     });
   }
 
   if (props.courseData.mcqExams) {
-    const date = new Date();
     props.courseData.mcqExams.forEach((exam, j) => {
       if (
-        new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60 >
-        date.getTime()
+        new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 >
+        new Date().getTime()
       )
         exams.push({
           _id: exam.examId._id,
@@ -64,12 +62,11 @@ const Exams = (props) => {
           totalTime: exam.examId.totalTime,
           examType: "mcq",
           when: "upcoming",
-          createdBy:
-            props.courseData.createdBy.firstName +
-            " " +
-            props.courseData.createdBy.lastName +
-            " " +
-            props.courseData.createdBy.username,
+          createdBy: props.courseData.createdBy.firstName
+            ? props.courseData.createdBy.firstName
+            : "" + " " + props.courseData.createdBy.lastName
+            ? props.courseData.createdBy.lastName
+            : "" + " " + props.courseData.createdBy.username,
         });
       else {
         exams.push({
@@ -81,12 +78,11 @@ const Exams = (props) => {
           totalTime: exam.examId.totalTime,
           examType: "mcq",
           when: "previous",
-          createdBy:
-            props.courseData.createdBy.firstName +
-            " " +
-            props.courseData.createdBy.lastName +
-            " " +
-            props.courseData.createdBy.username,
+          createdBy: props.courseData.createdBy.firstName
+            ? props.courseData.createdBy.firstName
+            : "" + " " + props.courseData.createdBy.lastName
+            ? props.courseData.createdBy.lastName
+            : "" + " " + props.courseData.createdBy.username,
         });
       }
     });
@@ -98,7 +94,7 @@ const Exams = (props) => {
 
   let x = 1;
   const tableBody = exams.map((exam) => {
-    console.log("exam->",exam);
+    console.log("exam->", exam);
     return (
       <>
         <tr>

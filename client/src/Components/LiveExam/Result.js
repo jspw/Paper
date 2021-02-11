@@ -1,10 +1,11 @@
+import { Button } from "@material-ui/core";
 import React from "react";
 import { Col, Container, Row, Alert } from "react-bootstrap";
 import LinearIndeterminate from "../Generic/Loader";
 import "./LiveExam.scss";
 
 const Result = (props) => {
-  if (props.result )
+  if (props.result)
     return (
       <Container fluid className="root ">
         <Row className="justify-content-center">
@@ -29,6 +30,14 @@ const Result = (props) => {
                         You will be notified when result publish.
                       </Alert>
                     )}
+                  </div>
+                  <div className="justify-content-center">
+                    <Button
+                      variant="outlined"
+                      href={`/previous-exam/${props.examID}`}
+                    >
+                      View Detail
+                    </Button>
                   </div>
                 </p>
               </Col>

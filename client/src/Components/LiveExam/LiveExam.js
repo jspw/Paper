@@ -99,46 +99,42 @@ export default function LiveExam(props) {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds - 1);
-    }, 1000);
-    intervalRef.current = interval;
-
     axios
       .get(`student/exam/${id}`)
       .then((response) => {
-        setExamInfo(response.data.result.data);
-        console.log("examinfo", response.data.result.data);
-
         if (response.data.result.data.mcqQuestions) {
           setSeconds(
-            response.data.result.data.mcqQuestions[questionIndex].mcqQuestionId.time
+            response.data.result.data.mcqQuestions[questionIndex].mcqQuestionId
+              .time
           );
         } else
           setSeconds(
-            response.data.result.data.cqQuestions[questionIndex].cqQuestionId.time
+            response.data.result.data.cqQuestions[questionIndex].cqQuestionId
+              .time
           );
+
+        const interval = setInterval(() => {
+          setSeconds((seconds) => seconds - 1);
+          console.log(seconds);
+        }, 1000);
+
+        intervalRef.current = interval;
+
+        setExamInfo(response.data.result.data);
+        console.log("examinfo", response.data.result.data);
 
         let examTimeEndAfter = 0;
 
         examTimeEndAfter =
-          Math.round(
-            new Date(response.data.result.data.date).getTime() / 1000
-          ) +
-          response.data.result.data.totalTime -
-          Math.round(Date.now() / 1000);
+          new Date(response.data.result.data.date).getTime() +
+          (response.data.result.data.totalTime * 1000 - Date.now());
 
-        console.log(examTimeEndAfter);
-
-        if (examTimeEndAfter > 0) examTimeEndAfter = examTimeEndAfter * 1000;
-        else examTimeEndAfter = 0;
-
-        console.log(examTimeEndAfter);
+        console.log("examTimeEndAfter", examTimeEndAfter);
 
         const timeout = setTimeout(() => {
-          clearInterval(intervalRef.current);
           setdisableNextButton(true);
           submitAnswers();
+          clearInterval(intervalRef.current);
           // alert("Exam Timeout!");
         }, examTimeEndAfter);
       })
@@ -147,7 +143,7 @@ export default function LiveExam(props) {
       });
 
     return () => {
-      clearInterval(interval);
+      clearInterval(intervalRef);
     };
   }, []);
 
@@ -224,7 +220,11 @@ export default function LiveExam(props) {
     setAnswer("");
     if (examinfo.mcqQuestions) {
       if (questionIndex + 1 < examinfo.mcqQuestions.length) {
-        console.log("questionIndex", questionIndex + 1, examinfo.mcqQuestions.length);
+        console.log(
+          "questionIndex",
+          questionIndex + 1,
+          examinfo.mcqQuestions.length
+        );
         setSeconds(
           (seconds) => examinfo.mcqQuestions[questionIndex].mcqQuestionId.time
         );
@@ -235,7 +235,11 @@ export default function LiveExam(props) {
       }
     } else if (examinfo.cqQuestions) {
       if (questionIndex + 1 < examinfo.cqQuestions.length) {
-        console.log("questionIndex", questionIndex + 1, examinfo.cqQuestions.length);
+        console.log(
+          "questionIndex",
+          questionIndex + 1,
+          examinfo.cqQuestions.length
+        );
         setSeconds(
           (seconds) => examinfo.cqQuestions[questionIndex].cqQuestionId.time
         );
@@ -263,7 +267,9 @@ export default function LiveExam(props) {
       des = examinfo.cqQuestions[questionIndex].cqQuestionId.description ? (
         <Row className="exam__description">
           <Col>
-            <h5>{examinfo.cqQuestions[questionIndex].cqQuestionId.description}</h5>
+            <h5>
+              {examinfo.cqQuestions[questionIndex].cqQuestionId.description}
+            </h5>
           </Col>
         </Row>
       ) : null;
@@ -273,7 +279,9 @@ export default function LiveExam(props) {
       des = examinfo.mcqQuestions[questionIndex].mcqQuestionId.description ? (
         <Row className="exam__description">
           <Col>
-            <h5>{examinfo.mcqQuestions[questionIndex].mcqQuestionId.description}</h5>
+            <h5>
+              {examinfo.mcqQuestions[questionIndex].mcqQuestionId.description}
+            </h5>
           </Col>
         </Row>
       ) : null;
@@ -284,6 +292,7 @@ export default function LiveExam(props) {
       return (
         <Result
           result={result}
+          examID ={id}
           examType={examinfo.mcqQuestions ? "mcq" : "cq"}
         />
       );
@@ -317,15 +326,18 @@ export default function LiveExam(props) {
                       {examinfo.mcqQuestions
                         ? examinfo.mcqQuestions[questionIndex].mcqQuestionId
                             .mainQuestion
-                        : examinfo.cqQuestions[questionIndex].cqQuestionId.mainQuestion}
+                        : examinfo.cqQuestions[questionIndex].cqQuestionId
+                            .mainQuestion}
                     </h5>
                   </Col>
                   <Col xs="auto">
                     <p style={{ fontSize: "1vw" }}>
                       Marks:{" "}
                       {examinfo.mcqQuestions
-                        ? examinfo.mcqQuestions[questionIndex].mcqQuestionId.marks
-                        : examinfo.cqQuestions[questionIndex].cqQuestionId.marks}
+                        ? examinfo.mcqQuestions[questionIndex].mcqQuestionId
+                            .marks
+                        : examinfo.cqQuestions[questionIndex].cqQuestionId
+                            .marks}
                     </p>
                   </Col>
                 </Row>
@@ -343,13 +355,13 @@ export default function LiveExam(props) {
                             <Col xs={12}>
                               <FormControlLabel
                                 value={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[0].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[0].option
                                 }
                                 control={<Radio color="primary" />}
                                 label={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[0].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[0].option
                                 }
                               />
                             </Col>
@@ -358,13 +370,13 @@ export default function LiveExam(props) {
                             <Col xs={12}>
                               <FormControlLabel
                                 value={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[1].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[1].option
                                 }
                                 control={<Radio color="primary" />}
                                 label={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[1].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[1].option
                                 }
                               />
                             </Col>
@@ -373,13 +385,13 @@ export default function LiveExam(props) {
                             <Col xs={12}>
                               <FormControlLabel
                                 value={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[2].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[2].option
                                 }
                                 control={<Radio color="primary" />}
                                 label={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[2].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[2].option
                                 }
                               />
                             </Col>
@@ -388,13 +400,13 @@ export default function LiveExam(props) {
                             <Col xs={12}>
                               <FormControlLabel
                                 value={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[3].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[3].option
                                 }
                                 control={<Radio color="primary" />}
                                 label={
-                                  examinfo.mcqQuestions[questionIndex].mcqQuestionId
-                                    .options[3].option
+                                  examinfo.mcqQuestions[questionIndex]
+                                    .mcqQuestionId.options[3].option
                                 }
                               />
                             </Col>
