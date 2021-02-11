@@ -461,7 +461,7 @@ export default function Home(props) {
                   <AddIcon
                     onClick={handleClickOpen}
                     style={{
-                      fontSize: "35px",
+                      fontSize: "30px",
                       color: "#234058",
                       cursor: "pointer",
                     }}
