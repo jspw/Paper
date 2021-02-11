@@ -1,5 +1,11 @@
 import React from "react";
-import { Alert, Container } from "react-bootstrap";
+import {  Container } from "react-bootstrap";
+
+import MuiAlert from "@material-ui/lab/Alert";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 const MarkSheet = (props) => {
   const mcqExamsData = props.mcqExamsData;
@@ -70,11 +76,11 @@ const MarkSheet = (props) => {
             <td>
               <a href={`mailto: ${data.student.email}`}>{data.student.email}</a>
             </td>
-            <td>{data.solved}</td>
+            <td>{data.totalMarks}</td>
             <td>{data.wrong}</td>
             <td>{data.mark}</td>
             <td>
-              <a href={`${data.student._id}`}>View</a>
+              <a href={`/examine/${data.cqExam._id}`}>View</a>
             </td>
           </tr>
         </>

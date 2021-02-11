@@ -48,4 +48,8 @@ router
   .route("/examine/cq/:id")
   .post(authenticateJWT, teacherController.postCqExamine);
 
+  router
+  .route("/exams/all/:id")
+  .get(authenticateJWT, teacherController.getAllExams);
+
 module.exports = router;

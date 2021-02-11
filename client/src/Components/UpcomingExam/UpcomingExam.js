@@ -55,8 +55,8 @@ const UpcomingExam = (props) => {
   console.log(examInfo);
 
   return (
-    <Container>
-      <Alert variant="danger">
+    <Container style={{backgroundColor: "white", paddingBottom: "3%"}}>
+      <Alert variant="primary">
         <p className="text-center">Exam Has Not Started Yet</p>
       </Alert>
       {/* <Alert variant="light"> */}

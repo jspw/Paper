@@ -46,6 +46,16 @@ export default function Navigation(props) {
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
 
+    axios
+      .get("/notifications")
+      .then((result) => {
+        console.log("Notifications ", result.data.result.data);
+        setnotifies(result.data.result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     if (userdata) {
       console.log(userdata.department);
       socket.on(userdata.department, (data, error) => {
@@ -53,7 +63,9 @@ export default function Navigation(props) {
         console.log("data from socket", data);
         console.log("data from socket", error);
         if (userdata.role === "Student") {
-          notifies.push(data);
+          const bal = notifies;
+          bal.push(data);
+          setnotifies(data);
         }
       });
     }
@@ -106,7 +118,7 @@ export default function Navigation(props) {
     window.location.reload();
     history.push("/");
   };
-  let notificationUI;
+  let notificationsUI;
 
   const renderProfileMenu = (
     <Menu
@@ -126,7 +138,12 @@ export default function Navigation(props) {
       }}
       style={{ width: "340px" }}
     >
-      <MenuItem onClick={handleMenuClose} /*style={{width: "340px"}}*/>
+      <MenuItem
+        style={{ textDecoration: "none", color: "black" }}
+        component={Link}
+        to="/profile"
+        onClick={handleMenuClose} /*style={{width: "340px"}}*/
+      >
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My Schedule</MenuItem>
@@ -135,95 +152,69 @@ export default function Navigation(props) {
       </MenuItem>
     </Menu>
   );
+  let x = 0;
+  notificationsUI = notifies.map((not) => {
+    x++;
+    if (not.type === "course")
+      return (
+        <MenuItem>
+          You are invited to a new course {not.name}.<br></br>
+          {/* <div className="btn-group btn-group-sm">
+            <button
+              type="button"
+              class="btn btn-primary"
+              // onClick={joinCourse(not.typeID)}
+            >
+              Join
+            </button>
+            <p> </p>
+            <button type="button" class="btn btn-warning">
+              Reject
+            </button>
+          </div> */}
+          <hr/>
+        </MenuItem>
+      );
+    else if (not.type === "exam") {
+      return (
+        <MenuItem>
+          <a href={`/course/${not.typeID}`}>
+            A new exam is created {not.name}.
+          </a>
+        </MenuItem>
+      );
+    } else if (not.type === "result") {
+      return (
+        <MenuItem>
+          <a href={`/course/${not.typeID}`}>
+            Your CQ Exam {not.name} result has been published.
+          </a>
+        </MenuItem>
+      );
+    }
+  });
 
   let renderNotificationMenu;
-  if (notifies)
-    renderNotificationMenu = notificationUI = notifies.map((not) => {
-      if (not.type === "course")
-        return (
-          <Menu
-            anchorEl={anchor}
-            id="notification menu"
-            open={isNotificationOpen}
-            onClose={handleMenuClose}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <MenuItem>
-              You are invited to a new course {not.name}.<br></br>
-              <div className="btn-group">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  onClick={joinCourse(not.typeID)}
-                >
-                  Join
-                </button>
-                <p> </p>
-                <button type="button" class="btn btn-warning">
-                  Reject
-                </button>
-              </div>
-            </MenuItem>
-          </Menu>
-        );
-      else if (not.type === "exam") {
-        return (
-          <Menu
-            anchorEl={anchor}
-            id="notification menu"
-            open={isNotificationOpen}
-            onClose={handleMenuClose}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <MenuItem>
-              <a href={`/course/${not.typeID}`}>
-                A new exam is created {not.name}.
-              </a>
-            </MenuItem>
-          </Menu>
-        );
-      } else if (not.type === "result") {
-        return (
-          <Menu
-            anchorEl={anchor}
-            id="notification menu"
-            open={isNotificationOpen}
-            onClose={handleMenuClose}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <MenuItem>
-              <a href={`/course/${not.typeID}`}>
-                Your CQ Exam {not.name} has been published.
-              </a>
-            </MenuItem>
-          </Menu>
-        );
-      }
-    });
+
+  renderNotificationMenu = (
+    <Menu
+      anchorEl={anchor}
+      id={`{notification menu}{x++}`}
+      open={isNotificationOpen}
+      onClose={handleMenuClose}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+    >
+      {notifies ? notificationsUI : <MenuItem>No Notifications</MenuItem>}
+    </Menu>
+  );
 
   if (props.loginStatus == null) {
     navElements = (

@@ -636,7 +636,7 @@ exports.postCreateMcqExam = (req, res, next) => {
                 const notificationModel = new NotificationModel({
                   varsity: result.varsity.name,
                   department: result.department.name,
-                  type: "result",
+                  type: "exam",
                   typeID: result._id,
                   name: result.name,
                 });
@@ -781,6 +781,7 @@ exports.postCqExamine = (req, res, next) => {
             department: result.department.name,
             type: "result",
             typeID: result._id,
+            name: result.name,
           });
 
           notificationModel.save().then((notification) => {

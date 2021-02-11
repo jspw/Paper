@@ -1,25 +1,22 @@
 import React from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Alert,
-} from "react-bootstrap";
+import { Col, Container, Row, Alert } from "react-bootstrap";
+import LinearIndeterminate from "../Generic/Loader";
 import "./LiveExam.scss";
 
 const Result = (props) => {
-  if (props.result)
+  if (props.result )
     return (
       <Container fluid className="root ">
         <Row className="justify-content-center">
           <Col xs={7} className="exam">
             <Row className="justify-content-center">
               <Col xs="auto">
-               <br></br>
+                <br></br>
                 {/* <Jumbotron> */}
-                  <h1>Exam Finished!</h1>
-                  <p>
-                    <div className="justify-content-center">
+                <h1>Exam Finished!</h1>
+                <p>
+                  <div className="justify-content-center">
+                    {props.examType === "mcq" ? (
                       <Alert
                         variant={props.result.mark > 0 ? "success" : "danger"}
                       >
@@ -27,15 +24,20 @@ const Result = (props) => {
                           ? `Congrats You have Scored ${props.result.mark}`
                           : `Oho! You have Scored ${props.result.mark}`}
                       </Alert>
-                    </div>
-                  </p>
-                {/* </Jumbotron> */}
+                    ) : (
+                      <Alert variant="info">
+                        You will be notified when result publish.
+                      </Alert>
+                    )}
+                  </div>
+                </p>
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
     );
+  else return <LinearIndeterminate />;
 };
 
 export default Result;

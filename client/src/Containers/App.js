@@ -6,6 +6,7 @@ import Navigation from "../Components/Navbar/Navbar";
 import SignIn from "../Components/Authentication/SignIn";
 import SignUp from "../Components/Authentication/SignUp";
 import Home from "../Components/Home/Home";
+import Profile from "../Components/Profile/Profile";
 import axios from "axios";
 import Layout from "../Components/Layout/Layout";
 import Course from "../Components/Course/Course";
@@ -13,6 +14,8 @@ import Exam from "../Components/Exam/Exam";
 import LiveExam from "../Components/LiveExam/LiveExam";
 import PreviousExam from "../Components/PreviousExam/PreviousExam";
 import UpcomingExam from "../Components/UpcomingExam/UpcomingExam";
+import Examine from "../Components/PreviousExam/Examine";
+import Error404 from "../Components/404/Error404";
 import "./App.css";
 
 let userdata = localStorage.getItem("data");
@@ -78,13 +81,6 @@ function App() {
           notifications={notifications}
           userInfo={userInfo}
         />
-        <Route
-          path="/test"
-          exact
-          render={() => (
-            <Layout universityInfo={universityInfo} userInfo={userInfo} />
-          )}
-        />
 
         <Switch>
           <Route
@@ -93,6 +89,12 @@ function App() {
             render={() => (
               <Home universityInfo={universityInfo} userInfo={userInfo} />
             )}
+          />
+          <Route path="/examine/:id" exact render={() => <Examine />} />
+          <Route
+            path="/profile"
+            exact
+            render={() => <Profile userInfo={userInfo} />}
           />
 
           <Route path="/signUp" exact component={SignUp} />
@@ -125,6 +127,8 @@ function App() {
             exact
             render={() => <UpcomingExam userInfo={userInfo} />}
           />
+
+          <Route path="*" exact={true} component={Error404} />
         </Switch>
       </div>
     </BrowserRouter>

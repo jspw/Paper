@@ -5,6 +5,15 @@ body {
   margin-top: 4%;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
 .exam {
   background-color: white;
@@ -18,31 +27,31 @@ body {
     }
   }
   &__description {
-    border-bottom: 2px solid #E9EBED;
+    border-bottom: 2px solid #e9ebed;
   }
   &__question {
     padding-top: 7px;
     padding-bottom: 5px;
   }
   &__options {
-    background-color: #F4F5F9;
+    background-color: #f4f5f9;
 
     .option {
-      border-bottom: 2px solid #E2EBF3;
+      border-bottom: 2px solid #e2ebf3;
     }
-    .option:first-child{
-        border-top: 2px solid #E2EBF3;
+    .option:first-child {
+      border-top: 2px solid #e2ebf3;
     }
   }
   &__buttons {
-      padding: 10px 0px 10px 0px;
-      .timer {
-          margin-top: 1%;
-          font-size: large;
-      }
+    padding: 10px 0px 10px 0px;
+    .timer {
+      margin-top: 1%;
+      font-size: large;
+    }
   }
 }
 .feedback {
   padding-top: 1%;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }

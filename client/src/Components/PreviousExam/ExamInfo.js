@@ -122,7 +122,11 @@ const ExamInfo = (props) => {
                   </Box>
                 </Form.Label>
                 <Form.Control
-                  value={cqExamData.studentAnswers[i].studentAnswer}
+                  value={
+                    cqExamData.studentAnswers[i]
+                      ? cqExamData.studentAnswers[i].studentAnswer
+                      : ""
+                  }
                   disabled
                   as="textarea"
                   rows={3}

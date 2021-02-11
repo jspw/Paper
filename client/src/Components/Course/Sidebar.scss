@@ -9,12 +9,6 @@
   font-family: "Open Sans";
   --transition-speed: 600ms;
 }
-:target {
-  text-decoration: none;
-  filter: grayscale(0%) opacity(1);
-  color: #ffce47;
-  background-color: rgba(238, 232, 232, 0.2);
-}
 .parent {
   width: 100%;
   display: flex;
@@ -124,4 +118,11 @@
 .content__small {
   transition: padding-left 400ms;
   padding-left: 14.5rem;
+}
+
+:target {
+  text-decoration: none;
+  filter: grayscale(0%) opacity(1);
+  color: #ffce47;
+  background-color: rgba(238, 232, 232, 0.2);
 }

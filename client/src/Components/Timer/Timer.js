@@ -1,8 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-
-import "./Timer.css";
-
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from '@material-ui/core/Button';
+import "./Timer.css";
 
 const Timer = (props) => {
   const [timerDays, setTimerDays] = useState("00");
@@ -41,16 +43,25 @@ const Timer = (props) => {
     };
   });
 
-  if (timerDays && timerHours && timerMinutes && timerSeconds)
+  if (timerDays === 0 && timerHours === 0 && timerMinutes === 0 && timerSeconds === 0)
     return (
-      <div className="timer-container">
-        <Link
-          to={`/live-exam/${props.examID}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <button className="btn btn-primary">Enter Exam</button>
-        </Link>
-      </div>
+      <Container className="enterExam">
+        <Row className="d-flex justify-content-center enterHeading">
+          <Col xs="auto">
+            <h4>Your Exam is Running!</h4>
+          </Col>
+        </Row>
+        <Row className="d-flex justify-content-center">
+          <Col xs="auto">
+            <Link
+              to={`/live-exam/${props.examID}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Button variant="contained" color="primary" disableElevation style={{backgroundColor: "#3F7CAC"}}>Enter Exam</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
     );
   else
     return (
