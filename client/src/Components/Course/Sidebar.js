@@ -11,6 +11,8 @@ import "./Sidebar.scss";
 import ExamType from "./CreateExam/ExamType";
 import Students from './Students';
 import Exams from "./Exams";
+import Teacher from "./Teacher";
+import Info from "./Info";
 
 export default function Sidebar(props) {
 
@@ -58,6 +60,24 @@ export default function Sidebar(props) {
         courseData={props.courseData}
       />
     );
+  else if(content === "teacher") {
+    displayContent = (
+      <Teacher
+        className="content"
+        userInfo={userdata}
+        courseData={props.courseData}
+      />
+    );
+  }
+  else if(content === "info") {
+    displayContent = (
+      <Info
+        className="content"
+        userInfo={userdata}
+        courseData={props.courseData}
+      />
+    );
+  }
 
   return (
     <div className="parent">

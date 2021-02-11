@@ -140,7 +140,7 @@ export default function Navigation(props) {
   };
 
   const handleSignout = () => {
-    localStorage.clear();
+      
     // props.login.isLogin = "Failed";
 
     history.push("/signIn");
