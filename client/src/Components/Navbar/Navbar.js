@@ -31,7 +31,7 @@ export default function Navigation(props) {
 
   const [response, setResponse] = useState([]);
 
-  const [notifies, setnotifies] = useState(null);
+  const [notifies, setnotifies] = useState([]);
 
   let socketRef = useRef(null);
 
@@ -70,30 +70,43 @@ export default function Navigation(props) {
         console.log(error);
       });
 
-    // if (userdata) {
-    // console.log(userdata.department);
-    // socket.on(userdata.department, (data, error) => {
-    //   // setResponse(data);
-    //   console.log("data from socket", data);
-    //   console.log("data from socket", error);
-    //   if (userdata.role === "Student") {
-    //     const bal = notifies;
-    //     bal.push(data);
-    //     // setnotifies(data);
+    if (userdata) {
+      console.log(userdata.department);
+      socket.on(userdata.department, (data, error) => {
+        // setResponse(data);
+        console.log("data from socket", data);
+        console.log("data from socket", error);
+        if (userdata.role === "Student") {
+          // const bal = notifies;
+          // bal.push(data);
+          // setnotifies(data);
 
-    //     if (userdata.role === "Teacher") {
-    //       if (data.type === "course")
-    //         setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
-    //       else if (data.type === `exam`)
-    //         setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
-    //       else if (data.type === `result`)
-    //         setsnackbarMsg(
-    //           `Your CQ Exam (${data.name}) result has been published.`
-    //         );
-    //     }
-    //   }
-    // });
-    // }
+          if (userdata.role === "Student") {
+            if (data.type === "course") {
+              setopensnack(true);
+              setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
+              setTimeout(function () {
+                window.location.reload();
+              }, 2000);
+            } else if (data.type === `exam`) {
+              setopensnack(true);
+              setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
+              setTimeout(function () {
+                window.location.reload();
+              }, 2000);
+            } else if (data.type === `result`) {
+              setopensnack(true);
+              setsnackbarMsg(
+                `Your CQ Exam (${data.name}) result has been published.`
+              );
+              setTimeout(function () {
+                window.location.reload();
+              }, 2000);
+            }
+          }
+        }
+      });
+    }
   }, []);
 
   const joinCourse = (courseID) => {
@@ -111,7 +124,9 @@ export default function Navigation(props) {
       .then((response) => {
         console.log(response.data);
         if (response.data.status === "OK") {
-          window.location.reload();
+          setTimeout(function () {
+            window.location.reload();
+          }, 3000);
         }
       })
       .catch((error) => {
@@ -140,7 +155,6 @@ export default function Navigation(props) {
   };
 
   const handleSignout = () => {
-      
     // props.login.isLogin = "Failed";
 
     history.push("/signIn");
@@ -181,11 +195,11 @@ export default function Navigation(props) {
     </Menu>
   );
   let x = 0;
-  if (notifies)
+  if (notifies.length > 0)
     notificationsUI = notifies.map((not) => {
       if (not.type === "course")
         return (
-          <MenuItem>
+          <MenuItem onClick={() => joinCourse(not.typeID)}>
             You are invited to a new course {not.name}.<br></br>
             {/* <div className="btn-group btn-group-sm">
               <button

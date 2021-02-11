@@ -46,7 +46,7 @@ export default function LiveExam(props) {
   const [examinfo, setExamInfo] = useState(null);
 
   const [open, setOpen] = React.useState(false);
-  const [seconds, setSeconds] = useState(2);
+  const [seconds, setSeconds] = useState(1);
 
   const [windowChange, setwindowChange] = useState(0);
 

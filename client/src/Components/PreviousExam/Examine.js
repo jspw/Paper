@@ -95,6 +95,7 @@ const Examine = (props) => {
       .then((response) => {
         console.log(response.data);
         if (response.data.status == "OK") {
+          console.log("ONCQ?",response.data.result.data)
           setCqExamsData(response.data.result.data);
         }
       })
@@ -253,7 +254,7 @@ const Examine = (props) => {
               <Box fontWeight="fontWeightBold" m={1}>
                 {" "}
                 Question : [ {`Marks : ${cqx.cqQuestionId.marks} || `}
-                {`Time : ${cqx.cqQuestionId.time / 60}  min  ${
+                {`Time : ${Math.round(cqx.cqQuestionId.time / 60)}  min  ${
                   cqx.cqQuestionId.time % 60
                 } sec `}
                 ]

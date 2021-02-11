@@ -533,7 +533,7 @@ exports.postCourseAdd = (req, res, next) => {
                         .execPopulate()
                         .then((result) => {
                           // console.log("populate course", result);
-                          apiResponseInJson(res, 400, result.courses);
+                          apiResponseInJson(res, 200, result.courses);
                         })
                         .catch((error) => {
                           console.log(error);

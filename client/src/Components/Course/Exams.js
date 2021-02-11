@@ -98,14 +98,12 @@ const Exams = (props) => {
 
   let x = 1;
   const tableBody = exams.map((exam) => {
-    console.log(exam);
+    console.log("exam->",exam);
     return (
       <>
         <tr>
           <td>{x++}</td>
-          <td>
-            {exam.name}
-          </td>
+          <td>{exam.name}</td>
           <td>{exam.examType}</td>
           <td>{exam.totalMarks}</td>
           <td>{`${Math.round(exam.totalTime / 60)} min : ${
@@ -115,13 +113,15 @@ const Exams = (props) => {
           <td>{exam.date.toString()}</td>
           {props.userInfo.role === "Teacher" ? (
             <td>
-              <Button href={`/examine/cq/${exam._id}`} variant="primary">
+              <Button
+                disabled={exam.examType === "mcq" ? true : false}
+                href={`/examine/${exam._id}`}
+                variant="primary"
+              >
                 Examine
               </Button>
             </td>
-          ) : (
-            null
-          )}
+          ) : null}
 
           <td>
             <Button href={`/${exam.when}-exam/${exam._id}`} variant="info">
