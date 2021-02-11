@@ -120,15 +120,23 @@ const Examine = (props) => {
       });
   };
 
-  const handleChange =  (e) =>{
-      setmark(e.target.value);
-  }
+  const handleChange = (e) => {
+    setmark(e.target.value);
+  };
 
   const postMarks = () => {
-    const url = `teacher/exam/cq/submits/${id}`;
+    const url = `teacher/examine/cq/${id}`;
+
+    let totalMarks;
+
+    marks.forEach((marxk) => {
+      totalMarks += marxk.mark;
+    });
+    console.log(marks);
 
     const data = JSON.stringify({
       marks: marks,
+      totalMarks: totalMarks,
     });
 
     axios({
@@ -289,11 +297,11 @@ const Examine = (props) => {
                   type="Number"
                   value={mark}
                   variant="outlined"
-                  onChange= {handleChange}
+                  onChange={handleChange}
                   size="small"
                   required
                 />
-                <button onClick = {addMark} type="input" className="btn btn-info">
+                <button onClick={addMark} type="input" className="btn btn-info">
                   {" "}
                   Add{" "}
                 </button>

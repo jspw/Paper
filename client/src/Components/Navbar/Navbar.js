@@ -31,7 +31,7 @@ export default function Navigation(props) {
 
   const [response, setResponse] = useState([]);
 
-  const [notifies, setnotifies] = useState([]);
+  const [notifies, setnotifies] = useState(null);
 
   let socketRef = useRef(null);
 
@@ -70,30 +70,30 @@ export default function Navigation(props) {
         console.log(error);
       });
 
-    if (userdata) {
-      console.log(userdata.department);
-      // socket.on(userdata.department, (data, error) => {
-      //   // setResponse(data);
-      //   console.log("data from socket", data);
-      //   console.log("data from socket", error);
-      //   if (userdata.role === "Student") {
-      //     const bal = notifies;
-      //     bal.push(data);
-      //     // setnotifies(data);
+    // if (userdata) {
+    // console.log(userdata.department);
+    // socket.on(userdata.department, (data, error) => {
+    //   // setResponse(data);
+    //   console.log("data from socket", data);
+    //   console.log("data from socket", error);
+    //   if (userdata.role === "Student") {
+    //     const bal = notifies;
+    //     bal.push(data);
+    //     // setnotifies(data);
 
-      //     if (userdata.role === "Teacher") {
-      //       if (data.type === "course")
-      //         setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
-      //       else if (data.type === `exam`)
-      //         setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
-      //       else if (data.type === `result`)
-      //         setsnackbarMsg(
-      //           `Your CQ Exam (${data.name}) result has been published.`
-      //         );
-      //     }
-      //   }
-      // });
-    }
+    //     if (userdata.role === "Teacher") {
+    //       if (data.type === "course")
+    //         setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
+    //       else if (data.type === `exam`)
+    //         setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
+    //       else if (data.type === `result`)
+    //         setsnackbarMsg(
+    //           `Your CQ Exam (${data.name}) result has been published.`
+    //         );
+    //     }
+    //   }
+    // });
+    // }
   }, []);
 
   const joinCourse = (courseID) => {
@@ -182,8 +182,7 @@ export default function Navigation(props) {
   );
   let x = 0;
   if (notifies)
-  console.log("sasa",notifies);
-    notificationsUI = notifies.forEach((not) => {
+    notificationsUI = notifies.map((not) => {
       if (not.type === "course")
         return (
           <MenuItem>

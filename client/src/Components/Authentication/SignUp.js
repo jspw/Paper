@@ -4,8 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Forms from "../Generic/Forms";
 import Grid from "@material-ui/core/Grid";
 import MuiAlert from "@material-ui/lab/Alert";
-import "./SignIn.css";
+import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
+import "./SignIn.css";
 
 const apiDomain = "http://localhost:8080/";
 
@@ -316,6 +318,15 @@ export default function SignUp() {
             <Button variant="contained" value="Sign Up" type="submit" fullWidth>
               Sign Up
             </Button>
+            <Grid item xs={12} className={classes.textField}>
+              <Typography>
+                Already have an account?{" "}
+                <Link to="/signIn">
+                  <b>Sign In</b>
+                </Link>{" "}
+                instead
+              </Typography>
+            </Grid>
           </Grid>
         </form>
       </Grid>

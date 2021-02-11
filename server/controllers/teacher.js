@@ -767,8 +767,11 @@ exports.postCqExamine = (req, res, next) => {
     OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
       console.log(onCqExamModel);
 
-      onCqExamModel.totalMarks = req.body.totalMarks;
+      onCqExamModel.totalMarks = req.body.marks;
       onCqExamModel.examineBy = req.user._id;
+
+      
+
       onCqExamModel.marks.push(req.body.marks);
 
       onCqExamModel
