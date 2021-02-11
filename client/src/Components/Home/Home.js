@@ -59,10 +59,9 @@ export default function Home(props) {
   const [open, setOpen] = React.useState(false);
 
   let history = useHistory();
+  const [opensnack, setopensnack] = React.useState(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -119,12 +118,12 @@ export default function Home(props) {
 
   const [snackbarMsg, setsnackbarMsg] = useState(null);
 
-  const handleSnackbarClose = (event, reason) => {
+  const handleSnackClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setSnackbarOpen(false);
+    setopensnack(false);
   };
 
   const createCourse = () => {
@@ -160,21 +159,21 @@ export default function Home(props) {
           if (response.data.status === "OK") {
             handleClose();
             setsnackbarMsg("Course Created Successfully");
-            setSnackbarOpen(true);
+            setopensnack(true);
 
             setTimeout(function () {
               history.push("/");
               window.location.reload();
-            }, 5000);
+            }, 1000);
           } else {
             setsnackbarMsg("Course Creation Failed!");
-            setSnackbarOpen(true);
+            setopensnack(true);
           }
         })
         .catch((error) => {
           console.log(error);
           setsnackbarMsg("Course Creation Failed!");
-          setSnackbarOpen(true);
+          setopensnack(true);
         });
     }
   };
@@ -356,7 +355,10 @@ export default function Home(props) {
                 alignitems="flex-start"
                 className="upcoming__next"
               >
-                <Link to={`/upcoming-exam/${ex._id}`} style={{textDecoration: "none", color: "black"}}>
+                <Link
+                  to={`/upcoming-exam/${ex._id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <Row className="examHeading d-flex justify-content-between">
                     <Col xs="auto">
                       <span className="examName">
@@ -379,7 +381,7 @@ export default function Home(props) {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{paddingBottom: "10px"}}>{ex.courseName}</Col>
+                    <Col style={{ paddingBottom: "10px" }}>{ex.courseName}</Col>
                   </Row>
                 </Link>
               </Container>
@@ -431,158 +433,177 @@ export default function Home(props) {
     // console.log(role)
     return (
       // <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
-      <Grid container justify="space-between" alignItems="flex-start">
-        <Grid
-          item
-          xs={12}
-          md={2}
-          className="leftside"
-          style={{ float: "left", paddingTop: "10px", paddingLeft: "10px" }}
+      <>
+        <Snackbar
+          open={opensnack}
+          onClose={handleSnackClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          // anchorPosition ={ { right: 10, top: 100 }}
         >
-          <Grid container justify="space-between">
-            <Grid item>
-              <h4 className="leftHeading">My Courses</h4>
-            </Grid>
-            {role === "Teacher" ? (
+          <Alert onClose={handleSnackClose} severity="success">
+            {setsnackbarMsg}
+          </Alert>
+        </Snackbar>
+        <Grid container justify="space-between" alignItems="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={2}
+            className="leftside"
+            style={{ float: "left", paddingTop: "10px", paddingLeft: "10px" }}
+          >
+            <Grid container justify="space-between">
               <Grid item>
-                <AddIcon onClick={handleClickOpen} style={{ fontSize: "35px", color: "#234058", cursor: "pointer" }}/>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="form-dialog-title"
-                >
-                  <DialogTitle id="form-dialog-title">
-                    Create New Course
-                  </DialogTitle>
-                  <DialogContent>
-                    <Forms
-                      id="university"
-                      type="select"
-                      label="University"
-                      labelWidth={117}
-                      classes={classes}
-                      values={values.university}
-                      handleChange={handleChange}
-                    />
-                    <Forms
-                      selectedUniversity={values.university}
-                      id="department"
-                      type="select"
-                      label="Department"
-                      labelWidth={117}
-                      classes={classes}
-                      values={values.department}
-                      handleChange={handleChange}
-                    />
-                    <Forms
-                      id="courseName"
-                      type="text"
-                      label="Course Name"
-                      labelWidth={78}
-                      classes={classes}
-                      values={values.firstName}
-                      handleChange={handleChange}
-                      required={false}
-                    />
-                    <Forms
-                      id="courseCode"
-                      type="text"
-                      label="Course Code"
-                      labelWidth={78}
-                      classes={classes}
-                      values={values.firstName}
-                      handleChange={handleChange}
-                      required={false}
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose} color="default">
-                      Cancel
-                    </Button>
-                    <Button onClick={createCourse} color="primary">
-                      Create
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                <h4 className="leftHeading">My Courses</h4>
               </Grid>
-            ) : null}
-          </Grid>
-          <Grid item>
-            <hr />
-          </Grid>
-          {courseUI}
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          className="upcoming"
-          style={{ padding: "10px" }}
-        >
-          <Grid container justify="space-between" alignitems="flex-start">
-            <Grid item>
-              <h4 className="centerHeading">Upcoming Exams</h4>
+              {role === "Teacher" ? (
+                <Grid item>
+                  <AddIcon
+                    onClick={handleClickOpen}
+                    style={{
+                      fontSize: "35px",
+                      color: "#234058",
+                      cursor: "pointer",
+                    }}
+                  />
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                  >
+                    <DialogTitle id="form-dialog-title">
+                      Create New Course
+                    </DialogTitle>
+                    <DialogContent>
+                      <Forms
+                        id="university"
+                        type="select"
+                        label="University"
+                        labelWidth={117}
+                        classes={classes}
+                        values={values.university}
+                        handleChange={handleChange}
+                      />
+                      <Forms
+                        selectedUniversity={values.university}
+                        id="department"
+                        type="select"
+                        label="Department"
+                        labelWidth={117}
+                        classes={classes}
+                        values={values.department}
+                        handleChange={handleChange}
+                      />
+                      <Forms
+                        id="courseName"
+                        type="text"
+                        label="Course Name"
+                        labelWidth={78}
+                        classes={classes}
+                        values={values.firstName}
+                        handleChange={handleChange}
+                        required={false}
+                      />
+                      <Forms
+                        id="courseCode"
+                        type="text"
+                        label="Course Code"
+                        labelWidth={78}
+                        classes={classes}
+                        values={values.firstName}
+                        handleChange={handleChange}
+                        required={false}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="default">
+                        Cancel
+                      </Button>
+                      <Button onClick={createCourse} color="primary">
+                        Create
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </Grid>
+              ) : null}
             </Grid>
             <Grid item>
-              <InfoOutlinedIcon
-                style={{ fontSize: "35px", color: "#234058" }}
-              />
+              <hr />
             </Grid>
+            {courseUI}
           </Grid>
-          <Grid item>
-            <hr />
-          </Grid>
-          <div className="upcoming__first">
-            {mostUpcomingExamUI}
+          <Grid
+            item
+            xs={12}
+            md={6}
+            className="upcoming"
+            style={{ padding: "10px" }}
+          >
+            <Grid container justify="space-between" alignitems="flex-start">
+              <Grid item>
+                <h4 className="centerHeading">Upcoming Exams</h4>
+              </Grid>
+              <Grid item>
+                <InfoOutlinedIcon
+                  style={{ fontSize: "35px", color: "#234058" }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item>
+              <hr />
+            </Grid>
+            <div className="upcoming__first">
+              {mostUpcomingExamUI}
 
-            {upcomingExams.length > 0 ? (
-              <Timer
-                examID={upcomingExams[0]._id}
-                deadline={upcomingExams[0].date}
-              />
-            ) : (
-              <>
-                <Grid container justify="center">
-                  <Grid item xs="auto" style={{ marginTop: "10%" }}>
-                    <FaRegCheckCircle
-                      style={{ fontSize: "50px", color: "#234058" }}
-                    />
+              {upcomingExams.length > 0 ? (
+                <Timer
+                  examID={upcomingExams[0]._id}
+                  deadline={upcomingExams[0].date}
+                />
+              ) : (
+                <>
+                  <Grid container justify="center">
+                    <Grid item xs="auto" style={{ marginTop: "10%" }}>
+                      <FaRegCheckCircle
+                        style={{ fontSize: "50px", color: "#234058" }}
+                      />
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid container justify="center" style={{ marginTop: "2%" }}>
-                  <Grid item xs="auto">
-                    <h3 style={{ textAlign: "center" }}>
-                      You're All Caught Up!
-                    </h3>
-                    <p style={{ textAlign: "center", fontSize: "20px" }}>
-                      No Upcoming Exams
-                    </p>
+                  <Grid container justify="center" style={{ marginTop: "2%" }}>
+                    <Grid item xs="auto">
+                      <h3 style={{ textAlign: "center" }}>
+                        You're All Caught Up!
+                      </h3>
+                      <p style={{ textAlign: "center", fontSize: "20px" }}>
+                        No Upcoming Exams
+                      </p>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </>
-            )}
-          </div>
-          <div>{upcomingExamsUI}</div>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={3}
-          className="rightside"
-          style={{ padding: "10px" }}
-        >
-          <Grid container justify="space-between" alignitems="flex-start">
-            <Grid item>
-              <h4 className="rightHeading">Previous Exams</h4>
+                </>
+              )}
+            </div>
+            <div>{upcomingExamsUI}</div>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={3}
+            className="rightside"
+            style={{ padding: "10px" }}
+          >
+            <Grid container justify="space-between" alignitems="flex-start">
+              <Grid item>
+                <h4 className="rightHeading">Previous Exams</h4>
+              </Grid>
             </Grid>
+            <Grid item>
+              <hr />
+            </Grid>
+            {previousExamsUI}
           </Grid>
-          <Grid item>
-            <hr />
-          </Grid>
-          {previousExamsUI}
         </Grid>
-      </Grid>
-      // </Container>
+        {/* // </Container> */}
+      </>
     );
   } else return <LinearIndeterminate />;
 }

@@ -71,33 +71,52 @@ exports.postCreateTeacher = (req, res, next) => {
                 .save()
                 .then((teacher) => {
                   console.log("New teacher Account Created!");
+                  console.log(teacher);
+
+                  let department;
+
+                  teacher.varsity.departments.forEach((dept) => {
+                    if (dept.id == teacher.department) {
+                      department = dept.shortform;
+                    }
+                  });
 
                   return res.status(201).json({
                     status: "OK",
                     result: {
-                      jwt: {
-                        token: jwt.sign(
-                          {
-                            _id: teacher._id,
-                          },
-
-                          process.env.JWT_SECRET_TOKEN,
-
-                          {
-                            expiresIn: process.env.JWT_EXPIRES_IN,
-                          }
-                        ),
-                        expiresIn: process.env.JWT_EXPIRES_IN,
-                      },
                       data: {
-                        role: teacher.role,
+                        jwt: {
+                          token: jwt.sign(
+                            {
+                              _id: teacher._id,
+                            },
+
+                            process.env.JWT_SECRET_TOKEN,
+
+                            {
+                              expiresIn: process.env.JWT_EXPIRES_IN,
+                            }
+                          ),
+                          expiresIn: process.env.JWT_EXPIRES_IN,
+                        },
                         id: teacher._id,
+                        role: role,
+                        email: email,
+                        username: username,
+                        firstName: firstName,
+                        lastName: lastName,
+                        department: department,
+                        designation: designation,
+                        varsity: teacher.varsity.shortform,
+                        courses: teacher.courses,
+                        registered_at: teacher.registered_at,
                       },
                     },
                   });
                 })
                 .catch((error) => {
                   console.log("New teacher Account Creation Failed!");
+                  console.log(error);
                   let errorMessage;
                   if (error.code == 11000) {
                     if (error.keyPattern.username)
@@ -185,26 +204,47 @@ exports.postCreateStudent = (req, res, next) => {
 
                   student.password = undefined;
 
+                  let department;
+
+                  console.log(student);
+
+                  student.varsity.departments.forEach((dept) => {
+                    // console.log(dept);
+                    if (dept._id.toString() == student.department.toString()) {
+                      department = dept.shortform;
+                    }
+                  });
+
                   return res.status(201).json({
                     status: "OK",
                     result: {
-                      jwt: {
-                        token: jwt.sign(
-                          {
-                            _id: student._id,
-                          },
-
-                          process.env.JWT_SECRET_TOKEN,
-
-                          {
-                            expiresIn: process.env.JWT_EXPIRES_IN,
-                          }
-                        ),
-                        expiresIn: process.env.JWT_EXPIRES_IN,
-                      },
                       data: {
-                        role: student.role,
+                        jwt: {
+                          token: jwt.sign(
+                            {
+                              _id: student._id,
+                            },
+
+                            process.env.JWT_SECRET_TOKEN,
+
+                            {
+                              expiresIn: process.env.JWT_EXPIRES_IN,
+                            }
+                          ),
+                          expiresIn: process.env.JWT_EXPIRES_IN,
+                        },
                         id: student._id,
+                        role: role,
+                        email: email,
+                        username: username,
+                        firstName: firstName,
+                        lastName: lastName,
+                        department: department,
+                        registrationNo: registrationNo,
+                        session: session,
+                        varsity: student.varsity.shortform,
+                        courses: student.courses,
+                        registered_at: student.registered_at,
                       },
                     },
                   });
@@ -352,39 +392,6 @@ exports.getLogin = (req, res, next) => {
                     },
                   },
                 });
-
-                // return res.status(200).json({
-                //   status: "OK",
-                //   result: {
-                //     jwt: {
-                //       token: jwt.sign(
-                //         {
-                //           _id: student._id,
-                //         },
-
-                //         process.env.JWT_SECRET_TOKEN,
-
-                //         {
-                //           expiresIn: process.env.JWT_EXPIRES_IN,
-                //         }
-                //       ),
-                //       expiresIn: process.env.JWT_EXPIRES_IN,
-                //     },
-                //     data: {
-                //       id: student._id,
-                //       role: role,
-                //       email: email,
-                //       username: username,
-                //       firstName: firstName,
-                //       lastName: lastName,
-                //       department: department,
-                //       registrationNo: registrationNo,
-                //       session: session,
-                //       varsity: student.varsity.shortform,
-                //       registered_at: registered_at,
-                //     },
-                //   },
-                // });
               } else {
                 errorHandler.validationError(res, 401, "Invalid Password!");
               }

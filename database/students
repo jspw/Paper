@@ -1,23 +1,82 @@
 [{
   "_id": {
-    "$oid": "600d954bb931dd766b16150d"
+    "$oid": "6015855a946f0c778c691c60"
   },
   "role": "Student",
-  "email": "mehedi17@sust.edu",
-  "username": "mhs",
-  "password": "$2a$10$080dRdpKdD9LbM4I53t6YuZPgCL/PrSzwlr.aJnYn9JU0.H63kSDq",
+  "email": "shifat@buet.edu",
+  "username": "shifat",
+  "password": "$2a$10$4bHW6tXtiDPvrxhGVj3CP.Uq4aL7VbhCFy3EyZceW9Ov3ePijQyyK",
   "firstName": "Shifat",
   "lastName": "Rahman",
   "department": {
-    "$oid": "600c75f1059f3d6697f4e93a"
+    "$oid": "600eeb069c34055b3963adf7"
   },
   "registrationNo": 2017831051,
+  "varsity": {
+    "$oid": "600eeb069c34055b3963adee"
+  },
+  "session": "2017-2018",
+  "courses": [
+    {
+      "_id": {
+        "$oid": "6015abe55976cdc3c3cf866d"
+      },
+      "course": {
+        "$oid": "60158e6e5e798487dd0d985f"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "602472700cc9c58e15802b63"
+      },
+      "course": {
+        "$oid": "60246ab6b587a47bb823c1bd"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "602476f00cc9c58e15802b74"
+      },
+      "course": {
+        "$oid": "602476e30cc9c58e15802b71"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "602476f00cc9c58e15802b75"
+      },
+      "course": {
+        "$oid": "602476e30cc9c58e15802b71"
+      }
+    }
+  ],
+  "registered_at": {
+    "$date": "2021-01-30T16:12:10.919Z"
+  },
+  "__v": 13,
+  "notifications": []
+},{
+  "_id": {
+    "$oid": "6024c69fc241a95906880bd0"
+  },
+  "role": "Student",
+  "email": "mehedi17@sust.edu",
+  "username": "Shifat",
+  "password": "$2a$10$1hNIRVwhOULxxNyr/jJ7WOQxMdH60RwlVuE6z2BGQhReXOlY8DkaW",
+  "firstName": "",
+  "lastName": "",
+  "department": {
+    "$oid": "600c75f1059f3d6697f4e93a"
+  },
+  "registrationNo": 21212121,
   "varsity": {
     "$oid": "600c75f1059f3d6697f4e931"
   },
   "session": "2017-2018",
+  "courses": [],
+  "notifications": [],
   "registered_at": {
-    "$date": "2021-01-24T15:42:03.248Z"
+    "$date": "2021-02-11T05:54:39.415Z"
   },
   "__v": 0
 }]

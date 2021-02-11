@@ -57,7 +57,7 @@ const teacherSchema = new Schema({
       course: {
         type: Schema.Types.ObjectId,
         ref: "Course",
-        unique: true,
+        // unique: true,
         autopopulate: { maxDepth: 3 },
       },
     },

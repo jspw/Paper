@@ -1,11 +1,11 @@
 [{
   "_id": {
-    "$oid": "600db756f85e67c1c85dcb6c"
+    "$oid": "6015b154a411b8ce8c103c23"
   },
   "role": "Teacher",
-  "email": "kafi@@sust.edu",
-  "username": "Kofi",
-  "password": "$2a$10$k2AawmlHqclmzacnZ8CK2OSsjL7kjY2oVxtacrBpbx0Oqxo.fWnSa",
+  "email": "sania@@sust.edu",
+  "username": "shifat",
+  "password": "$2a$10$yjpavJYS7wl8zFv6GB6Teeh2nVHNnYVrcAh8IWk3JPgrClk1NFl2u",
   "firstName": "Mazah",
   "lastName": "Kafi",
   "department": {
@@ -15,8 +15,160 @@
     "$oid": "600c75f1059f3d6697f4e931"
   },
   "designation": "Professor",
+  "courses": [
+    {
+      "_id": {
+        "$oid": "6017d79c9f341b2d5f2893ae"
+      },
+      "course": {
+        "$oid": "60158e6e5e798487dd0d985f"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6022b68c23203f6741545e50"
+      },
+      "course": {
+        "$oid": "6022ce03cf2a4ca29524fa1a"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6023ad138aa1303f6ab41139"
+      },
+      "course": {
+        "$oid": "6023ad128aa1303f6ab41138"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6023ae618aa1303f6ab4113b"
+      },
+      "course": {
+        "$oid": "6023ae608aa1303f6ab4113a"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6024288f5a6220390669fc79"
+      },
+      "course": {
+        "$oid": "6024288e5a6220390669fc78"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60242b135a6220390669fc7b"
+      },
+      "course": {
+        "$oid": "60242b125a6220390669fc7a"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60242c85c74c613d39bbebd8"
+      },
+      "course": {
+        "$oid": "60242c84c74c613d39bbebd7"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60242e5afbcda8406732ff49"
+      },
+      "course": {
+        "$oid": "60242e58fbcda8406732ff48"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60242efefbcda8406732ff4b"
+      },
+      "course": {
+        "$oid": "60242efdfbcda8406732ff4a"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60242f4efbcda8406732ff4d"
+      },
+      "course": {
+        "$oid": "60242f4cfbcda8406732ff4c"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6024587e443a296dac35f46c"
+      },
+      "course": {
+        "$oid": "6024587d443a296dac35f46a"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "602459d4608994710a0bdfda"
+      },
+      "course": {
+        "$oid": "602459d3608994710a0bdfd8"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60245afe608994710a0bdfee"
+      },
+      "course": {
+        "$oid": "60245afd608994710a0bdfec"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60245bf7608994710a0bdff1"
+      },
+      "course": {
+        "$oid": "60245bf6608994710a0bdfef"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60246ab7b587a47bb823c1bf"
+      },
+      "course": {
+        "$oid": "60246ab6b587a47bb823c1bd"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "602476e40cc9c58e15802b73"
+      },
+      "course": {
+        "$oid": "602476e30cc9c58e15802b71"
+      }
+    }
+  ],
   "registered_at": {
-    "$date": "2021-01-24T18:07:18.998Z"
+    "$date": "2021-01-30T19:19:48.333Z"
+  },
+  "__v": 37
+},{
+  "_id": {
+    "$oid": "6024c7c591a2205fce6b7934"
+  },
+  "role": "Teacher",
+  "email": "mehedi17@sust.edu",
+  "username": "shifatx",
+  "password": "$2a$10$o4HwIut8qcTLF4mi0urexu00y4DCx762uq/4A8yNAVTbqG3n1VRG6",
+  "firstName": "Hasan",
+  "lastName": "Mh",
+  "department": {
+    "$oid": "600c75f1059f3d6697f4e93a"
+  },
+  "varsity": {
+    "$oid": "600c75f1059f3d6697f4e931"
+  },
+  "designation": "Professor",
+  "courses": [],
+  "registered_at": {
+    "$date": "2021-02-11T05:59:33.096Z"
   },
   "__v": 0
 }]

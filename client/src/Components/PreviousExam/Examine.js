@@ -112,15 +112,42 @@ const Examine = (props) => {
   }, []);
 
   const addMark = (id) => {
-    console.log(id, " X ", mark);
+    console.log(cqExamsData[index].cqExam._id, " X ", mark);
     if (mark)
       marks.push({
-        cqQuestion: id,
+        cqQuestion: cqExamsData[index].cqExam._id,
         mark: parseInt(mark, 10),
       });
   };
 
-  const postMarks = () => {};
+  const handleChange =  (e) =>{
+      setmark(e.target.value);
+  }
+
+  const postMarks = () => {
+    const url = `teacher/exam/cq/submits/${id}`;
+
+    const data = JSON.stringify({
+      marks: marks,
+    });
+
+    axios({
+      method: "POST",
+      url: url,
+
+      headers: { "Content-Type": "application/json" },
+      data: data,
+    })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "OK") {
+          setindex((index) => index + 1);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   if (cqExamsData) {
     const examInfoUI = (
@@ -262,12 +289,13 @@ const Examine = (props) => {
                   type="Number"
                   value={mark}
                   variant="outlined"
-                  onChange={addMark(id)}
+                  onChange= {handleChange}
                   size="small"
                   required
                 />
-                <button type="input" className="btn btn-info">
-                  {" "} Add {" "}
+                <button onClick = {addMark} type="input" className="btn btn-info">
+                  {" "}
+                  Add{" "}
                 </button>
               </Form.Group>
             </CardContent>

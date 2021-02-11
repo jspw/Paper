@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
+import { Snackbar } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 const ENDPOINT = "http://localhost:8080";
 
 let navElements;
@@ -32,6 +34,18 @@ export default function Navigation(props) {
   const [notifies, setnotifies] = useState([]);
 
   let socketRef = useRef(null);
+
+  const [opensnack, setopensnack] = React.useState(false);
+
+  const [snackbarMsg, setsnackbarMsg] = useState(false);
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setopensnack(false);
+  };
 
   console.log(notifies);
 
@@ -58,20 +72,33 @@ export default function Navigation(props) {
 
     if (userdata) {
       console.log(userdata.department);
-      socket.on(userdata.department, (data, error) => {
-        // setResponse(data);
-        console.log("data from socket", data);
-        console.log("data from socket", error);
-        if (userdata.role === "Student") {
-          const bal = notifies;
-          bal.push(data);
-          setnotifies(data);
-        }
-      });
+      // socket.on(userdata.department, (data, error) => {
+      //   // setResponse(data);
+      //   console.log("data from socket", data);
+      //   console.log("data from socket", error);
+      //   if (userdata.role === "Student") {
+      //     const bal = notifies;
+      //     bal.push(data);
+      //     // setnotifies(data);
+
+      //     if (userdata.role === "Teacher") {
+      //       if (data.type === "course")
+      //         setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
+      //       else if (data.type === `exam`)
+      //         setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
+      //       else if (data.type === `result`)
+      //         setsnackbarMsg(
+      //           `Your CQ Exam (${data.name}) result has been published.`
+      //         );
+      //     }
+      //   }
+      // });
     }
-  }, [ENDPOINT, userdata]);
+  }, []);
 
   const joinCourse = (courseID) => {
+    handleMenuClose();
+
     axios({
       method: "POST",
       url: `student/course/add`,
@@ -84,7 +111,7 @@ export default function Navigation(props) {
       .then((response) => {
         console.log(response.data);
         if (response.data.status === "OK") {
-          handleMenuClose();
+          window.location.reload();
         }
       })
       .catch((error) => {
@@ -115,8 +142,9 @@ export default function Navigation(props) {
   const handleSignout = () => {
     localStorage.clear();
     // props.login.isLogin = "Failed";
+
+    history.push("/signIn");
     window.location.reload();
-    history.push("/");
   };
   let notificationsUI;
 
@@ -153,46 +181,47 @@ export default function Navigation(props) {
     </Menu>
   );
   let x = 0;
-  notificationsUI = notifies.map((not) => {
-    x++;
-    if (not.type === "course")
-      return (
-        <MenuItem>
-          You are invited to a new course {not.name}.<br></br>
-          {/* <div className="btn-group btn-group-sm">
-            <button
-              type="button"
-              class="btn btn-primary"
-              // onClick={joinCourse(not.typeID)}
-            >
-              Join
-            </button>
-            <p> </p>
-            <button type="button" class="btn btn-warning">
-              Reject
-            </button>
-          </div> */}
-          <hr/>
-        </MenuItem>
-      );
-    else if (not.type === "exam") {
-      return (
-        <MenuItem>
-          <a href={`/course/${not.typeID}`}>
-            A new exam is created {not.name}.
-          </a>
-        </MenuItem>
-      );
-    } else if (not.type === "result") {
-      return (
-        <MenuItem>
-          <a href={`/course/${not.typeID}`}>
-            Your CQ Exam {not.name} result has been published.
-          </a>
-        </MenuItem>
-      );
-    }
-  });
+  if (notifies)
+  console.log("sasa",notifies);
+    notificationsUI = notifies.forEach((not) => {
+      if (not.type === "course")
+        return (
+          <MenuItem>
+            You are invited to a new course {not.name}.<br></br>
+            {/* <div className="btn-group btn-group-sm">
+              <button
+                type="button"
+                class="btn btn-primary"
+                // onClick={joinCourse(not.typeID)}
+              >
+                Join
+              </button>
+              <p> </p>
+              <button type="button" class="btn btn-warning">
+                Reject
+              </button>
+            </div> */}
+            <hr />
+          </MenuItem>
+        );
+      else if (not.type === "exam") {
+        return (
+          <MenuItem>
+            <a href={`/course/${not.typeID}`}>
+              A new exam is created {not.name}.
+            </a>
+          </MenuItem>
+        );
+      } else if (not.type === "result") {
+        return (
+          <MenuItem>
+            <a href={`/course/${not.typeID}`}>
+              Your CQ Exam {not.name} result has been published.
+            </a>
+          </MenuItem>
+        );
+      }
+    });
 
   let renderNotificationMenu;
 
@@ -202,6 +231,7 @@ export default function Navigation(props) {
       id={`{notification menu}{x++}`}
       open={isNotificationOpen}
       onClose={handleMenuClose}
+      // onClick={joinCourse}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",
@@ -266,23 +296,35 @@ export default function Navigation(props) {
   }
 
   return (
-    <Navbar bg="" style={{ backgroundColor: "#010302" }} variant="dark">
-      <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
-        <>
-          <img
-            src={"/static/paper.png"}
-            width={"38"}
-            height={"38"}
-            className={"d-inline-block align-top"}
-            className="nav__logo"
-            alt={"logo"}
-          />
-          <span className="nav__heading" style={{ fontSize: "122%" }}>
-            paper
-          </span>
-        </>
-      </Navbar.Brand>
-      {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
-    </Navbar>
+    <>
+      <Snackbar
+        open={opensnack}
+        onClose={handleSnackClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        // anchorPosition ={ { right: 10, top: 100 }}
+      >
+        <Alert onClose={handleSnackClose} severity="info">
+          {snackbarMsg}
+        </Alert>
+      </Snackbar>
+      <Navbar bg="" style={{ backgroundColor: "#010302" }} variant="dark">
+        <Navbar.Brand href="/" className={showSign ? null : "m-auto"}>
+          <>
+            <img
+              src={"/static/paper.png"}
+              width={"38"}
+              height={"38"}
+              className={"d-inline-block align-top"}
+              className="nav__logo"
+              alt={"logo"}
+            />
+            <span className="nav__heading" style={{ fontSize: "122%" }}>
+              paper
+            </span>
+          </>
+        </Navbar.Brand>
+        {showSign ? <Nav className="ml-auto">{navElements}</Nav> : null}
+      </Navbar>
+    </>
   );
 }
