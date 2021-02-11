@@ -99,6 +99,7 @@ export default function Navigation(props) {
   const joinCourse = (courseID) => {
     handleMenuClose();
 
+
     axios({
       method: "POST",
       url: `student/course/add`,
@@ -186,6 +187,7 @@ export default function Navigation(props) {
       if (not.type === "course")
         return (
           <MenuItem>
+          <Link to="/notifications">
             You are invited to a new course {not.name}.<br></br>
             {/* <div className="btn-group btn-group-sm">
               <button
@@ -200,7 +202,7 @@ export default function Navigation(props) {
                 Reject
               </button>
             </div> */}
-            <hr />
+            </Link>
           </MenuItem>
         );
       else if (not.type === "exam") {
@@ -225,12 +227,14 @@ export default function Navigation(props) {
   let renderNotificationMenu;
 
   renderNotificationMenu = (
-    <Menu
+    <Link to="/notifications">
+    <Menu 
       anchorEl={anchor}
       id={`{notification menu}{x++}`}
       open={isNotificationOpen}
+      // onClick={}
       onClose={handleMenuClose}
-      // onClick={joinCourse}
+      
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",
@@ -241,8 +245,11 @@ export default function Navigation(props) {
         horizontal: "center",
       }}
     >
-      {notifies ? notificationsUI : <MenuItem>No Notifications</MenuItem>}
+
+      {/* <button className="btn">View</button> */}
+      {/* {notifies ? notificationsUI : <MenuItem>No Notifications</MenuItem>} */}
     </Menu>
+    </Link>
   );
 
   if (props.loginStatus == null) {

@@ -64,7 +64,7 @@ export default function Profile(props) {
           <Col>
             <Row className="userName">
               <Col>
-                <h3>{props.userInfo.username}</h3>
+                <h3>{props.userInfo.firstName + ' ' + props.userInfo.lastName}</h3>
                 <p>{props.userInfo.role}</p>
               </Col>
             </Row>
