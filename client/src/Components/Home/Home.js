@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Snackbar, TextField } from "@material-ui/core";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -52,11 +52,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home(props) {
+  let userdata;
+  userdata = localStorage.getItem("data");
+  userdata = JSON.parse(userdata);
+
   const [open, setOpen] = React.useState(false);
 
   let history = useHistory();
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -173,9 +179,9 @@ export default function Home(props) {
     }
   };
 
-  if (props.userInfo) {
-    if (props.userInfo.courses.length > 0) {
-      courseUI = props.userInfo.courses.map((course, k) => {
+  if (userdata) {
+    if (userdata.courses.length > 0) {
+      courseUI = userdata.courses.map((course, k) => {
         // console.log(items);
         return (
           <Grid key={k} container alignitems="flex-start" className="sideExams">
@@ -195,7 +201,7 @@ export default function Home(props) {
       });
     }
 
-    props.userInfo.courses.forEach((course, i) => {
+    userdata.courses.forEach((course, i) => {
       const date = new Date();
 
       if (course.course.cqExams) {
@@ -420,13 +426,19 @@ export default function Home(props) {
         );
       });
   }
-  if (props.userInfo) {
-    const role = props.userInfo.role;
+  if (userdata) {
+    const role = userdata.role;
     // console.log(role)
     return (
       // <Container fluid style={{ marginTop: "10px", height: "100vh" }}>
       <Grid container justify="space-between" alignItems="flex-start">
-        <Grid item xs={12} md={2} className="leftside" style={{ float: "left" }}>
+        <Grid
+          item
+          xs={12}
+          md={2}
+          className="leftside"
+          style={{ float: "left" }}
+        >
           <Grid container justify="space-between">
             <Grid item>
               <h5>My Courses</h5>
@@ -513,7 +525,9 @@ export default function Home(props) {
               <h5>Upcoming Exams</h5>
             </Grid>
             <Grid item>
-              <InfoOutlinedIcon style={{ fontSize: "35px", color: "#234058" }} />
+              <InfoOutlinedIcon
+                style={{ fontSize: "35px", color: "#234058" }}
+              />
             </Grid>
           </Grid>
           <Grid item>
@@ -531,7 +545,9 @@ export default function Home(props) {
               <>
                 <Grid container justify="center">
                   <Grid item xs="auto" style={{ marginTop: "10%" }}>
-                    <FaRegCheckCircle style={{ fontSize: "50px", color: "#234058"}} />
+                    <FaRegCheckCircle
+                      style={{ fontSize: "50px", color: "#234058" }}
+                    />
                   </Grid>
                 </Grid>
                 <Grid container justify="center" style={{ marginTop: "2%" }}>

@@ -4,32 +4,22 @@ const autopopulate = require("mongoose-autopopulate");
 const Schema = mongoose.Schema;
 
 const notificationSchema = new Schema({
-  student: {
+  type: {
     type: String,
-    required: true,
-    unique: false,
   },
-
-  code: {
+  typeID: {
+    type: Schema.Types.ObjectId,
+  },
+  name :{
     type: String,
-    required: true,
-    unique: false,
   },
-
+  varsity: {
+    type: String,
+  },
   department: {
-    id: {
-      type: Schema.Types.ObjectId,
-      ref: "University.departments",
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
+    type: String,
   },
-
 });
-
 
 notificationSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("Notification", notificationSchema);

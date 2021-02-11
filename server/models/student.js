@@ -66,6 +66,19 @@ const studentSchema = new Schema({
       },
     },
   ],
+
+  notifications: [
+    {
+      notification: {
+        type: Schema.Types.ObjectId,
+        ref: "Notification",
+        autopopulate: { maxDepth: 2},
+      },
+      condition: {
+        type: String,
+      }
+    },
+  ],
   registered_at: {
     type: Date,
     default: Date.now,

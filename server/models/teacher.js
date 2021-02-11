@@ -67,5 +67,5 @@ const teacherSchema = new Schema({
     default: Date.now,
   },
 });
-teacherSchema.plugin(require('mongoose-autopopulate'));
+teacherSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("Teacher", teacherSchema);

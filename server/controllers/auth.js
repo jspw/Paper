@@ -293,24 +293,50 @@ exports.getLogin = (req, res, next) => {
               console.log("Student User Password Match");
 
               if (matchResult) {
+                let department;
+
+                student.varsity.departments.forEach((dept) => {
+                  if (dept.id == student.department) {
+                    department = dept.shortform;
+                  }
+                });
+
+                console.log("Student User Found");
+
+                console.log(student);
+
+                student.courses.forEach(function (course) {
+                  course.course.cqExams.forEach(function (exam) {
+                    console.log("CQ", exam);
+                    if (exam.examId.cqQuestions)
+                      exam.examId.cqQuestions = undefined;
+                  });
+
+                  course.course.mcqExams.forEach(function (exam) {
+                    if (exam.examId)
+                      if (exam.examId.mcqQuestions)
+                        exam.examId.mcqQuestions = undefined;
+                  });
+                });
+
                 return res.status(200).json({
                   status: "OK",
                   result: {
-                    jwt: {
-                      token: jwt.sign(
-                        {
-                          _id: student._id,
-                        },
-
-                        process.env.JWT_SECRET_TOKEN,
-
-                        {
-                          expiresIn: process.env.JWT_EXPIRES_IN,
-                        }
-                      ),
-                      expiresIn: process.env.JWT_EXPIRES_IN,
-                    },
                     data: {
+                      jwt: {
+                        token: jwt.sign(
+                          {
+                            _id: student._id,
+                          },
+
+                          process.env.JWT_SECRET_TOKEN,
+
+                          {
+                            expiresIn: process.env.JWT_EXPIRES_IN,
+                          }
+                        ),
+                        expiresIn: process.env.JWT_EXPIRES_IN,
+                      },
                       id: student._id,
                       role: role,
                       email: email,
@@ -321,10 +347,44 @@ exports.getLogin = (req, res, next) => {
                       registrationNo: registrationNo,
                       session: session,
                       varsity: student.varsity.shortform,
+                      courses: student.courses,
                       registered_at: registered_at,
                     },
                   },
                 });
+
+                // return res.status(200).json({
+                //   status: "OK",
+                //   result: {
+                //     jwt: {
+                //       token: jwt.sign(
+                //         {
+                //           _id: student._id,
+                //         },
+
+                //         process.env.JWT_SECRET_TOKEN,
+
+                //         {
+                //           expiresIn: process.env.JWT_EXPIRES_IN,
+                //         }
+                //       ),
+                //       expiresIn: process.env.JWT_EXPIRES_IN,
+                //     },
+                //     data: {
+                //       id: student._id,
+                //       role: role,
+                //       email: email,
+                //       username: username,
+                //       firstName: firstName,
+                //       lastName: lastName,
+                //       department: department,
+                //       registrationNo: registrationNo,
+                //       session: session,
+                //       varsity: student.varsity.shortform,
+                //       registered_at: registered_at,
+                //     },
+                //   },
+                // });
               } else {
                 errorHandler.validationError(res, 401, "Invalid Password!");
               }
@@ -372,21 +432,21 @@ exports.getLogin = (req, res, next) => {
                       return res.status(200).json({
                         status: "OK",
                         result: {
-                          jwt: {
-                            token: jwt.sign(
-                              {
-                                _id: teacher._id,
-                              },
-
-                              process.env.JWT_SECRET_TOKEN,
-
-                              {
-                                expiresIn: process.env.JWT_EXPIRES_IN,
-                              }
-                            ),
-                            expiresIn: process.env.JWT_EXPIRES_IN,
-                          },
                           data: {
+                            jwt: {
+                              token: jwt.sign(
+                                {
+                                  _id: teacher._id,
+                                },
+
+                                process.env.JWT_SECRET_TOKEN,
+
+                                {
+                                  expiresIn: process.env.JWT_EXPIRES_IN,
+                                }
+                              ),
+                              expiresIn: process.env.JWT_EXPIRES_IN,
+                            },
                             id: teacher._id,
                             role: role,
                             email: email,
@@ -394,13 +454,46 @@ exports.getLogin = (req, res, next) => {
                             firstName: firstName,
                             lastName: lastName,
                             department: department,
-                            registrationNo: registrationNo,
                             designation: designation,
-                            registered_at: registered_at,
                             varsity: teacher.varsity.shortform,
+                            courses: teacher.courses,
+                            registered_at: registered_at,
                           },
                         },
                       });
+
+                      // return res.status(200).json({
+                      //   status: "OK",
+                      //   result: {
+                      //     jwt: {
+                      //       token: jwt.sign(
+                      //         {
+                      //           _id: teacher._id,
+                      //         },
+
+                      //         process.env.JWT_SECRET_TOKEN,
+
+                      //         {
+                      //           expiresIn: process.env.JWT_EXPIRES_IN,
+                      //         }
+                      //       ),
+                      //       expiresIn: process.env.JWT_EXPIRES_IN,
+                      //     },
+                      //     data: {
+                      //       id: teacher._id,
+                      //       role: role,
+                      //       email: email,
+                      //       username: username,
+                      //       firstName: firstName,
+                      //       lastName: lastName,
+                      //       department: department,
+                      //       registrationNo: registrationNo,
+                      //       designation: designation,
+                      //       registered_at: registered_at,
+                      //       varsity: teacher.varsity.shortform,
+                      //     },
+                      //   },
+                      // });
                     } else {
                       errorHandler.validationError(
                         res,

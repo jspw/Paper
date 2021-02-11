@@ -7,6 +7,7 @@ const CqExamModel = require("../models/cqExam");
 const OnMcqExamModel = require("../models/onMcqExam");
 const OnCqExamModel = require("../models/onCqExam");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 exports.getStudent = (req, res, next) => {
@@ -58,6 +59,20 @@ exports.getStudent = (req, res, next) => {
         status: "OK",
         result: {
           data: {
+            jwt: {
+              token: jwt.sign(
+                {
+                  _id: student._id,
+                },
+
+                process.env.JWT_SECRET_TOKEN,
+
+                {
+                  expiresIn: process.env.JWT_EXPIRES_IN,
+                }
+              ),
+              expiresIn: process.env.JWT_EXPIRES_IN,
+            },
             id: student._id,
             role: role,
             email: email,

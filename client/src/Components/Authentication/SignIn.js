@@ -61,13 +61,15 @@ export default function SignUp() {
     const response = await fetch(`${apiDomain}${endpoint}`, requestOptions);
     const data = await response.json();
 
+    console.log(data);
+
     if (data.status === "OK") {
-      const userdata = {
-        token: data.result.jwt.token,
-        role: data.result.data.role.toLowerCase(),
-        id: data.result.data.id,
-      };
-      localStorage.setItem("data", JSON.stringify(userdata));
+      // const userdata = {
+      //   token: data.result.jwt.token,
+      //   role: data.result.data.role.toLowerCase(),
+      //   id: data.result.data.id,
+      // };
+      localStorage.setItem("data", JSON.stringify(data.result.data));
       history.push("/");
       window.location.reload();
       

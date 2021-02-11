@@ -13,7 +13,7 @@ console.log(userdata);
 axios.defaults.baseURL = "http://localhost:8080/";
 
 if (userdata) {
-  axios.defaults.headers.common["Authorization"] = "Token " + userdata.token;
+  axios.defaults.headers.common["Authorization"] = "Token " + userdata.jwt.token;
 }
 
 ReactDOM.render(

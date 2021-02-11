@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IoCreate } from "react-icons/io5";
@@ -13,6 +13,16 @@ import Students from './Students';
 import Exams from "./Exams";
 
 export default function Sidebar(props) {
+
+
+
+  let userdata;
+  userdata = localStorage.getItem("data");
+  userdata = JSON.parse(userdata);
+
+  console.log(props.courseData);
+
+
   let displayContent;
 
   const [sidebar, setSidebar] = useState(false);
@@ -36,7 +46,7 @@ export default function Sidebar(props) {
     displayContent = (
       <Exams
         className="content"
-        userInfo={props.userInfo}
+        userInfo={userdata}
         courseData={props.courseData}
       />
     );
@@ -44,7 +54,7 @@ export default function Sidebar(props) {
     displayContent = (
       <Students
         className="content"
-        userInfo={props.userInfo}
+        userInfo={userdata}
         courseData={props.courseData}
       />
     );
@@ -65,7 +75,7 @@ export default function Sidebar(props) {
               </span>
             </Row>
           </li>
-          {props.userInfo.role === "Teacher" ? (
+          {userdata.role === "Teacher" ? (
             <li className="sidebar__item">
               <a
                 href="#create-exam"

@@ -10,10 +10,13 @@ const CqExamModel = require("../models/cqExam");
 const OnMcqExamModel = require("../models/onMcqExam");
 const OnCqExamModel = require("../models/onCqExam");
 
+const NotificationModel = require("../models/notification");
+
 const errorHandler = require("../middleware/errorHandler");
 const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.getTeacher = (req, res, next) => {
   TeacherModel.findById(req.params.id)
@@ -45,6 +48,20 @@ exports.getTeacher = (req, res, next) => {
         status: "OK",
         result: {
           data: {
+            jwt: {
+              token: jwt.sign(
+                {
+                  _id: teacher._id,
+                },
+
+                process.env.JWT_SECRET_TOKEN,
+
+                {
+                  expiresIn: process.env.JWT_EXPIRES_IN,
+                }
+              ),
+              expiresIn: process.env.JWT_EXPIRES_IN,
+            },
             id: teacher._id,
             role: role,
             email: email,
@@ -466,57 +483,19 @@ exports.postCreateCourse = (req, res, next) => {
       .then((course) => {
         console.log(course.department.name);
 
-        var io = req.app.get("socketIO");
+        const notificationModel = new NotificationModel({
+          varsity: course.varsity.name,
+          department: course.department.name,
+          type: "course",
+          typeID: course._id,
+          name: course.name,
+        });
 
-        
+        notificationModel.save().then((result) => {
+          var io = req.app.get("socketIO");
 
-        io.emit(course.department.name, course);
-
-        // io.on("connection", (socket) => {
-        //   console.log("New client Connected!");
-        //   // const ip = socket.handshake.headers || socket.conn.remoteAddress;
-        //   // console.log(ip);
-
-        //   // console.log("Socket ID : ", socket.id);
-        //   // console.log("Clients connected : ", clients);
-
-        //   socket.emit("message", "New Notification");
-
-        //   // app.use((req, res, next) => {
-        //   //   req.socket = socket;
-        //   //   next();
-        //   // });
-
-        //   socket.on("disconnect", (reason) => {
-        //     console.log("Client Disconnected!");
-        //     console.log("Reason", reason);
-        //   });
-        // });
-
-        // console.log(req.socke t);
-        // let interval;
-
-        // let socket = req.socket;
-
-        // const getApiAndEmit = (socket) => {
-        //   const response = new Date();
-        // Emitting a new message. Will be consumed by the client
-        //   socket.emit("bal", response);
-        // };
-
-        // if (interval) {
-        //   clearInterval(interval);
-        // }
-        // interval = setInterval(() => getApiAndEmit(socket), 1000);
-        // socket.on("Client", (data) => {
-        //   console.log(data);
-        // });
-        // socket.on("disconnect", () => {
-        //   console.log("Client disconnected");
-        //   clearInterval(interval);
-        // });
-
-        // req.socket.to(course.varsity.id).emit(course.department.id, course);
+          io.emit(course.department.name, result);
+        });
 
         req.user.courses.push({
           course: course._id,
@@ -600,6 +579,21 @@ exports.postCreateCqExam = (req, res, next) => {
               .save()
               .then((result) => {
                 console.log(result);
+
+                const notificationModel = new NotificationModel({
+                  varsity: result.varsity.name,
+                  department: result.department.name,
+                  type: "exam",
+                  typeID: result._id,
+                  name: result.name,
+                });
+
+                notificationModel.save().then((notification) => {
+                  var io = req.app.get("socketIO");
+
+                  io.emit(course.department.name, notification);
+                });
+
                 apiResponseInJson(res, 201, cqExam);
               })
               .catch((error) => {
@@ -638,6 +632,21 @@ exports.postCreateMcqExam = (req, res, next) => {
               .save()
               .then((result) => {
                 console.log(result);
+
+                const notificationModel = new NotificationModel({
+                  varsity: result.varsity.name,
+                  department: result.department.name,
+                  type: "result",
+                  typeID: result._id,
+                  name: result.name,
+                });
+
+                notificationModel.save().then((notification) => {
+                  var io = req.app.get("socketIO");
+
+                  io.emit(course.department.name, notification);
+                });
+
                 apiResponseInJson(res, 201, mcqExam);
               })
               .catch((error) => {
@@ -766,6 +775,20 @@ exports.postCqExamine = (req, res, next) => {
         .save()
         .then((result) => {
           console.log(result);
+
+          const notificationModel = new NotificationModel({
+            varsity: result.varsity.name,
+            department: result.department.name,
+            type: "result",
+            typeID: result._id,
+          });
+
+          notificationModel.save().then((notification) => {
+            var io = req.app.get("socketIO");
+
+            io.emit(course.department.name, notification);
+          });
+
           apiResponseInJson(res, 200, result);
         })
         .catch((error) => {

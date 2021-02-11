@@ -114,25 +114,26 @@ export default function SignUp() {
 
     const data = await response.json();
 
-    console.log("API data",data);
+    console.log("API data", data);
 
     if (data.status === "FAILED")
       setValues({ ...values, ["error"]: data.result });
     else {
       setValues({ ...values, ["error"]: "" });
-      const userdata = {
-        token: data.result.jwt.token,
-        role: data.result.data.role.toLowerCase(),
-        id: data.result.data.id,
-      };
+      // const userdata = {
+      //   token: data.result.jwt.token,
+      //   role: data.result.data.role.toLowerCase(),
+      //   id: data.result.data.id,
+      // };
 
-      console.log(userdata);
+      localStorage.setItem("data", JSON.stringify(data.result.data));
 
-      localStorage.setItem("data", JSON.stringify(userdata));
+      // console.log(userdata);
+
+      // localStorage.setItem("data", JSON.stringify(userdata));
       history.push("/");
       window.location.reload();
     }
-    
   };
 
   const handleChange = (prop) => (event) => {

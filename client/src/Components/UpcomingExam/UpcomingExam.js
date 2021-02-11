@@ -1,12 +1,6 @@
 import React from "react";
 import Timer from "../Timer/Timer";
-import {
-  Col,
-  Container,
-  Row,
-  Alert,
-  Table,
-} from "react-bootstrap";
+import { Col, Container, Row, Alert, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const UpcomingExam = (props) => {
@@ -37,24 +31,26 @@ const UpcomingExam = (props) => {
 
   const { id } = useParams();
 
-  console.log(props.userInfo);
-  // console.log(id);
+  let userdata;
+  userdata = localStorage.getItem("data");
+  userdata = JSON.parse(userdata);
 
   let examInfo;
-  props.userInfo.courses.map((course) => {
-    //   console.log(course);
-    course.course.cqExams.map((exam) => {
-      //   console.log(exam.examId._id);
-      if (exam.examId._id == id) {
-        //   console.log(exam);
-        examInfo = exam.examId;
-      }
+  if (userdata)
+    userdata.courses.map((course) => {
+      //   console.log(course);
+      course.course.cqExams.map((exam) => {
+        //   console.log(exam.examId._id);
+        if (exam.examId._id == id) {
+          //   console.log(exam);
+          examInfo = exam.examId;
+        }
+      });
+      course.course.mcqExams.map((exam) => {
+        //   console.log(exam.examId._id);
+        if (exam.examId._id == id) examInfo = exam.examId;
+      });
     });
-    course.course.mcqExams.map((exam) => {
-      //   console.log(exam.examId._id);
-      if (exam.examId._id == id) examInfo = exam.examId;
-    });
-  });
 
   console.log(examInfo);
 

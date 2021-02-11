@@ -38,13 +38,24 @@ function App() {
         .then((result) => {
           setloginStatus(result.data.status);
           setUserInfo(result.data.result.data);
+          localStorage.setItem("data", JSON.stringify(result.data.result.data));
           console.log("UserInfo api call", result);
         })
         .catch((error) => {
+          console.log(error);
           setloginStatus("Failed");
           console.log("Error api call", error);
         });
     } else setloginStatus("Failed");
+    axios
+      .get("/notifications")
+      .then((result) => {
+        console.log("Notifications ", result.data.result.data);
+        setnotifications(result.data.result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     axios
       .get("university/all")
       .then((response) => {
@@ -57,13 +68,16 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-
   }, []);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation loginStatus={loginStatus} userInfo={userInfo} />
+        <Navigation
+          loginStatus={loginStatus}
+          notifications={notifications}
+          userInfo={userInfo}
+        />
         <Route
           path="/test"
           exact

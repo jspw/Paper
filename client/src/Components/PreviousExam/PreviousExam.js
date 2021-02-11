@@ -61,7 +61,13 @@ const PreviousExam = (props) => {
   ];
   const { id } = useParams();
 
-  const role = props.userInfo.role;
+  let userdata;
+  userdata = localStorage.getItem("data");
+  userdata = JSON.parse(userdata);
+
+  let role ;
+  
+  role = userdata.role;
 
   const [mcqExamData, setMcqExamData] = useState(null);
   const [cqExamData, setCqExamData] = useState(null);

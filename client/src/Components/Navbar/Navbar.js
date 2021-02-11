@@ -11,6 +11,7 @@ import { FaBell } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import socketIOClient from "socket.io-client";
+import axios from "axios";
 const ENDPOINT = "http://localhost:8080";
 
 let navElements;
@@ -20,31 +21,71 @@ export default function Navigation(props) {
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
 
-  const [notifications, setnotifications] = useState(null);
-
-  if (props.notifications) setnotifications(props.notifications);
-
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
   const [anchor, setAnchor] = React.useState(null);
   const isNotificationOpen = Boolean(anchor);
 
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState([]);
+
+  const [notifies, setnotifies] = useState([]);
 
   let socketRef = useRef(null);
+
+  console.log(notifies);
+
+  let userdata;
+
+  useEffect(() => {
+    userdata = localStorage.getItem("data");
+    userdata = JSON.parse(userdata);
+    // if (userdata) userdata = userdata;
+  }, []);
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
 
-    if (props.userInfo) {
-      console.log(props.userInfo.department);
-      socket.on(props.userInfo.department, (data) => {
+    if (userdata) {
+      console.log(userdata.department);
+      socket.on(userdata.department, (data, error) => {
         // setResponse(data);
         console.log("data from socket", data);
+        console.log("data from socket", error);
+        if (userdata.role === "Student") {
+          notifies.push(data);
+        }
       });
     }
-  }, [ENDPOINT, props.userInfo]);
+  }, [ENDPOINT, userdata]);
+
+  const joinCourse = (courseID) => {
+    axios({
+      method: "POST",
+      url: `student/course/add`,
+
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify({
+        course: courseID,
+      }),
+    })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "OK") {
+          handleMenuClose();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // if (props.notifications) {
+  //   props.notifications.forEach((notification) => {
+  //     // notifies.push(notification);
+  //     setnotifies(props.notifications);
+  //   });
+  // }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -65,6 +106,7 @@ export default function Navigation(props) {
     window.location.reload();
     history.push("/");
   };
+  let notificationUI;
 
   const renderProfileMenu = (
     <Menu
@@ -94,29 +136,94 @@ export default function Navigation(props) {
     </Menu>
   );
 
-  const renderNotificationMenu = (
-    <Menu
-      anchorEl={anchor}
-      id="notification menu"
-      open={isNotificationOpen}
-      onClose={handleMenuClose}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        {response ? response : "No Notifications"}
-      </MenuItem>
-    </Menu>
-  );
-
-  console.log("Login status", props.loginStatus);
+  let renderNotificationMenu;
+  if (notifies)
+    renderNotificationMenu = notificationUI = notifies.map((not) => {
+      if (not.type === "course")
+        return (
+          <Menu
+            anchorEl={anchor}
+            id="notification menu"
+            open={isNotificationOpen}
+            onClose={handleMenuClose}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <MenuItem>
+              You are invited to a new course {not.name}.<br></br>
+              <div className="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onClick={joinCourse(not.typeID)}
+                >
+                  Join
+                </button>
+                <p> </p>
+                <button type="button" class="btn btn-warning">
+                  Reject
+                </button>
+              </div>
+            </MenuItem>
+          </Menu>
+        );
+      else if (not.type === "exam") {
+        return (
+          <Menu
+            anchorEl={anchor}
+            id="notification menu"
+            open={isNotificationOpen}
+            onClose={handleMenuClose}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <MenuItem>
+              <a href={`/course/${not.typeID}`}>
+                A new exam is created {not.name}.
+              </a>
+            </MenuItem>
+          </Menu>
+        );
+      } else if (not.type === "result") {
+        return (
+          <Menu
+            anchorEl={anchor}
+            id="notification menu"
+            open={isNotificationOpen}
+            onClose={handleMenuClose}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <MenuItem>
+              <a href={`/course/${not.typeID}`}>
+                Your CQ Exam {not.name} has been published.
+              </a>
+            </MenuItem>
+          </Menu>
+        );
+      }
+    });
 
   if (props.loginStatus == null) {
     navElements = (
@@ -132,7 +239,10 @@ export default function Navigation(props) {
           color="inherit"
           onClick={handleNotificationMenuOpen}
         >
-          <Badge badgeContent={17} color="secondary">
+          <Badge
+            badgeContent={notifies ? notifies.length : 0}
+            color="secondary"
+          >
             <FaBell style={{ color: "white" }} />
           </Badge>
         </IconButton>
