@@ -189,7 +189,7 @@ export default function Home(props) {
             </Grid>
             <Grid item xs className="examName">
               <Link
-                to={`/course/${course.course._id}`}
+                to={`/course/${course.course._id}/#exams`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <span>{course.course.name}</span>

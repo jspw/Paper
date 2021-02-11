@@ -209,8 +209,6 @@ export default function LiveExam(props) {
     //   examinfo.cqQuestions[index].cqQuestionId._id
     // );
 
-    
-
     if (examinfo.mcqQuestions)
       studentAnswers.push({
         mcqQuestion: examinfo.mcqQuestions[index].mcqQuestionId._id,
@@ -222,8 +220,8 @@ export default function LiveExam(props) {
         studentAnswer: answer,
       });
     }
-    setValue('');
-    setAnswer('');
+    setValue("");
+    setAnswer("");
     if (examinfo.mcqQuestions) {
       if (index + 1 < examinfo.mcqQuestions.length) {
         console.log("Index", index + 1, examinfo.mcqQuestions.length);
@@ -415,6 +413,10 @@ export default function LiveExam(props) {
                         variant="standard"
                         value={answer}
                         onChange={handleAnswer}
+                        onCopy="return false"
+                        onDrag="return false"
+                        onDrop="return false"
+                        onPaste="return false"
                       />
                     )}
                   </Col>

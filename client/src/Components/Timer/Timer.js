@@ -43,7 +43,7 @@ const Timer = (props) => {
     };
   });
 
-  if (timerDays === 0 && timerHours === 0 && timerMinutes === 0 && timerSeconds === 0)
+  if (timerDays == 0 && timerHours == 0 && timerMinutes == 0 && timerSeconds == 0)
     return (
       <Container className="enterExam">
         <Row className="d-flex justify-content-center enterHeading">
