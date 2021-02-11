@@ -6,8 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-import "./SignIn.css";
 import { useHistory } from "react-router-dom";
+import "./SignIn.css";
 
 const apiDomain = "http://localhost:8080/";
 
