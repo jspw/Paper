@@ -11,14 +11,27 @@ import { FaBell } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import socketIOClient from "socket.io-client";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import { Snackbar } from "@material-ui/core";
+import { Button, makeStyles, Snackbar } from "@material-ui/core";
+import Icon from "@material-ui/core/Icon";
 import Alert from "@material-ui/lab/Alert";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
 const ENDPOINT = "http://localhost:8080";
 
 let navElements;
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(2),
+    },
+  },
+}));
+
 export default function Navigation(props) {
+  const classes = useStyles();
   let history = useHistory();
   const [showSign, setShowSign] = useState(true);
   const navChange = () => setShowSign(false);
@@ -64,7 +77,7 @@ export default function Navigation(props) {
       .get("/notifications")
       .then((result) => {
         console.log("Notifications ", result.data.result.data);
-        setnotifies(result.data.result.data);
+        setnotifies(result.data.result.data.reverse());
       })
       .catch((error) => {
         console.log(error);
@@ -84,20 +97,22 @@ export default function Navigation(props) {
           if (userdata.role === "Student") {
             if (data.type === "course") {
               setopensnack(true);
-              setsnackbarMsg(`New Course ${data.name} Invitation For You.`);
+              setsnackbarMsg(`New Course '${data.name}' Invitation For You.`);
               setTimeout(function () {
                 window.location.reload();
               }, 2000);
             } else if (data.type === `exam`) {
               setopensnack(true);
-              setsnackbarMsg(`A new exam  ${data.name} is set to your course.`);
+              setsnackbarMsg(
+                `A new exam  '${data.name}' is set to your course.`
+              );
               setTimeout(function () {
                 window.location.reload();
               }, 2000);
             } else if (data.type === `result`) {
               setopensnack(true);
               setsnackbarMsg(
-                `Your CQ Exam (${data.name}) result has been published.`
+                `Your CQ Exam '${data.name}' result has been published.`
               );
               setTimeout(function () {
                 window.location.reload();
@@ -199,38 +214,53 @@ export default function Navigation(props) {
     notificationsUI = notifies.map((not) => {
       if (not.type === "course")
         return (
-          <MenuItem onClick={() => joinCourse(not.typeID)}>
-            You are invited to a new course {not.name}.<br></br>
-            {/* <div className="btn-group btn-group-sm">
-              <button
-                type="button"
-                class="btn btn-primary"
-                // onClick={joinCourse(not.typeID)}
+          <MenuItem>
+            <Grid item sm={10}>
+              You are invited to a new course {not.name}
+            </Grid>
+
+            <Grid item sm={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => joinCourse(not.typeID)}
+                // startIcon={<AddRoundedIcon />}
               >
                 Join
-              </button>
-              <p> </p>
-              <button type="button" class="btn btn-warning">
-                Reject
-              </button>
-            </div> */}
-            <hr />
+              </Button>
+            </Grid>
           </MenuItem>
         );
       else if (not.type === "exam") {
         return (
           <MenuItem>
-            <a href={`/course/${not.typeID}`}>
-              A new exam is created {not.name}.
-            </a>
+            <Grid item sm={10}>
+              A new exam is created '{not.name}'.
+            </Grid>
+
+            <Grid item sm={2}>
+              <Button
+                variant="contained"
+                // color="primary"
+                href={`/previous-exam/${not.typeID}`}
+              >
+                View
+              </Button>
+            </Grid>
           </MenuItem>
         );
       } else if (not.type === "result") {
         return (
           <MenuItem>
-            <a href={`/course/${not.typeID}`}>
-              Your CQ Exam {not.name} result has been published.
-            </a>
+            <Grid item sm={10}>
+              Your CQ Exam '{not.name}' result has been published.
+            </Grid>
+
+            <Grid item sm={2}>
+              <Button variant="contained" href={`/previous-exam/${not.typeID}`}>
+                View
+              </Button>
+            </Grid>
           </MenuItem>
         );
       }

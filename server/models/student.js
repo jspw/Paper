@@ -62,7 +62,7 @@ const studentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Course",
         unique: true,
-        autopopulate: { maxDepth: 3},
+        autopopulate: { maxDepth: 3 },
       },
     },
   ],
@@ -72,11 +72,8 @@ const studentSchema = new Schema({
       notification: {
         type: Schema.Types.ObjectId,
         ref: "Notification",
-        autopopulate: { maxDepth: 2},
+        autopopulate: { maxDepth: 2 },
       },
-      condition: {
-        type: String,
-      }
     },
   ],
   registered_at: {
@@ -94,6 +91,6 @@ studentSchema.methods.addCourse = function (course) {
 };
 
 // studentSchema.plugin(autopopulate);
-studentSchema.plugin(require('mongoose-autopopulate'));
+studentSchema.plugin(require("mongoose-autopopulate"));
 
 module.exports = mongoose.model("Student", studentSchema);
