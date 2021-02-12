@@ -584,7 +584,7 @@ exports.postCreateCqExam = (req, res, next) => {
                   varsity: result.varsity.name,
                   department: result.department.name,
                   type: "exam",
-                  typeID: result._id,
+                  typeID: cqExam._id,
                   name: result.name,
                 });
 
@@ -637,7 +637,7 @@ exports.postCreateMcqExam = (req, res, next) => {
                   varsity: result.varsity.name,
                   department: result.department.name,
                   type: "exam",
-                  typeID: result._id,
+                  typeID: mcqExam._id,
                   name: result.name,
                 });
 
@@ -783,7 +783,7 @@ exports.postCqExamine = (req, res, next) => {
             varsity: result.varsity.name,
             department: result.department.name,
             type: "result",
-            typeID: result._id,
+            typeID: result.cqExam,
             name: result.name,
           });
 

@@ -224,6 +224,7 @@ export default function Navigation(props) {
                 variant="contained"
                 color="primary"
                 onClick={() => joinCourse(not.typeID)}
+                href={`/course/${not.typeID}`}
                 // startIcon={<AddRoundedIcon />}
               >
                 Join
