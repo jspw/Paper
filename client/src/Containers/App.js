@@ -16,6 +16,7 @@ import PreviousExam from "../Components/PreviousExam/PreviousExam";
 import UpcomingExam from "../Components/UpcomingExam/UpcomingExam";
 import Examine from "../Components/PreviousExam/Examine";
 import Error404 from "../Components/404/Error404";
+import Notifications from "../Components/Notifications/Notification";
 import "./App.css";
 
 let userdata = localStorage.getItem("data");
@@ -90,6 +91,7 @@ function App() {
               <Home universityInfo={universityInfo} userInfo={userInfo} />
             )}
           />
+          <Route path="/notifications" exact component={Notifications}/>
           <Route path="/examine/:id" exact render={() => <Examine />} />
           <Route
             path="/profile"

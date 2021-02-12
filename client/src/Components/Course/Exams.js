@@ -109,11 +109,7 @@ const Exams = (props) => {
           <td>{exam.date.toString()}</td>
           {props.userInfo.role === "Teacher" ? (
             <td>
-              <Button
-                disabled={exam.examType === "mcq" ? true : false}
-                href={`/examine/${exam._id}`}
-                variant="primary"
-              >
+              <Button disabled = {exam.examType === 'mcq' ? true : false }  href={`/examine/${exam._id}`} variant="primary">
                 Examine
               </Button>
             </td>
