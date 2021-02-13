@@ -89,35 +89,28 @@ export default function Navigation(props) {
         // setResponse(data);
         console.log("data from socket", data);
         console.log("data from socket", error);
-        if (userdata.role === "Student") {
-          // const bal = notifies;
-          // bal.push(data);
-          // setnotifies(data);
 
-          if (userdata.role === "Student") {
-            if (data.type === "course") {
-              setopensnack(true);
-              setsnackbarMsg(`New Course '${data.name}' Invitation For You.`);
-              setTimeout(function () {
-                window.location.reload();
-              }, 2000);
-            } else if (data.type === `exam`) {
-              setopensnack(true);
-              setsnackbarMsg(
-                `A new exam  '${data.name}' is set to your course.`
-              );
-              setTimeout(function () {
-                window.location.reload();
-              }, 2000);
-            } else if (data.type === `result`) {
-              setopensnack(true);
-              setsnackbarMsg(
-                `Your CQ Exam '${data.name}' result has been published.`
-              );
-              setTimeout(function () {
-                window.location.reload();
-              }, 2000);
-            }
+        if (userdata.role === "Student") {
+          if (data.type === "course") {
+            setopensnack(true);
+            setsnackbarMsg(`New Course '${data.name}' Invitation For You.`);
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+          } else if (data.type === `exam`) {
+            setopensnack(true);
+            setsnackbarMsg(`A new exam  '${data.name}' is set to your course.`);
+            setTimeout(function () {  
+              window.location.reload();
+            }, 2000);
+          } else if (data.type === `result`) {
+            setopensnack(true);
+            setsnackbarMsg(
+              `Your CQ Exam '${data.name}' result has been published.`
+            );
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
           }
         }
       });
@@ -126,8 +119,6 @@ export default function Navigation(props) {
 
   const joinCourse = (courseID) => {
     handleMenuClose();
-
-
     axios({
       method: "POST",
       url: `student/course/add`,
@@ -150,13 +141,6 @@ export default function Navigation(props) {
       });
   };
 
-  // if (props.notifications) {
-  //   props.notifications.forEach((notification) => {
-  //     // notifies.push(notification);
-  //     setnotifies(props.notifications);
-  //   });
-  // }
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -172,6 +156,7 @@ export default function Navigation(props) {
 
   const handleSignout = () => {
     // props.login.isLogin = "Failed";
+    localStorage.clear();
 
     history.push("/signIn");
     window.location.reload();
@@ -271,14 +256,13 @@ export default function Navigation(props) {
   let renderNotificationMenu;
 
   renderNotificationMenu = (
-    <Link to="/notifications">
-    <Menu 
+    // <Link to="/notifications">
+    <Menu
       anchorEl={anchor}
       id={`{notification menu}{x++}`}
       open={isNotificationOpen}
       // onClick={}
       onClose={handleMenuClose}
-      
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",
@@ -289,11 +273,10 @@ export default function Navigation(props) {
         horizontal: "center",
       }}
     >
-
       {/* <button className="btn">View</button> */}
-      {/* {notifies ? notificationsUI : <MenuItem>No Notifications</MenuItem>} */}
+      {notifies ? notificationsUI : <MenuItem>No Notifications</MenuItem>}
     </Menu>
-    </Link>
+    // </Link>
   );
 
   if (props.loginStatus == null) {
