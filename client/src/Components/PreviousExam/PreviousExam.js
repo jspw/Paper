@@ -65,8 +65,8 @@ const PreviousExam = (props) => {
   userdata = localStorage.getItem("data");
   userdata = JSON.parse(userdata);
 
-  let role ;
-  
+  let role;
+
   role = userdata.role;
 
   const [mcqExamData, setMcqExamData] = useState(null);
@@ -199,7 +199,11 @@ const PreviousExam = (props) => {
                   </Box>
                 </Form.Label>
                 <Form.Control
-                  value={cqExamData.studentAnswers[i] ? cqExamData.studentAnswers[i].studentAnswer : ''}
+                  value={
+                    cqExamData.studentAnswers[i]
+                      ? cqExamData.studentAnswers[i].studentAnswer
+                      : ""
+                  }
                   disabled
                   as="textarea"
                   rows={3}
@@ -384,7 +388,8 @@ const PreviousExam = (props) => {
                     <tr>
                       <td>Total Marks</td>
                       <td>
-                        {mcqExamData ? mcqExamData.mark : cqExamData.mark}/
+                        {mcqExamData ? mcqExamData.mark : cqExamData.totalMarks}
+                        /
                         {mcqExamData
                           ? mcqExamData.mcqExam.totalMarks
                           : cqExamData.cqExam.totalMarks}
@@ -399,6 +404,13 @@ const PreviousExam = (props) => {
                     <tr>
                       <td>Wrong</td>
                       <td>{mcqExamData ? mcqExamData.wrong : ""}</td>
+                    </tr>
+
+                    <tr>
+                      <td>Examined By</td>
+                      <td>
+                        {mcqExamData ? "Automatic" : cqExamData.examineBy.firstName ? cqExamData.examineBy.firstName : '' + cqExamData.examineBy.lastName ? cqExamData.examineBy.lastName : '' + cqExamData.examineBy.username }
+                      </td>
                     </tr>
                   </tbody>
                 </Table>

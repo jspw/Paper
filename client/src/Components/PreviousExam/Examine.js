@@ -1,44 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Button,
-  Col,
-  Container,
-  Row,
-  Modal,
-  Form,
-  Spinner,
-  Card,
-  Alert,
-  Jumbotron,
-  Table,
-  Tab,
-  TabContainer,
-  ListGroup,
-  TabContent,
-  TabPane,
-} from "react-bootstrap";
+import { Col, Container, Row, Form, Card, Table } from "react-bootstrap";
+
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 import TextField from "@material-ui/core/TextField";
 
 import axios from "axios";
 
 import MarkSheet from "./MarkSheet";
-
-import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
 import LinearIndeterminate from "../Generic/Loader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {
-  Box,
-  CardContent,
-  Grid,
-  MenuList,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, CardContent, Grid, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
-
-import ExamInfo from "./ExamInfo";
 
 const Examine = (props) => {
   var months = [
@@ -71,18 +47,16 @@ const Examine = (props) => {
   userdata = localStorage.getItem("data");
   userdata = JSON.parse(userdata);
 
-  let role;
-
-  role = userdata.role;
-
   const [cqExamsData, setCqExamsData] = useState(null);
 
   const [onlyExamInfo, setOnlyExamInfo] = useState(null);
 
-  const [index, setindex] = useState(0);
-  const [mark, setmark] = useState("");
+  const [examined, setExamined] = useState(false);
 
-  const marks = [];
+  const [index, setindex] = useState(0);
+  const [mark, setmark] = useState([]);
+
+  const [marks, setmarks] = useState([]);
 
   let cq;
 
@@ -113,12 +87,14 @@ const Examine = (props) => {
   }, []);
 
   const addMark = (id) => {
-    console.log(cqExamsData[index].cqExam._id, " X ", mark);
+    console.log(id, " X ", mark);
     if (mark)
       marks.push({
-        cqQuestion: cqExamsData[index].cqExam._id,
+        cqQuestion: id,
         mark: parseInt(mark, 10),
       });
+
+    console.log("marks", marks);
   };
 
   const handleChange = (e) => {
@@ -128,17 +104,21 @@ const Examine = (props) => {
   const postMarks = () => {
     const url = `teacher/examine/cq/${cqExamsData[index]._id}`;
 
-    let totalMarks;
+    let totalMarks = 0;
 
     marks.forEach((marxk) => {
-      totalMarks += marxk.mark;
+      console.log(marxk.mark);
+      totalMarks += parseInt(marxk.mark, 10);
     });
     console.log(marks);
 
     const data = JSON.stringify({
+      student: cqExamsData[index].student._id,
       marks: marks,
       totalMarks: totalMarks,
     });
+
+    console.log("submit data", data);
 
     axios({
       method: "POST",
@@ -149,8 +129,11 @@ const Examine = (props) => {
     })
       .then((response) => {
         console.log(response.data);
+        setmark("");
+        setmarks([]);
         if (response.data.status === "OK") {
-          setindex((index) => index + 1);
+          if (index + 1 < cqExamsData.length) setindex((index) => index + 1);
+          else setExamined(true);
         }
       })
       .catch((error) => {
@@ -293,7 +276,7 @@ const Examine = (props) => {
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <TextField
                   label="Mark"
-                  id={cqExamsData[index].cqExam._id}
+                  id={cqx.cqQuestionId._id}
                   //   defaultValue="Small"
                   type="Number"
                   value={mark}
@@ -302,7 +285,11 @@ const Examine = (props) => {
                   size="small"
                   required
                 />
-                <button onClick={addMark} type="input" className="btn btn-info">
+                <button
+                  onClick={() => addMark(cqx.cqQuestionId._id)}
+                  type="input"
+                  className="btn btn-info"
+                >
                   {" "}
                   Add{" "}
                 </button>
@@ -317,10 +304,34 @@ const Examine = (props) => {
     return (
       <Container>
         {examInfoUI}
-        {cq}
-        <button onClick={postMarks} className="btn btn-primary">
-          Submit
-        </button>
+
+        <Alert severity="warning">
+          <AlertTitle>Warning</AlertTitle>
+          Anonymous Student Account —{" "}
+          <strong>check it out and give score!</strong>
+        </Alert>
+
+        {/* {studentInfo} */}
+
+        {examined ? (
+          <>
+            <h2>All papers are checked!</h2>{" "}
+            <Button variant='contained' color='secondary' href={`/previous-exam/${cqExamsData[0].cqExam._id}`}>
+              View All
+            </Button>
+          </>
+        ) : (
+          cq
+        )}
+
+        {examined ? (
+          ""
+        ) : (
+          <button onClick={postMarks} className="btn btn-primary">
+            Submit
+          </button>
+        )}
+
         <br />
         <br />
       </Container>

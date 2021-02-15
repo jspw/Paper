@@ -50,7 +50,7 @@ export default function LiveExam(props) {
 
   const [windowChange, setwindowChange] = useState(0);
 
-  const studentAnswers = [];
+  const [studentAnswers, setStudentAnswers] = useState([]);
 
   const [result, setResult] = useState(0);
 
@@ -63,40 +63,6 @@ export default function LiveExam(props) {
   const [answer, setAnswer] = useState("");
 
   const [showResult, setShowResult] = useState(false);
-
-  const handleAnswer = (event) => {
-    setAnswer(event.target.value);
-  };
-
-  const handleFeedbackOpen = () => {
-    setOpenFeedback(true);
-  };
-
-  const handleFeedbackClose = () => {
-    setOpenFeedback(false);
-  };
-
-  const handleFeedback = (event) => {
-    setFeedback(event.target.value);
-  };
-  // console.log(feedback);
-  // const [totalExamTime, setTotalExamTime] = useState(0);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   useEffect(() => {
     axios
@@ -115,13 +81,13 @@ export default function LiveExam(props) {
 
         const interval = setInterval(() => {
           setSeconds((seconds) => seconds - 1);
-          console.log(seconds);
+          // console.log(seconds);
         }, 1000);
 
         intervalRef.current = interval;
 
         setExamInfo(response.data.result.data);
-        console.log("examinfo", response.data.result.data);
+        // console.log("examinfo", response.data.result.data);
 
         let examTimeEndAfter = 0;
 
@@ -132,22 +98,57 @@ export default function LiveExam(props) {
         console.log("examTimeEndAfter", examTimeEndAfter);
 
         const timeout = setTimeout(() => {
-          setdisableNextButton(true);
-          submitAnswers();
           clearInterval(intervalRef.current);
+          setdisableNextButton(true);
+
+          submitAnswers();
           // alert("Exam Timeout!");
         }, examTimeEndAfter);
+
+        return () => {
+          clearInterval(intervalRef);
+          clearTimeout(timeout);
+        };
       })
       .catch((error) => {
         console.log(error);
       });
-
-    return () => {
-      clearInterval(intervalRef);
-    };
   }, []);
 
-  console.log("examinfo", examinfo);
+  // console.log("examinfo", examinfo);
+
+  const handleAnswer = (event) => {
+    setAnswer(event.target.value);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  const handleFeedbackOpen = () => {
+    setOpenFeedback(true);
+  };
+
+  const handleFeedbackClose = () => {
+    setOpenFeedback(false);
+  };
+
+  const handleFeedback = (event) => {
+    setFeedback(event.target.value);
+  };
+  // console.log(feedback);
+  // const [totalExamTime, setTotalExamTime] = useState(0);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
 
   const submitAnswers = () => {
     let url;
@@ -156,6 +157,8 @@ export default function LiveExam(props) {
     setShowResult(true);
 
     console.log(examinfo);
+
+    console.log("Student answer!", studentAnswers);
 
     if (examinfo) {
       if (examinfo.mcqQuestions) {
@@ -198,12 +201,13 @@ export default function LiveExam(props) {
   };
 
   const nextQuestion = (event) => {
-    // console.log(
-    //   "Ans : ",
-    //   questionIndex,
-    //   answer,
-    //   examinfo.cqQuestions[questionIndex].cqQuestionId._id
-    // );
+    console.log("Question index", questionIndex);
+
+    console.log("value", value);
+
+    console.log("answer", answer);
+
+    console.log("STudent ans", studentAnswers);
 
     if (examinfo.mcqQuestions)
       studentAnswers.push({
@@ -216,19 +220,23 @@ export default function LiveExam(props) {
         studentAnswer: answer,
       });
     }
+
+    console.log("STudent ans", studentAnswers);
+
     setValue("");
     setAnswer("");
+
     if (examinfo.mcqQuestions) {
       if (questionIndex + 1 < examinfo.mcqQuestions.length) {
         console.log(
           "questionIndex",
-          questionIndex + 1,
+          questionIndex,
           examinfo.mcqQuestions.length
         );
         setSeconds(
           (seconds) => examinfo.mcqQuestions[questionIndex].mcqQuestionId.time
         );
-        setquestionIndex(questionIndex + 1);
+        setquestionIndex((questionIndex) => questionIndex + 1);
       } else {
         clearInterval(intervalRef.current);
         submitAnswers();
@@ -237,16 +245,16 @@ export default function LiveExam(props) {
       if (questionIndex + 1 < examinfo.cqQuestions.length) {
         console.log(
           "questionIndex",
-          questionIndex + 1,
+          questionIndex,
           examinfo.cqQuestions.length
         );
         setSeconds(
           (seconds) => examinfo.cqQuestions[questionIndex].cqQuestionId.time
         );
-        setquestionIndex(questionIndex + 1);
+        setquestionIndex((questionIndex) => questionIndex + 1);
       } else {
-        submitAnswers();
         clearInterval(intervalRef.current);
+        submitAnswers();
       }
     }
   };
@@ -287,12 +295,13 @@ export default function LiveExam(props) {
       ) : null;
     }
 
-    if (seconds < 0) nextQuestion();
+    if (seconds <= 0) nextQuestion();
+
     if (result || showResult) {
       return (
         <Result
           result={result}
-          examID ={id}
+          examID={id}
           examType={examinfo.mcqQuestions ? "mcq" : "cq"}
         />
       );

@@ -17,6 +17,7 @@ const apiResponseInJson = require("../middleware/apiResponseInJson");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 exports.getTeacher = (req, res, next) => {
   TeacherModel.findById(req.params.id)
@@ -762,35 +763,41 @@ exports.getCqSubmits = (req, res, next) => {
 
 exports.postCqExamine = (req, res, next) => {
   if (req.user.role == "Teacher") {
-    console.log(req.body.mark);
+    console.log(req.body);
 
-    OnCqExamModel.find({
-      cqExam: req.params.id,
-    }).then((onCqExamModel) => {
-      console.log(onCqExamModel);
+    OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
+      console.log("onCqExamModel", onCqExamModel);
 
-      onCqExamModel.totalMarks = req.body.marks;
+      onCqExamModel.totalMarks = req.body.totalMarks;
       onCqExamModel.examineBy = req.user._id;
 
-      onCqExamModel.marks.push(req.body.marks);
+      // req.body.marks.forEach((x) => {
+      //   x.cqQuestion = mongoose.Types.ObjectId(x.cqQuestion);
+      // });
+
+      onCqExamModel.marks = req.body.marks;
 
       onCqExamModel
         .save()
         .then((result) => {
-          console.log(result);
+          console.log("OnCQ", result.cqExam.course.varsity.name);
+
+          const varsity = result.cqExam.course.varsity.name;
+
+          const department = result.cqExam.course.department.name;
 
           const notificationModel = new NotificationModel({
-            varsity: result.varsity.name,
-            department: result.department.name,
+            varsity: varsity,
+            department: department,
             type: "result",
-            typeID: result.cqExam,
-            name: result.name,
+            typeID: result.cqExam._id,
+            name: result.cqExam.name,
           });
 
           notificationModel.save().then((notification) => {
             var io = req.app.get("socketIO");
 
-            io.emit(course.department.name, notification);
+            io.emit(department, notification);
           });
 
           apiResponseInJson(res, 200, result);

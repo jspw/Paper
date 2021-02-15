@@ -1,11 +1,13 @@
 import React from "react";
-import {  Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 import MuiAlert from "@material-ui/lab/Alert";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 
 const MarkSheet = (props) => {
   const mcqExamsData = props.mcqExamsData;
@@ -14,9 +16,19 @@ const MarkSheet = (props) => {
   let tableBody;
   let x = 1;
 
+  const saveMarksheet = () => {
+    html2canvas(document.querySelector("#resulttable")).then((canvas) => {
+      // document.body.appendChild(canvas); // if you want see your screenshot in body.
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 0, 0);
+      pdf.save("marksheet.pdf");
+    });
+  };
+
   if (mcqExamsData) {
     mcqExamsData.sort(function (a, b) {
-      return a.mark - b.mark;
+      return b.mark - a.mark;
     });
 
     console.log("Exam Data", mcqExamsData);
@@ -43,6 +55,7 @@ const MarkSheet = (props) => {
             <td>{data.solved}</td>
             <td>{data.wrong}</td>
             <td>{data.mark}</td>
+            <td>{data.windowChanged}</td>
             <td>
               <a href={`${data.student._id}`}>View</a>
             </td>
@@ -52,7 +65,7 @@ const MarkSheet = (props) => {
     });
   } else if (cqExamsData) {
     cqExamsData.sort(function (a, b) {
-      return a.mark - b.mark;
+      return b.totalMarks - a.totalMarks;
     });
 
     console.log("Exam Data", cqExamsData);
@@ -78,7 +91,8 @@ const MarkSheet = (props) => {
             </td>
             <td>{data.totalMarks}</td>
             <td>{data.wrong}</td>
-            <td>{data.mark}</td>
+            <td>{data.totalMarks}</td>
+            <td>{data.windowChanged}</td>
             <td>
               <a href={`/examine/${data.cqExam._id}`}>View</a>
             </td>
@@ -90,25 +104,37 @@ const MarkSheet = (props) => {
 
   if (mcqExamsData || cqExamsData)
     return (
-      <table
-        className="table table-hover table-striped table-light"
-        style={{ textAlign: "center" }}
-      >
-        <thead className="thead-dark">
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Registration No</th>
-            <th>Email</th>
-            <th>Solved</th>
-            <th>Wrong</th>
-            <th>Mark</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+      <div>
+        <table
+          id="resulttable"
+          className="table table-hover table-striped table-light"
+          style={{ textAlign: "center" }}
+        >
+          <thead className="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Registration No</th>
+              <th>Email</th>
+              <th>Solved</th>
+              <th>Wrong</th>
+              <th>Marks</th>
+              <th>Window Changed</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-        <tbody>{tableBody}</tbody>
-      </table>
+          <tbody>{tableBody}</tbody>
+        </table>
+        <button
+          style={{ margin: "10px", position: "fixed", bottom: "0", right: "0" }}
+          type="button"
+          className="btn btn-outline-info btn-lg"
+          onClick={saveMarksheet}
+        >
+          Print
+        </button>
+      </div>
     );
   else
     return (
