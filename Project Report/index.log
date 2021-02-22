@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.20)  22 FEB 2021 07:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.20)  22 FEB 2021 08:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -299,6 +299,15 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count195
 \l__pdf_internal_box=\box49
 ) (/home/jspw/Documents/Projects/Paper/Project Report/index.aux
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
 
 LaTeX Warning: Label `fig' multiply defined.
 
@@ -766,153 +775,183 @@ l.410
 File: ../assets/ss/studnt/notifications.png Graphic file (type png)
 <use ../assets/ss/studnt/notifications.png>
 Package pdftex.def Info: ../assets/ss/studnt/notifications.png  used on input line 413.
-(pdftex.def)             Requested size: 397.48827pt x 520.33754pt.
- [22pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.417 
-       <../assets/ss/studnt/course-create-notification-realtime.png>]
-<../assets/ss/diagram/level1.png, id=551, 775.89874pt x 1065.9825pt>
+(pdftex.def)             Requested size: 278.2403pt x 455.29778pt.
+<../assets/ss/diagram/level1.png, id=545, 775.89874pt x 1065.9825pt>
 File: ../assets/ss/diagram/level1.png Graphic file (type png)
 <use ../assets/ss/diagram/level1.png>
 Package pdftex.def Info: ../assets/ss/diagram/level1.png  used on input line 424.
 (pdftex.def)             Requested size: 397.485pt x 546.09999pt.
- [23pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
+ [22pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.428 
-       <../assets/ss/studnt/notifications.png>]
-<../assets/ss/diagram/level0.png, id=558, 603.25375pt x 222.8325pt>
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.428 
+       <../assets/ss/studnt/course-create-notification-realtime.png> <../assets/ss/studnt/notifications.png>]
+<../assets/ss/diagram/level0.png, id=554, 603.25375pt x 222.8325pt>
 File: ../assets/ss/diagram/level0.png Graphic file (type png)
 <use ../assets/ss/diagram/level0.png>
 Package pdftex.def Info: ../assets/ss/diagram/level0.png  used on input line 432.
 (pdftex.def)             Requested size: 397.485pt x 146.82509pt.
- [24pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
+ [23pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.436 
        <../assets/ss/diagram/level1.png>]
-<../assets/ss/diagram/mvc.png, id=565, 405.76593pt x 221.32687pt>
+<../assets/ss/diagram/dataflow-teacher.png, id=561, 486.81876pt x 516.93124pt>
+File: ../assets/ss/diagram/dataflow-teacher.png Graphic file (type png)
+<use ../assets/ss/diagram/dataflow-teacher.png>
+Package pdftex.def Info: ../assets/ss/diagram/dataflow-teacher.png  used on input line 441.
+(pdftex.def)             Requested size: 317.98837pt x 325.22668pt.
+<../assets/ss/diagram/dataflow-student.png, id=562, 657.45625pt x 366.36874pt>
+File: ../assets/ss/diagram/dataflow-student.png Graphic file (type png)
+<use ../assets/ss/diagram/dataflow-student.png>
+Package pdftex.def Info: ../assets/ss/diagram/dataflow-student.png  used on input line 448.
+(pdftex.def)             Requested size: 397.485pt x 221.50003pt.
+ [24pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.452 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.452 
+       <../assets/ss/diagram/level0.png> <../assets/ss/diagram/dataflow-teacher.png>]
+<../assets/ss/diagram/entity.png, id=571, 657.45625pt x 1116.17pt>
+File: ../assets/ss/diagram/entity.png Graphic file (type png)
+<use ../assets/ss/diagram/entity.png>
+Package pdftex.def Info: ../assets/ss/diagram/entity.png  used on input line 457.
+(pdftex.def)             Requested size: 397.48639pt x 520.35916pt.
+ [25pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.461 
+       <../assets/ss/diagram/dataflow-student.png>] [26pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.467 \subsection
+                 {Back-end} <../assets/ss/diagram/entity.png>]
+<../assets/ss/diagram/mvc.png, id=585, 405.76593pt x 221.32687pt>
 File: ../assets/ss/diagram/mvc.png Graphic file (type png)
 <use ../assets/ss/diagram/mvc.png>
-Package pdftex.def Info: ../assets/ss/diagram/mvc.png  used on input line 452.
+Package pdftex.def Info: ../assets/ss/diagram/mvc.png  used on input line 473.
 (pdftex.def)             Requested size: 397.485pt x 216.81778pt.
- [25pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.456 
-       <../assets/ss/diagram/level0.png>]
-<../assets/ss/diagram/api.png, id=573, 2167.09625pt x 872.25874pt>
+<../assets/ss/diagram/api.png, id=586, 2167.09625pt x 872.25874pt>
 File: ../assets/ss/diagram/api.png Graphic file (type png)
 <use ../assets/ss/diagram/api.png>
-Package pdftex.def Info: ../assets/ss/diagram/api.png  used on input line 472.
+Package pdftex.def Info: ../assets/ss/diagram/api.png  used on input line 493.
 (pdftex.def)             Requested size: 397.485pt x 159.98114pt.
- [26pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
+ [27pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.476 
+l.497 
        <../assets/ss/diagram/mvc.png>]
-<../assets/ss/api-call.png, id=580, 693.59125pt x 262.9825pt>
+<../assets/ss/api-call.png, id=593, 693.59125pt x 262.9825pt>
 File: ../assets/ss/api-call.png Graphic file (type png)
 <use ../assets/ss/api-call.png>
-Package pdftex.def Info: ../assets/ss/api-call.png  used on input line 484.
+Package pdftex.def Info: ../assets/ss/api-call.png  used on input line 505.
 (pdftex.def)             Requested size: 397.485pt x 150.71617pt.
-<../assets/ss/frontend-components.png, id=581, 210.7875pt x 539.01375pt>
+<../assets/ss/frontend-components.png, id=594, 210.7875pt x 539.01375pt>
 File: ../assets/ss/frontend-components.png Graphic file (type png)
 <use ../assets/ss/frontend-components.png>
-Package pdftex.def Info: ../assets/ss/frontend-components.png  used on input line 497.
+Package pdftex.def Info: ../assets/ss/frontend-components.png  used on input line 518.
 (pdftex.def)             Requested size: 198.7425pt x 508.21922pt.
- [27pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
+ [28pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.501 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.501 
-       <../assets/ss/diagram/api.png> <../assets/ss/api-call.png>]
-<../assets/ss/api-call2.png, id=590, 842.14626pt x 249.93375pt>
-File: ../assets/ss/api-call2.png Graphic file (type png)
-<use ../assets/ss/api-call2.png>
-Package pdftex.def Info: ../assets/ss/api-call2.png  used on input line 506.
-(pdftex.def)             Requested size: 397.485pt x 117.96846pt.
- [28pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.510 
-       <../assets/ss/frontend-components.png>]
-<../assets/ss/backend.png, id=597, 201.75375pt x 277.035pt>
-File: ../assets/ss/backend.png Graphic file (type png)
-<use ../assets/ss/backend.png>
-Package pdftex.def Info: ../assets/ss/backend.png  used on input line 517.
-(pdftex.def)             Requested size: 198.7425pt x 272.90433pt.
-<../assets/ss/model.png, id=598, 553.06625pt x 672.5125pt>
-File: ../assets/ss/model.png Graphic file (type png)
-<use ../assets/ss/model.png>
-Package pdftex.def Info: ../assets/ss/model.png  used on input line 524.
-(pdftex.def)             Requested size: 238.49342pt x 289.99567pt.
- [29pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.528 
+l.522 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.30}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.528 
+l.522 
+       <../assets/ss/diagram/api.png> <../assets/ss/api-call.png>]
+<../assets/ss/api-call2.png, id=604, 842.14626pt x 249.93375pt>
+File: ../assets/ss/api-call2.png Graphic file (type png)
+<use ../assets/ss/api-call2.png>
+Package pdftex.def Info: ../assets/ss/api-call2.png  used on input line 527.
+(pdftex.def)             Requested size: 397.485pt x 117.96846pt.
+ [29pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.531 
+       <../assets/ss/frontend-components.png>]
+<../assets/ss/backend.png, id=610, 201.75375pt x 277.035pt>
+File: ../assets/ss/backend.png Graphic file (type png)
+<use ../assets/ss/backend.png>
+Package pdftex.def Info: ../assets/ss/backend.png  used on input line 538.
+(pdftex.def)             Requested size: 198.7425pt x 272.90433pt.
+<../assets/ss/model.png, id=611, 553.06625pt x 672.5125pt>
+File: ../assets/ss/model.png Graphic file (type png)
+<use ../assets/ss/model.png>
+Package pdftex.def Info: ../assets/ss/model.png  used on input line 545.
+(pdftex.def)             Requested size: 238.49342pt x 289.99567pt.
+ [30pdfTeX warning (ext4): destination with the same identifier (name{figure.32}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.549 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.33}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.549 
        <../assets/ss/api-call2.png> <../assets/ss/backend.png>]
-<../assets/ss/routes.png, id=605, 639.38875pt x 640.3925pt>
+<../assets/ss/routes.png, id=618, 639.38875pt x 640.3925pt>
 File: ../assets/ss/routes.png Graphic file (type png)
 <use ../assets/ss/routes.png>
-Package pdftex.def Info: ../assets/ss/routes.png  used on input line 531.
+Package pdftex.def Info: ../assets/ss/routes.png  used on input line 552.
 (pdftex.def)             Requested size: 238.49342pt x 238.86652pt.
- [30pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) has been already used, duplicate ignored
+ [31pdfTeX warning (ext4): destination with the same identifier (name{figure.34}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.540 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.32}) has been already used, duplicate ignored
+l.561 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.35}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.540 
-       <../assets/ss/model.png> <../assets/ss/routes.png>] [31] [32]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 622.
- [33]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 622.
+l.561 
+       <../assets/ss/model.png> <../assets/ss/routes.png>] [32] [33]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 643.
+ [34]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 643.
  (/home/jspw/Documents/Projects/Paper/Project Report/index.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 622.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 622.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 643.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 643.
 Package rerunfilecheck Info: File `index.out' has not changed.
 (rerunfilecheck)             Checksum: D09DBD48F4B934F95D63AE7F8AC553E5;5094.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 622.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 643.
  ) 
 Here is how much of TeX's memory you used:
- 8578 strings out of 481239
- 129275 string characters out of 5920377
+ 8600 strings out of 481239
+ 129942 string characters out of 5920377
  382812 words of memory out of 5000000
- 23483 multiletter control sequences out of 15000+600000
+ 23498 multiletter control sequences out of 15000+600000
  561452 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,7n,45p,520b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpcxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxsc.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "/home/jspw/Documents/Projects/Paper/Project Report/index.pdf" (33 pages, 1017521 bytes).
+Output written on "/home/jspw/Documents/Projects/Paper/Project Report/index.pdf" (34 pages, 1077277 bytes).
 PDF statistics:
- 685 PDF objects out of 1000 (max. 8388607)
- 578 compressed objects within 6 object streams
- 143 named destinations out of 1000 (max. 500000)
- 769 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 700 PDF objects out of 1000 (max. 8388607)
+ 586 compressed objects within 6 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 784 words of extra memory for PDF output out of 10000 (max. 10000000)
 
