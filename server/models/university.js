@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
 const Schema = mongoose.Schema;
-
 const universitySchema = new Schema({
   name: {
     type: String,

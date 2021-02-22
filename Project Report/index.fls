@@ -1,0 +1,353 @@
+PWD /home/jspw/Documents/Projects/Paper/Project Report
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.tex
+OUTPUT /home/jspw/Documents/Projects/Paper/Project Report/index.log
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/pxfonts.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/pxfonts.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.aux
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.aux
+OUTPUT /home/jspw/Documents/Projects/Paper/Project Report/index.aux
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omlpxmi.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omlpxmi.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omspxsy.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omspxsy.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omxpxex.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/omxpxex.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxexa.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxexa.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/ot1pxr.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/ot1pxr.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT /usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+OUTPUT /home/jspw/Documents/Projects/Paper/Project Report/index.pdf
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+OUTPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxmia.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxmia.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsya.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsya.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsyb.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsyb.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsyc.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/upxsyc.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxr.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxr.tfm
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxsc.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxsc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxi.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplri.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxr.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxr.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxb.tfm
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.toc
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.toc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsy.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxex.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxi.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxmia.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsya.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxsyc.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxexa.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxb.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxb.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxb.tfm
+OUTPUT /home/jspw/Documents/Projects/Paper/Project Report/index.toc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pxb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pxb.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxpplb.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpxb.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/ts1pxr.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/pxfonts/ts1pxr.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/pcxr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/pxfonts/pcxr.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pxfonts/rpcxr.tfm
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/signup/signup.png
+INPUT ../assets/ss/signup/signup.png
+INPUT ../assets/ss/signup/signup.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/signup/signup-error-e.png
+INPUT ../assets/ss/signup/signup-error-e.png
+INPUT ../assets/ss/signup/signup-error-e.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/signup/signup-error-u.png
+INPUT ../assets/ss/signup/signup-error-u.png
+INPUT ../assets/ss/signup/signup-error-u.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/login/login.png
+INPUT ../assets/ss/login/login.png
+INPUT ../assets/ss/login/login.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/login/login-error1.png
+INPUT ../assets/ss/login/login-error1.png
+INPUT ../assets/ss/login/login-error1.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/login/login-error2.png
+INPUT ../assets/ss/login/login-error2.png
+INPUT ../assets/ss/login/login-error2.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/home.png
+INPUT ../assets/ss/home.png
+INPUT ../assets/ss/home.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/course-create.png
+INPUT ../assets/ss/teacher/course-create.png
+INPUT ../assets/ss/teacher/course-create.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/upcoming-exam.png
+INPUT ../assets/ss/studnt/upcoming-exam.png
+INPUT ../assets/ss/studnt/upcoming-exam.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/previous-exam-non-participate.png
+INPUT ../assets/ss/studnt/previous-exam-non-participate.png
+INPUT ../assets/ss/studnt/previous-exam-non-participate.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/previous cq.png
+INPUT ../assets/ss/studnt/previous cq.png
+INPUT ../assets/ss/studnt/previous cq.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/marksheet.png
+INPUT ../assets/ss/teacher/marksheet.png
+INPUT ../assets/ss/teacher/marksheet.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/exam-create.png
+INPUT ../assets/ss/teacher/exam-create.png
+INPUT ../assets/ss/teacher/exam-create.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/cq-create.png
+INPUT ../assets/ss/teacher/cq-create.png
+INPUT ../assets/ss/teacher/cq-create.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/mcq-create.png
+INPUT ../assets/ss/teacher/mcq-create.png
+INPUT ../assets/ss/teacher/mcq-create.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/set-exam.png
+INPUT ../assets/ss/teacher/set-exam.png
+INPUT ../assets/ss/teacher/set-exam.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/all-exams.png
+INPUT ../assets/ss/teacher/all-exams.png
+INPUT ../assets/ss/teacher/all-exams.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/live-exam-mcq.png
+INPUT ../assets/ss/studnt/live-exam-mcq.png
+INPUT ../assets/ss/studnt/live-exam-mcq.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/live-exam-cq.png
+INPUT ../assets/ss/studnt/live-exam-cq.png
+INPUT ../assets/ss/studnt/live-exam-cq.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/teacher/examine-cq2.png
+INPUT ../assets/ss/teacher/examine-cq2.png
+INPUT ../assets/ss/teacher/examine-cq2.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/course-create-notification-realtime.png
+INPUT ../assets/ss/studnt/course-create-notification-realtime.png
+INPUT ../assets/ss/studnt/course-create-notification-realtime.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/studnt/notifications.png
+INPUT ../assets/ss/studnt/notifications.png
+INPUT ../assets/ss/studnt/notifications.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/diagram/level1.png
+INPUT ../assets/ss/diagram/level1.png
+INPUT ../assets/ss/diagram/level1.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/diagram/level0.png
+INPUT ../assets/ss/diagram/level0.png
+INPUT ../assets/ss/diagram/level0.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/diagram/mvc.png
+INPUT ../assets/ss/diagram/mvc.png
+INPUT ../assets/ss/diagram/mvc.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/diagram/api.png
+INPUT ../assets/ss/diagram/api.png
+INPUT ../assets/ss/diagram/api.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/api-call.png
+INPUT ../assets/ss/api-call.png
+INPUT ../assets/ss/api-call.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/frontend-components.png
+INPUT ../assets/ss/frontend-components.png
+INPUT ../assets/ss/frontend-components.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/api-call2.png
+INPUT ../assets/ss/api-call2.png
+INPUT ../assets/ss/api-call2.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/backend.png
+INPUT ../assets/ss/backend.png
+INPUT ../assets/ss/backend.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/model.png
+INPUT ../assets/ss/model.png
+INPUT ../assets/ss/model.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/../assets/ss/routes.png
+INPUT ../assets/ss/routes.png
+INPUT ../assets/ss/routes.png
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.aux
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /home/jspw/Documents/Projects/Paper/Project Report/index.out
+INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpcxr.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxb.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxr.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pxfonts/rpxsc.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb

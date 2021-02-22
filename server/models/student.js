@@ -20,10 +20,6 @@ const studentSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    // validate: {
-    //     validator: validator.email,
-    //     message: 'This is not a valid email',
-    // },
     lowercase: true,
     unique: true,
   },

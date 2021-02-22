@@ -1,0 +1,76 @@
+\BOOKMARK [1][-]{section.1}{Project Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Project Background}{}% 2
+\BOOKMARK [1][-]{section.3}{Project Description}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Teacher}{section.3}% 4
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Course Create}{subsection.3.1}% 5
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Question Create}{subsection.3.1}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Exam Create}{subsection.3.1}% 7
+\BOOKMARK [3][-]{subsubsection.3.1.4}{CQ Examine}{subsection.3.1}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Marksheet Check}{subsection.3.1}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.6}{Feedback Check}{subsection.3.1}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.7}{Result Print}{subsection.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Student}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Real-Time Exam}{subsection.3.2}% 13
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Revise Previous Exam}{subsection.3.2}% 14
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Realtime Notifications}{subsection.3.2}% 15
+\BOOKMARK [3][-]{subsubsection.3.2.4}{Feedback}{subsection.3.2}% 16
+\BOOKMARK [3][-]{subsubsection.3.2.5}{Late Participate}{subsection.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.3}{Exam}{section.3}% 18
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Question features}{subsection.3.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Exam Features}{subsection.3.3}% 20
+\BOOKMARK [1][-]{section.4}{User Interface Specifications}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{Authentication}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Signup}{subsection.4.1}% 23
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Login}{subsection.4.1}% 24
+\BOOKMARK [2][-]{subsection.4.2}{Home Page}{section.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Courses}{subsection.4.2}% 26
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Course Creation}{subsection.4.2}% 27
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Countdown Timer}{subsection.4.2}% 28
+\BOOKMARK [3][-]{subsubsection.4.2.4}{Upcoming Exams}{subsection.4.2}% 29
+\BOOKMARK [3][-]{subsubsection.4.2.5}{Previous Exams}{subsection.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.3}{Upcoming Exam Page}{section.4}% 31
+\BOOKMARK [2][-]{subsection.4.4}{Previous Exam Page}{section.4}% 32
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Exam Detail}{subsection.4.4}% 33
+\BOOKMARK [3][-]{subsubsection.4.4.2}{My Answers}{subsection.4.4}% 34
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Marksheet}{subsection.4.4}% 35
+\BOOKMARK [3][-]{subsubsection.4.4.4}{Reports}{subsection.4.4}% 36
+\BOOKMARK [2][-]{subsection.4.5}{Course Page}{section.4}% 37
+\BOOKMARK [3][-]{subsubsection.4.5.1}{Course Info}{subsection.4.5}% 38
+\BOOKMARK [3][-]{subsubsection.4.5.2}{Exam Creation}{subsection.4.5}% 39
+\BOOKMARK [3][-]{subsubsection.4.5.3}{All Exams}{subsection.4.5}% 40
+\BOOKMARK [3][-]{subsubsection.4.5.4}{Students}{subsection.4.5}% 41
+\BOOKMARK [3][-]{subsubsection.4.5.5}{Teacher Info}{subsection.4.5}% 42
+\BOOKMARK [2][-]{subsection.4.6}{Real-time Exam}{section.4}% 43
+\BOOKMARK [2][-]{subsection.4.7}{Examine CQ}{section.4}% 44
+\BOOKMARK [2][-]{subsection.4.8}{Notifications}{section.4}% 45
+\BOOKMARK [1][-]{section.5}{System Design}{}% 46
+\BOOKMARK [2][-]{subsection.5.1}{Use Case Diagram}{section.5}% 47
+\BOOKMARK [2][-]{subsection.5.2}{Context Diagram}{section.5}% 48
+\BOOKMARK [2][-]{subsection.5.3}{Data Flow Diagram}{section.5}% 49
+\BOOKMARK [2][-]{subsection.5.4}{Entity Relationship Diagram}{section.5}% 50
+\BOOKMARK [1][-]{section.6}{System Architecture}{}% 51
+\BOOKMARK [2][-]{subsection.6.1}{Front-End}{section.6}% 52
+\BOOKMARK [2][-]{subsection.6.2}{Back-end}{section.6}% 53
+\BOOKMARK [1][-]{section.7}{System Implementation}{}% 54
+\BOOKMARK [2][-]{subsection.7.1}{Authentication}{section.7}% 55
+\BOOKMARK [2][-]{subsection.7.2}{Pattern Of Code}{section.7}% 56
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Frontend}{subsection.7.2}% 57
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Backend}{subsection.7.2}% 58
+\BOOKMARK [1][-]{section.8}{Testing And validation}{}% 59
+\BOOKMARK [2][-]{subsection.8.1}{Functional Testing}{section.8}% 60
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Unit Testing : }{subsection.8.1}% 61
+\BOOKMARK [3][-]{subsubsection.8.1.2}{Integration testing : }{subsection.8.1}% 62
+\BOOKMARK [3][-]{subsubsection.8.1.3}{System testing: }{subsection.8.1}% 63
+\BOOKMARK [3][-]{subsubsection.8.1.4}{Acceptance Testing : }{subsection.8.1}% 64
+\BOOKMARK [2][-]{subsection.8.2}{Non-Functional Testing}{section.8}% 65
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Load Testing}{subsection.8.2}% 66
+\BOOKMARK [3][-]{subsubsection.8.2.2}{Security Testing}{subsection.8.2}% 67
+\BOOKMARK [3][-]{subsubsection.8.2.3}{Reliability Testing}{subsection.8.2}% 68
+\BOOKMARK [3][-]{subsubsection.8.2.4}{Efficiency Testing}{subsection.8.2}% 69
+\BOOKMARK [1][-]{section.9}{Future Enhancement}{}% 70
+\BOOKMARK [2][-]{subsection.9.1}{Combined Exams}{section.9}% 71
+\BOOKMARK [2][-]{subsection.9.2}{Lab Exams}{section.9}% 72
+\BOOKMARK [2][-]{subsection.9.3}{Realtime Chat}{section.9}% 73
+\BOOKMARK [2][-]{subsection.9.4}{Mobile Version}{section.9}% 74
+\BOOKMARK [1][-]{section.10}{Conclusion}{}% 75
+\BOOKMARK [1][-]{section.11}{References}{}% 76
